@@ -45,7 +45,7 @@
 			<h4 class="col-heading">Flyer Tags</h4>
                         <?php foreach ($flyertags as $flyer){ ?>
 			<label class="box-checkbox">
-				<input type="checkbox" name="flyer_tags[]" value="<?php echo $btn['pk_flyer_tags']; ?>"> <?php echo $flyer['flyer_tags_title']; ?>
+				<input type="checkbox" name="flyer_tags[]" value="<?php echo $flyer['pk_flyer_tags']; ?>"> <?php echo $flyer['flyer_tags_title']; ?>
 			</label>
                         <?php } ?>
 		</div>
