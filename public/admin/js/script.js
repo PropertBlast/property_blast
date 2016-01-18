@@ -25,7 +25,7 @@ $(document).ready(function($) {
         for (var j = 0; j < btn.length; j++) {
             var d = new Date();
             console.log('Button : ' + button[i][j] + ' ID >> ' + d.getTime() + _randomID);
-            add("button", (d.getTime() + _randomID), button[i][j], tabs[i]);
+            //add("button", (d.getTime() + _randomID), button[i][j], tabs[i]);
             _randomID = _randomID + 1;
         }
     }
@@ -49,7 +49,7 @@ $(document).ready(function($) {
             //function calling
             $(el).colpickHide();
             alert('Here in color 1');
-            proFabric.text.SetTextColor('#' + hex);
+            //proFabric.text.SetTextColor('#' + hex);
             // if(!bySetColor) $(el).val(hex);
         }
     });
@@ -71,6 +71,7 @@ $(document).ready(function($) {
         var obj;
         //console.log(
         //var bgcol =
+        console.log('I am here');
         console.log($('#picker').css('borderBottomColor'));
         var hex_Col = proFabric.rgb2hex($('#picker').css('borderBottomColor'));
         console.log(hex_Col);
@@ -171,27 +172,31 @@ function add(type, idToAppend, name, _tab) {
     //Assign different attributes to the element.
     element.type = type;
     element.setAttribute("id", idToAppend);
-    element.setAttribute('class', 'btn-btn btn-small yes button-ui mt-10 ui-button ui-widget ui-state-default ui-corner-all');
+    element.setAttribute('class', 'btn btn-default');
     element.value = name; // Really? You want the default value to be the type string?
     //element.name = type;  // And the name too?
-    element.onclick = function(event) { // Note this is a function
+    element.onclick = function (event) { // Note this is a function
         event.preventDefault();
         var val = proFabric.randBtnSelection(this.id);
         proFabric.set.ID(this.id, val);
     };
     console.log(element);
+    console.log(_tab);
     var foo = document.getElementById(_tab);
+    console.log(foo);
     //Append the element in page (in span).
     foo.appendChild(element);
     //document.getElementById("prop-info").innerHTML =
     //$( "#prop-info" ).append('<input type="'+type+'" class="ui-helper-hidden-accessible" id="'+idToAppend+'"><label for="'+idToAppend+'"  class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">Address</label>');
+}
+
     function addColorSet() {
         var sample = '<div id="color-sample-1"> <h3 class="center-text">Set Flyer Color Option 1</h3> <div class="col-wrap"> <div class="row"> <div class="col-three"> <div class="set-color-box mb-10"> Color 1 </div> </div> <div class="col-three"> <div class="color-box mb-10" style="background-color: #ffe59b"> &nbsp </div> </div> <div class="col-three last"> <div class="color-rgb-box mb-10"> R 255, G 229, B 156 </div> </div> </div> </div> </div>';
     }
     /*$("body").delegate('#unlock','click',function(){
         proFabric.set.unlock();
     });*/
-    $(document).delegate("img.add_svg", "click", function() {
+    /*$(document).delegate("img.add_svg", "click", function() {
         var id = new Date().getTime();
         proFabric.color.add($(this).attr("src"), id);
         if ($("#setcolortext div").last().html()) {
@@ -202,8 +207,8 @@ function add(type, idToAppend, name, _tab) {
         $("#sample-sets #setcolorbackground").append('<div id=' + id + ' class="color colorpicker color-box mb-10" style="background-color: #0036CC">&nbsp</div>');
         $("#sample-sets #setcolorcode").append('<div class="color-rgb-box mb-10">R 0, G 54, B 204</div>');
         colorpicker();
-    });
-    $(document).delegate("#colortabs li", "click", function() {
+    });*/
+    /*$(document).delegate("#colortabs li", "click", function() {
         var html = $('#color-sample-area div:has(:visible)').find('#setcolorbackground');
         $(html.children()).each(function() {
             proFabric.color.fill($(this).attr('id'), $(this).css('backgroundColor'));
@@ -249,7 +254,7 @@ function add(type, idToAppend, name, _tab) {
 
 
     /*Umar's work*/
-    $(document).delegate("#zoomminus", "click", function() {
+    /*$(document).delegate("#zoomminus", "click", function() {
         alert("msg");
         proFabric.set.zoom($("#zoomValue").val());
         console.log($("#zoomValue").val());
@@ -397,7 +402,7 @@ function add(type, idToAppend, name, _tab) {
                 proFabric.shapes.stroke_color('#'+hex);
             }
             $('#svgStroke').css('background-color', '#'+hex);*/
-    function colorpicker() {
+    /*function colorpicker() {
         $('div.colorpicker').colpick({
             onShow: function(el) {},
             onChange: function(hsb, hex, rgb, el) {},
@@ -415,7 +420,6 @@ function add(type, idToAppend, name, _tab) {
                 $(el).colpickHide();
             }
         });
-    }
-}
+    }*/
 
 

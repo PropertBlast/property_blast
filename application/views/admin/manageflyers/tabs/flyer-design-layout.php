@@ -15,7 +15,7 @@
                 <div class="wan-spinner wan-spinner-1"  >
                     <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 14px;">-</a>
                     <input type="text" value="1" style="width: 100px; padding: 14px;">
-                    <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 15px; width:0%;">+</a>
+                    <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 15px; width:0%;"></a>
                 </div>
             </div>
             <div class="col-md-6 col-xs-12">
@@ -36,14 +36,14 @@
                 <div role="tabpanel" class="tab-pane" id="profile">
                     <div class="row" style="width: 85%;margin-left: 0.5%;" >
                         <div class="input-group" style="width: 100%;">
-                            <textarea id="address" type="textbox" placeholder="" class="form-control"style="height: 150px;"></textarea>
+                            <textarea type="textbox" placeholder="Enter Text" id="addText" class="form-control"style="height: 150px;"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class=" col-md-6 col-xs-12">
-                            <button class="btn btn-default" type="submit">Add Text</button>
-                            <button class="btn btn-default" type="submit">Delete Text</button>
-                            <button  class="btn btn-danger" type="submit" style="width : 72%; color : white;">Roolover</button>
+                            <button class="btn btn-default" type="button" id="addTextbtn" >Add Text</button>
+                            <button class="btn btn-default" type="button" id="delete">Delete Text</button>
+                            <button  class="btn btn-danger" type="button" style="width : 72%; color : white;">Roolover</button>
                             <div class="btn-group" role="group" aria-label="..." style="width : 71%;">
                                 <button type="button" class="btn btn-default" style="width: 25%;" ><span class="glyphicon glyphicon-link" aria-hidden="true"></button>
                                 <button type="button" class="btn btn-default" style="width: 25%;"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></button>
@@ -90,15 +90,52 @@
                                 <button type="button" class="btn btn-default" style="width: 25%;"><span class="glyphicon glyphicon-list" aria-hidden="true"></button>
                             </div>
                             <button type="button" class="btn btn-default"  style="margin-left: 40%;"><i class="fa fa-eyedropper"></i></button>
-                            <div class="colordiv8"></div> <p style="margin-top: -9%;"><small></small><B>Color : </B></small></p>
+                            <div id="picker"></div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 5%;padding-left: 15px;">
-                        <button type="button" class="btn btn-primary btn-sm">Property info</button>
-                        <button type="button" class="btn btn-default">Agent 1</button>
-                        <button type="button" class="btn btn-default">Agent 2</button>
-                        <button type="button" class="btn btn-default">Company 1</button>
-                        <button type="button" class="btn btn-default">Company 2</button>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#tabs-01"  role="tab" data-toggle="tab">Property info</a></li>
+                            <li role="presentation"><a href="#tabs-02" role="tab" data-toggle="tab">Agent 1</a></li>
+                            <li role="presentation"><a href="#tabs-03" role="tab" data-toggle="tab">Agent 2</a></li>
+                            <li role="presentation"><a href="#tabs-04" role="tab" data-toggle="tab">Company 1</a></li>
+                            <li role="presentation"><a href="#tabs-05" role="tab" data-toggle="tab">Company 2</a></li>
+                        </ul>
+                        <div class="tab-content">
+                        <div role="tabpanel"  class="tab-pane active" id="tabs-01">
+                            <div id="prop-info" class="col-2">
+                                <h3 class="center-text">Select Property Text Box to Add.</h3>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="tabs-02">
+                            <div id="agent-info" class="col-2">
+                                <h3 class="center-text">Select Agent 1 Text Box to Add.</h3>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="tabs-03">
+                            <div id="agent-2-info" class="col-2">
+                                <h3 class="center-text">Select Agent 2 Text Box to Add.</h3>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="tabs-04">
+                            <div id="company-info" class="tab-pane" class="col-2">
+                                <h3 class="center-text">Select Company 1 Text Box to Add.</h3>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="tabs-05">
+                            <div id="company-2-info" class="tab-pane" class="col-2">
+                                <h3 class="center-text">Select Company 2 Text Box to Add.</h3>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="messages">
@@ -357,3 +394,4 @@
         </div>
     </div>
 </div>
+    </div>
