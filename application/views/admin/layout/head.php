@@ -12,6 +12,7 @@
     <!-- CUSTOM STYLES-->
     <link href="<?php echo base_url('public/admin/css/custom.css') ?>" rel="stylesheet" />
     <link href="<?php echo base_url('public/admin/css/flyer-design.css') ?>" rel="stylesheet" />
+    <link href="<?php echo base_url('public/admin/css/studio.css') ?>" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
