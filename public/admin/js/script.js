@@ -416,3 +416,6 @@ function add(type, idToAppend, name, _tab) {
             }
         });
     }
+}
+
+
