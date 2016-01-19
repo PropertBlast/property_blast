@@ -268,6 +268,7 @@ var proFabric = new function(){
 		svg : function(){
 		},
 		json : function(){
+            return that.canvas.toJSON();
 		}
 	};
     this.randBtnSelection = function(id) {

@@ -28,7 +28,7 @@ proFabric.text = {
         }
         this.parent().canvas.add(text);
         this.parent().canvas.renderAll();
-	},
+	},*/
     updateUI:function(Object){
         console.log("va");
         $("#addText").val("");
@@ -398,8 +398,7 @@ proFabric.text = {
                 this.parent().canvas.renderAll();
             }
         }
-    }
-    */
+    },
     add: function(_text,_options){
         var self = this;
 
