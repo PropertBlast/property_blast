@@ -30,7 +30,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     <div class=" col-md-6 col-xs-12">
         <div>
             <ul class="nav nav-tabs" role="tablist">
@@ -61,7 +60,7 @@
                                 <p><small><B>lock/unlock :</B></small></p>
                                 <button type="button" class="btn btn-primary btn-xs" style="width: 15%;  border-radius: 3px; padding: 5px;"><span class="glyphicon glyphicon-lock" aria-hidden="true"></button>
                                 <button type="button" class="btn btn-default btn-xs" style="width: 15%; padding: 5px;"><span class="glyphicon glyphicon-lock" aria-hidden="true"></button>
-=======
+
     <div class=" col-md-6 col-xs-12 right-col">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#text" aria-controls="profile" role="tab" data-toggle="tab">Add Text</a></li>
@@ -82,14 +81,14 @@
                             <div class="col-md-12 col-xs-12">
                                 <button class="btn btn-default" type="button">Add Text</button>
                                 <button class="btn btn-default" type="button">Delete Text</button>
->>>>>>> 253293afcb0567367de339922f055cdc43949914
+
                             </div>
                         </div>
                         <div class="row pt-10">
                             <div class="col-md-12 col-xs-12">
                                 <button class="btn btn-danger">Roolover</button>
                             </div>
-<<<<<<< HEAD
+
                             <div class="btn-group" role="group" aria-label="..." style="    width: 71%;">
                                 <p><small><b>Style :</b></small></p>
                                 <button type="button" class="btn btn-default" style="width: 25%;" ><span class="glyphicon glyphicon-bold" aria-hidden="true"></button>
@@ -150,7 +149,7 @@
                     <div class="row" style="margin-top: 5%;">
                         <div class="col-md-6 col-xs-12">
                             <p style="margin-left: 11%;"><B>Select Image Number To Input</B></p>
-=======
+
                         </div>
                         <div class="btn-group" role="group" aria-label="..." style="width : 71%;">
                             <button type="button" class="btn btn-default" style="width: 25%;" ><span class="glyphicon glyphicon-link" aria-hidden="true"></button>
@@ -189,7 +188,7 @@
                             <button type="button" class="btn btn-default" style="width: 25%;"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></button>
                             <button type="button" class="btn btn-default" style="width: 25%;"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></button>
                             <button type="button" class="btn btn-default" style="width: 25%;"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></button>
->>>>>>> 253293afcb0567367de339922f055cdc43949914
+
                         </div>
                         <div class="btn-group" role="group" aria-label="..." style="    width: 71%;">
                             <p><small><b>Style :</b></small></p>
