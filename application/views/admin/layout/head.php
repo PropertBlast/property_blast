@@ -6,7 +6,7 @@
     <link href="<?php echo base_url('public/admin/css/bootstrap.css') ?>" rel="stylesheet" />
     <link href="<?php echo base_url('public/admin/css/bootstrap.min.css') ?>" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="<?php echo base_url('public/admin/css/font-awesome.css') ?>" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="<?php echo base_url('public/admin/css/style.css') ?>" rel="stylesheet" />
     <link href="<?php echo base_url('public/admin/css/jquery-ui.min.css') ?>" rel="stylesheet" />
     <link href="<?php echo base_url('public/admin/css/jquery-ui.theme.min.css') ?>" rel="stylesheet" />
