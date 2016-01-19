@@ -1,35 +1,52 @@
 <div class="row">
-    <div class=" col-md-6 col-xs-12">
-        <div class="row">
-            <div class=" col-md-12 col-xs-12">
-                <h5>Choose your Flyre Size :</h5>
-            </div>
-            <div class=" col-md-12 col-xs-12">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">8.5*11</button>
-                    <button type="button" class="btn btn-default">8.5*11</button>
-                    <button type="button" class="btn btn-default">8.5*11</button>
-                    <button type="button" class="btn btn-default">11*17</button>
-                </div>
-            </div>
+<div class=" col-md-6 col-xs-12">
+    <div class="row">
+        <div class=" col-md-5 col-xs-12">
+            <p style="font-size: 11px;">
+                Choose your Flyre Size :
+            </p>
         </div>
-        <div class="canvasBig" style="border:1px solid;border-color:#000000;margin-top:2%;margin-bottom:4%;overflow:auto;">
-			<center><canvas id="myCanvas"></canvas></center>
-		</div>
-        <div class="row" style="margin-top: -2%;">
-            <div class="col-md-6 col-xs-12">
-                <div class="wan-spinner wan-spinner-1"  >
-                    <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 14px;">-</a>
-                    <input type="text" value="1" style="width: 100px; padding: 14px;">
-                    <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 15px; width:0%;"></a>
-                </div>
-            </div>
-            <div class="col-md-6 col-xs-12">
-                <button type="button" class="btn btn-warning" style="margin-left: 6%;">Undo</button>
-                <button type="button" class="btn btn-primary">Save</button>
+        <div class=" col-md-7 col-xs-12" style="margin-top: 4%; margin-bottom: 4%;">
+            <div class="btn-group" role="group" aria-label="..." style="margin-left: 0%;width: 98%;">
+                <button type="button" class="btn btn-default" style="width: 25%;font-size: 9px;margin: 0px;padding: 0px;height: 30px;">
+                    8.5*11
+                </button>
+                <button type="button" class="btn btn-default" style="width: 25%;font-size: 9px;margin: 0px;padding: 0px;height: 30px;">
+                    8.5*11
+                </button>
+                <button type="button" class="btn btn-default" style="width: 25%;font-size: 9px;margin: 0px;padding: 0px;height: 30px;">
+                    8.5*11
+                </button>
+                <button type="button" class="btn btn-default" style="width: 25%;font-size: 9px;margin: 0px;padding: 0px;height: 30px;">
+                    11*17
+                </button>
             </div>
         </div>
     </div>
+    <div class="row" style="border: 1px solid black; height: 550px; width: 100%;margin-left: 0%;">
+    </div>
+    <div class="row" style="margin-top: 2%;">
+        <div class="col-md-6 col-xs-12">
+            <div class="wan-spinner wan-spinner-1"  >
+                <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 14px;">
+                    -
+                </a>
+                <input type="text" value="1" style="width: 100px; padding: 14px;"/>
+                <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 15px; width:0%;">
+                    +
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <button type="button" class="btn btn-warning" style="margin-left:  53%;">
+                Undo
+            </button>
+            <button type="button" class="btn btn-primary">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
     <div class=" col-md-6 col-xs-12">
         <div>
             <ul class="nav nav-tabs" role="tablist">
