@@ -1,0 +1,43 @@
+.mtop{
+	margin-top:20px;
+}
+.mtop1{
+	margin-top:20px;
+	padding: 0px;
+	margin: 
+0px;
+}
+.square{
+	width: 25px;
+	height: 25px;
+	border:1px solid black;
+	background-color: green;
+}
+.rect{
+	width: 100px;
+	height: 33px;
+	border:1px solid lightgray;
+	background-color: white;
+	padding:3px;
+
+}
+	.rect1{
+	width: 300px;
+	height: 50px;
+	border:1px solid lightgray;
+	background-color: white;
+	padding: 7px;
+}
+.textalign {
+	padding-top: 6px;
+}
+.textalign1 {
+	padding-top: 16px;
+}
+.square1{
+	width: 25px;
+	height: 25px;
+	border:1px solid black;
+	background-color: green;
+}
+

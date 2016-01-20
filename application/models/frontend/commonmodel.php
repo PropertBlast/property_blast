@@ -65,12 +65,10 @@ class commonmodel extends CI_Model
         /* ------------Load Layout Functions------------------ */
 
         public function frontloadLayout($data,$content_path) {
-
-            $data['header'] = $this->load->view('frontend/layout/header', $data, TRUE);
+            $data['header'] = $this->load->view('frontend/layout/dheader', $data, TRUE);
             $data['content'] = $this->load->view($content_path, $data, TRUE);
-            $data['footer'] = $this->load->view('frontend/layout/footer', $data, TRUE);
+            $data['footer'] = $this->load->view('frontend/layout/dfooter', $data, TRUE);
             $this->load->view('frontend/layout/template', $data);
-
         }
         
         public function adminloadLayout($data,$content_path) {
