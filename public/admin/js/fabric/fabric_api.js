@@ -53,10 +53,11 @@ var proFabric = new function(){
 	this.canvas.on('object:moving', function(o){});
 	this.canvas.on('object:selected', function(o){
 		var object = o.target;
-        if(object.class=="text")
-        that.text.updateUI(object);
-		else if(object.class){
-			proFabric.image.imageSelected(object);
+        if(object.class=="text"){
+            that.text.updateUI(object);
+        }
+		else if(object.class == 'image'){
+			that.image.updateUI(object);
 		}
         else if(object.class=='shape'){
             proFabric.shapes.shapeSelected(object);
@@ -271,18 +272,13 @@ var proFabric = new function(){
             return that.canvas.toJSON();
 		}
 	};
+	this.import = {
+		svg : function(svg){
+		},
+		json : function(json){
+		}
+	};
     this.randBtnSelection = function(id) {
-        //var objectList = that.canvas.getObjects();
-        /*for (var i = 0; i < objectList._objects.length; i++) {
-            if (objectList._objects[i].class == "text") {
-                if (objectList._objects[i].btnID) {
-                    if (id == objectList._objects[i].btnID) {
-                        that.canvas.setActiveObject(objectList._objects[i]);
-                        return;
-                    }
-                }
-            }
-        }*/
         that.canvas.forEachObject(function(obj){
             console.log(obj+"  ::  "+id);
             if (obj.btnID) {
@@ -301,32 +297,6 @@ var proFabric = new function(){
             console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE WE ARE");
         });
     };
-	this.import = {
-		svg : function(svg){
-		},
-		json : function(json){
-		}
-	};/*,
-    remove:function(){
-       //Latest Modified Ahmad
-        var obj = this.canvas.getActiveObject();
-        if(obj == null){
-            obj = canvas.getActiveGroup();
-            for(var i = 0 ; i < obj._objects.length ; i++) {
-                console.log(obj._objects[i]);
-                canvas.fxRemove(obj._objects[i]);
-            }
-            canvas.discardActiveGroup();
-            canvas.renderAll();
-        }
-        else{
-            canvas.fxRemove(obj);
-            canvas.renderAll();
-        }
-        canvas.renderAll();
-    }*/
-//}
-	//};
     this.rgb2hex=function (rgb){
         rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
         return (rgb && rgb.length === 4) ? "#" +
@@ -334,7 +304,6 @@ var proFabric = new function(){
         ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
         ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
     };
-
 	this.deselectCanvas =function(){
 		that.canvas.discardActiveObject();
 		that.canvas.discardActiveGroup()
@@ -387,74 +356,16 @@ var proFabric = new function(){
 		var data = pixel.data;
 		return 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + data[3] + ')';
 	};
-    this.delete = function(opt_obj) {//Edited by Ahmad
-        if(opt_obj=='text')
-        {
-            if(that.canvas.getActiveGroup()){
-                //that.canvas.getActiveGroup().forEachObject(function(o){ canvas.remove(o) });
-                //that.canvas.discardActiveGroup().renderAll();
-                var obj = that.canvas.getActiveGroup();
-                for(var i = 0 ; i < obj._objects.length ; i++) {
-                    console.log(obj._objects[i]);
-                    if(obj._objects[i].class=="text") {
-                        console.log("TEXT");
-                        that.canvas.fxRemove(obj._objects[i]);
-                    }
-                }
-                that.canvas.discardActiveGroup();
-                that.canvas.renderAll();
-                that.canvas.discardActiveGroup().renderAll();
-            } else {
-                that.canvas.remove(that.canvas.getActiveObject());
-            }
-        }
-        else if(opt_obj=='image')
-        {
-            console.log("IMAGE");
-            if(that.canvas.getActiveGroup()){
-                //that.canvas.getActiveGroup().forEachObject(function(o){ canvas.remove(o) });
-                //that.canvas.discardActiveGroup().renderAll();
-                var obj = that.canvas.getActiveGroup();
-                for(var i = 0 ; i < obj._objects.length ; i++) {
-                    console.log(obj._objects[i]);
-                    if(obj._objects[i].class=='image') {
-                        that.canvas.fxRemove(obj._objects[i]);
-                    }
-                }
-                that.canvas.discardActiveGroup();
-                that.canvas.renderAll();
-                that.canvas.discardActiveGroup().renderAll();
-            } else {
-                that.canvas.remove(that.canvas.getActiveObject());
-            }
-        }
-        else
-        {
-            console.log("OTHER");
-            if(that.canvas.getActiveGroup()){
-                //that.canvas.getActiveGroup().forEachObject(function(o){ canvas.remove(o) });
-                //that.canvas.discardActiveGroup().renderAll();
-                var obj = that.canvas.getActiveGroup();
-                for(var i = 0 ; i < obj._objects.length ; i++) {
-                    console.log(obj._objects[i]);
-                    that.canvas.fxRemove(obj._objects[i]);
-                }
-                that.canvas.discardActiveGroup();
-                that.canvas.renderAll();
-                that.canvas.discardActiveGroup().renderAll();
-            } else {
-                that.canvas.remove(that.canvas.getActiveObject());
-            }
-        }
+    this.delete = function() {
+        var o = that.canvas.getActiveObject();
+        that.canvas.remove(o);
     };
-    this.droper = function (){
-
-            _pickerFlag = 1;
-
+    this.droper = function(){
+        _pickerFlag = 1;
     };
     this.disableSelection=function(){
-            that.canvas.deactivateAll();
-            that.canvas.selection = false;
+        that.canvas.deactivateAll();
+        that.canvas.selection = false;
         var lenght = that.canvas._objects.length;
         for(var i = 0 ; i < lenght ; i++) {
             that.canvas._objects[i].selectable = false;

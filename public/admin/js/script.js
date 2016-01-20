@@ -66,104 +66,168 @@ $(document).ready(function($) {
         //console.log(file);
         console.log(name + " : " + size + " : " + type);
     });
-    $("body").delegate('#addTextbtn', 'click', function() {
-        //event.preventDefault();
-        var obj;
-        //console.log(
-        //var bgcol =
-        console.log('I am here');
-        console.log($('#picker').css('borderBottomColor'));
-        var hex_Col = proFabric.rgb2hex($('#picker').css('borderBottomColor'));
-        console.log(hex_Col);
-        var txt = $("#addText").val();
-        obj = {
-            text: txt,
-            color: hex_Col,
-            fontSize: $("#FontSize").val(),
-            fontFamily: $("#FontFamily").val()
-        };
-        proFabric.text.add(obj);
-        //console.log(txt);
-        event.preventDefault();
-        var txt = $("#addText").val();
-        proFabric.text.add(txt);
+
+
+    $(document).delegate('#editor-delete', 'click', function() {
+        proFabric.delete();
     });
-    $('#addText').bind('input', function() {
-        proFabric.text.SetText($("#addText").val());
+    $(document).delegate('#editor-bringFront', 'click', function() {
+        proFabric.set.bringFront();
     });
-    $("body").delegate('#ColorPicker', 'click', function(event) {
-        event.preventDefault();
-        console.log('I am here');
-        proFabric.disableSelection();
-        proFabric.droper();
-        proFabric.enableSelection();
+    $(document).delegate('#editor-sendBack', 'click', function() {
+        proFabric.set.sendBack();
     });
-    $('#FontSize').change(function() {
-        var value = $("#FontSize option:selected").val();
+    $(document).delegate('#editor-addText', 'click', function() {
+        proFabric.text.add('Your Text Here');
+    });
+    $(document).delegate('#editor-textarea', 'keyup', function() {
+        var _text = $(this).val();
+        proFabric.text.set({text: _text});
+    });
+    $(document).delegate('#editor-fontSize', 'change', function() {
+        var value = $("#editor-fontSize").val();
         proFabric.text.set({
             fontSize: parseInt(value)
         });
     });
-    $('#FontFamily').change(function() {
-        var faimly = $("#FontFamily option:selected").val();
+    $(document).delegate('#editor-fontFamily', 'change', function() {
+        var value = $("#editor-fontFamily>option:selected").val();
         proFabric.text.set({
-            fontFamily: faimly
+            fontFamily: value
         });
     });
-    $("body").delegate('#bold', 'click', function() {
+    $(document).delegate('div#editor-textAlign>button', 'click', function() {
+        var type = $(this).attr('data-type');
+        $(this).addClass('btn-primary').siblings().removeClass('btn-primary');
         proFabric.text.set({
-            fontWeight: 'bold'
+            textAlign: type
         });
     });
-    $("body").delegate('#italic', 'click', function() {
-        proFabric.text.set({
-            fontStyle: 'italic'
+    $(document).delegate('button#editor-textBold', 'click', function() {
+        if ($(this).hasClass('btn-primary')) {
+            $(this).removeClass('btn-primary');
+            proFabric.text.set({
+                fontWeight: 'normal'
+            });
+        }
+        else{
+            $(this).addClass('btn-primary');
+            proFabric.text.set({
+                fontWeight: 'bold'
+            });
+        }
+    });
+    $(document).delegate('button#editor-textItalic', 'click', function() {
+        if ($(this).hasClass('btn-primary')) {
+            $(this).removeClass('btn-primary');
+            proFabric.text.set({
+                fontStyle: 'normal'
+            });
+        }
+        else{
+            $(this).addClass('btn-primary');
+            proFabric.text.set({
+                fontStyle: 'italic'
+            });
+        }
+    });
+    $(document).delegate('button#editor-textUnderline', 'click', function() {
+        if ($(this).hasClass('btn-primary')) {
+            $(this).removeClass('btn-primary');
+            proFabric.text.set({
+                textDecoration: 'none'
+            });
+        }
+        else{
+            $(this).addClass('btn-primary');
+            proFabric.text.set({
+                textDecoration: 'underline'
+            });
+        }
+    });
+    $(document).delegate('div#editor-lockGroup>button', 'click', function() {
+        var type = $(this).attr('data-type');
+        $(this).addClass('btn-primary').siblings().removeClass('btn-primary');
+        if(type=='lock'){
+            proFabric.set.lock();
+        }
+        else{
+            proFabric.set.unlock();
+        }
+    });
+    $(document).delegate("#editor-addImage", "click", function() {
+        proFabric.image.add('/property_blast/public/admin/img/find_user.png');
+    });
+    $(document).delegate('#editor-imageWidth', 'change', function() {
+        var value = $(this).val();
+        proFabric.image.set({
+            width: parseInt(value)
         });
     });
-    $("body").delegate('#underline', 'click', function() {
-        proFabric.text.set({
-            textDecoration: 'underline'
+    $(document).delegate('#editor-imageHeight', 'change', function() {
+        var value = $(this).val();
+        proFabric.image.set({
+            height: parseInt(value)
         });
     });
-    $("body").delegate('#left', 'click', function() {
-        proFabric.text.set({
-            textAlign: 'left'
-        });
+
+    $(document).delegate('#fullScreenEditor', 'click', function() {
+        if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
+            $(this).val('Exit');
+            $('#editor').css({
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                padding: '25px',
+                overflow: 'auto',
+                width: '100vw',
+                height: '100vh'
+            });
+            if(document.documentElement.requestFullscreen) {
+                document.getElementById('#editor').requestFullscreen();
+            }
+            else if(document.documentElement.msRequestFullscreen){
+                document.getElementById('#editor').msRequestFullscreen();
+            }
+            else if(document.documentElement.mozRequestFullScreen){
+                document.getElementById('#editor').mozRequestFullScreen();
+            }
+            else if(document.documentElement.webkitRequestFullscreen){
+                document.getElementById('editor').webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+        }
+        else {
+            $(this).val('Full Screen');
+            $('#editor').removeAttr('style');
+            if(document.exitFullscreen){
+                document.exitFullscreen();
+            }
+            else if(document.msExitFullscreen){
+                document.msExitFullscreen();
+            }
+            else if(document.mozCancelFullScreen){
+                document.mozCancelFullScreen();
+            }
+            else if(document.webkitExitFullscreen){
+                document.webkitExitFullscreen();
+            }
+        }
     });
-    $("body").delegate('#right', 'click', function() {
-        proFabric.text.set({
-            textAlign: 'right'
-        });
-    });
-    $("body").delegate('#center', 'click', function() {
-        proFabric.text.set({
-            textAlign: 'center'
-        });
-    });
-    $("body").delegate('#Justify', 'click', function() {
-        proFabric.text.set({
-            textAlign: 'justify'
-        });
-    });
-    $("body").delegate('#lock', 'click', function() {
-        proFabric.set.lock();
-    });
-    $("body").delegate('#bringToFront', 'click', function() {
-        proFabric.text.bringTextToFront();
-        console.log("#bringToFront");
-    });
-    $("body").delegate('#bringToBack', 'click', function() {
-        proFabric.text.bringTextToBack();
-        console.log("#bringToBack");
-    });
-    $("body").delegate('#delete', 'click', function() {
-        proFabric.delete('text');
-    });
-    $(document).delegate("img.add_svg", "click", function() {
-        var id = proFabric.color.add($(this).attr("src"));
-    });
-    $(document).delegate("img.add_svg", "click", function() {
-        var id = proFabric.color.add($(this).attr("src"));
+    
+    $('div.colorpicker').colpick({
+        colorScheme : 'light',
+        onShow: function(el) {},
+        onChange: function(hsb, hex, rgb, el) {},
+        onSubmit: function(hsb, hex, rgb, el) {
+            var type = $(el).data('type');
+            $(el).css('background-color', '#' + hex);
+            $(el).colpickHide();
+            if (type == "text") {
+                proFabric.text.set({
+                    fill : '#' + hex
+                });
+            }
+        }
     });
 });
 
