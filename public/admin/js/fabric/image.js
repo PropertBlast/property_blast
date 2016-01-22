@@ -46,6 +46,7 @@ proFabric.image = {
         this.canvas.renderAll();
     },
     updateUI: function(obj){
+        $('#editor-imageList').find('button[data-id='+obj.id+']').addClass('btn-primary').siblings().removeClass('btn-primary');
         $("#editor-imageWidth").val(Math.ceil(obj.width));
         $("#editor-imageHeight").val(Math.ceil(obj.height));
         if(obj.lockMovementX){

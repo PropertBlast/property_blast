@@ -62,6 +62,8 @@
                                     <button type="button" class="btn btn-default" id="editor-textUnlink">
                                         <i class="fa fa-chain-broken editor-fa"></i>
                                     </button>
+                                </div>
+                                <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-default" id="editor-bringFront">
                                         <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
                                     </button>
@@ -199,17 +201,7 @@
                     </div>
                 </div>
                 <div class="row pt-20 mt-20" style="border-top:1px solid #ccc;">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">2</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">3</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">4</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">5</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">6</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">7</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">8</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">9</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">10</button>
+                    <div class="col-md-12" id="editor-imageList">
                     </div>
                 </div>
             </div>

@@ -156,7 +156,16 @@ $(document).ready(function($) {
         }
     });
     $(document).delegate("#editor-addImage", "click", function() {
-        proFabric.image.add('/property_blast/public/admin/img/find_user.png');
+        var size = $('#editor-imageList').children().size();
+        var id = proFabric.get.guid();
+        $('#editor-imageList').children().removeClass('btn-primary');
+        $('#editor-imageList').append('<button type="button" class="btn btn-default btn-circle btn-primary imagetextbold" data-id="'+(id)+'">'+(size+1)+'</button>');
+        proFabric.image.add('/property_blast/public/admin/img/find_user.png', {id:id});
+    });
+    $(document).delegate("#editor-imageList>button", "click", function() {
+        var id = $(this).attr('data-id');
+        if(!id)return;
+        proFabric.set.setActiveobj(id);
     });
     $(document).delegate('#editor-imageWidth', 'change', function() {
         var value = $(this).val();
