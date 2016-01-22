@@ -38,12 +38,28 @@ var proFabric = new function(){
             _pickerFlag = 0;
             var rgba = 'rgba(' + px[0] + ',' + px[1] + ',' + px[2] + ',' + px[3] + ')';
             var hex = proFabric.rgb2hex( rgba );
-            $('#picker').colpickSetColor(hex);
+            //$('#picker').colpickSetColor(hex);
+            var button = $('#editor-cpicker.btn-primary');
+            if(button){
+                proFabric.enableSelection();
+                that.set.setActiveobj($(button).attr('data-id'));
+                $(button).removeClass('btn-primary');
+                var type = $(button).attr('data-type');
+                var el = $('.colorpicker[data-type='+type+']');
+                $(el).css('backgroundColor',hex);
+                var hexHash = hex.split('#')[1];
+                colorPickerSubmit('', hexHash, '', el);
+            }
         }
     });
 	this.canvas.on('mouse:move', function(o){});
 	this.canvas.on('mouse:up', function(o){});
-	this.canvas.on('selection:cleared', function(o){});
+	this.canvas.on('selection:cleared', function(o){
+        var object = o.target;
+        if(!object){
+            $('#editor-textAssign').children().removeClass('btn-primary');
+        }
+    });
 	this.canvas.on('selection:created', function(o){});
 	this.canvas.on('object:added', function(o){});
 	this.canvas.on('object:remove', function(o){});
@@ -54,13 +70,19 @@ var proFabric = new function(){
 	this.canvas.on('object:selected', function(o){
 		var object = o.target;
         if(object.class=="text"){
+            $('#editor-mainTabs a[href="#text"]').tab('show');
             that.text.updateUI(object);
         }
 		else if(object.class == 'image'){
+            $('#editor-mainTabs a[href="#image"]').tab('show');
 			that.image.updateUI(object);
 		}
         else if(object.class=='shape'){
+            $('#editor-mainTabs a[href="#object"]').tab('show');
             proFabric.shapes.shapeSelected(object);
+        }
+        else if(object.class=='color'){
+            $('#editor-mainTabs a[href="#color"]').tab('show');
         }
 		console.log(object);
 		var dataId=object.class;
@@ -74,7 +96,6 @@ var proFabric = new function(){
 		});
 	});
     this.canvas.on('mouse:move', function(e) {
-
     });
 
 	this.get = {
@@ -245,8 +266,8 @@ var proFabric = new function(){
 		},
 		setActiveobj:function(id){
 			that.canvas.forEachObject(function(obj) {
-				console.log(obj);
-				if (obj.linkid == id) {	
+				if (obj.id == id) {
+                    console.log(obj);
 					that.canvas.setActiveObject(obj, '');
 				}
 			});
@@ -369,6 +390,5 @@ var proFabric = new function(){
             that.canvas._objects[i].selectable = true;
         }
         that.canvas.renderAll();
-        //alert('I am disable');
     };
 };

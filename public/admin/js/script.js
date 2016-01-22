@@ -200,6 +200,35 @@ $(document).ready(function($) {
         $(_tabs).prependTo('#cs-tablist');
         colorPickerInit();
     });
+    $(document).delegate('#editor-textAssign>button', 'click', function() {
+        var name = $(this).attr('data-type');
+        var obj = proFabric.get.currentObject();
+        if(!obj) return;
+        var id = obj.id;
+        $(this).siblings('button').each(function(index, el) {
+            var _id = $(el).attr('data-id');
+            if(_id == id){
+                $(el).removeClass('btn-primary').attr('data-id','');
+            }
+        });
+        if($(this).hasClass('btn-primary')){
+            $(this).removeClass('btn-primary').attr('data-id','');
+            proFabric.text.assign(name, true);
+        }
+        else{
+            $(this).addClass('btn-primary').attr('data-id', id);
+            proFabric.text.assign(name, false);
+        }
+    });
+    $(document).delegate('button#editor-cpicker', 'click', function() {
+        var obj = proFabric.get.currentObject();
+        if(!obj) return;
+        var _id = obj.id;
+        $(this).addClass('btn-primary').attr('data-id', _id);
+        event.preventDefault();
+        proFabric.disableSelection();
+        proFabric.droper();
+    });
 
 
     $(document).delegate('#fullScreenEditor', 'click', function() {
@@ -247,26 +276,29 @@ $(document).ready(function($) {
     colorPickerInit();
     
 });
-function colorPickerInit(hsb, hex, rgb, el){
+function colorPickerInit(){
     $('div.colorpicker').colpick({
         colorScheme : 'light',
         onSubmit: function(hsb, hex, rgb, el) {
-            var type = $(el).data('type');
             $(el).css('background-color', '#' + hex);
             $(el).colpickHide();
-            if (type == "text") {
-                proFabric.text.set({
-                    fill : '#' + hex
-                });
-            }
-            else if (type == "svgFill") {
-                proFabric.shapes.fill('#' + hex);
-            }
-            else if (type == "colorsFill") {
-                proFabric.color.fill($(el).parents('.colorRow').attr('data-id'), '#' + hex);
-            }
+            colorPickerSubmit(hsb, hex, rgb, el);
         }
     });
+}
+function colorPickerSubmit(hsb, hex, rgb, el){
+    var type = $(el).data('type');
+    if (type == "text") {
+        proFabric.text.set({
+            fill : '#' + hex
+        });
+    }
+    else if (type == "svgFill") {
+        proFabric.shapes.fill('#' + hex);
+    }
+    else if (type == "colorsFill") {
+        proFabric.color.fill($(el).parents('.colorRow').attr('data-id'), '#' + hex);
+    }
 }
 function add(type, idToAppend, name, _tab) {
     var element = document.createElement("input");
@@ -290,237 +322,6 @@ function add(type, idToAppend, name, _tab) {
     //document.getElementById("prop-info").innerHTML =
     //$( "#prop-info" ).append('<input type="'+type+'" class="ui-helper-hidden-accessible" id="'+idToAppend+'"><label for="'+idToAppend+'"  class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">Address</label>');
 }
-
-    function addColorSet() {
-        var sample = '<div id="color-sample-1"> <h3 class="center-text">Set Flyer Color Option 1</h3> <div class="col-wrap"> <div class="row"> <div class="col-three"> <div class="set-color-box mb-10"> Color 1 </div> </div> <div class="col-three"> <div class="color-box mb-10" style="background-color: #ffe59b"> &nbsp </div> </div> <div class="col-three last"> <div class="color-rgb-box mb-10"> R 255, G 229, B 156 </div> </div> </div> </div> </div>';
-    }
-    /*$("body").delegate('#unlock','click',function(){
-        proFabric.set.unlock();
-    });*/
-    /*$(document).delegate("img.add_svg", "click", function() {
-        var id = new Date().getTime();
-        proFabric.color.add($(this).attr("src"), id);
-        if ($("#setcolortext div").last().html()) {
-            i = i + 1;
-            console.log(i);
-        }
-        $("#sample-sets #setcolortext").append('<div class="set-color-box mb-10">Color ' + i + '</div>');
-        $("#sample-sets #setcolorbackground").append('<div id=' + id + ' class="color colorpicker color-box mb-10" style="background-color: #0036CC">&nbsp</div>');
-        $("#sample-sets #setcolorcode").append('<div class="color-rgb-box mb-10">R 0, G 54, B 204</div>');
-        colorpicker();
-    });*/
-    /*$(document).delegate("#colortabs li", "click", function() {
-        var html = $('#color-sample-area div:has(:visible)').find('#setcolorbackground');
-        $(html.children()).each(function() {
-            proFabric.color.fill($(this).attr('id'), $(this).css('backgroundColor'));
-        });
-    });
-    $(document).delegate("#savecolor ", "click", function() {
-        var num = 1;
-        $("#color-sample-area>div").each(function() {
-            console.log($(this).attr('id'));
-            if ($(this).children().length == 1) {
-                $(this).html($("#sample-sets").html());
-                $(this).children('#setcolortitle').html("Set Flyer Color Option " + num + "");
-                return false;
-            } else {
-                num = num + 1;
-            }
-        });
-        //colorpicker();
-    });
-    colorpicker();
-    /*function updateText(Object)
-    {
-        $("#addText").val(Object);
-    }*/
-    /*
-    var readURL = function(input) {left
-        console.log(input.files);
-        for(var i=0;i<input.files.length;i++)
-        {
-            if (input.files && input.files[i]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    prototypefabric.addImage(e.target.result);
-                    setTimeout(function(){
-                        $(".file-upload").val('');
-                    },1000);
-                }
-                reader.readAsDataURL(input.files[i]);
-            }
-        }
-    >>>>>>> d6bcd6275735aba2d3115ffd363602414c088c54
-    }
-
-
-    /*Umar's work*/
-    /*$(document).delegate("#zoomminus", "click", function() {
-        alert("msg");
-        proFabric.set.zoom($("#zoomValue").val());
-        console.log($("#zoomValue").val());
-    });
-    $(document).delegate("#zoomplus", "click", function() {
-        proFabric.set.zoom($("#zoomValue").val());
-    });
-    $(document).delegate("#addimage", "click", function() {
-        proFabric.image.add('images/images/test.jpg', {
-            id: proFabric.get.guid()
-        });
-    });
-    $(document).delegate("#lock_img", "click", function() {
-        proFabric.set.lock();
-    });
-    $(document).delegate("#unlock_img", "click", function() {
-        proFabric.set.unlock();
-    });
-    $(document).delegate("#bringFrontImage", "click", function() {
-        proFabric.set.bringFront();
-    });
-    $(document).delegate("#bringBackImage", "click", function() {
-        proFabric.set.sendBack();
-    });
-    $(document).delegate("#lock_color", "click", function() {
-        proFabric.set.lock();
-    });
-    $(document).delegate("#unlock_color", "click", function() {
-        proFabric.set.unlock();
-    });
-    $(document).delegate("#bringFrontColor", "click", function() {
-        proFabric.set.bringFront();
-    });
-    $(document).delegate("#bringBackColor", "click", function() {
-        proFabric.set.sendBack();
-    });
-    $('#color_width_input').change(function(event) {
-        var width = $("#color_width_input").val();
-        var height = $("#color_height_input").val();
-        proFabric.color.scaleToWidth(width);
-        //proFabric.shapes.setScaleX(width);
-    });
-    $('#color_height_input').change(function(event) {
-        var width = $("#color_width_input").val();
-        var height = $("#color_height_input").val();
-        proFabric.color.scaleToHeight(height);
-        //proFabric.shapes.setScaleY(height);
-    });
-    $('#img_width_input').change(function(event) {
-        var width = $("#img_width_input").val();
-        var height = $("#img_height_input").val();
-        proFabric.image.set({
-            width, height
-        });
-    });
-    $('#img_height_input').change(function(event) {
-        var width = $("#img_width_input").val();
-        var height = $("#img_height_input").val();
-        proFabric.image.set({
-            width, height
-        });
-    });
-    $('body').delegate('#image-count>div', 'click', function(event) {
-        console.log($(this).attr('class'));
-        var obj = proFabric.get.currentObject();
-        var id = new Date().getTime();
-        if ($(this).hasClass('ui-state-active')) {
-            if ($(this).attr('uniqueId') == obj.linkid) {
-                id = '';
-                $(this).attr('uniqueId', id);
-                proFabric.image.set({
-                    'linkid': id
-                });
-                $(this).removeClass('ui-state-active');
-            } else {
-                event.preventDefault();
-                proFabric.set.setActiveobj($(this).attr('uniqueId'));
-                return;
-            }
-        } else {
-            event.preventDefault();
-            if (obj.linkid != '') {
-                alert('object already linked');
-                return;
-            }
-            $(this).attr('uniqueId', id);
-            console.log('ja raha');
-            $(this).addClass('ui-state-active');
-            proFabric.image.set({
-                'linkid': id
-            });
-        }
-        console.log($(this).attr('class'));
-    });
-    $('#shape_width_input').change(function(event) {
-        var width = $("#shape_width_input").val();
-        var height = $("#shape_height_input").val();
-        proFabric.shapes.scaleToWidth(width);
-        //proFabric.shapes.setScaleX(width);
-    });
-    $('#shape_height_input').change(function(event) {
-        var width = $("#shape_width_input").val();
-        var height = $("#shape_height_input").val();
-        proFabric.shapes.scaleToHeight(height);
-        //proFabric.shapes.setScaleY(height);
-    });
-    $('body').delegate('#canvas_size li', 'click', function(event) {
-        var values = $(this).children('a').html();
-        var values = values.split('x');
-        proFabric.set.canvas_size(proFabric.get.inchesToPixel(values[0]), proFabric.get.inchesToPixel(values[1]));
-    });
-    $(document).delegate("#addshape", "click", function() {
-        proFabric.shapes.add('images/SVG/plain.svg');
-    });
-    $(document).delegate("#lock_shape", "click", function() {
-        proFabric.set.lock();
-    });
-    $(document).delegate("#unlock_shape", "click", function() {
-        proFabric.set.unlock();
-    });
-    $(document).delegate("#bringFrontShape", "click", function() {
-        proFabric.set.bringFront();
-    });
-    $(document).delegate("#bringBackShape", "click", function() {
-        proFabric.set.sendBack();
-    });
-
-    function addColorSet() {
-        var sample = '<div id="color-sample-1"> <h3 class="center-text">Set Flyer Color Option 1</h3> <div class="col-wrap"> <div class="row"> <div class="col-three"> <div class="set-color-box mb-10"> Color 1 </div> </div> <div class="col-three"> <div class="color-box mb-10" style="background-color: #ffe59b"> &nbsp </div> </div> <div class="col-three last"> <div class="color-rgb-box mb-10"> R 255, G 229, B 156 </div> </div> </div> </div> </div>';
-    }
-    /*$('.colorpicker').colpick({
-        color:'78A4BA',   
-        onShow:function(el){
-        },
-        onChange:  function(hsb,hex,rgb,el) {
-
-        },
-        onSubmit:function(hsb,hex,rgb,el) {
-          var type = $(el).data('type');
-          if(type=="svgfill"){
-            proFabric.shapes.fill('#'+hex);
-                $('#svgFill').css('background-color', '#'+hex);
-            }
-            if(type=="svgstroke"){
-                proFabric.shapes.stroke_color('#'+hex);
-            }
-            $('#svgStroke').css('background-color', '#'+hex);*/
-    /*function colorpicker() {
-        $('div.colorpicker').colpick({
-            onShow: function(el) {},
-            onChange: function(hsb, hex, rgb, el) {},
-            onSubmit: function(hsb, hex, rgb, el) {
-                var type = $(el).data('type');
-                if (type == "svgfill") {
-                    proFabric.shapes.fill('#' + hex);
-                    $('#svgFill').css('background-color', '#' + hex);
-                }
-                if (type == "svgstroke") {
-                    proFabric.shapes.stroke_color('#' + hex);
-                    $('#svgStroke').css('background-color', '#' + hex);
-                }
-                $(el).css('background-color', '#' + hex);
-                $(el).colpickHide();
-            }
-        });
-    }*/
-
-
+function addColorSet() {
+    var sample = '<div id="color-sample-1"> <h3 class="center-text">Set Flyer Color Option 1</h3> <div class="col-wrap"> <div class="row"> <div class="col-three"> <div class="set-color-box mb-10"> Color 1 </div> </div> <div class="col-three"> <div class="color-box mb-10" style="background-color: #ffe59b"> &nbsp </div> </div> <div class="col-three last"> <div class="color-rgb-box mb-10"> R 255, G 229, B 156 </div> </div> </div> </div> </div>';
+}

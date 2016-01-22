@@ -9,6 +9,8 @@ proFabric.text = {
         $("#editor-fontSize").val(object.fontSize);
         $('#editor-fontFamily').children('option').filter(function(){return $(this).val()==object.fontFamily}).prop('selected',true).change();
         $('div#editor-textAlign').find('button[data-type='+object.textAlign+']').addClass('btn-primary').siblings().removeClass('btn-primary');
+        console.log(object.id);
+        $('#editor-textAssign').children('button[data-id='+object.id+']').addClass('btn-primary').siblings('button').removeClass('btn-primary');
     },
     add: function(_text,_options){
         var self = this;
@@ -48,6 +50,22 @@ proFabric.text = {
         var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'text') return;
         obj.set(options);
+        obj.setCoords();
+        this.canvas.renderAll();
+    },
+    assign: function(name, alreadyAssigned) {
+        var obj = this.canvas.getActiveObject();
+        if(!obj || obj.class !== 'text') return;
+        if(!alreadyAssigned){
+            obj.set({
+                linkName : name
+            });
+        }
+        else{
+            obj.set({
+                linkName : ''
+            });
+        }
         obj.setCoords();
         this.canvas.renderAll();
     }

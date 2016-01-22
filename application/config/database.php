@@ -52,6 +52,11 @@ $active_record = TRUE;
 
 //$db['default']['hostname'] = 'mysql:host=74.208.218.238';
 $db['default']['hostname'] = 'mysql:host=localhost';
+/*
+$db['default']['username'] = 'freetime_proper';
+$db['default']['password'] = '3y3flrgvi9kl';
+$db['default']['database'] = 'freetime_property_blast';
+*/
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'property_blast';

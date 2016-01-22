@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="col-md-6 col-xs-12 right-col">
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs" role="tablist" id="editor-mainTabs">
             <li class="active"><a href="#text" role="tab" data-toggle="tab">Add Text</a></li>
             <li><a href="#image" role="tab" data-toggle="tab">Add Image</a></li>
             <li><a href="#object" role="tab" data-toggle="tab">Add Object</a></li>
@@ -135,18 +135,18 @@
                                 <div class="color-div colorpicker" id="editor-textColor" data-type="text"></div>
                             </div>
                             <div class="col-md-3 col-xs-12 nopad text-right">
-                                <button type="button" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
+                                <button type="button" id="editor-cpicker" data-type="text" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-50">
-                    <div class="col-md-12 col-xs-12">
-                        <button type="button" class="btn btn-default">Property info</button>
-                        <button type="button" class="btn btn-default">Agent 1</button>
-                        <button type="button" class="btn btn-default">Agent 2</button>
-                        <button type="button" class="btn btn-default">Company 1</button>
-                        <button type="button" class="btn btn-default">Company 2</button>
+                    <div class="col-md-12 col-xs-12" id="editor-textAssign">
+                        <button data-type="property" data-id="" type="button" class="btn btn-default">Property info</button>
+                        <button data-type="agent1" data-id="" type="button" class="btn btn-default">Agent 1</button>
+                        <button data-type="agent2" data-id="" type="button" class="btn btn-default">Agent 2</button>
+                        <button data-type="company1" data-id="" type="button" class="btn btn-default">Company 1</button>
+                        <button data-type="company2" data-id="" type="button" class="btn btn-default">Company 2</button>
                     </div>
                 </div>
             </div>
