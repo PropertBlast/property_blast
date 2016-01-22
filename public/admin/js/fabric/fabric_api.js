@@ -72,18 +72,6 @@ var proFabric = new function(){
 				$(this).addClass('.ui-tabs-active ui-state-active');*/
 			}
 		});
-		if(object.class=="text"){
-
-		}
-		else if(object.class=='image'){
-			proFabric.image.imageSelected(object);
-		}
-		else if(object.class=='shape'){
-			proFabric.shapes.shapeSelected(object);
-		}
-		else if(object.class=='color'){
-			proFabric.color.colorSelected(object);
-		}
 	});
     this.canvas.on('mouse:move', function(e) {
 
@@ -109,7 +97,7 @@ var proFabric = new function(){
 			return that.zoom;
 		},
 		guid : function() {
-			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+			return 'xxxxxx-xxxx-xxxxxx'.replace(/[xy]/g, function (c) {
 				var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 				return v.toString(16);
 			});

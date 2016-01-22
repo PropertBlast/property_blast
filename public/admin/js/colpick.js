@@ -249,7 +249,7 @@ For usage and examples: colpick.com/plugin
 					cal.show();
 				}
 				//Hide when user clicks outside
-				//$('html').mousedown({cal:cal}, hide);
+				$('html').mousedown({cal:cal}, hide);
 				cal.mousedown(function(ev){ev.stopPropagation();})
 			},
 			hide = function (ev) {

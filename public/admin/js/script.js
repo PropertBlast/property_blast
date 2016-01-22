@@ -170,6 +170,37 @@ $(document).ready(function($) {
             height: parseInt(value)
         });
     });
+    $(document).delegate('#editor-svgImage', 'click', function() {
+        var src = $(this).attr('src');
+        proFabric.shapes.add(src);
+    });
+    $(document).delegate('#cs-tablist>li', 'click', function() {
+        var href = $(this).children('a').attr('href');
+        $(href).children().each(function(index, el) {
+            console.log(index, el);
+            proFabric.color.fill($(el).attr('data-id'), $(el).find('.colorpicker').css('backgroundColor'));
+        });
+    });
+    $(document).delegate('#editor-setsImage', 'click', function() {
+        var src = $(this).attr('src');
+        var id = proFabric.color.add(src);
+        console.log(id);
+        var size = $('#cs-sample1').children().size();
+        var _html = '<div class="row pt-10 colorRow" data-id="'+id+'"><div class="col-md-4 col-xs-12">Color '+(size+ 1)+'</div><div class="col-md-4 col-xs-12"> <div class="color-div large colorpicker" id="editor-svgBorder" data-type="colorsFill"></div></div><div class="col-md-4 col-xs-12 nopad text-right pr-20"><button type="button" class="btn btn-default"><i class="fa fa-eyedropper"></i></button></div></div>';
+        $(_html).appendTo('#cs-sample1');
+        colorPickerInit();
+    });
+    $(document).delegate('#editor-addSets', 'click', function() {
+        var content = $('#cs-sample1').html();
+        var size = $('#cs-tablist').children().size();
+        var _html = '<div role="tabpanel" class="tab-pane" id="cs-sample'+(size+ 1)+'">'+content+'</div>';
+        $(_html).prependTo('#cs-tabContent');
+
+        var _tabs = '<li><a href="#cs-sample'+(size+ 1)+'" data-toggle="tab">Sample '+(size+ 1)+'</a></li>';
+        $(_tabs).prependTo('#cs-tablist');
+        colorPickerInit();
+    });
+
 
     $(document).delegate('#fullScreenEditor', 'click', function() {
         if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
@@ -213,11 +244,12 @@ $(document).ready(function($) {
             }
         }
     });
+    colorPickerInit();
     
+});
+function colorPickerInit(hsb, hex, rgb, el){
     $('div.colorpicker').colpick({
         colorScheme : 'light',
-        onShow: function(el) {},
-        onChange: function(hsb, hex, rgb, el) {},
         onSubmit: function(hsb, hex, rgb, el) {
             var type = $(el).data('type');
             $(el).css('background-color', '#' + hex);
@@ -227,10 +259,15 @@ $(document).ready(function($) {
                     fill : '#' + hex
                 });
             }
+            else if (type == "svgFill") {
+                proFabric.shapes.fill('#' + hex);
+            }
+            else if (type == "colorsFill") {
+                proFabric.color.fill($(el).parents('.colorRow').attr('data-id'), '#' + hex);
+            }
         }
     });
-});
-
+}
 function add(type, idToAppend, name, _tab) {
     var element = document.createElement("input");
     //Assign different attributes to the element.

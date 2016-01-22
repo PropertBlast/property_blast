@@ -13,7 +13,7 @@
     <script src="<?php echo base_url('public/admin/js/fabric/text.js') ?>"></script>
     <script src="<?php echo base_url('public/admin/js/fabric/image.js') ?>"></script>
     <script src="<?php echo base_url('public/admin/js/fabric/shapes.js') ?>"></script>
-    <script src="<?php echo base_url('public/admin/js/fabric/shapes.js') ?>"></script>
+    <script src="<?php echo base_url('public/admin/js/fabric/colors.js') ?>"></script>
 
 </body>
 </html>

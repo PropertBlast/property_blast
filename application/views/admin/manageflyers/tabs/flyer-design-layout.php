@@ -152,7 +152,7 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="image">
                 <div class="row mt-10">
-                    <div class="col-md-9 col-xs-12">
+                    <div class="col-md-9 col-xs-12 text-center">
                         <h4 class="mt-0">Select Image Number To Input</h4>
                     </div>
                     <div class="col-md-3 col-xs-12">
@@ -214,11 +214,6 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="object">
-                <div class="row mt-10">
-                    <div class="col-md-9 col-xs-12">
-                        <h4 class="mt-0">Select Image Number To Input</h4>
-                    </div>
-                </div>
                 <div class="row mt-20 mb-30">
                     <div class="col-md-6 col-xs-12">
                         <div class="row">
@@ -226,16 +221,76 @@
                                 <label class="control-label">lock/unlock</label>
                             </div>
                             <div class="col-md-12 col-xs-12">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-lock"></i></button>
-                                    <button type="button" class="btn btn-default"><i class="fa fa-unlock"></i></button>
+                                <div class="btn-group" role="group" id="editor-lockGroup">
+                                    <button data-type="lock" type="button" class="btn btn-default"><i class="fa fa-lock"></i></button>
+                                    <button data-type="unlock" type="button" class="btn btn-default btn-primary"><i class="fa fa-unlock"></i></button>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-12 col-xs-12">
-                                <button type="button" class="btn btn-default"><i class="fa fa-lock"></i></button>
-                                <button type="button" class="btn btn-default"><i class="fa fa-unlock"></i></button>
+                                <button type="button" class="btn btn-default" id="editor-bringFront">
+                                    <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
+                                </button>
+                                <button type="button" class="btn btn-default" id="editor-sendBack">
+                                    <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editor-svgWidth">Width</label>
+                                <input type="email" class="form-control" id="editor-svgWidth" placeholder="Width">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editor-svgHeight">Height</label>
+                                <input type="email" class="form-control" id="editor-svgHeight" placeholder="Height">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-20 editor-objectsBox">
+                    <div class="col-md-12">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/check56.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/circle111.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/heart13.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/plain.svg')?>">
+                    </div>
+                </div>
+                <div class="row pt-10">
+                    <div class="col-md-3 col-xs-12 nopad pl-20">
+                        <label>Fill</label>
+                    </div>
+                    <div class="col-md-5 col-xs-12 nopad pl-20">
+                        <div class="color-div large colorpicker" id="editor-svgFill" data-type="svgFill"></div>
+                    </div>
+                    <div class="col-md-4 col-xs-12 nopad text-right pr-20">
+                        <button type="button" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="color">
+                <div class="row mt-20 mb-30">
+                    <div class="col-md-6 col-xs-12">
+                        <div class="row mt-10">
+                            <div class="col-md-12 col-xs-12">
+                                <button type="button" class="btn btn-default" id="editor-bringFront">
+                                    <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
+                                </button>
+                                <button type="button" class="btn btn-default" id="editor-sendBack">
+                                    <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-md-12 col-xs-12">
+                                <button type="button" class="btn btn-default" id="editor-addSets">
+                                    Add Color Set
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -254,97 +309,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="row pt-20 mt-20" style="border:1px solid #ccc;">
+                <div class="row mt-20 editor-objectsBox">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/check56.svg')?>">
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/circle111.svg')?>">
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/heart13.svg')?>">
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/plain.svg')?>">
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/right11.svg')?>">
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/square_2.svg')?>">
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/square61.svg')?>">
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/star129.svg')?>">
+                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/triangle36.svg')?>">
                     </div>
                 </div>
-                <div class="row mt-20">
-                    <div class="col-md-8">
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                </div>
-                <div class="row mt-20">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                        <button type="button" class="btn btn-default btn-circle imagetextbold">1</button>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="color">
-                <div class="row">
-                    <button type="button" class="btn btn-primary btn-sm" style="margin-left: 3%;">Add Image</button>
-                    <p style="margin-left: 15%;"><B>Select Shape Number To Input</B></p>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6 col-xs-12">
-                        <p><small>lock/unlock :</small></p>
-                        <div class="btn-group btn-group-xs" role="group" aria-label="..." style="    margin-left: 28%;margin-top: -23%;">
-                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></button>
-                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></button>
+                <div class="row pt-10">
+                    <div class="col-md-12 col-xs-12">
+                        <ul class="nav nav-tabs" role="tablist" id="cs-tablist">
+                            <li class="active"><a href="#cs-sample1" data-toggle="tab">Sample 1</a></li>
+                        </ul>
+                        <div class="tab-content" id="cs-tabContent">
+                            <div role="tabpanel" class="tab-pane active" id="cs-sample1">
+                            </div>
                         </div>
-                        
-                        
-                        <div class="btn-group btn-group-xs" role="group" aria-label="..." style= "margin-top: -12%; margin-left: 10%;">
-                            <img src="layer.png">
-                            <img src="layer1.png">
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-12">
-                        <select class="form-control" id="text-transform" style="width: 33%;margin-left: 0%;">
-                            <option value="none"><small><B>Width</B></small></option>
-                            <option value="capitalize"><small>capitalize</small></option>
-                            <option value="uppercase"><small>uppercase</small></option>
-                            <option value="lowercase"><small>lowercase</small></option>
-                            <option value="initial"><small>initial</small></option>
-                            <option value="inherit"><small>inherit</small></option>
-                        </select>
-                        <select class="form-control" id="text-transform" style="width: 33%;margin-left: 35%;margin-top: -13%;">
-                            <option value="none"><small><B>height</B></small></option>
-                            <option value="capitalize"><small>capitalize</small></option>
-                            <option value="uppercase"><small>uppercase</small></option>
-                            <option value="lowercase"><small>lowercase</small></option>
-                            <option value="initial"><small>initial</small></option>
-                            <option value="inherit"><small>inherit</small></option>
-                        </select>
-                        <p style=""><small>Color : </small></p>
-                        <div class="btn-group btn-group-xs" role="group" aria-label="..." style="    margin-left: 17%;margin-top: 31%;">
-                            <button type="button" class="btn btn-default" style="width: 80px;height: 24px;margin-top: -40%;margin-left:  69%; border : 2px solid black; background-color : blue;"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <img src="icon.svg" style="width: 5%; margin-left: 10%;">
-                    <img src="icon.svg" style="width: 5%; margin-left: 10%;">
-                    <img src="icon.svg" style="width: 5%; margin-left: 10%;">
-                    <img src="icon.svg" style="width: 5%; margin-left: 10%;">
-                    
-                    
-                    <img src="icon.svg" style="width: 5%; margin-left: 10%;">
-                    <img src="icon.svg" style="width: 5%; margin-left: 10%;">
-                    <img src="icon.svg" style="width: 5%; margin-left: 10%;">
-                    <img src="icon.svg" style="width: 5%; margin-left: 10%;">
-                </div>
-                
-                
-                <div class="row" style="width: 80%;">
-                    <div class="col-md-3 col-md-3"> <img src="col.svg"> </div>
-                    <div class="col-md-3 col-md-3"><img src="3.png" style="width: 60%;"></div>
-                    <div class="col-md-3 col-md-3"> <img src="col.svg"></div>
-                    <div class="col-md-3 col-md-3"> <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                        <p style=""><small>Color : </small></p>
-                        <button type="button" class="btn btn-default" style="width: 80px;height: 24px; border : 2px solid black; background-color : blue;" ></button>
                     </div>
                 </div>
             </div>

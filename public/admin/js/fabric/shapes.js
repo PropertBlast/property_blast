@@ -16,17 +16,13 @@ proFabric.shapes = {
 		}
 	},
 	add: function(src, _options) {
-
 		var self = this;
 
 		fabric.loadSVGFromURL(src, function (objects, options) {
-
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
 			}
-
 			var obj = fabric.util.groupSVGElements(objects, options);
-
 			obj.set({
 				left: (_options && _options.left) || self.parent.get.width() / 2,
 				top: (_options && _options.top) || self.parent.get.height() / 4,
@@ -52,24 +48,22 @@ proFabric.shapes = {
 				original_left: obj.left / (self.parent.get.zoom() / 100),
 				original_top: obj.top / (self.parent.get.zoom() / 100)
 			});
-
 			obj.setCoords();
 			self.parent.canvas.add(obj);
 			self.parent.canvas.setActiveObject(obj);
 			self.canvas.renderAll();
+			self.scaleToWidth(120);
+			self.scaleToHeight(120);
 
 		}, function (item, object) {
-
 			object.set('id', item.getAttribute('id'));
 			object.set('class', item.getAttribute('class'));
 			object.set('original_scaleX', item.getAttribute('original_scaleX'));
 			object.set('original_scaleY', item.getAttribute('original_scaleY'));
 			object.set('original_left', item.getAttribute('original_left'));
 			object.set('original_top', item.getAttribute('original_top'));
-
 			return object.id;
 		}).bind(this);
-
 	},
 	stroke_color: function(color) {
 		var obj = this.canvas.getActiveObject();
@@ -149,17 +143,14 @@ proFabric.shapes = {
     },
     shapeSelected: function(obj){
     	//$("#imageTab").addClass('.ui-tabs-active ui-state-active');
-    	$("#shape_width_input").val(Math.ceil(obj.getWidth()));
-    	$("#shape_height_input").val(Math.ceil(obj.getHeight()));
-    	$("#svgFill").css("background-color",obj.fill);
-    	$("#svgStroke").css("background-color",obj.paths[0].stroke);
+    	$("#editor-svgWidth").val(Math.ceil(obj.getWidth()));
+    	$("#editor-svgHeight").val(Math.ceil(obj.getHeight()));
+    	$("#editor-svgFill").css("background-color",obj.fill);
     	if(obj.lockMovementX){
-    		$("#lock_shape").addClass('ui-state-active');
-    		$("#unlock_shape").removeClass('ui-state-active');
+    		$("#object").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');
     	}
     	else{
-    		$("#lock_shape").removeClass('ui-state-active');
-    		$("#unlock_shape").addClass('ui-state-active');
+    		$("#object").find("#editor-lockGroup").find('button[data-type=unlock]').addClass('btn-primary').siblings().removeClass('btn-primary');
     	}
     }
 };
