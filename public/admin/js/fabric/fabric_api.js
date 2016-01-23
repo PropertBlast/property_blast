@@ -274,9 +274,10 @@ var proFabric = new function(){
             }
         },
 		canvas_size: function(w, h) {
+            that.canvas.setWidth(w || that.canvas.getWidth());
 			that.canvas.setHeight(h || that.canvas.getHeight());
-			that.canvas.setWidth(w || that.canvas.getWidth());
-
+            this.width(w || that.canvas.getWidth());
+            this.height(h || that.canvas.getHeight())
 			that.canvas.renderAll();
 		},
 		setActiveobj:function(id){

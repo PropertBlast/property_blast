@@ -67,7 +67,11 @@ $(document).ready(function($) {
         console.log(name + " : " + size + " : " + type);
     });
 
-
+    $(document).delegate('button#editor-canvasSize', 'click', function() {
+        var _width  = $(this).attr('data-width'),
+            _height = $(this).attr('data-height');
+        proFabric.set.canvas_size((_width*96), (_height*96));
+    });
     $(document).delegate('#editor-delete', 'click', function() {
         type = $(this).attr('data-type');
         var obj = proFabric.get.currentObject();

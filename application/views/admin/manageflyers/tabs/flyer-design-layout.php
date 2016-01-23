@@ -6,14 +6,14 @@
             </div>
             <div class=" col-md-12 col-xs-12">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">8.5*11</button>
-                    <button type="button" class="btn btn-default">8.5*11</button>
-                    <button type="button" class="btn btn-default">8.5*11</button>
-                    <button type="button" class="btn btn-default">11*17</button>
+                    <button type="button" id="editor-canvasSize" data-width="8.5" data-height="11" class="btn btn-default">8.5*11</button>
+                    <button type="button" id="editor-canvasSize" data-width="5" data-height="5" class="btn btn-default">5*5</button>
+                    <button type="button" id="editor-canvasSize" data-width="8" data-height="4" class="btn btn-default">8*4</button>
+                    <button type="button" id="editor-canvasSize" data-width="6" data-height="9" class="btn btn-default">6*9</button>
                 </div>
             </div>
         </div>
-        <div class="canvasBig" style="border:1px solid;border-color:#000000;margin-top:2%;margin-bottom:4%;overflow:auto;">
+        <div class="canvasBig" style="border:1px solid;border-color:#000000;margin-top:2%;margin-bottom:4%;overflow:auto;max-height:600px;">
             <center><canvas id="myCanvas"></canvas></center>
         </div>
         <div class="row" style="margin-top: -2%;">
@@ -55,14 +55,12 @@
                         </div>
                         <div class="row pt-10">
                             <div class="col-md-12 col-xs-12">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-default" id="editor-bringFront">
-                                        <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
-                                    </button>
-                                    <button type="button" class="btn btn-default" id="editor-sendBack">
-                                        <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
-                                    </button>
-                                </div>
+                                <button type="button" class="btn btn-default" id="editor-bringFront">
+                                    <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
+                                </button>
+                                <button type="button" class="btn btn-default" id="editor-sendBack">
+                                    <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
+                                </button>
                             </div>
                         </div>
                         <div class="row pt-20">
