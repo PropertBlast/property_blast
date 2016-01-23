@@ -50,19 +50,11 @@
                         <div class="row pt-10">
                             <div class="col-md-12 col-xs-12">
                                 <button class="btn btn-default" id="editor-addText" type="button">Add Text</button>
-                                <button class="btn btn-default" id="editor-delete" type="button">Delete Text</button>
+                                <button class="btn btn-default" id="editor-delete" data-type="text" type="button">Delete Text</button>
                             </div>
                         </div>
                         <div class="row pt-10">
                             <div class="col-md-12 col-xs-12">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-default" id="editor-textLink">
-                                        <i class="fa fa-link editor-fa"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-default" id="editor-textUnlink">
-                                        <i class="fa fa-chain-broken editor-fa"></i>
-                                    </button>
-                                </div>
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-default" id="editor-bringFront">
                                         <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
@@ -182,6 +174,9 @@
                                 <button type="button" class="btn btn-default" id="editor-sendBack">
                                     <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
                                 </button>
+                                <button type="button" class="btn btn-default" data-type="image" id="editor-delete">
+                                    <span class="glyphicon glyphicon-trash editor-fa"></span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -227,6 +222,9 @@
                                 <button type="button" class="btn btn-default" id="editor-sendBack">
                                     <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
                                 </button>
+                                <button type="button" class="btn btn-default" data-type="shape" id="editor-delete">
+                                    <span class="glyphicon glyphicon-trash editor-fa"></span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -261,7 +259,7 @@
                         <div class="color-div large colorpicker" id="editor-svgFill" data-type="svgFill"></div>
                     </div>
                     <div class="col-md-4 col-xs-12 nopad text-right pr-20">
-                        <button type="button" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
+                        <button type="button" id="editor-cpicker" data-type="svgFill" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
                     </div>
                 </div>
             </div>
@@ -276,6 +274,9 @@
                                 <button type="button" class="btn btn-default" id="editor-sendBack">
                                     <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
                                 </button>
+                                <button type="button" class="btn btn-default" data-type="color" id="editor-delete">
+                                    <span class="glyphicon glyphicon-trash editor-fa"></span>
+                                </button>
                             </div>
                         </div>
                         <div class="row mt-10">
@@ -289,14 +290,14 @@
                     <div class="col-md-6 col-xs-12">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Width</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                <label for="editor-colorWidth">Width</label>
+                                <input type="email" class="form-control" id="editor-colorWidth" placeholder="Width">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Height</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                <label for="editor-colorHeight">Height</label>
+                                <input type="email" class="form-control" id="editor-colorHeight" placeholder="Height">
                             </div>
                         </div>
                     </div>

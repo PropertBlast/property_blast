@@ -69,6 +69,16 @@ $(document).ready(function($) {
 
 
     $(document).delegate('#editor-delete', 'click', function() {
+        type = $(this).attr('data-type');
+        var obj = proFabric.get.currentObject();
+        if(!obj) return;
+        var _id = obj.id;
+        if(type=="image"){
+            $('#editor-imageList').find('button[data-id='+_id+']').remove();
+        }
+        else if(type=="color"){
+            $('#cs-tabContent').find('.colorRow[data-id='+_id+']').remove();
+        }
         proFabric.delete();
     });
     $(document).delegate('#editor-bringFront', 'click', function() {
@@ -195,7 +205,7 @@ $(document).ready(function($) {
         var id = proFabric.color.add(src);
         console.log(id);
         var size = $('#cs-sample1').children().size();
-        var _html = '<div class="row pt-10 colorRow" data-id="'+id+'"><div class="col-md-4 col-xs-12">Color '+(size+ 1)+'</div><div class="col-md-4 col-xs-12"> <div class="color-div large colorpicker" id="editor-svgBorder" data-type="colorsFill"></div></div><div class="col-md-4 col-xs-12 nopad text-right pr-20"><button type="button" class="btn btn-default"><i class="fa fa-eyedropper"></i></button></div></div>';
+        var _html = '<div class="row pt-10 colorRow" data-id="'+id+'"><div class="col-md-4 col-xs-12">Color '+(size+ 1)+'</div><div class="col-md-4 col-xs-12"> <div class="color-div large colorpicker" id="editor-svgBorder" data-type="colorsFill"></div></div><div class="col-md-4 col-xs-12 nopad text-right pr-20"><button type="button" id="editor-cpicker" data-type="colorsFill" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button></div></div>';
         $(_html).appendTo('#cs-sample1');
         colorPickerInit();
     });

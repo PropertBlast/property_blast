@@ -63,7 +63,21 @@ var proFabric = new function(){
 	this.canvas.on('selection:created', function(o){});
 	this.canvas.on('object:added', function(o){});
 	this.canvas.on('object:remove', function(o){});
-	this.canvas.on('object:modified', function(o){});
+	this.canvas.on('object:modified', function(o){
+        var object = o.target;
+        if(object.class=="text"){
+            that.text.updateUI(object);
+        }
+        else if(object.class == 'image'){
+            that.image.updateUI(object);
+        }
+        else if(object.class=='shape'){
+            proFabric.shapes.shapeSelected(object);
+        }
+        else if(object.class=='color'){
+            proFabric.color.colorSelected(object);
+        }
+    });
 	this.canvas.on('object:rotating', function(o){});
 	this.canvas.on('object:scaling', function(o){});
 	this.canvas.on('object:moving', function(o){});
@@ -83,6 +97,7 @@ var proFabric = new function(){
         }
         else if(object.class=='color'){
             $('#editor-mainTabs a[href="#color"]').tab('show');
+            proFabric.color.colorSelected(object);
         }
 		console.log(object);
 		var dataId=object.class;

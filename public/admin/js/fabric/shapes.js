@@ -17,7 +17,6 @@ proFabric.shapes = {
 	},
 	add: function(src, _options) {
 		var self = this;
-
 		fabric.loadSVGFromURL(src, function (objects, options) {
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
@@ -51,9 +50,10 @@ proFabric.shapes = {
 			obj.setCoords();
 			self.parent.canvas.add(obj);
 			self.parent.canvas.setActiveObject(obj);
-			self.canvas.renderAll();
 			self.scaleToWidth(120);
 			self.scaleToHeight(120);
+			self.parent.canvas.setActiveObject(obj);
+			self.canvas.renderAll();
 
 		}, function (item, object) {
 			object.set('id', item.getAttribute('id'));
@@ -82,18 +82,21 @@ proFabric.shapes = {
 		this.canvas.renderAll();
 	},
 	fill: function(color) {
-		console.log(color);
 		var obj = this.canvas.getActiveObject();
 		if(obj && obj.class !== 'shape') return;
-
-		console.log(obj);
 		if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
 			obj.setFill(color);
+			this.stroke_color(color);
 		}
 		else if (obj.paths) {
-			obj.paths.forEach(function(i) { i.setFill(color) });
+			obj.paths.forEach(function(i) {
+				i.set({
+					stroke 	: color,
+					fill 	: color
+				});
+			});
+			console.log('a_d_s_f');
 		}
-
 		obj.setCoords();
 		this.canvas.renderAll();
 	},
@@ -142,7 +145,6 @@ proFabric.shapes = {
         this.canvas.renderAll();
     },
     shapeSelected: function(obj){
-    	//$("#imageTab").addClass('.ui-tabs-active ui-state-active');
     	$("#editor-svgWidth").val(Math.ceil(obj.getWidth()));
     	$("#editor-svgHeight").val(Math.ceil(obj.getHeight()));
     	$("#editor-svgFill").css("background-color",obj.fill);

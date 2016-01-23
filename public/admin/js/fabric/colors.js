@@ -89,15 +89,17 @@ proFabric.color = {
         this.canvas.renderAll();
     },
 	fill: function(id,color) {
+		var self = this;
 		this.canvas.forEachObject(function(obj) {
 			if (obj.id == id) {
 				if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
 					obj.setFill(color);
+					self.stroke_color(color);
 				}
 				else if (obj.paths) {
-					obj.paths.forEach(function(i) { i.setFill(color) });
+					obj.paths.forEach(function(i) { i.setFill(color); });
 				}
-				obj.setCoords();					
+				obj.setCoords();				
 			}
 		});
 		this.canvas.renderAll();
@@ -112,17 +114,16 @@ proFabric.color = {
 		this.canvas.renderAll();
 	},
 	colorSelected: function(obj){
-        //$("#imageTab").trigger('click');
-       $("#color_width_input").val(Math.ceil(obj.getWidth()));
-    	$("#color_height_input").val(Math.ceil(obj.getHeight()));
-        if(obj.lockMovementX){
-        	$("#lock_color").addClass('ui-state-active');
-        	$("#unlock_color").removeClass('ui-state-active');
-        }
-        else{
-        	$("#lock_color").removeClass('ui-state-active');
-        	$("#unlock_color").addClass('ui-state-active');
-        }
+		$("#editor-colorWidth").val(Math.ceil(obj.getWidth()));
+		$("#editor-colorHeight").val(Math.ceil(obj.getHeight()));
+		if(obj.lockMovementX){
+			$("#lock_color").addClass('ui-state-active');
+			$("#unlock_color").removeClass('ui-state-active');
+		}
+		else{
+			$("#lock_color").removeClass('ui-state-active');
+			$("#unlock_color").addClass('ui-state-active');
+		}
     }
 
 };
