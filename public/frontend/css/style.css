@@ -8,10 +8,11 @@
 0px;
 }
 .square{
-	width: 25px;
+	width: 70px;
 	height: 25px;
 	border:1px solid black;
-	background-color: green;
+    border-radius: 5px;
+	background-color: black;
 }
 .rect{
 	width: 100px;
@@ -41,3 +42,26 @@
 	background-color: green;
 }
 
+.color-box {
+    float:left;
+    width:30px;
+    height:30px;
+    margin:5px;
+    border: 1px solid white;
+}
+
+#picker {
+    margin:0;
+    padding:0;
+    border:0;
+    width:40px;
+    height:24px;
+    border-right:80px solid #000000;
+    border-radius: 10px;
+    line-height:20px;
+}
+.on{
+    background-color:#337ab7 ;
+    /**background-color: #337ab7;
+    border-color: darkgrey;**/
+}
