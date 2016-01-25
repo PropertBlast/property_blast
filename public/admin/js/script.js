@@ -15,6 +15,21 @@ var button = [
 ];
 var tabs = ['prop-info', 'agent-info', 'agent-2-info', 'company-info', 'company-2-info'];
 $(document).ready(function($) {
+    $(document).delegate('#menuHider', 'click', function(event) {
+        var navbar = $('.navbar-side');
+        if(navbar.children('.sidebar-collapse').is(':visible')){
+            navbar.children('.sidebar-collapse').hide();
+            navbar.animate({width: '5px'}, 300);
+            $(this).animate({left: '5px'}, 300);
+            $('#page-wrapper').animate({marginLeft: '5px'}, 300);
+        }
+        else{
+            navbar.children('.sidebar-collapse').show();
+            navbar.animate({width: '260px'}, 300);
+            $(this).animate({left: '260px'}, 300);
+            $('#page-wrapper').animate({marginLeft: '260px'}, 300);
+        }
+    });
     /*for(int i=0;i<items.)
     var d = new Date();
     var tempid = d.getDate().toString()+d.getDay().toString()+d.getHours().toString()+d.getMinutes().toString()+d.getSeconds().toString()+d.getMilliseconds().toString();
@@ -294,6 +309,13 @@ $(document).ready(function($) {
             else if(document.webkitExitFullscreen){
                 document.webkitExitFullscreen();
             }
+        }
+    });
+    $(document).on ('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
+        fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+        if(!fullScreenMode){
+            $('#fullScreenEditor').val('Full Screen');
+            $('#editor').removeAttr('style');
         }
     });
     colorPickerInit();

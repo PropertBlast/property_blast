@@ -68,5 +68,12 @@ proFabric.text = {
         }
         obj.setCoords();
         this.canvas.renderAll();
+    },
+    list: function() {
+        var obj = this.canvas.getActiveObject();
+        if(!obj || obj.class !== 'text') return;
+        //
+        obj.setCoords();
+        this.canvas.renderAll();
     }
 };

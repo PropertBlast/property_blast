@@ -53,7 +53,7 @@ proFabric.color = {
 	},
 	stroke_color: function(color) {
 		var obj = this.canvas.getActiveObject();
-		if(!obj && obj.class !== 'color') return;
+		if(!obj || obj.class !== 'color') return;
 
 		obj.paths.forEach(function(i) { i.set({stroke: color}); });
 		obj.setCoords();
@@ -61,7 +61,7 @@ proFabric.color = {
 	},
 	stroke_width: function(width) {
 		var obj = this.canvas.getActiveObject();
-		if(!obj && obj.class !== 'color') return;
+		if(!obj || obj.class !== 'color') return;
 
 		obj.paths.forEach(function(i) { i.set({strokeWidth: width}); });
 		obj.setCoords();
@@ -69,7 +69,7 @@ proFabric.color = {
 	},
 	scaleToWidth: function(width) {
 		var obj = this.canvas.getActiveObject();
-		if(obj && obj.class !== 'color') return;
+		if(!obj || obj.class !== 'color') return;
 
 		var boundingRectFactor = obj.getBoundingRect().width / obj.getWidth();
 		obj.set({scaleX : width / obj.width / boundingRectFactor});	
@@ -79,7 +79,7 @@ proFabric.color = {
     },
     scaleToHeight: function(height) {
     	var obj = this.canvas.getActiveObject();
-    	if(obj && obj.class !== 'color') return;
+    	if(!obj || obj.class !== 'color') return;
 
     	var boundingRectFactor = obj.getBoundingRect().height / obj.getHeight();
     	obj.set({scaleY : height / obj.height / boundingRectFactor});
@@ -106,7 +106,7 @@ proFabric.color = {
 	},
 	set: function(option) {
 		var obj = this.canvas.getActiveObject();
-		if(!obj && obj.class !== 'color') return;
+		if(!obj || obj.class !== 'color') return;
 
 		obj.paths.forEach(function(i) { i.set(option) });
 
