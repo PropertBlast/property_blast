@@ -17,8 +17,7 @@
 	</div>
 
 	<div id="tab-id-1-3" class="tab-pane fade">
-		<h3>Menu 2</h3>
-		<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+		<?php $this->load->view( 'admin/manageflyers/tabs/flyer-design-layout' ); ?>
 	</div>
 
 	<div id="tab-id-1-4" class="tab-pane fade">

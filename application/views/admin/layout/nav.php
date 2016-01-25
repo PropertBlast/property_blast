@@ -34,7 +34,7 @@
            
 
     </div>
-
-</nav>   
+    <div class="menuHider" id="menuHider"><span class="glyphicon glyphicon-transfer"></span></div>
+</nav> 
 
 

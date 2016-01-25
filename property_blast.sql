@@ -61,7 +61,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`pk_admin_id`, `admin_username`, `admin_password`, `admin_email`) VALUES
-(2, 'usman', '2f1fed5365c79d8fea7859dcc8788d77', 'usmanakram13@gmail.com');
+(2, 'usman', '41acf9c1a9e5b4bfeac86458fa675aa7', 'usmanakram13@gmail.com');
 
 -- --------------------------------------------------------
 

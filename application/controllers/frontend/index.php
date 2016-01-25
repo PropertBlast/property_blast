@@ -24,5 +24,13 @@ class index extends CI_Controller {
        
     }
 
+    /**
+     * Will get design page content
+     */
+    public function design() {
+        $data = '';
+        $this->commonmodel->frontloadLayout($data,'frontend/design');
+       
+    }
   
 }
