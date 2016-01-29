@@ -21,10 +21,10 @@
         <div class="col-md-8 col-xs-12" align="right" style = "padding: 0px;margin: 0px;margin-bottom: 5px;">
             <div class="btn-group" role="group" aria-label="..." >
                 <div class="col-md-8 col-xs-12" align="center" style = "margin-bottom: 5px;">
-                    <div class="col-md-6 col-xs-6"><button type="button" class="btn btn-warning btn-sm">
+                    <div class="col-md-6 col-xs-6"><button type="button" style="width: 80px" class="btn btn-warning btn-sm">
                         Undo
                     </button></div>
-                    <div class="col-md-6 col-xs-6"><button type="button" class="btn btn-warning btn-sm">
+                    <div class="col-md-6 col-xs-6"><button type="button" style="width: 80px" class="btn btn-warning btn-sm">
                         Redo
                     </button></div>
                 </div>
@@ -49,7 +49,7 @@
     <div class="input-group "style="width: 100%; margin-top:5%;">
         <textarea id="addText" type="textbox" placeholder="" class="form-control"style="height: 200px; margin-top: 10px;border-radius: 5px;"></textarea>
     </div>
-    <div class="row" >
+    <div class="row" style="margin-top: 5px;">
         <div class="col-md-6" style="margin: 0px;padding: 0px;">
             <div class="col-md-12 col-xs-12">
                 <div class="textalign" style="font-weight: bold;">
@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-    <div class="row" >
+    <div class="row" style="margin-top: 5px;">
         <div class="col-md-2 col-xs-12">
             <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
                 <div class="textalign" style="font-weight: bold;">
@@ -118,7 +118,7 @@
             </div>
         </div>
     </div>
-    <div class="row" >
+    <div class="row" style="margin-top: 5px;">
         <div class="col-md-2 col-xs-12">
             <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
                 <div class="textalign" style="font-weight: bold;">
@@ -137,12 +137,14 @@
             </div>
         </div>
     </div>
-    <div class="row" >
+    <div class="row" style="margin-top: 6px;margin-bottom: 5px;">
         <div class="col-md-2 col-xs-2 " style="font-weight: bold;padding-top: 3px;margin-right: 15px;">
-            FILL:
+                FILL:
         </div>
-        <div class="col-md-9 col-xs-9" style="padding: 0px;margin: 0px;font-weight: bold;">
-            <div id="picker"></div>
+        <div class="col-md-9 col-xs-9" style="padding: 0px;margin: 0px;font-weight: bold; margin-left: -5px;">
+            <div class=" col-md-12 col-xs-12">
+                <div id="picker"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -156,18 +158,18 @@
     </div>
     <div class="col-md-12 col-xs-12">
         <div class="rect1" style="width: 100%;margin-top: 10px;">
-            <div class="col-md-4 col-xs-12" style="padding: 0px;margin: 0px;">
-                <button type="button" id="Up-imageUpload" class="btn btn-primary btn-sm" style="font-size: 12px;">Choose File</button>
+            <div class="col-md-4 col-xs-4" style="padding: 0px;margin: 0px;">
+                <button type="button" style="width:105px;"id="Up-imageUpload" class="btn btn-primary btn-sm" style="font-size: 12px;">Choose File</button>
             </div>
-            <div class="col-md-8 col-xs-12">
-                <div class="textalign" style="font-size: 14px;margin-right: 10px;">
+            <div class="col-md-8 col-xs-8">
+                <div class="textalign" style="font-size: 14px;margin-left: 20%;">
                     No file choosen
                 </div>
             </div>
         </div>
     </div>
 
-    <div  class="col-md-12 col-xs-12" align="center" style="margin-top: 10px;">
+    <div  class="col-md-12 col-xs-12" align="center" style="margin-top: 10px; margin-bottom: 10px;">
         <button type="button" id="modal-click" class="btn btn-info btn-sm">Edit Image</button>
     </div>
 
@@ -347,11 +349,11 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-xs-6" align="left">
-        <button type="button" class="btn btn-primary btn-sm">GO BACK</button>
+    <div class="col-md-6 col-xs-5"  style="margin:0px;padding:0px;" align="left">
+        <button type="button"  class="btn btn-primary btn-sm">GO BACK</button>
     </div>
-    <div class="col-md-6 col-xs-6" align="right" >
-        <button type="button" class="btn btn-primary btn-sm">SAVE&CONTINUE</button>
+    <div class="col-md-6 col-xs-6"  style="margin:0px;padding:0px;" align="right" >
+        <button type="button"  class="btn btn-primary btn-sm">SAVE&CONTINUE</button>
     </div>
 </div>
 <input type="hidden" id="base_url" value ="<?php echo base_url() ?>">

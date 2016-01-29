@@ -14,7 +14,7 @@ ini_set('include_path', base_url()+'application/views/frontend/layout/upload.php
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
         <!-- header css & js resources -->
-        <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/font-awesome.css">
+        <link rel="stylesheet" href="<?\php echo base_url() ?>public/frontend/css/font-awesome.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/bootstrap.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/bootstrap.min.css">
@@ -27,6 +27,6 @@ ini_set('include_path', base_url()+'application/views/frontend/layout/upload.php
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     </head>
     <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse" style="width: 100%;">
 
     </nav>
