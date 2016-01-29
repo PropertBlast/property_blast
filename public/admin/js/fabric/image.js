@@ -5,7 +5,6 @@ proFabric.image = {
         var self = this;
 
         fabric.Image.fromURL(src, function(image) {
-
             image.set({
                 left: (_options && _options.left) || self.parent.get.width() / 2,
                 top: (_options && _options.top) || self.parent.get.height() / 4,
@@ -24,7 +23,7 @@ proFabric.image = {
                 lockRotation 	  : (_options && _options.lockRotation) || false,
                 lockScalingX 	  : (_options && _options.lockScalingX) || false,
                 lockScalingY 	  : (_options && _options.lockScalingY) || false
-                });
+            });
 
             image.set({
                 original_scaleX: image.scaleX / (self.parent.get.zoom() / 100),
@@ -42,44 +41,18 @@ proFabric.image = {
     set: function(options) {
         var obj = this.canvas.getActiveObject();
         if(obj && obj.class !== 'image') return;
-
         obj.set(options);
         obj.setCoords();
         this.canvas.renderAll();
     },
-    stroke_color: function(color) {
-        var obj = this.canvas.getActiveObject();
-        if(obj && obj.class !== 'image') return;
-
-        obj.set({stroke: color});
-        obj.setCoords();
-        this.canvas.renderAll();
-
-    },
-    stroke_width: function(width) {
-        var obj = this.canvas.getActiveObject();
-        if(obj && obj.class !== 'image') return;
-
-        obj.set({strokeWidth: width});
-        obj.setCoords();
-        this.canvas.renderAll();
-    },
-    imageSelected: function(obj){
-        //$("#imageTab").trigger('click');
-       $("#img_width_input").val(Math.ceil(obj.width));
-       $("#img_height_input").val(Math.ceil(obj.height));
-       if(obj.lockMovementX){
-        $("#lock_img").addClass('ui-state-active');
-        $("#unlock_img").removeClass('ui-state-active');
-       }
-       else{
-        $("#lock_img").removeClass('ui-state-active');
-        $("#unlock_img").addClass('ui-state-active');
-       }
+    updateUI: function(obj){
+        $("#editor-imageWidth").val(Math.ceil(obj.width));
+        $("#editor-imageHeight").val(Math.ceil(obj.height));
+        if(obj.lockMovementX){
+            $("#image").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');
+        }
+        else{
+            $("#image").find("#editor-lockGroup").find('button[data-type=unlock]').addClass('btn-primary').siblings().removeClass('btn-primary');
+        }
     }
-/*    linktoId:function(id){
-
-        var obj = this.canvas.getActiveObject();
-
-    }*/
 };

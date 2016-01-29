@@ -16,7 +16,7 @@ For usage and examples: colpick.com/plugin
 				onHide: function () {},
 				onChange: function () {},
 				onSubmit: function () {},
-				colorScheme: 'light',
+				colorScheme: 'dark',
 				color: '3289c7',
 				livePreview: true,
 				flat: false,
@@ -229,37 +229,27 @@ For usage and examples: colpick.com/plugin
 			},
 			//Show/hide the color picker
 			show = function (ev) {
-
-				var cumulativeOffset = function(element) {
-					var top = 0, left = 0;
-					do {
-						top += element.offsetTop  || 0;
-						left += element.offsetLeft || 0;
-						element = element.offsetParent;
-					} while(element);
-
-					return {
-						top: top,
-						left: left - 200
-					};
-				};
 				// Prevent the trigger of any direct parent
 				ev.stopPropagation();
 				var cal = $('#' + $(this).data('colpickId'));
 				cal.data('colpick').onBeforeShow.apply(this, [cal.get(0)]);
-				var pos = cumulativeOffset(this);
+				var pos = $(this).offset();
 				var top = pos.top + this.offsetHeight;
 				var left = pos.left;
 				var viewPort = getViewport();
 				var calW = cal.width();
-
-				var camulate = cumulativeOffset(this);
+				if($(window).height() < (top+cal.height())){
+					top = top + ($(window).height() - (top+cal.height()) - 50);
+				}
+				if (left + calW > viewPort.l + viewPort.w) {
+					left -= calW;
+				}
 				cal.css({left: left + 'px', top: top + 'px'});
 				if (cal.data('colpick').onShow.apply(this, [cal.get(0)]) != false) {
 					cal.show();
 				}
 				//Hide when user clicks outside
-				$('html').mousedown({cal:cal}, hide);
+				//$('html').mousedown({cal:cal}, hide);
 				cal.mousedown(function(ev){ev.stopPropagation();})
 			},
 			hide = function (ev) {
