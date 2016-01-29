@@ -3,19 +3,21 @@ var _pickerFlag = 0;
 var _selectionflag=0;
 var proFabric = new function(){
 	var that = this; // refrence for proFabric
-	this.canvasWidth = 613;
-	this.canvasHeight = 547;
+	this.canvasWidth = 576;
+	this.canvasHeight = 864;
     var Top = this.canvasHeight;
     var Left = this.canvasWidth;
 	this.zoom = 100, this.defaultZoom = 100;
     this.canvas = new fabric.Canvas('myCanvas',{backgroundColor:'#fff'});
     this.canvas.setWidth(this.canvasWidth);
     this.canvas.setHeight(this.canvasHeight);
+    this.canvas.selection = false;
     var BaseURL = $('#base_url').val();
-    console.log(BaseURL);
+    //console.log(BaseURL);
         fabric.Image.fromURL(BaseURL+'abc.jpg', function(img) {
             img.class = 'image';
-            img.source = BaseURL+'abc.jpg';
+            img.src = BaseURL+'abc.jpg';
+            img.orignalSource = BaseURL+'abc.jpg';
             img.id = "test";
             img.originX = "center";
             img.originY = "center";
@@ -77,10 +79,10 @@ var proFabric = new function(){
 		var object = o.target;
         if(object.class=="text") {
             that.text.updateUI(object);
-            $("#textOpt").slideDown("slow");
-            $("#settingOpt").slideDown("slow");
-            $("#imageOpt").slideUp("slow");
-            $("#colorStyleOpt").slideUp("slow");
+            $("#textOpt").show();
+            $("#settingOpt").show();
+            $("#imageOpt").fadeOut();
+            $("#colorStyleOpt").fadeOut();
         }
 		else if(object.class){
 			proFabric.image.imageSelected(object);
@@ -88,7 +90,7 @@ var proFabric = new function(){
         else if(object.class=='shape'){
             proFabric.shapes.shapeSelected(object);
         }
-		console.log(object);
+		//console.log(object);
 		var dataId=object.class;
 		$("#tabs li" ).each(function() {
 			if($(this).data('id')==object.class){
@@ -102,21 +104,13 @@ var proFabric = new function(){
 
 		}
 		else if(object.class=='image'){
-			//proFabric.image.imageSelected(object);
-            //$('#imageUpload').trigger('click');
-            $("#panel").slideDown("imageOpt");
-            $("#panel").slideUp("textOpt");
-
-            $("#imageOpt").slideDown("slow");
-            $("#settingOpt").slideDown("slow");
-            $("#textOpt").slideUp("slow");
-            $("#colorStyleOpt").slideUp("slow");
+            $("#settingOpt").show();
+            $("#imageOpt").show();
+            $("#textOpt").fadeOut();
+            $("#colorStyleOpt").fadeOut();
 		}
 		else if(object.class=='shape'){
 			proFabric.shapes.shapeSelected(object);
-		}
-		else if(object.class=='color'){
-			proFabric.color.colorSelected(object);
 		}
 	});
     this.canvas.on('mouse:move', function(e) {
@@ -154,7 +148,6 @@ var proFabric = new function(){
 		inchesToPixel : function(inc){
 			return inc * 96;
         }
-
 	};
 	this.set = {
 		width : function(w){
@@ -333,35 +326,36 @@ var proFabric = new function(){
                     return;
                 }
             }
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE WE ARE");
+            //console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE WE ARE");
         });
     };
 	this.import = {
 		svg : function(svg){
 		},
-		json : function(json){
-		}
-	};/*,
-    remove:function(){
-       //Latest Modified Ahmad
-        var obj = this.canvas.getActiveObject();
-        if(obj == null){
-            obj = canvas.getActiveGroup();
-            for(var i = 0 ; i < obj._objects.length ; i++) {
-                console.log(obj._objects[i]);
-                canvas.fxRemove(obj._objects[i]);
+		json :function(_json){
+                var _JSON_NEW = JSON.stringify(_json);
+                that.canvas.loadFromJSON(_JSON_NEW, that.canvas.renderAll.bind(that.canvas), function(o, object) {
+                    object.set({
+                        lockMovementX: true,
+                        lockMovementY: true,
+                        lockRotation: true,
+                        lockScalingX: true,
+                        lockScalingY: true,
+                        hasControls: false
+                    });
+                    if(object.type=="path-group")
+                    {
+                        object.set({selectable:false});
+                    }
+                    fabric.log(o, object);
+                    console.log(object.class);
+                    console.log(object.type);
+                    console.log(object.globalCompositeOperation);
+                });
+                console.log("++++++++++++++-----------------+++++++++++++++");
+                that.canvas.renderAll();
             }
-            canvas.discardActiveGroup();
-            canvas.renderAll();
-        }
-        else{
-            canvas.fxRemove(obj);
-            canvas.renderAll();
-        }
-        canvas.renderAll();
-    }*/
-//}
-	//};
+	};
     this.rgb2hex=function (rgb){
         rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
         return (rgb && rgb.length === 4) ? "#" +
@@ -483,13 +477,11 @@ var proFabric = new function(){
         }
     };
     this.droper = function (){
-
             _pickerFlag = 1;
-
     };
     this.disableSelection=function(){
-            that.canvas.deactivateAll();
-            that.canvas.selection = false;
+        that.canvas.deactivateAll();
+        that.canvas.selection = false;
         var lenght = that.canvas._objects.length;
         for(var i = 0 ; i < lenght ; i++) {
             that.canvas._objects[i].selectable = false;
@@ -507,6 +499,10 @@ var proFabric = new function(){
         that.canvas.renderAll();
         //alert('I am disable');
     };
+    this.unselectSelected=function(){
+        that.canvas.deactivateAll();
+        that.canvas.renderAll();
+    };
     this.replaceImg=function(source){
         console.log("here")
         that.canvas.forEachObject(function(obj) {
@@ -520,20 +516,111 @@ var proFabric = new function(){
                 that.canvas.renderAll();
                 fabric.Image.fromURL(source, function(img) {
                     img.class = 'image';
-                    img.source = source;
+                    img.src = source;
+                    img.orignalSource = source;
                     img.id = "test";
-                    img.originX = "center";
-                    img.originY = "center";
                     img.top = top;
                     img.left = left;
                     img.width = _width;
                     img.height = _height
                     img.color = "#0000ff";
+                    img.set({
+                        lockMovementX: true,
+                        lockMovementY: true,
+                        lockRotation: true,
+                        lockScalingX: true,
+                        lockScalingY: true,
+                        hasControls: false
+                    });
                     console.log(img.width);
                     that.canvas.add(img);
-                    canvas.renderAll();
+                    that.canvas.renderAll();
                 });
             }
         });
     };
+    this.getEditImg=function(source){
+        var obj = that.canvas.getActiveObject();
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Inside Edit Image");
+        console.log(obj.orignalSource);
+        console.log(obj.src);
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Inside Edit Image");
+        if(obj.orignalSource)
+            return obj.orignalSource;
+        else {
+            obj.orignalSource = obj.src;
+            return obj.src;
+        }
+    };
+    this.newImg = function(newObj){
+        var dataURL;
+        var obj = that.canvas.getActiveObject();
+        console.log("Old Top : "+obj.top);
+        console.log("Old left : "+obj.left);
+        console.log("Old Width : "+obj.width);
+        console.log("Old height : "+obj.height);
+        var _width = obj.width;
+        var _height = obj.height;
+        TempCanvas = new fabric.Canvas(fabric.util.createCanvasElement());
+        TempCanvas.setWidth(newObj.imgWidth);
+        TempCanvas.setHeight(newObj.imgHeight);
+        fabric.Image.fromURL(newObj.src, function(img) {
+            TempCanvas.add(img);
+            TempCanvas.renderAll();
+            dataURL = TempCanvas.toDataURL({
+                format: 'png',
+                left: newObj.x,
+                top: newObj.y,
+                width: newObj.width,
+                height: newObj.height
+            });
+            var ImageObj = new Image();
+            ImageObj.onload = function() {
+                image = new fabric.Image(ImageObj);
+                image.top = obj.top;
+                image.left = obj.left;
+                image.width = _width;
+                image.height = _height;
+                image.src = dataURL;
+                image.orignalSource = obj.orignalSource;
+                //image.original_src = obj.original_src;
+                image.angle = obj.angle;
+                image.id = obj.id;
+                image.class = "image";
+                image.set({
+                    original_scaleX: newObj.scaleX,
+                    original_scaleY: newObj.scaleX,
+                    lockMovementX: true,
+                    lockMovementY: true,
+                    lockRotation: true,
+                    lockScalingX: true,
+                    lockScalingY: true,
+                    hasControls: false
+                });
+                console.log("New Top : "+image.top);
+                console.log("New left : "+image.left);
+                console.log("New Width : "+image.width);
+                console.log("New height : "+image.height);
+                that.canvas.add(image);
+                that.canvas.moveTo(image, that.canvas.getObjects().indexOf(obj));
+                that.canvas.setActiveObject(image);
+                that.canvas.fxRemove(obj);
+                that.canvas.renderAll();
+            }
+            ImageObj.src = dataURL;
+        });
+    };
+    this.getcolorObjects = function(){
+        console.log("I am here...............................................................");
+        var lenght = that.canvas._objects.length;
+        console.log(lenght);
+        for(var i = 0 ; i < lenght ; i++) {
+            that.canvas._objects[i].selectable = true;
+            if(that.canvas._objects[i].class=="color")
+            {
+                console.log(that.canvas._objects[i]);
+            }
+        }
+        console.log("I am here...............................................................");
+    }
 };

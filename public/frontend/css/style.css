@@ -29,17 +29,35 @@
 	background-color: white;
 	padding: 7px;
 }
+.textalignactive {
+    margin-top: 1px;
+    color: #15317E;
+    font-size: 16px;
+    margin-left: -4px;
+    text-shadow: 1px 1px 0 rgba(140,140,140,0.6) , -1px -1px 1px rgba(0,0,0,0.67) ;
+}
 .textalign {
-	padding-top: 6px;
+    padding-top: 2px;
 }
-.textalign1 {
-	padding-top: 16px;
-}
+
 .square1{
-	width: 25px;
-	height: 25px;
-	border:1px solid black;
-	background-color: green;
+	width: 18px;
+	height: 18px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+.square1active{
+    width: 22px !important;
+    height: 22px !important;
+    margin-bottom: 8px;
+    margin-left: -2px;
+    box-shadow: 3px 3px  1px #888888;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 15px;
+    -webkit-box-shadow: 0 0 2px 2px #303030 ;
+    box-shadow: 0 0 2px 2px #303030 ;
+    border-radius: 15px;
 }
 
 .color-box {

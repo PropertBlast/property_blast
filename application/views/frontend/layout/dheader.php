@@ -17,9 +17,12 @@ ini_set('include_path', base_url()+'application/views/frontend/layout/upload.php
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/font-awesome.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/bootstrap.css">
+        <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/colpick.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/dropzone.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/dropzone.css">
+        <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/cropper.css">
+        <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/wan-spinner.css">
 
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     </head>

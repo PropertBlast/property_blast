@@ -34,6 +34,7 @@ proFabric.text = {
         $("#addText").val("");
         $("#addText").val(Object.text);
         $("#fontSize").val(Object.fontSize);
+        console.log('..........................'+Object.fill);
         $('#picker').colpickSetColor(Object.fill);
         //$( "#FontSize" ).val(Object.fontsize());
         //$('#FontSize [value='"++"']").attr('selected', 'selected');
@@ -45,87 +46,91 @@ proFabric.text = {
         _txtSelectionFlag = 1;
         if(Object.fontWeight == 'bold')
         {
-            $("#text_bold").addClass('ui-state-active');
-            $("#text_bold").addClass('ui-widget-content');
+            $('#bold').css("background-color", "#337ab7");
+            $('#bold').css("border-color", "darkgrey");
         }
         else
         {
-            $("#text_bold").removeClass('ui-state-active');
-            $("#text_bold").removeClass('ui-widget-content');
+            $('#bold').css("background-color", "white");
+            $('#bold').css("border-color", "#8c8c8c");
         }
         if(Object.fontStyle == 'italic')
         {
-            $("#text_italic").addClass('ui-state-active');
-            $("#text_italic").addClass('ui-widget-content');
+            $('#italic').css("background-color", "#337ab7");
+            $('#italic').css("border-color", "darkgrey");
         }
         else
         {
-            $("#text_italic").removeClass('ui-state-active');
-            $("#text_italic").removeClass('ui-widget-content');
+            $('#italic').css("background-color", "white");
+            $('#italic').css("border-color", "#8c8c8c");
         }
         if(Object.textDecoration == 'underline')
         {
-            $("#text_underline").addClass('ui-state-active');
-            $("#text_underline").addClass('ui-widget-content');
+            $('#underline').css("background-color", "#337ab7");
+            $('#underline').css("border-color", "darkgrey");
         }
         else
         {
-            $("#text_underline").removeClass('ui-state-active');
-            $("#text_underline").removeClass('ui-widget-content');
+            $('#underline').css("background-color", "white");
+            $('#underline').css("border-color", "#8c8c8c");
         }
         if(Object.textAlign=='left')
         {
-            $("#text_left").addClass('ui-state-active');
-            $("#text_left").addClass('ui-widget-content');
+            $('#left').css("background-color", "#337ab7");
+            $('#left').css("border-color", "darkgrey");
         }
         else
         {
-            $("#text_left").removeClass('ui-state-active');
-            $("#text_left").removeClass('ui-widget-content');
+            $('#right').css("background-color", "white");
+            $('#right').css("border-color", "#8c8c8c");
+            $('#center').css("background-color", "white");
+            $('#center').css("border-color", "#8c8c8c");
+            $('#justify').css("background-color", "white");
+            $('#justify').css("border-color", "#8c8c8c");
 
         }
         if(Object.textAlign=='center')
         {
-            $("#text_center").addClass('ui-state-active');
-            $("#text_center").addClass('ui-widget-content');
+            $('#center').css("background-color", "#337ab7");
+            $('#center').css("border-color", "darkgrey");
         }
         else
         {
-            $("#text_center").removeClass('ui-state-active');
-            $("#text_center").removeClass('ui-widget-content');
+            $('#left').css("background-color", "white");
+            $('#left').css("border-color", "#8c8c8c");
+            $('#right').css("background-color", "white");
+            $('#right').css("border-color", "#8c8c8c");
+            $('#justify').css("background-color", "white");
+            $('#justify').css("border-color", "#8c8c8c");
         }
         if(Object.textAlign=='right')
         {
-            $("#text_right").addClass('ui-state-active');
-            $("#text_right").addClass('ui-widget-content');
+            $('#right').css("background-color", "#337ab7");
+            $('#right').css("border-color", "darkgrey");
         }
         else
         {
-            $("#text_right").removeClass('ui-state-active');
-            $("#text_right").removeClass('ui-widget-content');
+            $('#left').css("background-color", "white");
+            $('#left').css("border-color", "#8c8c8c");
+            $('#center').css("background-color", "white");
+            $('#center').css("border-color", "#8c8c8c");
+            $('#justify').css("background-color", "white");
+            $('#justify').css("border-color", "#8c8c8c");
         }
         if(Object.textAlign=='justify')
         {
         console.log("JUSTIFY");
-            $("#text_justify").addClass('ui-state-active');
-            $("#text_justify").addClass('ui-widget-content');
+            $('#justify').css("background-color", "#337ab7");
+            $('#justify').css("border-color", "darkgrey");
         }
         else
         {
-            $("#text_justify").removeClass('ui-state-active');
-            $("#text_justify").removeClass('ui-widget-content');
-        }
-        if(Object.lockMovementX)
-        {
-            console.log("Here Un-Locked !! "+Object.lockMovementX);
-            $("#text_lock").removeClass('fa fa-lock');
-            $("#text_lock").addClass('fa fa-unlock');
-        }
-        else
-        {
-            console.log("Here Locked !! "+Object.lockMovementX);
-            $("#text_lock").removeClass('fa fa-unlock');
-            $("#text_lock").addClass('fa fa-lock');
+            $('#left').css("background-color", "white");
+            $('#left').css("border-color", "#8c8c8c");
+            $('#right').css("background-color", "white");
+            $('#right').css("border-color", "#8c8c8c");
+            $('#center').css("background-color", "white");
+            $('#center').css("border-color", "#8c8c8c");
         }
         //console.log(Object.text);
         //console.log(Object.fill);
@@ -403,9 +408,49 @@ proFabric.text = {
             }
         }
     },
+    setGroupTextColor: function(sets){
+        var self = this;
+        /*var arr = [];
+        var i= 1,j=1;
+            $.each(sets, function (index, obj) {
+                if (i==rowNum) {
+                    $.each(obj, function (index, obj1) {
+                        console.log(obj1.color + " :: " + 'C' + i + j);
+                        ++j;
+                        arr.push(obj1.color);
+                    });
+                }
+            j = 1;
+            ++i;
+        });
+        i=0;
+        console.log(arr.length);
+        self.canvas.forEachObject(function(obj) {
+            if(obj.class=="text")
+            {
+                console.log(i,arr[i]);
+                obj.set({
+                    fill: arr[i++]
+                });
+            }
+        });*/
+        $.each(sets, function (index, set) {
+            self.canvas.forEachObject(function(obj) {
+                if(obj.id==set.id)
+                {
+                    obj.set({
+                        fill: set.color,
+                        stroke:set.color,
+                        color:set.color,
+                        selectable:false
+                    });
+                }
+            });
+        });
+        self.canvas.renderAll();
+    },
     add: function(_text,_options){
         var self = this;
-
         var text = new fabric.Textbox(_text || 'Enter Your Text Here', {
             left: (_options && _options.left) || self.parent.get.width() / 2,
             top: (_options && _options.top) || self.parent.get.height() / 4,
@@ -413,7 +458,7 @@ proFabric.text = {
             height: (_options && _options.height) || 200,
             textAlign : 'left',
             class: 'text',
-            fill: 'blue',
+            fill: '#2323FF',
             fontSize: 16,
             id: (_options && _options.id) || self.parent.get.guid(),
             opacity: (_options && _options.opacity) || 1,
