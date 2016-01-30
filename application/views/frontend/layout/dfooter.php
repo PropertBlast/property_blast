@@ -14,5 +14,34 @@
     <script src="<?php echo base_url() ?>public/frontend/js/wan-spinner.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/cropper.js"></script>
     <script> var base_url = '<?php echo base_url(); ?>' ;</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ['Open Sans',
+                    'Roboto',
+                    'Lato',
+                    'Oswald',
+                    'Lora',
+                    'Source Sans Pro',
+                    'Montserrat',
+                    'Raleway',
+                    'Ubuntu',
+                    'Droid Serif',
+                    'Merriweather',
+                    'Indie Flower',
+                    'Titillium Web',
+                    'Poiret One',
+                    'Oxygen',
+                    'Yanone Kaffeesatz',
+                    'Lobster',
+                    'Playfair Display',
+                    'Fjalla One',
+                    'Inconsolata',
+                    'Droid Sans',
+                    'Droid Serif']
+            }
+        });
+    </script>
     </body>
 </html>

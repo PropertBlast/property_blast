@@ -42,7 +42,7 @@ proFabric.text = {
         //$('#FontFamily option[value="'+Object.fontFamily+'"]').attr('selected', 'selected');
         $( "#FontSize" ).val(Object.fontSize);
         //$(".browser-default").css('setBackground',object.fontFamily);
-        $( "#FontFamily" ).val(Object.fontFamily);
+        $( "#textfont" ).val(Object.fontFamily);
         _txtSelectionFlag = 1;
         if(Object.fontWeight == 'bold')
         {
@@ -490,7 +490,6 @@ proFabric.text = {
     set: function(options) {
         var obj = this.canvas.getActiveObject();
         if(obj && obj.class !== 'text') return;
-
         obj.set(options);
         obj.setCoords();
         this.canvas.renderAll();

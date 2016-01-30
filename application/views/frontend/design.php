@@ -67,35 +67,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <select class="form-control" id="text-transform" style="width: 100%;">
-                    <option value="none">
-                        font  size
-                    </option>
-                    <option value="capitalize">
-
-                        capitalize
-
-                    </option>
-                    <option value="uppercase">
-
-                        uppercase
-
-                    </option>
-                    <option value="lowercase">
-
-                        lowercase
-
-                    </option>
-                    <option value="initial">
-
-                        initial
-
-                    </option>
-                    <option value="inherit">
-
-                        inherit
-
-                    </option>
+                <select class="form-control" id="textfont" style="width: 100%;">
                 </select>
             </div>
         </div>

@@ -23,6 +23,7 @@ ini_set('include_path', base_url()+'application/views/frontend/layout/upload.php
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/dropzone.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/cropper.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/wan-spinner.css">
+        <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,300italic,400italic,600italic,600,700,700italic' rel='stylesheet'  type='text/css'>
 
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     </head>

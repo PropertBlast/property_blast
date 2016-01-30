@@ -66,7 +66,19 @@ var proFabric = new function(){
         }
     });
 	this.canvas.on('mouse:move', function(o){});
-	this.canvas.on('mouse:up', function(o){});
+	this.canvas.on('mouse:up', function(o){
+        var object = that.canvas.getActiveObject();
+        if(!object) {
+            that.unselectSelected();
+            $("#colorStyleOpt").show();
+            $("#settingOpt").fadeOut();
+            $("#imageOpt").fadeOut();
+            $("#settingOpt").fadeOut();
+            $("#textOpt").fadeOut();
+            that.getcolorObjects();
+            that.selectfalseColor();
+        }
+    });
 	this.canvas.on('selection:cleared', function(o){});
 	this.canvas.on('selection:created', function(o){});
 	this.canvas.on('object:added', function(o){});
@@ -334,6 +346,7 @@ var proFabric = new function(){
 		},
 		json :function(_json){
                 var _JSON_NEW = JSON.stringify(_json);
+                console.log("++++++++++++++-----------------+++++++++++++++");
                 that.canvas.loadFromJSON(_JSON_NEW, that.canvas.renderAll.bind(that.canvas), function(o, object) {
                     object.set({
                         lockMovementX: true,
@@ -345,16 +358,15 @@ var proFabric = new function(){
                     });
                     if(object.type=="path-group")
                     {
-                        object.set({selectable:false});
+                        object.set({selectable :false});
+                        object.selectable = false;
                     }
-                    fabric.log(o, object);
-                    console.log(object.class);
-                    console.log(object.type);
-                    console.log(object.globalCompositeOperation);
+                    console.log(object.fontFamily);
+                    //fabric.log(o, object);
                 });
                 console.log("++++++++++++++-----------------+++++++++++++++");
                 that.canvas.renderAll();
-            }
+        }
 	};
     this.rgb2hex=function (rgb){
         rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
@@ -622,5 +634,14 @@ var proFabric = new function(){
             }
         }
         console.log("I am here...............................................................");
+    }
+    this.selectfalseColor = function (){
+        var lenght = that.canvas._objects.length;
+        for(var i = 0 ; i < lenght ; i++) {
+            if(that.canvas._objects[i].type =="path-group") {
+                that.canvas._objects[i].selectable = false;
+            }
+        }
+        that.canvas.renderAll();
     }
 };
