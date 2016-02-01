@@ -76,6 +76,17 @@ $route['admin/manageflyers'] = "admin/manageflyers/index";
 $route['admin/manageflyers/(:any)'] = "admin/manageflyers/$1";
 $route['admin/manageflyers/(:any)/(:any)/(:any)'] = "admin/manageflyers/$1/$2/$3";
 
+//admin flyer ajax requests
+
+$route['admin/ajax/templates/(:any)'] = "admin/ajax/templates/$1";
+$route['admin/ajax/templates'] = "admin/ajax/templates/";
+$route['admin/ajax/fonts'] = "admin/ajax/getfonts/";
+$route['admin/ajax/colorset/(:any)'] = "admin/ajax/getFlyerColorSet/$1";
+$route['admin/ajax/colorset'] = "admin/ajax/getFlyerColorSet/";
+$route['admin/ajax/objects'] = "admin/ajax/getObjectsList";
+
+$route['admin/ajax/(:any)'] = "admin/ajax/index";
+
 
 //frontend routes
 ////////////////////////////////////////////////////////

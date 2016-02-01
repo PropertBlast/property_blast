@@ -2,6 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/XAMPP/htdocs/property_blast/application/models/admin/flyersmodel.php</file>
+            <file>file:/D:/XAMPP/htdocs/property_blast/application/controllers/admin/manageflyers.php</file>
+            <file>file:/D:/XAMPP/htdocs/property_blast/application/views/admin/manageflyers/tabs/flyer-design-tab-1.php</file>
+        </group>
     </open-files>
 </project-private>
