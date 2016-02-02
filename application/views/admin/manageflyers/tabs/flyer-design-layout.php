@@ -13,20 +13,22 @@
                 </div>
             </div>
         </div>
-        <div class="canvasBig" style="border:1px solid;border-color:#000000;margin-top:2%;margin-bottom:4%;overflow:auto;max-height:600px;">
+        <div class="canvasBig" style="border:1px solid;border-color:#F1F1F1;margin-top:2%;margin-bottom:4%;overflow:auto;max-height:600px;background:#F1F1F1">
             <center><canvas id="myCanvas"></canvas></center>
         </div>
         <div class="row" style="margin-top: -2%;">
             <div class="col-md-5 col-xs-12">
-                <div class="wan-spinner wan-spinner-1"  >
-                    <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 14px;">-</a>
-                    <input type="text" value="1" style="width: 100px; padding: 14px;">
-                    <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 15px; width:0%;">+</a>
+                <div class="wan-spinner wan-spinner-1">
+                    <a href="javascript:void(0)" class="minus"><i class="fa fa-minus"></i></a>
+                    <input type="text" value="100">
+                    <a href="javascript:void(0)" class="plus"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
             <div class="col-md-7 col-xs-12 text-right">
-                <button type="button" id="fullScreenEditor" class="btn btn-success">Full Screen</button>
-                <button type="button" class="btn btn-warning" style="margin-left: 6%;">Undo</button>
+                <div class="btn-group" role="group">
+                    <button data-type="redo" type="button" class="btn btn-default">Redo</button>
+                    <button data-type="undo" type="button" class="btn btn-default">Undo</button>
+                </div>
                 <button type="button" id="save" class="btn btn-primary">Save</button>
             </div>
         </div>
@@ -327,5 +329,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

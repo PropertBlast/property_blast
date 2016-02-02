@@ -215,7 +215,6 @@ $(document).ready(function($) {
     $(document).delegate('#cs-tablist>li', 'click', function() {
         var href = $(this).children('a').attr('href');
         $(href).children().each(function(index, el) {
-            console.log(index, el);
             proFabric.color.fill($(el).attr('data-id'), $(el).find('.colorpicker').css('backgroundColor'));
         });
     });
@@ -268,10 +267,9 @@ $(document).ready(function($) {
         proFabric.droper();
     });
 
-
-    $(document).delegate('#fullScreenEditor', 'click', function() {
-        if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
-            $(this).val('Exit');
+    $(document).on('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
+        fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+        if(fullScreenMode){
             $('#editor').css({
                 position: 'fixed',
                 top: 0,
@@ -281,44 +279,25 @@ $(document).ready(function($) {
                 width: '100vw',
                 height: '100vh'
             });
-            if(document.documentElement.requestFullscreen) {
-                document.getElementById('#editor').requestFullscreen();
-            }
-            else if(document.documentElement.msRequestFullscreen){
-                document.getElementById('#editor').msRequestFullscreen();
-            }
-            else if(document.documentElement.mozRequestFullScreen){
-                document.getElementById('#editor').mozRequestFullScreen();
-            }
-            else if(document.documentElement.webkitRequestFullscreen){
-                document.getElementById('editor').webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-            }
-        }
-        else {
-            $(this).val('Full Screen');
-            $('#editor').removeAttr('style');
-            if(document.exitFullscreen){
-                document.exitFullscreen();
-            }
-            else if(document.msExitFullscreen){
-                document.msExitFullscreen();
-            }
-            else if(document.mozCancelFullScreen){
-                document.mozCancelFullScreen();
-            }
-            else if(document.webkitExitFullscreen){
-                document.webkitExitFullscreen();
-            }
-        }
-    });
-    $(document).on ('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
-        fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
-        if(!fullScreenMode){
-            $('#fullScreenEditor').val('Full Screen');
+        }else{
             $('#editor').removeAttr('style');
         }
     });
     colorPickerInit();
+
+    $(".wan-spinner-1").WanSpinner({
+        maxValue: 500,
+        minValue: 40,
+        step: 20,
+        inputWidth: 70,
+        start: 100,
+        valueChanged: function(val) {
+            var value = parseInt($(val).parent().find('input').val());
+            if(value > 0)
+                proFabric.zoomcanvas(value);
+        }
+    });
+
     
 });
 function colorPickerInit(){

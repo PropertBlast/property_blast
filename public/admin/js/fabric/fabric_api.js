@@ -294,7 +294,7 @@ var proFabric = new function(){
 		svg : function(){
 		},
 		json : function(){
-            return that.canvas.toJSON();
+            return that.canvas.toJSON(['id','original_scaleX','original_scaleY','original_left','original_top','class']);
 		}
 	};
 	this.import = {
@@ -334,6 +334,7 @@ var proFabric = new function(){
 		that.canvas.discardActiveGroup()
 	};
 	this.zoomcanvas = function(zoom){
+        console.log(zoom);
 		//this.deselectcanvas();
 		this.zoom = zoom;
 		this.canvas.forEachObject(function(obj){
@@ -372,6 +373,7 @@ var proFabric = new function(){
 			}
 			obj.setCoords();
 		});
+        console.log(this.canvasWidth, this.canvasHeight)
 		this.canvas.setWidth(this.canvasWidth * (zoom/100)).setHeight(this.canvasHeight * (zoom/100));
 		this.canvas.renderAll();
 	};
