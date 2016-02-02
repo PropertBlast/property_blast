@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/bootstrap-lightbox.min.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend//css/font-awesome.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/frontend/css/master.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </head>
     <body>
 
