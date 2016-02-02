@@ -46,91 +46,68 @@ proFabric.text = {
         _txtSelectionFlag = 1;
         if(Object.fontWeight == 'bold')
         {
-            $('#bold').css("background-color", "#337ab7");
-            $('#bold').css("border-color", "darkgrey");
+            $('#bold').addClass("btn-primary");
         }
         else
         {
-            $('#bold').css("background-color", "white");
-            $('#bold').css("border-color", "#8c8c8c");
+            $('#bold').removeClass("btn-primary");
         }
         if(Object.fontStyle == 'italic')
         {
-            $('#italic').css("background-color", "#337ab7");
-            $('#italic').css("border-color", "darkgrey");
+            $('#italic').addClass("btn-primary");
         }
         else
         {
-            $('#italic').css("background-color", "white");
-            $('#italic').css("border-color", "#8c8c8c");
+            $('#italic').removeClass("btn-primary");
         }
         if(Object.textDecoration == 'underline')
         {
-            $('#underline').css("background-color", "#337ab7");
-            $('#underline').css("border-color", "darkgrey");
+            $('#underline').addClass("btn-primary");
         }
         else
         {
-            $('#underline').css("background-color", "white");
-            $('#underline').css("border-color", "#8c8c8c");
+            $('#underline').removeClass("btn-primary");
         }
         if(Object.textAlign=='left')
         {
-            $('#left').css("background-color", "#337ab7");
-            $('#left').css("border-color", "darkgrey");
+            $('#left').addClass("btn-primary");
         }
         else
         {
-            $('#right').css("background-color", "white");
-            $('#right').css("border-color", "#8c8c8c");
-            $('#center').css("background-color", "white");
-            $('#center').css("border-color", "#8c8c8c");
-            $('#justify').css("background-color", "white");
-            $('#justify').css("border-color", "#8c8c8c");
+            $('#right').removeClass("btn-primary");
+            $('#center').removeClass("btn-primary");
+            $('#justify').removeClass("btn-primary");
 
         }
         if(Object.textAlign=='center')
         {
-            $('#center').css("background-color", "#337ab7");
-            $('#center').css("border-color", "darkgrey");
+            $('#center').addClass("btn-primary");
         }
         else
         {
-            $('#left').css("background-color", "white");
-            $('#left').css("border-color", "#8c8c8c");
-            $('#right').css("background-color", "white");
-            $('#right').css("border-color", "#8c8c8c");
-            $('#justify').css("background-color", "white");
-            $('#justify').css("border-color", "#8c8c8c");
+            $('#left').removeClass("btn-primary");
+            $('#right').removeClass("btn-primary");
+            $('#justify').removeClass("btn-primary");
         }
         if(Object.textAlign=='right')
         {
-            $('#right').css("background-color", "#337ab7");
-            $('#right').css("border-color", "darkgrey");
+            $('#right').addClass("btn-primary");
         }
         else
         {
-            $('#left').css("background-color", "white");
-            $('#left').css("border-color", "#8c8c8c");
-            $('#center').css("background-color", "white");
-            $('#center').css("border-color", "#8c8c8c");
-            $('#justify').css("background-color", "white");
-            $('#justify').css("border-color", "#8c8c8c");
+            $('#left').removeClass("btn-primary");
+            $('#center').removeClass("btn-primary");
+            $('#justify').removeClass("btn-primary");
         }
         if(Object.textAlign=='justify')
         {
-        console.log("JUSTIFY");
-            $('#justify').css("background-color", "#337ab7");
-            $('#justify').css("border-color", "darkgrey");
+            $('#justify').addClass("btn-primary");
         }
         else
         {
-            $('#left').css("background-color", "white");
-            $('#left').css("border-color", "#8c8c8c");
-            $('#right').css("background-color", "white");
-            $('#right').css("border-color", "#8c8c8c");
-            $('#center').css("background-color", "white");
-            $('#center').css("border-color", "#8c8c8c");
+            $('#left').removeClass("btn-primary");
+            $('#right').removeClass("btn-primary");
+            $('#center').removeClass("btn-primary");
         }
         //console.log(Object.text);
         //console.log(Object.fill);
@@ -488,10 +465,13 @@ proFabric.text = {
         return obj.get(property);
     },
     set: function(options) {
+        var self = this;
         var obj = this.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj && obj.class !== 'text') return;
         obj.set(options);
         obj.setCoords();
         this.canvas.renderAll();
+        self.parent.savestate('modified',before,obj.toJSON(['id','class']));
     }
 };

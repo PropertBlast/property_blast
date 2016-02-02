@@ -1,6 +1,7 @@
 proFabric;
 var _pickerFlag = 0;
 var _selectionflag=0;
+var undo_redo_tmp_obj=[],canvas_state = new Array(), current_state=0;
 var proFabric = new function(){
 	var that = this; // refrence for proFabric
 	this.canvasWidth = 576;
@@ -356,16 +357,30 @@ var proFabric = new function(){
                         lockScalingY: true,
                         hasControls: false
                     });
+                    //object.index = i++;
                     if(object.type=="path-group")
                     {
                         object.set({selectable :false});
                         object.selectable = false;
                     }
-                    console.log(object.fontFamily);
+                    console.log(object.index);
+
                     //fabric.log(o, object);
                 });
                 console.log("++++++++++++++-----------------+++++++++++++++");
                 that.canvas.renderAll();
+            /*var lenght = that.canvas._objects.length;
+            console.log("here");
+            for(var i = 0 ; i < lenght ; i++) {
+                //that.canvas._objects[i].selectable = true;
+                if(that.canvas._objects[i].class=="color")
+                {
+                    that.canvas._objects[i].index = i;
+                    console.log(that.canvas._objects[i].index);
+                }
+            }
+            console.log("here");
+            that.canvas.renderAll();*/
         }
 	};
     this.rgb2hex=function (rgb){
@@ -567,6 +582,7 @@ var proFabric = new function(){
     this.newImg = function(newObj){
         var dataURL;
         var obj = that.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         console.log("Old Top : "+obj.top);
         console.log("Old left : "+obj.left);
         console.log("Old Width : "+obj.width);
@@ -617,6 +633,7 @@ var proFabric = new function(){
                 that.canvas.moveTo(image, that.canvas.getObjects().indexOf(obj));
                 that.canvas.setActiveObject(image);
                 that.canvas.fxRemove(obj);
+                this.savestate('modified',before,image.toJSON(['id','class']));
                 that.canvas.renderAll();
             }
             ImageObj.src = dataURL;
@@ -643,5 +660,357 @@ var proFabric = new function(){
             }
         }
         that.canvas.renderAll();
+    }
+    this.undo = function(){
+        if(current_state<0)
+            return;
+        that.canvas.discardActiveObject();
+        that.canvas.discardActiveGroup();
+        console.log("Undo start --------------------->");
+        console.log(current_state);
+        console.log(canvas_state);
+        if(current_state > 0){
+            current_state--;
+            var state=canvas_state;
+            obj = state[current_state];
+            var action = obj.action;
+            if(action == 'background'){
+                var color = obj.before;
+                $('li#showgrid').removeClass('active');
+                that.canvas.backgroundColor = color;
+                that.canvas.renderAll();
+            }
+            if(action == 'modified'){
+                var object = obj.before;
+                console.log(object);
+                if(object.type != "group"){
+                    that.canvas.forEachObject(function(temp){
+                        console.log(object.id + "-:-" + temp.id);
+                        if(temp.id == object.id){
+                            that.canvas.remove(temp);
+                            setTimeout(function(){
+                                that.addObject(object,0,0,1,1);
+                            },10);
+                        }
+                    });
+                }
+                else{
+                    $.each(object.objects,function(index,obj){
+                        that.canvas.forEachObject(function(temp){
+                            if(temp.id == obj.id){
+                                that.canvas.remove(temp);
+                                setTimeout(function(){
+                                    that.addObject(obj,object.left+object.width/2,object.top+object.height/2,object.scaleX,object.scaleY);
+                                },10);
+                            }
+                        });
+                    });
+                }
+            }
+            else if(action == 'add'){
+                var object = obj.object;
+                that.canvas.forEachObject(function(temp){
+                    if(temp.id == object.id){
+                        that.canvas.fxRemove(temp);
+                    }
+                });
+            }
+            else if(action== 'delete'){
+                var object = obj.object;
+                //that.addObject(object,0,0,1,1);
+                if(object.type != "group"){
+                    console.log(object);
+                    that.addObject(object,0,0,1,1);
+                }
+                else{
+                    $.each(object.objects,function(index,obj){
+                        that.addObject(obj,object.left+object.width/2,object.top+object.height/2,object.scaleX,object.scaleY);
+                    });
+                }
+            }
+            that.canvas.renderAll();
+        }
+        else{
+            current_state = 0;
+        }
+    };
+    this.redo = function(){
+        if(current_state<0)
+            return;
+        console.log("Redo start --------------------->");
+        console.log(canvas_state[current_state]);
+        console.log(current_state);
+        console.log(canvas_state);
+        that.canvas.discardActiveObject();
+        that.canvas.discardActiveGroup();
+        if((current_state < canvas_state.length)){
+            var state=canvas_state;
+            var obj = state[current_state];
+            var action = obj.action;
+            if(action == 'background'){
+                //$('li#showgrid').removeClass('active');
+                var color = obj.after;
+                that.canvas.backgroundColor = color;
+                that.canvas.renderAll();
+            }
+            if(action == 'modified'){
+                var object = obj.after;
+                if(object.type != "group"){
+                    that.canvas.forEachObject(function(temp){
+                        if(temp.id == object.id){
+                            console.log("Called->",object);
+                            that.canvas.remove(temp);
+                            setTimeout(function(){
+                                that.addObject(object,0,0,1,1);
+                            },10);
+                        }
+                    });
+                }
+                else{
+                    $.each(object.objects,function(index,obj){
+                        that.canvas.forEachObject(function(temp){
+                            if(temp.id == obj.id){
+                                that.canvas.remove(temp);
+                                setTimeout(function(){
+                                    that.addObject(obj,object.left+object.width/2,object.top+object.height/2,object.scaleX,object.scaleY);
+                                },10);
+                            }
+                        });
+                    });
+                }
+            }
+            else if(action == 'add'){
+                var object = obj.object;
+                if(object.type != "group"){
+                    that.addObject(object,0,0,1,1);
+                }
+                else{
+                    $.each(object.objects,function(index,obj){
+                        that.addObject(obj,object.left+object.width/2,object.top+object.height/2,object.scaleX,object.scaleY);
+                    });
+                }
+            }
+            else if(action=="delete"){
+                var object = obj.object;
+                if(object.type != "group"){
+                    that.canvas.forEachObject(function(temp){
+                        if(temp.id == object.id){
+                            that.canvas.fxRemove(temp);
+                        }
+                    });
+                }
+                else{
+                    $.each(object.objects,function(index,obj){
+                        that.canvas.forEachObject(function(temp){
+                            if(temp.id == obj.id){
+                                that.canvas.fxRemove(temp);
+                            }
+                        });
+                    });
+                }
+            }
+            that.canvas.renderAll();
+            current_state++;
+        }
+    };
+    this.savestate = function(type,object,object1){
+        var obj = {
+            action:type,
+            object:object,
+            before:object,
+            after:object1
+        };
+        canvas_state.splice(current_state,0,obj);
+        current_state++;
+        //alert(current_state);
+        console.log(current_state);
+        console.log(canvas_state);
+    };
+    this.addObject = function(obj,offsetLeft,offsetTop,scaleX,scaleY) {
+        console.log(obj);
+        if (!obj) return;
+        if (obj.class == "text"){
+            text = new fabric.Text(obj.text, {
+                fontSize: obj.fontSize,
+                fontFamily: obj.fontFamily,
+                fill: obj.fill,
+                class:obj.class,
+                textDecoration:obj.textDecoration,
+                fontStyle:obj.fontStyle,
+                fontWeight:obj.fontWeight,
+                originX: obj.originX,
+                originY: obj.originY,
+                id:obj.id,
+                alignment:obj.alignment,
+                angle:obj.angle,
+                textAlign:obj.textAlign,
+                index:obj.index
+            });
+            text.set({
+                left:obj.left+offsetLeft,
+                top:obj.top+offsetTop,
+                scaleY:obj.scaleY*scaleY,
+                scaleX:obj.scaleX*scaleX,
+                lockMovementX     : true,
+                lockMovementY	  : true,
+                lockRotation 	  : true,
+                lockScalingX 	  : true,
+                lockScalingY 	  : true,
+                hasControls       : false
+            });
+            if(obj.shadow)
+            {
+                text.setShadow({
+                    blur: obj.shadow.blur,
+                    color: obj.shadow.color,
+                    offsetX: obj.shadow.offsetX,
+                    offsetY: obj.shadow.offsetY
+                });
+            }
+            if(obj.stroke)
+            {
+                text.set({
+                    stroke:obj.stroke,
+                    strokeWidth : obj.strokeWidth
+                });
+            }
+            text.on('editing:entered', function(obj) {
+                $("textarea#text_area").val(text.text);
+            });
+            text.on('editing:exited', function(obj) {
+                $("textarea#text_area").val(text.text);
+            });
+            alert();
+            that.canvas.add(text);
+            console.log(obj.index);
+            console.log(text.index);
+            that.canvas.moveTo(text,obj.index);
+            that.canvas.renderAll();
+        }
+        else if (obj.class == "svg"){
+            var group = [];
+            fabric.loadSVGFromURL(obj.src, function(objects, options) {
+                var loadedObjects = new fabric.util.groupSVGElements(objects, options);
+                loadedObjects.src = obj.src;
+                loadedObjects.class = obj.class;
+                loadedObjects.set({
+                    originX: 'center',
+                    originY: 'center',
+                    id:obj.id,
+                    fill:obj.fill,
+                    class: 'svg',
+                    top: obj.top+offsetTop,
+                    left: obj.left+offsetLeft,
+                    scaleX: obj.scaleX*scaleX,
+                    scaleY: obj.scaleY*scaleY,
+                    opacity:obj.opacity,
+                    angle:obj.angle,
+                    alignment : obj.alignment,
+                    index:obj.index,
+                    hasControls : false
+                });
+                if(obj.paths)
+                {
+                    if(obj.paths[0].stroke)
+                    {
+                        $.each(loadedObjects.paths,function(index,value){
+                            value.set({
+                                stroke: obj.paths[0].stroke
+                            });
+                        });
+                    }
+                    if(obj.paths[0].strokeWidth)
+                    {
+                        $.each(loadedObjects.paths,function(index,value){
+                            value.set({
+                                strokeWidth:obj.paths[0].strokeWidth
+                            });
+                        });
+                    }
+                    if(obj.paths[0].shadow)
+                    {
+                        $.each(loadedObjects.paths,function(index,value){
+                            value.setShadow({
+                                blur: obj.paths[0].shadow.blur,
+                                color: obj.paths[0].shadow.color,
+                                offsetX: obj.paths[0].shadow.offsetX,
+                                offsetY: obj.paths[0].shadow.offsetY
+                            });
+                        });
+                    }
+                }
+                else
+                {
+                    if(obj.stroke)
+                    {
+                        $.each(loadedObjects.paths,function(index,value){
+                            value.set({
+                                stroke: obj.stroke
+                            });
+                        });
+                    }
+                    if(obj.strokeWidth)
+                    {
+                        $.each(loadedObjects.paths,function(index,value){
+                            value.set({
+                                strokeWidth:obj.strokeWidth
+                            });
+                        });
+                    }
+                    if(obj.shadow)
+                    {
+                        $.each(loadedObjects.paths,function(index,value){
+                            value.setShadow({
+                                blur: obj.shadow.blur,
+                                color: obj.shadow.color,
+                                offsetX: obj.shadow.offsetX,
+                                offsetY: obj.shadow.offsetY
+                            });
+                        });
+                    }
+                }
+                that.canvas.add(loadedObjects);
+                that.canvas.moveTo(loadedObjects,obj.index);
+                that.canvas.renderAll();
+            }, function(item, object)
+            {
+                object.set('id', item.getAttribute('id'));
+                group.push(object);
+            }, {
+                crossOrigin: 'anonymous'
+            });
+        }
+        else if(obj.type == "image"){
+            var ImageObj = new Image();
+            ImageObj.onload = function() {
+                image = new fabric.Image(ImageObj);
+                image.top  = obj.top+offsetTop;
+                image.left = obj.left+offsetLeft;
+                image.width = obj.width;
+                image.height = obj.height;
+                image.scaleX = obj.scaleX*scaleX;
+                image.scaleY = obj.scaleY*scaleY;
+                image.src = obj.src;
+                image.original_src = obj.original_src;
+                image.class="image";
+                image.angle = obj.angle;
+                image.originX = obj.originX;
+                image.originY = obj.originY;
+                image.id = obj.id;
+                image.alignment = obj.alignment;
+                image.index = obj.index;
+                image.lockMovementX  = true;
+                image.lockMovementY  = true;
+                image.lockRotation  = true;
+                image.lockScalingX  = true;
+                image.lockScalingY  = true;
+                image.hasControls = false;
+                that.canvas.add(image);
+                that.canvas.moveTo(image,obj.index);
+                that.canvas.bringForward(image);
+                that.canvas.renderAll();
+            }
+            ImageObj.src = obj.src;
+        }
     }
 };
