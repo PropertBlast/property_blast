@@ -282,18 +282,14 @@ $(document).ready(function($) {
     //    $(this).addClass('square2');
     //});
     $('body').delegate('.color-pallet-row','click',function(){
-        $.each($('body').find('.square1'),function(index,obj){
-            $(obj).removeClass('square1active');
-        });
-        $.each($(this).find('.square1'),function(index,obj){
-            $(obj).addClass('square1active');
-        });
-        $.each($('body').find('.textalign'),function(index,obj){
+        $.each($('body').find('.txt'),function(index,obj){
             $(obj).removeClass('textalignactive');
         });
-        $.each($(this).find('.textalign'),function(index,obj){
-            $(obj).addClass('textalignactive');
+        $.each($('body').find('.colorRow'),function(index,obj){
+            $(obj).removeClass('colorRowhover');
         });
+        $(this).addClass('colorRowhover');
+        $(this).find('.txt').addClass('textalignactive');
     });
     $("body").delegate('#Ccol-1', 'click', function(event) {
         i=1;
@@ -634,6 +630,13 @@ $(document).ready(function($) {
         proFabric.redo();
     });
 });
+
+
+function removeclasses(obj){
+    $(obj).removeClass('colorRowhover');
+    $(obj).removeClass('textalignactive');
+    $(obj).removeClass('colorRowhover');
+}
 
 
     function addColorSet() {

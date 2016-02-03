@@ -545,7 +545,7 @@
         </div>
         <hr style="width: 100%;margin: 0px;padding: 0px; margin-bottom: 10px;">
 </div>
-<div class="row color-pallet-row" id="Ccol-1">
+<div class="row color-pallet-row colorRow" id="Ccol-1">
     <div class="col-md-9 col-xs-8" style="margin: 0px;padding: 0px;" >
         <div class="col-md-2  col-xs-2" style="border: 0px;padding: 0px;">
             <div id = "C11" class="square1"></div>
@@ -566,13 +566,13 @@
             <div id = "C16" class="square1"></div>
         </div>
     </div>
-    <div class="col-md-3 col-xs-4"style="margin:0px;padding:0px;">
+    <div class="col-md-3 col-xs-4" class="txt" style="margin:0px;padding:0px;">
             <label class="textalign1"for="exampleInputEmail1">
                 SAMLPLE1
             </label>
     </div>
 </div>
-<div class="row color-pallet-row" id="Ccol-2">
+<div class="row color-pallet-row colorRow" id="Ccol-2">
     <div class="col-md-9 col-xs-8"style="margin:0px;padding:0px;">
             <div class="col-md-2  col-xs-2" style="border: 0px;padding: 0px;">
                 <div id = "C21" class="square1"></div>
@@ -593,13 +593,13 @@
                 <div id = "C26" class="square1"></div>
             </div>
     </div>
-    <div class="col-md-3 col-xs-4"style="margin:0px;padding:0px;">
+    <div class="col-md-3 col-xs-4" class="txt" style="margin:0px;padding:0px;">
             <label class="textalign1"for="exampleInputEmail1">
                 SAMLPLE2
             </label>
     </div>
 </div>
-<div class="row color-pallet-row" id="Ccol-3">
+<div class="row color-pallet-row colorRow" id="Ccol-3">
     <div class="col-md-9 col-xs-8"style="margin:0px;padding:0px;">
             <div class="col-md-2  col-xs-2"style="border: 0px;padding: 0px;">
                 <div id = "C31" class="square1"></div>
@@ -620,13 +620,13 @@
                 <div id = "C36" class="square1"></div>
             </div>
     </div>
-    <div class="col-md-3 col-xs-4"style="margin:0px;padding:0px;" >
+    <div class="col-md-3 col-xs-4" class="txt" style="margin:0px;padding:0px;" >
             <label class="textalign1"for="exampleInputEmail1">
                 SAMLPLE3
             </label>
     </div>
 </div>
-<div class="row color-pallet-row" id="Ccol-4">
+<div class="row color-pallet-row colorRow" id="Ccol-4">
     <div class="col-md-9 col-xs-8" style="margin:0px;padding:0px;">
             <div class="col-md-2  col-xs-2"style="border: 0px;padding: 0px;">
                 <div id = "C41" class="square1"></div>
@@ -647,13 +647,13 @@
                 <div id = "C46" class="square1"></div>
             </div>
     </div>
-    <div class="col-md-3 col-xs-4" style="margin:0px;padding:0px;">
+    <div class="col-md-3 col-xs-4" class="txt" style="margin:0px;padding:0px;">
             <label class="textalign1"for="exampleInputEmail1">
                 SAMLPLE4
             </label>
     </div>
 </div>
-<div class="row color-pallet-row" id="Ccol-5" >
+<div class="row color-pallet-row colorRow" id="Ccol-5" >
     <div class="col-md-9 col-xs-8" style="margin:0px;padding:0px;">
             <div class="col-md-2  col-xs-2" style="border: 0px;padding: 0px;">
                 <div id = "C51" class="square1"></div>
@@ -674,13 +674,13 @@
                 <div id = "C56" class="square1"></div>
             </div>
     </div>
-    <div class="col-md-3 col-xs-4" style="margin:0px;padding:0px;">
+    <div class="col-md-3 col-xs-4" class="txt" style="margin:0px;padding:0px;">
             <label class="textalign1"for="exampleInputEmail1">
                 SAMLPLE5
             </label>
     </div>
 </div>
-<div class="row color-pallet-row" id="Ccol-6">
+<div class="row color-pallet-row colorRow" id="Ccol-6">
         <div class="col-md-9 col-xs-8" style="margin:0px;padding:0px;">
                 <div class="col-md-2  col-xs-2" style="border: 0px;padding: 0px;">
                     <div id = "C61" class="square1"></div>
@@ -701,7 +701,7 @@
                     <div id = "C66" class="square1"></div>
                 </div>
         </div>
-        <div class="col-md-3 col-xs-4" style="margin:0px;padding:0px;">
+        <div class="col-md-3 col-xs-4" class="txt" style="margin:0px;padding:0px;">
                 <label class="textalign1"for="exampleInputEmail1">
                     SAMLPLE6
                 </label>
