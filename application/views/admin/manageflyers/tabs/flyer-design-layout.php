@@ -6,7 +6,7 @@
             </div>
             <div class=" col-md-12 col-xs-12">
                 <div class="btn-group" role="group">
-                    <button type="button" id="editor-canvasSize" data-width="8.5" data-height="11" class="btn btn-default">8.5 X 11</button>
+                    <button type="button" id="editor-canvasSize" data-width="8.5" data-height="11" class="btn btn-default btn-primary">8.5 X 11</button>
                     <button type="button" id="editor-canvasSize" data-width="5" data-height="5" class="btn btn-default">5 X 5</button>
                     <button type="button" id="editor-canvasSize" data-width="8" data-height="4" class="btn btn-default">8 X 4</button>
                     <button type="button" id="editor-canvasSize" data-width="6" data-height="9" class="btn btn-default">6 X 9</button>

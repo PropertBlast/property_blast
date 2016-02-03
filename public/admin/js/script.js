@@ -82,7 +82,14 @@ $(document).ready(function($) {
         console.log(name + " : " + size + " : " + type);
     });
 
+    $(document).delegate('#editor-mainTabs>li', 'mousedown', function(){
+        if(!$(this).hasClass('active')){
+            proFabric.deselectCanvas();
+        }
+    });
     $(document).delegate('button#editor-canvasSize', 'click', function() {
+        $('button#editor-canvasSize').removeClass('btn-primary');
+        $(this).addClass('btn-primary');
         var _width  = $(this).attr('data-width'),
             _height = $(this).attr('data-height');
         proFabric.set.canvas_size((_width*96), (_height*96));
@@ -98,7 +105,9 @@ $(document).ready(function($) {
         else if(type=="color"){
             $('#cs-tabContent').find('.colorRow[data-id='+_id+']').remove();
         }
+        $('#editor-textarea').val('');
         proFabric.delete();
+        proFabric.deselectCanvas();
     });
     $(document).delegate('#editor-bringFront', 'click', function() {
         proFabric.set.bringFront();
@@ -108,6 +117,7 @@ $(document).ready(function($) {
     });
     $(document).delegate('#editor-addText', 'click', function() {
         proFabric.text.add('Your Text Here');
+        $('#editor-textarea').focus();
     });
     $(document).delegate('#editor-textarea', 'keyup', function() {
         var _text = $(this).val();
