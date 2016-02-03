@@ -349,13 +349,15 @@ var proFabric = new function(){
                 var _JSON_NEW = JSON.stringify(_json);
                 console.log("++++++++++++++-----------------+++++++++++++++");
                 that.canvas.loadFromJSON(_JSON_NEW, that.canvas.renderAll.bind(that.canvas), function(o, object) {
+                    var col = object.fil;
                     object.set({
                         lockMovementX: true,
                         lockMovementY: true,
                         lockRotation: true,
                         lockScalingX: true,
                         lockScalingY: true,
-                        hasControls: false
+                        hasControls: false,
+                        stroke:col
                     });
                     //object.index = i++;
                     if(object.type=="path-group")
@@ -363,7 +365,7 @@ var proFabric = new function(){
                         object.set({selectable :false});
                         object.selectable = false;
                     }
-                    console.log(object.index);
+                    console.log(object.stroke+' <<>> '+col);
 
                     //fabric.log(o, object);
                 });

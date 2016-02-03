@@ -4,8 +4,26 @@
 .mtop1{
 	margin-top:20px;
 	padding: 0px;
-	margin: 
-0px;
+	margin: 0px;
+}
+.colorRowhover
+{
+	margin: 5px 0;
+    border: 1px solid #6666A4;
+    padding: 5px;
+    border-radius: 5px;
+    padding-bottom: 0;
+    background: #f1f1f1;
+    color: darkblue;
+    font-weight: bold;
+}
+.colorRow
+{
+	margin: 5px 0;
+    border: 1px solid #eee;
+    padding: 5px;
+    border-radius: 5px;
+    padding-bottom: 0;
 }
 .square{
 	width: 70px;
@@ -30,7 +48,7 @@
 	padding: 7px;
 }
 .textalignactive {
-    margin-top: 1px;
+    margin-top: 3px;
     color: #15317E;
     font-size: 16px;
     margin-left: -4px;
@@ -54,15 +72,12 @@ button{
     width: 130px;
 }
 .square1active{
-    width: 22px !important;
-    height: 22px !important;
+    width: 23px !important;
+    height: 23px !important;
     margin-bottom: 8px;
     margin-left: -2px;
-    box-shadow: 3px 3px  1px #888888;
     -webkit-border-radius: 20px;
     -moz-border-radius: 15px;
-    -webkit-box-shadow: 0 0 2px 2px #303030 ;
-    box-shadow: 0 0 2px 2px #303030 ;
     border-radius: 15px;
 }
 
