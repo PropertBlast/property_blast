@@ -277,7 +277,8 @@ $(document).ready(function($) {
         proFabric.droper();
     });
 
-    $(document).on('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
+    $(document).on('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(e){
+        console.log('asdf');
         fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
         if(fullScreenMode){
             $('#editor').css({
