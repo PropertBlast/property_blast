@@ -399,11 +399,20 @@
     </div>
     <div class="row" style="margin-top: 2%;">
         <div class="col-md-4 col-xs-12" style = "margin-bottom: 5px;">
-            <div class="wan-spinner wan-spinner-1">
+            <div class="wan-spinner wan-spinner-1 dropup ">
                 <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 14px;">
                     -
                 </a>
-                <input type="text" id="zoom"value="40" style="width: 100px; padding: 14px;"/>
+                <input type="text" class="dropdown-toggle" id="zoom"value="40" style="width: 100px; padding: 14px;" readonly  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <ul id="zoom-menu"class="dropdown-menu" aria-labelledby="zoom">
+                    <li value="50"><a>50</a></li>
+                    <li value="60"><a>60</a></li>
+                    <li value="75"><a>75</a></li>
+                    <li value="100"><a>100</a></li>
+                    <li value="120"><a>120</a></li>
+                    <li value="150"><a>150</a></li>
+                    <li value="200"><a>200</a></li>
+                </ul>
                 <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 15px; width:0%;">
                     +
                 </a>
@@ -412,15 +421,17 @@
         <div class="col-md-8 col-xs-12" align="right" style = "padding: 0px;margin: 0px;margin-bottom: 5px;">
             <div class="btn-group" role="group" aria-label="..." >
                 <div class="col-md-8 col-xs-12" align="center" style = "margin-bottom: 5px;">
-                    <div class="col-md-6 col-xs-6"><button type="button" id="undobtn" style="width: 80px" class="btn btn-warning btn-sm">
+                    <div class="btn-group">
+                    <button type="button" id="undobtn" style="width: 50px" class="btn btn-default btn-sm">
                         Undo
-                    </button></div>
-                    <div class="col-md-6 col-xs-6"><button type="button" id="redobtn" style="width: 80px" class="btn btn-warning btn-sm">
+                    </button>
+                    <button type="button" id="redobtn" style="width: 50px" class="btn btn-default btn-sm">
                         Redo
-                    </button></div>
+                    </button>
+                    </div>
                 </div>
                 <div class="col-md-4 col-xs-12" align="center">
-                    <button type="button" class="btn btn-primary btn-sm">
+                    <button type="button" style="width: 50px" class="btn btn-primary btn-sm">
                         Save
                     </button>
                 </div>
@@ -448,7 +459,23 @@
                 </div>
             </div>
             <div class="col-md-12 col-xs-12">
-                <input id="fontSize" class="form-control" type="number" min="0" step="1" value ="12"/>
+                <select class="form-control"  id="fontSize" class="form-control" type="number">
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="12">12</option>
+				<option value="14">14</option>
+				<option value="16">16</option>
+				<option value="18">18</option>
+				<option value="20">20</option>
+				<option value="22">22</option>
+				<option value="24">24</option>
+				<option value="26">26</option>
+				<option value="28">28</option>
+				<option value="36">36</option>
+				<option value="48">48</option>
+				<option value="72">72</option>
+				</select>
             </div>
         </div>
         <div class="col-md-6"  style="margin: 0px;padding: 0px;">
@@ -476,7 +503,7 @@
                 <div class="btn-group btn-sm" role="group" aria-label="..." style="width : 100%;">
                     <button type="button" id="bold" class="btn btn-default btn-sm" style="width: 25%;" ><span class="glyphicon glyphicon-bold" aria-hidden="true"></button>
                     <button type="button" id="italic" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-italic" aria-hidden="true"></button>
-                    <button type="button" id="underline" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-magnet" aria-hidden="true"></button>
+                    <button type="button" id="underline" class="btn btn-default btn-sm" style="width: 25%;"><span style="font-size:14px;" class="fa fa-underline" aria-hidden="true"></button>
                 </div>
             </div>
         </div>
@@ -502,7 +529,7 @@
     </div>
     <div class="row" style="margin-top: 6px;margin-bottom: 5px;">
         <div class="col-md-2 col-xs-2 " style="font-weight: bold;padding-top: 3px;margin-right: 15px;">
-                FILL:
+                COLOR:
         </div>
         <div class="col-md-9 col-xs-9" style="padding: 0px;margin: 0px;font-weight: bold; margin-left: -5px;">
             <div class=" col-md-12 col-xs-12">

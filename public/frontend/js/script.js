@@ -233,6 +233,9 @@ $(document).ready(function($) {
         j = 1;
         ++i;
     });
+	$('body').delegate('#zoom','click',function(){
+		$('#zoom-menu').css("display", "block");
+	});
     $('body').delegate('.color-pallet-row','click',function(){
         $.each($('body').find('.txt'),function(index,obj){
             $(obj).removeClass('textalignactive');
@@ -382,7 +385,7 @@ $(document).ready(function($) {
             $(el).css('border-color', '#' + hex);
             $(el).colpickHide();
             proFabric.text.set({
-                fill: '#' + hex
+                fill : '#' + hex
             });
         }
     });
@@ -414,7 +417,7 @@ $(document).ready(function($) {
         proFabric.enableSelection();
     });
     $('#fontSize').change(function() {
-        var value = $("#fontSize").val();
+        var value = $("#fontSize option:selected").val();
         proFabric.text.set({
             fontSize: parseInt(value)
         });
@@ -479,6 +482,7 @@ $(document).ready(function($) {
     });
     $("body").delegate('.minus', 'click', function() {
         var value = $("#zoom").val();
+
         var decreament = 20;
         value=value-decreament;
         $("#zoom").val("");
@@ -486,6 +490,15 @@ $(document).ready(function($) {
         console.log("===========>> "+value);
         proFabric.zoomcanvas(value);
     });
+	$("body").delegate('body', 'click', function() {
+		$('#zoom-menu').css("display", "none");
+		});
+	$('#zoom-menu li').click(function(){
+		var value = $(this).val();
+		$("#zoom").val(value);
+		$('#zoom-menu').css("display", "none");
+		 proFabric.zoomcanvas(value);
+	});
     $("body").delegate('.plus', 'click', function() {
         var value = $("#zoom").val();
         var increament = 20;
@@ -499,9 +512,6 @@ $(document).ready(function($) {
         $("#zoom").val(value);
         console.log("===========>> "+value);
         proFabric.zoomcanvas(value);
-    });
-    $('#zoom').change(function(){
-        proFabric.zoomAll($("#zoom").val());
     });
     $("body").delegate('#left', 'click', function() {
         var col = proFabric.rgb2hex($('#left').css("background-color"));
