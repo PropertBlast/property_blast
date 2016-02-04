@@ -8,13 +8,12 @@ var proFabric = new function(){
 	this.canvasHeight = 864;
     var Top = this.canvasHeight;
     var Left = this.canvasWidth;
-	this.zoom = 100, this.defaultZoom = 100;
+	this.zoom = 0, this.defaultZoom = 0;
     this.canvas = new fabric.Canvas('myCanvas',{backgroundColor:'#fff'});
     this.canvas.setWidth(this.canvasWidth);
     this.canvas.setHeight(this.canvasHeight);
     this.canvas.selection = false;
     var BaseURL = $('#base_url').val();
-    //console.log(BaseURL);
         fabric.Image.fromURL(BaseURL+'abc.jpg', function(img) {
             img.class = 'image';
             img.src = BaseURL+'abc.jpg';
@@ -30,7 +29,6 @@ var proFabric = new function(){
             img.lockMovementX = true;
             img.lockMovementY = true;
             img.lockRotation = true;
-        console.log(img.width);
         that.canvas.add(img);
     });
     this.canvas.renderAll();
@@ -50,16 +48,11 @@ var proFabric = new function(){
 
 	this.canvas.on('mouse:down', function(o){
         if(_pickerFlag==1) {
-            // get the current mouse position
             var ctx = that.canvas.getContext("2d");
             var mouse = that.canvas.getPointer(o.e);
             var x = parseInt(mouse.x);
             var y = parseInt(mouse.y);
-
-            // get the color array for the pixel under the mouse
-            var px = ctx.getImageData(x, y, 1, 1).data;
             var rgb_val = px[0] + ':' + px[1] + ':' + px[2] + ':' + px[3];
-            // report that pixel data
             _pickerFlag = 0;
             var rgba = 'rgba(' + px[0] + ',' + px[1] + ',' + px[2] + ',' + px[3] + ')';
             var hex = proFabric.rgb2hex( rgba );
@@ -84,7 +77,9 @@ var proFabric = new function(){
 	this.canvas.on('selection:created', function(o){});
 	this.canvas.on('object:added', function(o){});
 	this.canvas.on('object:remove', function(o){});
-	this.canvas.on('object:modified', function(o){});
+	this.canvas.on('object:modified', function(o){
+
+    });
 	this.canvas.on('object:rotating', function(o){});
 	this.canvas.on('object:scaling', function(o){});
 	this.canvas.on('object:moving', function(o){});
@@ -103,14 +98,10 @@ var proFabric = new function(){
         else if(object.class=='shape'){
             proFabric.shapes.shapeSelected(object);
         }
-		//console.log(object);
 		var dataId=object.class;
 		$("#tabs li" ).each(function() {
 			if($(this).data('id')==object.class){
 				$(this).trigger('click');
-				//console.log($(this).data('id'));
-				/*$(this).siblings('li').removeClass('.ui-tabs-active ui-state-active');
-				$(this).addClass('.ui-tabs-active ui-state-active');*/
 			}
 		});
 		if(object.class=="text"){
@@ -125,6 +116,14 @@ var proFabric = new function(){
 		else if(object.class=='shape'){
 			proFabric.shapes.shapeSelected(object);
 		}
+        if(object){
+            object.set({
+                original_scaleX : object.scaleX / (last_zoom/100),
+                original_scaleY : object.scaleY/ (last_zoom/100),
+                original_left   : object.left / (last_zoom/100),
+                original_top    : object.top / (last_zoom/100)
+            });
+        }
 	});
     this.canvas.on('mouse:move', function(e) {
 
@@ -202,7 +201,6 @@ var proFabric = new function(){
                     });
                     $("#text_lock").removeClass('fa fa-lock');
                     $("#text_lock").addClass('fa fa-unlock');
-                    console.log("Here Locked !! ------- "+obj.lockMovementX);
                 }
                 else
                 {
@@ -215,7 +213,6 @@ var proFabric = new function(){
                     });
                     $("#text_lock").removeClass('fa fa-unlock');
                     $("#text_lock").addClass('fa fa-lock');
-                    console.log("Here Un-Locked !! ------ "+obj.lockMovementX);
                 }
                 that.canvas.renderAll();
             }
@@ -255,8 +252,6 @@ var proFabric = new function(){
 		},
         ID : function(id){
             if(id) {
-                //console.log('ID Assigning : ' + id);
-                //console.log("Here");
                 var obj = that.canvas.getActiveObject();
                 if (obj&&obj.class=='text') {
                     if(!obj.btnID)
@@ -281,23 +276,19 @@ var proFabric = new function(){
                     }
                     else
                     {
-                        console.log("id already assigned to button");
+                        //console.log("id already assigned to button");
                     }
                     selectionflag = 0;
-                    //console.log("Here2");
-                    //console.log(obj);
                 }
             }
         },
 		canvas_size: function(w, h) {
 			that.canvas.setHeight(h || that.canvas.getHeight());
 			that.canvas.setWidth(w || that.canvas.getWidth());
-
 			that.canvas.renderAll();
 		},
 		setActiveobj:function(id){
 			that.canvas.forEachObject(function(obj) {
-				console.log(obj);
 				if (obj.linkid == id) {	
 					that.canvas.setActiveObject(obj, '');
 				}
@@ -313,23 +304,9 @@ var proFabric = new function(){
 		}
 	};
     this.randBtnSelection = function(id) {
-        //var objectList = that.canvas.getObjects();
-        /*for (var i = 0; i < objectList._objects.length; i++) {
-            if (objectList._objects[i].class == "text") {
-                if (objectList._objects[i].btnID) {
-                    if (id == objectList._objects[i].btnID) {
-                        that.canvas.setActiveObject(objectList._objects[i]);
-                        return;
-                    }
-                }
-            }
-        }*/
         that.canvas.forEachObject(function(obj){
-            console.log(obj+"  ::  "+id);
             if (obj.btnID) {
-                console.log(obj.btnID);
                 if (id == obj.btnID) {
-                    console.log('Selected');
                     that.canvas.setActiveObject(obj);
                     _selectionflag = 1;
                     if(_txtSelectionFlag==1)
@@ -339,7 +316,6 @@ var proFabric = new function(){
                     return;
                 }
             }
-            //console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE WE ARE");
         });
     };
 	this.import = {
@@ -347,7 +323,6 @@ var proFabric = new function(){
 		},
 		json :function(_json){
                 var _JSON_NEW = JSON.stringify(_json);
-                console.log("++++++++++++++-----------------+++++++++++++++");
                 that.canvas.loadFromJSON(_JSON_NEW, that.canvas.renderAll.bind(that.canvas), function(o, object) {
                     var col = object.fil;
                     object.set({
@@ -359,30 +334,13 @@ var proFabric = new function(){
                         hasControls: false,
                         stroke:col
                     });
-                    //object.index = i++;
                     if(object.type=="path-group")
                     {
                         object.set({selectable :false});
                         object.selectable = false;
                     }
-                    console.log(object.stroke+' <<>> '+col);
-
-                    //fabric.log(o, object);
                 });
-                console.log("++++++++++++++-----------------+++++++++++++++");
                 that.canvas.renderAll();
-            /*var lenght = that.canvas._objects.length;
-            console.log("here");
-            for(var i = 0 ; i < lenght ; i++) {
-                //that.canvas._objects[i].selectable = true;
-                if(that.canvas._objects[i].class=="color")
-                {
-                    that.canvas._objects[i].index = i;
-                    console.log(that.canvas._objects[i].index);
-                }
-            }
-            console.log("here");
-            that.canvas.renderAll();*/
         }
 	};
     this.rgb2hex=function (rgb){
@@ -398,7 +356,6 @@ var proFabric = new function(){
 		that.canvas.discardActiveGroup()
 	};
 	this.zoomcanvas = function(zoom){
-		//this.deselectcanvas();
 		this.zoom = zoom;
 		this.canvas.forEachObject(function(obj){
 			if(obj.type === 'group'){
@@ -449,13 +406,9 @@ var proFabric = new function(){
         if(opt_obj=='text')
         {
             if(that.canvas.getActiveGroup()){
-                //that.canvas.getActiveGroup().forEachObject(function(o){ canvas.remove(o) });
-                //that.canvas.discardActiveGroup().renderAll();
                 var obj = that.canvas.getActiveGroup();
                 for(var i = 0 ; i < obj._objects.length ; i++) {
-                    console.log(obj._objects[i]);
                     if(obj._objects[i].class=="text") {
-                        console.log("TEXT");
                         that.canvas.fxRemove(obj._objects[i]);
                     }
                 }
@@ -468,13 +421,9 @@ var proFabric = new function(){
         }
         else if(opt_obj=='image')
         {
-            console.log("IMAGE");
             if(that.canvas.getActiveGroup()){
-                //that.canvas.getActiveGroup().forEachObject(function(o){ canvas.remove(o) });
-                //that.canvas.discardActiveGroup().renderAll();
                 var obj = that.canvas.getActiveGroup();
                 for(var i = 0 ; i < obj._objects.length ; i++) {
-                    console.log(obj._objects[i]);
                     if(obj._objects[i].class=='image') {
                         that.canvas.fxRemove(obj._objects[i]);
                     }
@@ -488,13 +437,9 @@ var proFabric = new function(){
         }
         else
         {
-            console.log("OTHER");
             if(that.canvas.getActiveGroup()){
-                //that.canvas.getActiveGroup().forEachObject(function(o){ canvas.remove(o) });
-                //that.canvas.discardActiveGroup().renderAll();
                 var obj = that.canvas.getActiveGroup();
                 for(var i = 0 ; i < obj._objects.length ; i++) {
-                    console.log(obj._objects[i]);
                     that.canvas.fxRemove(obj._objects[i]);
                 }
                 that.canvas.discardActiveGroup();
@@ -516,7 +461,6 @@ var proFabric = new function(){
             that.canvas._objects[i].selectable = false;
         }
         that.canvas.renderAll();
-        console.log(that.canvas);
     };
     this.enableSelection=function(){
         that.canvas.deactivateAll();
@@ -526,14 +470,13 @@ var proFabric = new function(){
             that.canvas._objects[i].selectable = true;
         }
         that.canvas.renderAll();
-        //alert('I am disable');
     };
     this.unselectSelected=function(){
         that.canvas.deactivateAll();
         that.canvas.renderAll();
     };
     this.replaceImg=function(source){
-        console.log("here")
+        //console.log("here")
         that.canvas.forEachObject(function(obj) {
             if(obj.class=="image")
             {
@@ -561,7 +504,6 @@ var proFabric = new function(){
                         lockScalingY: true,
                         hasControls: false
                     });
-                    console.log(img.width);
                     that.canvas.add(img);
                     that.canvas.renderAll();
                 });
@@ -570,10 +512,6 @@ var proFabric = new function(){
     };
     this.getEditImg=function(source){
         var obj = that.canvas.getActiveObject();
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Inside Edit Image");
-        console.log(obj.orignalSource);
-        console.log(obj.src);
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Inside Edit Image");
         if(obj.orignalSource)
             return obj.orignalSource;
         else {
@@ -585,10 +523,6 @@ var proFabric = new function(){
         var dataURL;
         var obj = that.canvas.getActiveObject();
         var before = obj.toJSON(['id','class']);
-        console.log("Old Top : "+obj.top);
-        console.log("Old left : "+obj.left);
-        console.log("Old Width : "+obj.width);
-        console.log("Old height : "+obj.height);
         var _width = obj.width;
         var _height = obj.height;
         TempCanvas = new fabric.Canvas(fabric.util.createCanvasElement());
@@ -627,10 +561,6 @@ var proFabric = new function(){
                     lockScalingY: true,
                     hasControls: false
                 });
-                console.log("New Top : "+image.top);
-                console.log("New left : "+image.left);
-                console.log("New Width : "+image.width);
-                console.log("New height : "+image.height);
                 that.canvas.add(image);
                 that.canvas.moveTo(image, that.canvas.getObjects().indexOf(obj));
                 that.canvas.setActiveObject(image);
@@ -642,17 +572,14 @@ var proFabric = new function(){
         });
     };
     this.getcolorObjects = function(){
-        console.log("I am here...............................................................");
         var lenght = that.canvas._objects.length;
-        console.log(lenght);
         for(var i = 0 ; i < lenght ; i++) {
             that.canvas._objects[i].selectable = true;
             if(that.canvas._objects[i].class=="color")
             {
-                console.log(that.canvas._objects[i]);
+                //console.log(that.canvas._objects[i]);
             }
         }
-        console.log("I am here...............................................................");
     }
     this.selectfalseColor = function (){
         var lenght = that.canvas._objects.length;
@@ -668,9 +595,6 @@ var proFabric = new function(){
             return;
         that.canvas.discardActiveObject();
         that.canvas.discardActiveGroup();
-        console.log("Undo start --------------------->");
-        console.log(current_state);
-        console.log(canvas_state);
         if(current_state > 0){
             current_state--;
             var state=canvas_state;
@@ -684,10 +608,9 @@ var proFabric = new function(){
             }
             if(action == 'modified'){
                 var object = obj.before;
-                console.log(object);
+                //console.log(object);
                 if(object.type != "group"){
                     that.canvas.forEachObject(function(temp){
-                        console.log(object.id + "-:-" + temp.id);
                         if(temp.id == object.id){
                             that.canvas.remove(temp);
                             setTimeout(function(){
@@ -719,9 +642,7 @@ var proFabric = new function(){
             }
             else if(action== 'delete'){
                 var object = obj.object;
-                //that.addObject(object,0,0,1,1);
                 if(object.type != "group"){
-                    console.log(object);
                     that.addObject(object,0,0,1,1);
                 }
                 else{
@@ -739,10 +660,6 @@ var proFabric = new function(){
     this.redo = function(){
         if(current_state<0)
             return;
-        console.log("Redo start --------------------->");
-        console.log(canvas_state[current_state]);
-        console.log(current_state);
-        console.log(canvas_state);
         that.canvas.discardActiveObject();
         that.canvas.discardActiveGroup();
         if((current_state < canvas_state.length)){
@@ -750,7 +667,6 @@ var proFabric = new function(){
             var obj = state[current_state];
             var action = obj.action;
             if(action == 'background'){
-                //$('li#showgrid').removeClass('active');
                 var color = obj.after;
                 that.canvas.backgroundColor = color;
                 that.canvas.renderAll();
@@ -760,7 +676,6 @@ var proFabric = new function(){
                 if(object.type != "group"){
                     that.canvas.forEachObject(function(temp){
                         if(temp.id == object.id){
-                            console.log("Called->",object);
                             that.canvas.remove(temp);
                             setTimeout(function(){
                                 that.addObject(object,0,0,1,1);
@@ -824,15 +739,12 @@ var proFabric = new function(){
         };
         canvas_state.splice(current_state,0,obj);
         current_state++;
-        //alert(current_state);
-        console.log(current_state);
-        console.log(canvas_state);
     };
     this.addObject = function(obj,offsetLeft,offsetTop,scaleX,scaleY) {
         console.log(obj);
         if (!obj) return;
         if (obj.class == "text"){
-            text = new fabric.Text(obj.text, {
+            text = new fabric.Textbox(obj.text, {
                 fontSize: obj.fontSize,
                 fontFamily: obj.fontFamily,
                 fill: obj.fill,
@@ -853,6 +765,8 @@ var proFabric = new function(){
                 top:obj.top+offsetTop,
                 scaleY:obj.scaleY*scaleY,
                 scaleX:obj.scaleX*scaleX,
+                width:obj.width,
+                height:obj.height,
                 lockMovementX     : true,
                 lockMovementY	  : true,
                 lockRotation 	  : true,
@@ -882,11 +796,7 @@ var proFabric = new function(){
             text.on('editing:exited', function(obj) {
                 $("textarea#text_area").val(text.text);
             });
-            alert();
             that.canvas.add(text);
-            console.log(obj.index);
-            console.log(text.index);
-            that.canvas.moveTo(text,obj.index);
             that.canvas.renderAll();
         }
         else if (obj.class == "svg"){

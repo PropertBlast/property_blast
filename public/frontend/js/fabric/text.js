@@ -2,46 +2,12 @@ _txtSelectionFlag=0;
 proFabric.text = {
 	parent : proFabric,
     canvas: proFabric.get.canvas(),
-	/*add: function(obj){
-		//console.log(obj);
-        this.parent();
-        var text = new fabric.IText(obj.text, {
-            left: 10,
-            top: 10,
-            backgroundColor: 'transparent',
-            textAlign : 'center' ,
-            class: 'text',
-            fontSize: 16
-        });
-        //console.log(text);
-        if(obj) {
-            if (obj.fontFamily) {
-                text.fontFamily = obj.fontFamily;
-            }
-            if (obj.color) {
-                text.fill = obj.color;
-            }
-            if(obj.fontSize)
-            {
-                text.fontSize = obj.fontSize;
-            }
-        }
-        this.parent().canvas.add(text);
-        this.parent().canvas.renderAll();
-	},*/
     updateUI:function(Object){
-        console.log("va");
         $("#addText").val("");
         $("#addText").val(Object.text);
         $("#fontSize").val(Object.fontSize);
-        console.log('..........................'+Object.fill);
         $('#picker').colpickSetColor(Object.fill);
-        //$( "#FontSize" ).val(Object.fontsize());
-        //$('#FontSize [value='"++"']").attr('selected', 'selected');
-        //$('#FontSize option[value="'+Object.fontSize+'"]').attr('selected', 'selected');
-        //$('#FontFamily option[value="'+Object.fontFamily+'"]').attr('selected', 'selected');
         $( "#FontSize" ).val(Object.fontSize);
-        //$(".browser-default").css('setBackground',object.fontFamily);
         $( "#textfont" ).val(Object.fontFamily);
         _txtSelectionFlag = 1;
         if(Object.fontWeight == 'bold')
@@ -109,11 +75,8 @@ proFabric.text = {
             $('#right').removeClass("btn-primary");
             $('#center').removeClass("btn-primary");
         }
-        //console.log(Object.text);
-        //console.log(Object.fill);
     },
     SetFontSize: function(size){
-        console.log(size);
         var obj = this.parent().canvas.getActiveObject();
         if(obj) {
             obj.set({
@@ -178,7 +141,6 @@ proFabric.text = {
         }
     },
     SetText: function(txt){
-        //alert('txt'+txt);
         var self = this;
         var obj = self.canvas.getActiveObject();
         if(obj && obj.class=="text") {
@@ -317,7 +279,6 @@ proFabric.text = {
     textAlign: function(type){
         var obj = this.parent().canvas.getActiveObject();
         if(obj && obj.class=="text") {
-            console.log("here inside 1L");
             obj.set({
                 textAlign: type
             });
@@ -327,7 +288,6 @@ proFabric.text = {
         {
             obj = this.parent().canvas.getActiveGroup();
             if(obj) {
-                console.log("here inside 1L");
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
                         obj._objects[i].set({
@@ -342,7 +302,6 @@ proFabric.text = {
     bringTextToFront: function(){
         var obj = this.parent().canvas.getActiveObject();
         if(obj && obj.class=="text") {
-            console.log("here inside 1BTF");
             this.parent().canvas.sendBackwards(obj);
             this.parent().canvas.sendToBack(obj);
             this.parent().canvas.renderAll();
@@ -351,7 +310,6 @@ proFabric.text = {
         {
             obj = this.parent().canvas.getActiveGroup();
             if(obj) {
-                console.log("here inside 1BTF");
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
                         this.parent().canvas.sendBackwards(obj._objects[i]);
@@ -365,7 +323,6 @@ proFabric.text = {
     bringTextToBack: function(){
         var obj = this.parent().canvas.getActiveObject();
         if(obj && obj.class=="text") {
-            console.log("here inside 1BTF");
             this.parent().canvas.bringForward(obj);
             this.parent().canvas.bringToFront(obj);
             this.parent().canvas.renderAll();
@@ -374,7 +331,6 @@ proFabric.text = {
         {
             obj = this.parent().canvas.getActiveGroup();
             if(obj) {
-                console.log("here inside 1BTF");
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
                         this.parent().canvas.bringForward(obj._objects[i]);
@@ -387,30 +343,6 @@ proFabric.text = {
     },
     setGroupTextColor: function(sets){
         var self = this;
-        /*var arr = [];
-        var i= 1,j=1;
-            $.each(sets, function (index, obj) {
-                if (i==rowNum) {
-                    $.each(obj, function (index, obj1) {
-                        console.log(obj1.color + " :: " + 'C' + i + j);
-                        ++j;
-                        arr.push(obj1.color);
-                    });
-                }
-            j = 1;
-            ++i;
-        });
-        i=0;
-        console.log(arr.length);
-        self.canvas.forEachObject(function(obj) {
-            if(obj.class=="text")
-            {
-                console.log(i,arr[i]);
-                obj.set({
-                    fill: arr[i++]
-                });
-            }
-        });*/
         $.each(sets, function (index, set) {
             self.canvas.forEachObject(function(obj) {
                 if(obj.id==set.id)

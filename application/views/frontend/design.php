@@ -393,7 +393,7 @@
 
 <div class="row">
 <div class="col-md-8 col-xs-12">
-    <div class="row" align="center" style="border: 1px solid black; height: 866px; width: 100%;margin-left: 0%;  background-size:cover;">
+    <div class="row" align="center" style="overflow-x: scroll;overflow-y: scroll;border: 1px solid black; height: 766px; width: 620px;margin-left: 0%;  background-size:cover;">
         <canvas id="myCanvas" style="border:1px solid #000000;">
         </canvas>
     </div>
@@ -403,7 +403,7 @@
                 <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 14px;">
                     -
                 </a>
-                <input type="text" value="1" style="width: 100px; padding: 14px;"/>
+                <input type="text" id="zoom"value="40" style="width: 100px; padding: 14px;"/>
                 <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 15px; width:0%;">
                     +
                 </a>

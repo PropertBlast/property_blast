@@ -223,64 +223,16 @@ $(document).ready(function($) {
             }
         }
     }
-    //console.log(sets);
     var j = 1;
     i = 1;
     $.each(sets, function (index, obj) {
         $.each(obj, function (index, obj1) {
             $('#C' + i + j).css("background-color", obj1.color);
-            //console.log(obj1.color + " :: " + 'C' + i + j);
             ++j;
         });
-        //console.log(">>>>><<<<<<");
         j = 1;
         ++i;
     });
-
-    /*var width = proFabric.get.width();
-    var height = proFabric.get.height();
-    for (var i = 0; i < 6; i++) {
-        obj = {
-            left: (width/15) +(i*90),
-            top: (height/ 4) +(i*30),
-            id: 'set-id-'+(i+1)
-        };
-        proFabric.text.add("Colorful Text",obj);
-    }*/
-    //$("#Ccol-1").hover(function () {
-    //    //$(this).find( "#C11" ).removeClass('square1');
-    //    $(this).find( "#C11" ).addClass('square2');
-    //},function () {
-    //    //$(this).find( "#C12" ).removeClass('square1');
-    //    $(this).find( "#C12" ).addClass('square2');
-    //},function () {
-    //    //$(this).find( "#C13" ).removeClass('square1');
-    //    $(this).find( "#C13" ).addClass('square2');
-    //},function () {
-    //    //$(this).find( "#C14" ).removeClass('square1');
-    //    $(this).find( "#C14" ).addClass('square2');
-    //},function () {
-    //    //$(this).find( "#C15" ).removeClass('square1');
-    //    $(this).find( "#C15" ).addClass('square2');
-    //},function () {
-    //    //$(this).find( "#C16" ).removeClass('square1');
-    //    $(this).find( "#C16" ).addClass('square2');
-    //});
-    //$("#Ccol-2").hover(function () {
-    //    $(this).addClass('square2');
-    //});
-    //$("#Ccol-3").hover(function () {
-    //    $(this).addClass('square2');
-    //});
-    //$("#Ccol-4").hover(function () {
-    //    $(this).addClass('square2');
-    //});
-    //$("#Ccol-5").hover(function () {
-    //    $(this).addClass('square2');
-    //});
-    //$("#Ccol-6").hover(function () {
-    //    $(this).addClass('square2');
-    //});
     $('body').delegate('.color-pallet-row','click',function(){
         $.each($('body').find('.txt'),function(index,obj){
             $(obj).removeClass('textalignactive');
@@ -354,7 +306,6 @@ $(document).ready(function($) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                //console.log(e.target.result);
                 proFabric.replaceImg(e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
@@ -366,20 +317,8 @@ $(document).ready(function($) {
     });
 
     $("body").delegate('#crop-Done-btn', 'click', function(event) {
-        console.log('x : '+obj.x);
-        console.log('y : '+obj.y);
-        console.log('Width : '+obj.width);
-        console.log('Height : '+obj.height);
-        console.log('Rotate : '+obj.rotate);
-        console.log('ScaleX : '+obj.scaleX);
-        console.log('ScaleY : '+obj.scaleY);
-        console.log('Src : '+obj.src);
-        console.log('Image Height : '+obj.imgHeight);
-        console.log('Image Width : '+obj.imgWidth);
         proFabric.newImg(obj);
         $('#crop-End-btn').trigger('click');
-        //$('#modal').modal('toggle');
-        //console.log(' I AM HERE IN CROP ');
     });
 
     $("body").delegate('#modal-click', 'click', function(event) {
@@ -432,44 +371,24 @@ $(document).ready(function($) {
         proFabric.selectfalseColor();
     });
     $('#picker').colpick({
-        //flat:true,
-        //flat:true,
         color: '#000000',
         layout: 'hex',
         colorScheme: 'dark',
         onChange: function(hsb, hex, rgb, el, bySetColor) {
             $(el).css('border-color', '#' + hex);
-            //$(el).css('background-color','#'+hex);
-            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-            //alert('Here in color 1');
             if (!bySetColor) $(el).val(hex);
         },
         onSubmit: function(hsb, hex, rgb, el, bySetColor) {
             $(el).css('border-color', '#' + hex);
-            //$(el).css('background-color','#'+hex);
-            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-            //function calling
             $(el).colpickHide();
-            //proFabric.text.SetTextColor('#' + hex);
             proFabric.text.set({
                 fill: '#' + hex
             });
-            // if(!bySetColor) $(el).val(hex);
         }
     });
-    /*.keyup(function(){
-        $(this).colpickSetColor(this.value);
-    });*/
-
     $("body").delegate('#addTextbtn', 'click', function() {
-        //event.preventDefault();
         var obj;
-        //console.log(
-        //var bgcol =
-        console.log('I am here');
-        console.log($('#picker').css('borderBottomColor'));
         var hex_Col = proFabric.rgb2hex($('#picker').css('borderBottomColor'));
-        console.log(hex_Col);
         var txt = "Hello World";
         obj = {
             text: txt,
@@ -478,13 +397,11 @@ $(document).ready(function($) {
             fontFamily: $("#FontFamily").val()
         };
         proFabric.text.add(obj);
-        //console.log(txt);
         event.preventDefault();
         var txt = $("#addText").val();
         proFabric.text.add(txt);
     });
     $('#addText').bind('input', function() {
-        console.log("We are here !!");
         proFabric.text.SetText($("#addText").val());
     });
     $( "#addText" ).keyup(function() {
@@ -492,7 +409,6 @@ $(document).ready(function($) {
     });
     $("body").delegate('#ColorPicker', 'click', function(event) {
         event.preventDefault();
-        console.log('I am here');
         proFabric.disableSelection();
         proFabric.droper();
         proFabric.enableSelection();
@@ -505,7 +421,7 @@ $(document).ready(function($) {
     });
     $('#textfont').change(function() {
         var family = $("#textfont option:selected").val();
-        console.log(family);
+        //console.log(family);
         proFabric.text.set({
             fontFamily: family
         });
@@ -513,8 +429,6 @@ $(document).ready(function($) {
     $("body").delegate('#bold', 'click', function() {
         var col = proFabric.rgb2hex($('#bold').css("background-color"));
         var bodCol = proFabric.rgb2hex($('#bold').css("border-color"));
-        console.log(col);
-        console.log(bodCol);
         if( !$('#bold').hasClass("btn-primary")) {
             $('#bold').addClass("btn-primary");
             proFabric.text.set({
@@ -532,8 +446,6 @@ $(document).ready(function($) {
     $("body").delegate('#italic', 'click', function() {
         var col = proFabric.rgb2hex($('#italic').css("background-color"));
         var bodCol = proFabric.rgb2hex($('#italic').css("border-color"));
-        console.log(col);
-        console.log(bodCol);
         if(!$('#italic').hasClass("btn-primary")) {
             $('#italic').addClass("btn-primary");
             proFabric.text.set({
@@ -551,8 +463,6 @@ $(document).ready(function($) {
     $("body").delegate('#underline', 'click', function() {
         var col = proFabric.rgb2hex($('#underline').css("background-color"));
         var bodCol = proFabric.rgb2hex($('#underline').css("border-color"));
-        console.log(col);
-        console.log(bodCol);
         if(!$('#underline').hasClass("btn-primary")) {
             $('#underline').addClass("btn-primary");
             proFabric.text.set({
@@ -566,6 +476,32 @@ $(document).ready(function($) {
                 textDecoration: 'normal'
             });
         }
+    });
+    $("body").delegate('.minus', 'click', function() {
+        var value = $("#zoom").val();
+        var decreament = 20;
+        value=value-decreament;
+        $("#zoom").val("");
+        $("#zoom").val(value);
+        console.log("===========>> "+value);
+        proFabric.zoomcanvas(value);
+    });
+    $("body").delegate('.plus', 'click', function() {
+        var value = $("#zoom").val();
+        var increament = 20;
+        if(value<=0) {
+            value = -Math.abs(value) + Math.abs(increament);
+        }
+        else {
+            value = Math.abs(value) + Math.abs(increament);
+        }
+        $("#zoom").val("");
+        $("#zoom").val(value);
+        console.log("===========>> "+value);
+        proFabric.zoomcanvas(value);
+    });
+    $('#zoom').change(function(){
+        proFabric.zoomAll($("#zoom").val());
     });
     $("body").delegate('#left', 'click', function() {
         var col = proFabric.rgb2hex($('#left').css("background-color"));
@@ -621,12 +557,10 @@ $(document).ready(function($) {
     });
     $(document).delegate('#undobtn','click',function(event){
         event.preventDefault();
-        console.log('Here I am');
         proFabric.undo();
     });
     $(document).delegate('#redobtn','click',function(event){
         event.preventDefault();
-        console.log('Here I am');
         proFabric.redo();
     });
 });
