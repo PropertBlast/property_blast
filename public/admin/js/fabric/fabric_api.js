@@ -57,7 +57,10 @@ var proFabric = new function(){
 	this.canvas.on('selection:cleared', function(o){
         var object = o.target;
         if(!object){
-            $('#editor-textAssign').children().removeClass('btn-primary');
+            proFabric.text.updateUI('');
+            proFabric.image.updateUI('');
+            proFabric.shapes.shapeSelected('');
+            proFabric.color.colorSelected('');
         }
     });
 	this.canvas.on('selection:created', function(o){});

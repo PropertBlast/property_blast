@@ -46,7 +46,8 @@ proFabric.image = {
         this.canvas.renderAll();
     },
     updateUI: function(obj){
-        $('#editor-imageList').find('button[data-id='+obj.id+']').addClass('btn-primary').siblings().removeClass('btn-primary');
+        $('#editor-imageList').children().removeClass('btn-primary')
+        $('#editor-imageList').find('button[data-id='+obj.id+']').addClass('btn-primary');
         $("#editor-imageWidth").val(Math.ceil(obj.width));
         $("#editor-imageHeight").val(Math.ceil(obj.height));
         if(obj.lockMovementX){
@@ -55,5 +56,8 @@ proFabric.image = {
         else{
             $("#image").find("#editor-lockGroup").find('button[data-type=unlock]').addClass('btn-primary').siblings().removeClass('btn-primary');
         }
+        $('body').find('button#editor-textAssign').removeClass('btn-primary').prop('disabled', false);
+        $('body').find("button#editor-textAssign[data-id!='']").prop('disabled', true);
+        $('body').find('button#editor-textAssign[data-id='+obj.id+']').addClass('btn-primary').prop('disabled', false);
     }
 };
