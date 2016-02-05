@@ -8,11 +8,12 @@
     <script src="<?php echo base_url() ?>public/frontend/js/fabric/text.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/fabric/image.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/fabric/shapes.js"></script>
-    <script src="<?php echo base_url() ?>public/frontend/js/colpick.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/script.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/dropzone.min.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/wan-spinner.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/cropper.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url() ?>public/frontend/js/evol.colorpicker.js"></script>
     <script> var base_url = '<?php echo base_url(); ?>' ;</script>
     <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
     <script>

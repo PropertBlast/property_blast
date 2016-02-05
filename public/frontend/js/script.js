@@ -233,6 +233,11 @@ $(document).ready(function($) {
         j = 1;
         ++i;
     });
+
+    $('#col-picker').colorpicker({color:'#31859b', defaultPalette:'web'});
+    $('#col-picker').colorpicker({showOn:'button'});
+    $("#col-picker").trigger();
+
 	$('body').delegate('#zoom','click',function(){
 		$('#zoom-menu').css("display", "block");
 	});
@@ -372,22 +377,6 @@ $(document).ready(function($) {
         $("#textOpt").fadeOut();
         proFabric.getcolorObjects();
         proFabric.selectfalseColor();
-    });
-    $('#picker').colpick({
-        color: '#000000',
-        layout: 'hex',
-        colorScheme: 'dark',
-        onChange: function(hsb, hex, rgb, el, bySetColor) {
-            $(el).css('border-color', '#' + hex);
-            if (!bySetColor) $(el).val(hex);
-        },
-        onSubmit: function(hsb, hex, rgb, el, bySetColor) {
-            $(el).css('border-color', '#' + hex);
-            $(el).colpickHide();
-            proFabric.text.set({
-                fill : '#' + hex
-            });
-        }
     });
     $("body").delegate('#addTextbtn', 'click', function() {
         var obj;

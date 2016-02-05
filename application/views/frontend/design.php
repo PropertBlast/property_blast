@@ -703,7 +703,7 @@
         </div>
         <div class="col-md-9 col-xs-9" style="padding: 0px;margin: 0px;font-weight: bold; margin-left: -5px;">
             <div class=" col-md-12 col-xs-12">
-                <div id="picker"></div>
+                <input type="textbox" style="width:80px;" id="col-picker" value="show">
             </div>
         </div>
     </div>
@@ -737,7 +737,7 @@
 </div>
 </div>
 
-<div class="row">
+<div class="row" style="margin-bottom:20px;">
     <div class="col-md-6 col-xs-5"  style="margin:0px;padding:0px; padding-left:20px;" align="left">
         <button type="button"  class="btn btn-primary btn-sm">GO BACK</button>
     </div>
