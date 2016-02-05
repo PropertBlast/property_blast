@@ -1,2 +1,4 @@
+/application/config/
+.env
 config.php
 config/
