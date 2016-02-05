@@ -64,11 +64,8 @@ var proFabric = new function(){
         var object = that.canvas.getActiveObject();
         if(!object) {
             that.unselectSelected();
+            that.text.disableTextOpts();
             $("#colorStyleOpt").show();
-            $("#settingOpt").fadeOut();
-            $("#imageOpt").fadeOut();
-            $("#settingOpt").fadeOut();
-            $("#textOpt").fadeOut();
             that.getcolorObjects();
             that.selectfalseColor();
         }
@@ -87,15 +84,15 @@ var proFabric = new function(){
 		var object = o.target;
         if(object.class=="text") {
             that.text.updateUI(object);
-            $("#textOpt").show();
-            $("#settingOpt").show();
-            $("#imageOpt").fadeOut();
-            $("#colorStyleOpt").fadeOut();
+            that.text.enableTextOpts();
+			that.disableImgOpts();
         }
 		else if(object.class){
 			proFabric.image.imageSelected(object);
 		}
         else if(object.class=='shape'){
+			that.disableImgOpts();
+            that.text.disableTextOpts();
             proFabric.shapes.shapeSelected(object);
         }
 		var dataId=object.class;
@@ -108,22 +105,14 @@ var proFabric = new function(){
 
 		}
 		else if(object.class=='image'){
+            that.text.disableTextOpts();
+			that.enableImgOpts();
             $("#settingOpt").show();
             $("#imageOpt").show();
-            $("#textOpt").fadeOut();
-            $("#colorStyleOpt").fadeOut();
 		}
 		else if(object.class=='shape'){
 			proFabric.shapes.shapeSelected(object);
 		}
-        if(object){
-            object.set({
-                original_scaleX : object.scaleX / (last_zoom/100),
-                original_scaleY : object.scaleY/ (last_zoom/100),
-                original_left   : object.left / (last_zoom/100),
-                original_top    : object.top / (last_zoom/100)
-            });
-        }
 	});
     this.canvas.on('mouse:move', function(e) {
 
@@ -730,6 +719,14 @@ var proFabric = new function(){
             current_state++;
         }
     };
+	this.disableImgOpts = function(){
+		$("#Up-imageUpload").attr("disabled", "disabled");
+        $("#modal-click").attr("disabled", "disabled");
+	};
+	this.enableImgOpts = function(){
+		$("#Up-imageUpload").removeAttr("disabled");
+        $("#modal-click").removeAttr("disabled");
+	};
     this.savestate = function(type,object,object1){
         var obj = {
             action:type,

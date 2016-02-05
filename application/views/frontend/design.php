@@ -403,7 +403,7 @@
                 <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 14px;">
                     -
                 </a>
-                <input type="text" class="dropdown-toggle" id="zoom"value="40" style="width: 100px; padding: 14px;" readonly  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <input type="text" class="dropdown-toggle" id="zoom"value="100" style="width: 100px; padding: 14px;" readonly  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                 <ul id="zoom-menu"class="dropdown-menu" aria-labelledby="zoom">
                     <li value="50"><a>50</a></li>
                     <li value="60"><a>60</a></li>
@@ -441,129 +441,7 @@
 </div>
 <div class="col-md-4 col-xs-12">
 <div id="settingOpt" align="right" style="display: none;">
-    <button type="button" id="settingbtn" class="btn btn-primary btn-sm">Settings</button>
-</div>
-<div id="textOpt" style="display: none;">
-    <div style="font-size: 16px;margin: 0px;padding: 0px;font-weight: bold;margin-top: 10px;">
-    TEXT:
-    </div>
-    <hr style="width: 100%;margin: 0px;padding: 0px;">
-    <div class="input-group "style="width: 100%; margin-top:5%;">
-        <textarea id="addText" type="textbox" placeholder="" class="form-control"style="height: 200px; margin-top: 10px;border-radius: 5px;"></textarea>
-    </div>
-    <div class="row" style="margin-top: 5px;">
-        <div class="col-md-6" style="margin: 0px;padding: 0px;">
-            <div class="col-md-12 col-xs-12">
-                <div class="textalign" style="font-weight: bold;">
-                    SIZE:
-                </div>
-            </div>
-            <div class="col-md-12 col-xs-12">
-                <select class="form-control"  id="fontSize" class="form-control" type="number">
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-				<option value="12">12</option>
-				<option value="14">14</option>
-				<option value="16">16</option>
-				<option value="18">18</option>
-				<option value="20">20</option>
-				<option value="22">22</option>
-				<option value="24">24</option>
-				<option value="26">26</option>
-				<option value="28">28</option>
-				<option value="36">36</option>
-				<option value="48">48</option>
-				<option value="72">72</option>
-				</select>
-            </div>
-        </div>
-        <div class="col-md-6"  style="margin: 0px;padding: 0px;">
-            <div class="col-md-12 col-xs-12">
-                <div class="textalign" style="font-weight: bold;">
-                    FONT:
-                </div>
-            </div>
-            <div class="col-md-12">
-                <select class="form-control" id="textfont" style="width: 100%;">
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 5px;">
-        <div class="col-md-2 col-xs-12">
-            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
-                <div class="textalign" style="font-weight: bold;">
-                    STYLE:
-                </div>
-            </div>
-        </div>
-        <div class="col-md-10 col-xs-12">
-            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
-                <div class="btn-group btn-sm" role="group" aria-label="..." style="width : 100%;">
-                    <button type="button" id="bold" class="btn btn-default btn-sm" style="width: 25%;" ><span class="glyphicon glyphicon-bold" aria-hidden="true"></button>
-                    <button type="button" id="italic" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-italic" aria-hidden="true"></button>
-                    <button type="button" id="underline" class="btn btn-default btn-sm" style="width: 25%;"><span style="font-size:14px;" class="fa fa-underline" aria-hidden="true"></button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 5px;">
-        <div class="col-md-2 col-xs-12">
-            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
-                <div class="textalign" style="font-weight: bold;">
-                    ALIGN:
-                </div>
-            </div>
-        </div>
-        <div class="col-md-10 col-xs-12">
-            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
-                <div class="btn-group btn-sm" role="group" aria-label="..." style="width : 100%;">
-                    <button type="button" id="left" class="btn btn-default btn-sm" style="width: 25%;" ><span class="glyphicon glyphicon-align-left" aria-hidden="true"></button>
-                    <button type="button" id="right" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></button>
-                    <button type="button" id="center" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></button>
-                    <button type="button" id="justify" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 6px;margin-bottom: 5px;">
-        <div class="col-md-2 col-xs-2 " style="font-weight: bold;padding-top: 3px;margin-right: 15px;">
-                COLOR:
-        </div>
-        <div class="col-md-9 col-xs-9" style="padding: 0px;margin: 0px;font-weight: bold; margin-left: -5px;">
-            <div class=" col-md-12 col-xs-12">
-                <div id="picker"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="imageOpt" style="display: none;">
-<div class="row" >
-    <div class=" col-md-12 col-xs-12">
-        <div style="font-size: 16px;margin: 0px;padding: 0px;font-weight: bold;">
-            IMAGE:
-        </div>
-        <hr style="width: 100%;margin: 0px;padding: 0px;">
-    </div>
-    <div class="col-md-12 col-xs-12">
-        <div class="rect1" style="width: 100%;margin-top: 10px;">
-            <div class="col-md-4 col-xs-4" style="padding: 0px;margin: 0px;">
-                <button type="button" style="width:105px;"id="Up-imageUpload" class="btn btn-primary btn-sm" style="font-size: 12px;">Choose File</button>
-            </div>
-            <div class="col-md-8 col-xs-8">
-                <div class="textalign" style="font-size: 14px;margin-left: 20%;">
-                    No file choosen
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div  class="col-md-12 col-xs-12" align="center" style="margin-top: 10px; margin-bottom: 10px;">
-        <button type="button" id="modal-click" class="btn btn-info btn-sm">Edit Image</button>
-    </div>
-
-</div>
+    <!--<button type="button" id="settingbtn" class="btn btn-primary btn-sm">Settings</button>-->
 </div>
 <div id="colorStyleOpt">
 <div class="row" >
@@ -735,14 +613,135 @@
         </div>
     </div>
 </div>
+<div id="textOpt" style="margin-bottom:30px; margin-top:25px;">
+    <div style="font-size: 16px;margin: 0px;padding: 0px;font-weight: bold;margin-top: 10px;margin-left: -16px;">
+    TEXT:
+    </div>
+    <hr style="width: 100%;margin: 0px;padding: 0px;">
+    <div class="input-group "style="width: 100%; margin-top:5%;">
+        <textarea id="addText" type="textbox" placeholder="" class="form-control"style="height: 200px; margin-top: 10px;border-radius: 5px;"></textarea>
+    </div>
+    <div class="row" style="margin-top: 5px;">
+        <div class="col-md-6" style="margin: 0px;padding: 0px;">
+            <div class="col-md-12 col-xs-12">
+                <div class="textalign" style="font-weight: bold;">
+                    SIZE:
+                </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+                <select class="form-control"  id="fontSize" class="form-control" type="number">
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="12">12</option>
+				<option value="14">14</option>
+				<option value="16">16</option>
+				<option value="18">18</option>
+				<option value="20">20</option>
+				<option value="22">22</option>
+				<option value="24">24</option>
+				<option value="26">26</option>
+				<option value="28">28</option>
+				<option value="36">36</option>
+				<option value="48">48</option>
+				<option value="72">72</option>
+				</select>
+            </div>
+        </div>
+        <div class="col-md-6"  style="margin: 0px;padding: 0px;">
+            <div class="col-md-12 col-xs-12">
+                <div class="textalign" style="font-weight: bold;">
+                    FONT:
+                </div>
+            </div>
+            <div class="col-md-12">
+                <select class="form-control" id="textfont" style="width: 100%;">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 5px;">
+        <div class="col-md-2 col-xs-12">
+            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
+                <div class="textalign" style="font-weight: bold;">
+                    STYLE:
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 col-xs-12">
+            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
+                <div class="btn-group btn-sm" role="group" aria-label="..." style="width : 100%;">
+                    <button type="button" id="bold" class="btn btn-default btn-sm" style="width: 25%;" ><span class="glyphicon glyphicon-bold" aria-hidden="true"></button>
+                    <button type="button" id="italic" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-italic" aria-hidden="true"></button>
+                    <button type="button" id="underline" class="btn btn-default btn-sm" style="width: 25%;"><span style="font-size:14px;" class="fa fa-underline" aria-hidden="true"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 5px;">
+        <div class="col-md-2 col-xs-12">
+            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
+                <div class="textalign" style="font-weight: bold;">
+                    ALIGN:
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 col-xs-12">
+            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
+                <div class="btn-group btn-sm" role="group" aria-label="..." style="width : 100%;">
+                    <button type="button" id="left" class="btn btn-default btn-sm" style="width: 25%;" ><span class="glyphicon glyphicon-align-left" aria-hidden="true"></button>
+                    <button type="button" id="right" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></button>
+                    <button type="button" id="center" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></button>
+                    <button type="button" id="justify" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 6px;margin-bottom: 5px;">
+        <div class="col-md-2 col-xs-2 " style="font-weight: bold;padding-top: 3px;margin-right: 15px;">
+                COLOR:
+        </div>
+        <div class="col-md-9 col-xs-9" style="padding: 0px;margin: 0px;font-weight: bold; margin-left: -5px;">
+            <div class=" col-md-12 col-xs-12">
+                <div id="picker"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="imageOpt" style="margin-bottom:5px;">
+<div class="row" >
+    <div class=" col-md-12 col-xs-12" style="margin: 0px;padding: 0px;">
+        <div style="font-size: 16px;margin: 0px;padding: 0px;font-weight: bold;">
+            IMAGE:
+        </div>
+        <hr style="width: 100%;margin: 0px;padding: 0px;">
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <div class="rect1" style="width: 100%;margin-top: 10px;">
+            <div class="col-md-4 col-xs-4" style="padding: 0px;margin: 0px;">
+                <button type="button" style="width:105px;"id="Up-imageUpload" class="btn btn-primary btn-sm" style="font-size: 12px;">Choose File</button>
+            </div>
+            <div class="col-md-8 col-xs-8">
+                <div class="textalign" style="font-size: 14px;margin-left: 20%;">
+                    No file choosen
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="col-md-12 col-xs-12" align="center" style="margin-top: 10px; margin-bottom: 10px;">
+        <button type="button" id="modal-click" class="btn btn-info btn-sm">Edit Image</button>
+    </div>
+
+</div>
 </div>
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-xs-5"  style="margin:0px;padding:0px;" align="left">
+    <div class="col-md-6 col-xs-5"  style="margin:0px;padding:0px; padding-left:20px;" align="left">
         <button type="button"  class="btn btn-primary btn-sm">GO BACK</button>
     </div>
-    <div class="col-md-6 col-xs-6"  style="margin:0px;padding:0px;" align="right" >
+    <div class="col-md-6 col-xs-6"  style="margin:0px;padding:0px;padding-right:20px;" align="right" >
         <button type="button"  class="btn btn-primary btn-sm">SAVE&CONTINUE</button>
     </div>
 </div>

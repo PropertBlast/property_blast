@@ -358,6 +358,40 @@ proFabric.text = {
         });
         self.canvas.renderAll();
     },
+    disableTextOpts:function(){
+        document.getElementById('addText').value = "";
+        $("#addText").attr("disabled", "disabled");
+        $("#fontSize").attr("disabled", "disabled");
+        $("#textfont").attr("disabled", "disabled");
+		$("#bold").removeClass("btn-primary");
+        $("#bold").attr("disabled", "disabled");
+		$("#italic").removeClass("btn-primary");
+        $("#italic").attr("disabled", "disabled");
+		$("#underline").removeClass("btn-primary");
+        $("#underline").attr("disabled", "disabled");
+		$("#left").removeClass("btn-primary");
+        $("#left").attr("disabled", "disabled");
+		$("#right").removeClass("btn-primary");
+        $("#right").attr("disabled", "disabled");
+		$("#center").removeClass("btn-primary");
+        $("#center").attr("disabled", "disabled");
+		$("#justify").removeClass("btn-primary");
+        $("#justify").attr("disabled", "disabled");
+        $("#picker").attr("disabled", "disabled");
+    },
+    enableTextOpts:function(){
+        $("#addText").removeAttr("disabled");
+        $("#fontSize").removeAttr("disabled");
+        $("#textfont").removeAttr("disabled");
+        $("#bold").removeAttr("disabled");
+        $("#italic").removeAttr("disabled");
+        $("#underline").removeAttr("disabled");
+        $("#left").removeAttr("disabled");
+        $("#right").removeAttr("disabled");
+        $("#center").removeAttr("disabled");
+        $("#justify").removeAttr("disabled");
+        $("#picker").removeAttr("disabled");
+    },
     add: function(_text,_options){
         var self = this;
         var text = new fabric.Textbox(_text || 'Enter Your Text Here', {
