@@ -1,5 +1,5 @@
 <div class="row" id="editor">
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-7 col-xs-12">
         <div class="row">
             <div class=" col-md-12 col-xs-12">
                 <h5>Choose your Flyre Size :</h5>
@@ -25,6 +25,7 @@
                 </div>
             </div>
             <div class="col-md-7 col-xs-12 text-right">
+                <button type="button" id="fullScreenEditor" class="btn btn-success">Full Screen</button>
                 <div class="btn-group" role="group">
                     <button data-type="redo" type="button" class="btn btn-default">Redo</button>
                     <button data-type="undo" type="button" class="btn btn-default">Undo</button>
@@ -33,8 +34,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xs-12 right-col">
-        <ul class="nav nav-tabs" role="tablist" id="editor-mainTabs">
+    <div class="col-md-5 col-xs-12 right-col">
+        <ul class="nav nav-tabs editor-tabs" role="tablist" id="editor-mainTabs">
             <li class="active"><a href="#text" role="tab" data-toggle="tab">Add Text</a></li>
             <li><a href="#image" role="tab" data-toggle="tab">Add Image</a></li>
             <li><a href="#object" role="tab" data-toggle="tab">Add Object</a></li>
@@ -52,7 +53,7 @@
                         <div class="row pt-10">
                             <div class="col-md-12 col-xs-12">
                                 <button class="btn btn-default" id="editor-addText" type="button">Add Text</button>
-                                <button class="btn btn-default" id="editor-delete" data-type="text" type="button">Delete Text</button>
+                                <button class="btn btn-default" id="editor-delete" data-type="text" type="button">Delete</button>
                             </div>
                         </div>
                         <div class="row pt-10">
@@ -82,7 +83,23 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="row"><label class="control-label">Font size</label></div>
                                 <div class="row">
-                                    <input type="number" class="form-control" id="editor-fontSize" style="width:90%;" value="11">
+                                    <select class="form-control" id="editor-fontSize" style="width:90%;">
+                                        <option value="8">8px</option>
+                                        <option value="9">9px</option>
+                                        <option value="10">10px</option>
+                                        <option value="12">12px</option>
+                                        <option value="14">14px</option>
+                                        <option value="16">16px</option>
+                                        <option value="18">18px</option>
+                                        <option value="20">20px</option>
+                                        <option value="22">22px</option>
+                                        <option value="24">24px</option>
+                                        <option value="26">26px</option>
+                                        <option value="28">28px</option>
+                                        <option value="36">36px</option>
+                                        <option value="48">48px</option>
+                                        <option value="72">72px</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
@@ -132,15 +149,6 @@
                                 <button type="button" id="editor-cpicker" data-type="text" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mt-50">
-                    <div class="col-md-12 col-xs-12" id="editor-textAssign">
-                        <button data-type="property" data-id="" type="button" class="btn btn-default">Property info</button>
-                        <button data-type="agent1" data-id="" type="button" class="btn btn-default">Agent 1</button>
-                        <button data-type="agent2" data-id="" type="button" class="btn btn-default">Agent 2</button>
-                        <button data-type="company1" data-id="" type="button" class="btn btn-default">Company 1</button>
-                        <button data-type="company2" data-id="" type="button" class="btn btn-default">Company 2</button>
                     </div>
                 </div>
             </div>
@@ -324,6 +332,97 @@
                             <div role="tabpanel" class="tab-pane active" id="cs-sample1">
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="nav nav-tabs small-tabs mt-50" role="tablist" id="editor-infoTabs">
+            <li class="active"><a href="#propertyinfo" role="tab" data-toggle="tab">Property info</a></li>
+            <li><a href="#agent1" role="tab" data-toggle="tab">Agent 1</a></li>
+            <li><a href="#agent2" role="tab" data-toggle="tab">Agent 2</a></li>
+            <li><a href="#company1" role="tab" data-toggle="tab">Company 1</a></li>
+            <li><a href="#company2" role="tab" data-toggle="tab">Company 2</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane pt-20 active" id="propertyinfo">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Address</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Body 1</button>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Price</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Body 2</button>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Main Header</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Body 3</button>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Headline</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Call to Action</button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="agent1">
+                <div class="row">
+                    <div class="col-md-8">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Agent Contact Info</button>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-8">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">License #</button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="agent2">
+                <div class="row">
+                    <div class="col-md-8">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Agent Contact Info</button>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-8">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">License #</button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="company1">
+                <div class="row">
+                    <div class="col-md-8">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Company Contact Info</button>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-8">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">License #</button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="company2">
+                <div class="row">
+                    <div class="col-md-8">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Company Contact Info</button>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-8">
+                        <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">License #</button>
                     </div>
                 </div>
             </div>

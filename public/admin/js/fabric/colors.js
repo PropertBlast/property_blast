@@ -114,8 +114,8 @@ proFabric.color = {
 		this.canvas.renderAll();
 	},
 	colorSelected: function(obj){
-		$("#editor-colorWidth").val(Math.ceil(obj.getWidth()));
-		$("#editor-colorHeight").val(Math.ceil(obj.getHeight()));
+		$("#editor-colorWidth").val(Math.ceil(obj.width));
+		$("#editor-colorHeight").val(Math.ceil(obj.height));
 		if(obj.lockMovementX){
 			$("#lock_color").addClass('ui-state-active');
 			$("#unlock_color").removeClass('ui-state-active');
@@ -124,6 +124,9 @@ proFabric.color = {
 			$("#lock_color").removeClass('ui-state-active');
 			$("#unlock_color").addClass('ui-state-active');
 		}
+        $('body').find('button#editor-textAssign').removeClass('btn-primary').prop('disabled', false);
+        $('body').find("button#editor-textAssign[data-id!='']").prop('disabled', true);
+        $('body').find('button#editor-textAssign[data-id='+obj.id+']').addClass('btn-primary').prop('disabled', false);
     }
 
 };

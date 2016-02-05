@@ -247,12 +247,12 @@ $(document).ready(function($) {
         $(_tabs).prependTo('#cs-tablist');
         colorPickerInit();
     });
-    $(document).delegate('#editor-textAssign>button', 'click', function() {
+    $(document).delegate('button#editor-textAssign', 'click', function() {
         var name = $(this).attr('data-type');
         var obj = proFabric.get.currentObject();
         if(!obj) return;
         var id = obj.id;
-        $(this).siblings('button').each(function(index, el) {
+        $('body').find('button#editor-textAssign').each(function(index, el) {
             var _id = $(el).attr('data-id');
             if(_id == id){
                 $(el).removeClass('btn-primary').attr('data-id','');
@@ -277,10 +277,9 @@ $(document).ready(function($) {
         proFabric.droper();
     });
 
-    $(document).on('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(e){
-        console.log('asdf');
-        fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
-        if(fullScreenMode){
+    $(document).delegate('#fullScreenEditor', 'click', function() {
+        if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
+            $(this).val('Exit').html('Exit');
             $('#editor').css({
                 position: 'fixed',
                 top: 0,
@@ -290,8 +289,34 @@ $(document).ready(function($) {
                 width: '100vw',
                 height: '100vh'
             });
-        }else{
+            if(document.documentElement.requestFullscreen) {
+                document.getElementById('#editor').requestFullscreen();
+            }
+            else if(document.documentElement.msRequestFullscreen){
+                document.getElementById('#editor').msRequestFullscreen();
+            }
+            else if(document.documentElement.mozRequestFullScreen){
+                document.getElementById('#editor').mozRequestFullScreen();
+            }
+            else if(document.documentElement.webkitRequestFullscreen){
+                document.getElementById('editor').webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+        }
+        else {
+            $(this).val('Full Screen').html('Full Screen');
             $('#editor').removeAttr('style');
+            if(document.exitFullscreen){
+                document.exitFullscreen();
+            }
+            else if(document.msExitFullscreen){
+                document.msExitFullscreen();
+            }
+            else if(document.mozCancelFullScreen){
+                document.mozCancelFullScreen();
+            }
+            else if(document.webkitExitFullscreen){
+                document.webkitExitFullscreen();
+            }
         }
     });
     colorPickerInit();

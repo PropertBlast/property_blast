@@ -10,7 +10,9 @@ proFabric.text = {
         $('#editor-fontFamily').children('option').filter(function(){return $(this).val()==object.fontFamily}).prop('selected',true).change();
         $('div#editor-textAlign').find('button[data-type='+object.textAlign+']').addClass('btn-primary').siblings().removeClass('btn-primary');
         console.log(object.id);
-        $('#editor-textAssign').children('button[data-id='+object.id+']').addClass('btn-primary').siblings('button').removeClass('btn-primary');
+        $('body').find('button#editor-textAssign').removeClass('btn-primary').prop('disabled', false);
+        $('body').find("button#editor-textAssign[data-id!='']").prop('disabled', true);
+        $('body').find('button#editor-textAssign[data-id='+object.id+']').addClass('btn-primary').prop('disabled', false);
     },
     add: function(_text,_options){
         var self = this;
