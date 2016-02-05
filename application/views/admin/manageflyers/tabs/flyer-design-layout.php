@@ -1,5 +1,5 @@
 <div class="row" id="editor">
-    <div class="col-md-7 col-xs-12">
+    <div class="col-md-8 col-xs-12">
         <div class="row">
             <div class=" col-md-12 col-xs-12">
                 <h5>Choose your Flyre Size :</h5>
@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5 col-xs-12 right-col">
+    <div class="col-md-4 col-xs-12 right-col">
         <ul class="nav nav-tabs editor-tabs" role="tablist" id="editor-mainTabs">
             <li class="active"><a href="#text" role="tab" data-toggle="tab">Add Text</a></li>
             <li><a href="#image" role="tab" data-toggle="tab">Add Image</a></li>
