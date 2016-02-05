@@ -27,6 +27,7 @@
 
     <!-- footer js resourses -->
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/bootstrap.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/bootstrap-lightbox.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/parallax.js"></script>

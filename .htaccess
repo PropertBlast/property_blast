@@ -2,6 +2,7 @@ RewriteEngine on
 RewriteBase /property_blast
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|css)
 RewriteRule .* index.php/$0 [PT,L]
 
 php_value upload_max_filesize 128M  
