@@ -32,7 +32,7 @@ var proFabric = new function(){
         that.canvas.add(img);
     });
     this.canvas.renderAll();
-
+    
     fabric.Object.prototype.toObject = (function (toObject) {
         return function () {
             return fabric.util.object.extend(toObject.call(this), {
@@ -65,9 +65,9 @@ var proFabric = new function(){
         if(!object) {
             that.unselectSelected();
             that.text.disableTextOpts();
-            $("#colorStyleOpt").show();
             that.getcolorObjects();
             that.selectfalseColor();
+            that.disableImgOpts();
         }
     });
 	this.canvas.on('selection:cleared', function(o){});
@@ -312,8 +312,11 @@ var proFabric = new function(){
 		},
 		json :function(_json){
                 var _JSON_NEW = JSON.stringify(_json);
+                var _img_flag = true;
+                var i = 0;
+                $('#rect1').hide();
                 that.canvas.loadFromJSON(_JSON_NEW, that.canvas.renderAll.bind(that.canvas), function(o, object) {
-                    var col = object.fil;
+                    var col = object.fill;
                     object.set({
                         lockMovementX: true,
                         lockMovementY: true,
@@ -321,14 +324,24 @@ var proFabric = new function(){
                         lockScalingX: true,
                         lockScalingY: true,
                         hasControls: false,
-                        stroke:col
+                        editable :false
                     });
                     if(object.type=="path-group")
                     {
-                        object.set({selectable :false});
+                        object.set({selectable :false, stroke:col});
                         object.selectable = false;
                     }
+                    if(object.class=="image"&&object.src)
+                        _img_flag = false;
+                    //console.log((i++)+" <> "+object);
+                    if(object.src) {
+                        $('#rect1').hide();
+                        _img_flag = false;
+                        console.log(_img_flag);
+                    }
                 });
+                if(_img_flag)
+                    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Flag Up : '+_img_flag);
                 that.canvas.renderAll();
         }
 	};
@@ -365,6 +378,15 @@ var proFabric = new function(){
 				obj.saveCoords().setObjectsCoords();
 			}
 			else{
+
+                if(obj.class=="image")
+                {
+                    console.log(obj.class);
+                    console.log(obj.scaleX);
+                    console.log(obj.left);
+                    console.log(obj.top);
+                }
+                
 				var scale_X= typeof obj.original_scaleX === "undefined" ? obj.scaleX : obj.original_scaleX,
 				scale_Y    = typeof obj.original_scaleY === "undefined" ? obj.scaleY : obj.original_scaleY,
 				left       = typeof obj.original_left === "undefined"   ? obj.left   : obj.original_left,
@@ -379,6 +401,7 @@ var proFabric = new function(){
 				obj.scaleY = scale_Y * (zoom/100);
 				obj.left   = left   * (zoom/100);
 				obj.top    = top    * (zoom/100);
+
 			}
 			obj.setCoords();
 		});

@@ -6,7 +6,7 @@ proFabric.text = {
         $("#addText").val("");
         $("#addText").val(Object.text);
         $("#fontSize").val(Object.fontSize);
-        $('#picker').colpickSetColor(Object.fill);
+        $("#col-picker").colorpicker("val", Object.fill);
         $( "#FontSize" ).val(Object.fontSize);
         $( "#textfont" ).val(Object.fontFamily);
         _txtSelectionFlag = 1;
