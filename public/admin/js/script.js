@@ -15,6 +15,8 @@ var button = [
 ];
 var tabs = ['prop-info', 'agent-info', 'agent-2-info', 'company-info', 'company-2-info'];
 $(document).ready(function($) {
+    objectsAligning(proFabric.canvas);
+    objectsCenter(proFabric.canvas);
     $(document).delegate('#menuHider', 'click', function(event) {
         var navbar = $('.navbar-side');
         if(navbar.children('.sidebar-collapse').is(':visible')){
@@ -248,7 +250,7 @@ $(document).ready(function($) {
         var _html = '<div role="tabpanel" class="tab-pane" id="cs-sample'+(size+ 1)+'">'+content+'</div>';
         $(_html).prependTo('#cs-tabContent');
 
-        var _tabs = '<li><a href="#cs-sample'+(size+ 1)+'" data-toggle="tab">Sample '+(size+ 1)+'</a></li>';
+        var _tabs = '<li><a href="#cs-sample'+(size+1)+'" data-toggle="tab">Sample '+(size+1)+'</a></li>';
         $(_tabs).prependTo('#cs-tablist');
         colorPickerInit();
     });
@@ -261,6 +263,7 @@ $(document).ready(function($) {
         var obj = proFabric.get.currentObject();
         if(!obj) return;
         var _id = obj.id;
+        $('div.canvas-container, canvas').css('cursor', 'crosshair');
         $(this).addClass('btn-primary').attr('data-id', _id);
         event.preventDefault();
         proFabric.disableSelection();

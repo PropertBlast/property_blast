@@ -271,13 +271,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="Editor-imageWidth">Width</label>
-                                <input type="number" class="form-control" id="editor-imageWidth" placeholder="Width">
+                                <input type="number" class="form-control pr-0" id="editor-imageWidth" placeholder="Width">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="Editor-imageHeight">Height</label>
-                                <input type="number" class="form-control" id="editor-imageHeight" placeholder="Height">
+                                <input type="number" class="form-control pr-0" id="editor-imageHeight" placeholder="Height">
                             </div>
                         </div>
                     </div>

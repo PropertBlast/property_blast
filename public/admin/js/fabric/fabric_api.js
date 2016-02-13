@@ -43,6 +43,7 @@ var proFabric = new function(){
             if(button){
                 proFabric.enableSelection();
                 that.canvas.setCursor("default");
+                $('div.canvas-container, canvas').css('cursor', 'default');
                 that.set.setActiveobj($(button).attr('data-id'));
                 $(button).removeClass('btn-primary');
                 var type = $(button).attr('data-type');
@@ -393,6 +394,7 @@ var proFabric = new function(){
     };
     this.droper = function(){
         that.canvas.setCursor("crosshair");
+        $('div.canvas-container,canvas').css('cursor', 'crosshair');
         _pickerFlag = 1;
     };
     this.disableSelection=function(){
