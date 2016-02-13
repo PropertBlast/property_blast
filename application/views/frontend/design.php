@@ -517,7 +517,7 @@
             </div>
         </div>
         <div class="col-md-10 col-xs-12">
-            <div class=" col-md-12 col-xs-12" style="padding: 0px;margin: 0px;">
+            <div class=" col-md-12 col-xs-12" align="right" style="padding: 0px;margin: 0px;">
                 <div class="btn-group btn-sm" role="group" aria-label="..." style="width : 100%;">
                     <button type="button" id="left" class="btn btn-default btn-sm" style="width: 25%;" ><span class="glyphicon glyphicon-align-left" aria-hidden="true"></button>
                     <button type="button" id="right" class="btn btn-default btn-sm" style="width: 25%;"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></button>
@@ -546,21 +546,14 @@
         </div>
         <hr style="width: 100%;margin: 0px;padding: 0px; margin-bottom: 10px;">
     </div>
-    <div class="row" >
+    <div class="row imgOptclass" >
         <div class="col-md-12 col-xs-12">
-            <div class="rect1" style="width: 100%;margin-top: 10px;">
-                <div class="col-md-4 col-xs-4" style="padding: 0px;margin: 0px;">
-                    <button type="button" style="width:105px;"id="Up-imageUpload" class="btn btn-primary btn-sm" style="font-size: 12px;">Choose File</button>
-                </div>
-                <div class="col-md-8 col-xs-8">
-                    <div style="font-size: 14px;margin-left: 20%;">
-                        No file choosen
-                    </div>
-                </div>
+            <div id="img-present-box" style="margin-top: 10px; margin-bottom: 20px; padding: 5px;">
+
             </div>
         </div>
         <div  class="col-md-12 col-xs-12" align="center" style="margin-top: 8px;">
-            <button type="button" id="modal-click" class="btn btn-info btn-sm">Edit Image</button>
+            <!--<button type="button" id="modal-click" class="btn btn-info btn-sm">Edit Image</button>-->
         </div>
     </div>
 </div>
