@@ -42,6 +42,7 @@ var proFabric = new function(){
             var button = $('#editor-cpicker.btn-primary');
             if(button){
                 proFabric.enableSelection();
+                that.canvas.setCursor("default");
                 that.set.setActiveobj($(button).attr('data-id'));
                 $(button).removeClass('btn-primary');
                 var type = $(button).attr('data-type');
@@ -391,6 +392,7 @@ var proFabric = new function(){
         that.canvas.remove(o);
     };
     this.droper = function(){
+        that.canvas.setCursor("crosshair");
         _pickerFlag = 1;
     };
     this.disableSelection=function(){
