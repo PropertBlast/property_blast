@@ -87,13 +87,6 @@ $(document).ready(function($) {
             proFabric.deselectCanvas();
         }
     });
-    $(document).delegate('button#editor-canvasSize', 'click', function() {
-        $('button#editor-canvasSize').removeClass('btn-primary');
-        $(this).addClass('btn-primary');
-        var _width  = $(this).attr('data-width'),
-            _height = $(this).attr('data-height');
-        proFabric.set.canvas_size((_width*96), (_height*96));
-    });
     $(document).delegate('#editor-delete', 'click', function() {
         type = $(this).attr('data-type');
         var obj = proFabric.get.currentObject();
@@ -115,13 +108,15 @@ $(document).ready(function($) {
     $(document).delegate('#editor-sendBack', 'click', function() {
         proFabric.set.sendBack();
     });
-    $(document).delegate('#editor-addText', 'click', function() {
-        proFabric.text.add('Your Text Here');
-        $('#editor-textarea').focus();
-    });
     $(document).delegate('#editor-textarea', 'keyup', function() {
         var _text = $(this).val();
-        proFabric.text.set({text: _text});
+        var obj = proFabric.get.currentObject();
+        if(obj && obj.class=='text' && obj.bullet){
+            proFabric.text.set({text: _text});
+            proFabric.text.bullet(true);
+        }
+        else
+            proFabric.text.set({text: _text});
     });
     $(document).delegate('#editor-fontSize', 'change', function() {
         var value = $("#editor-fontSize").val();
@@ -141,6 +136,16 @@ $(document).ready(function($) {
         proFabric.text.set({
             textAlign: type
         });
+    });
+    $(document).delegate('button#editor-textList', 'click', function() {
+        if ($(this).hasClass('btn-primary')) {
+            $(this).removeClass('btn-primary');
+            proFabric.text.bullet(false);
+        }
+        else{
+            $(this).addClass('btn-primary');
+            proFabric.text.bullet(true);
+        }
     });
     $(document).delegate('button#editor-textBold', 'click', function() {
         if ($(this).hasClass('btn-primary')) {
@@ -248,24 +253,9 @@ $(document).ready(function($) {
         colorPickerInit();
     });
     $(document).delegate('button#editor-textAssign', 'click', function() {
-        var name = $(this).attr('data-type');
-        var obj = proFabric.get.currentObject();
-        if(!obj) return;
-        var id = obj.id;
-        $('body').find('button#editor-textAssign').each(function(index, el) {
-            var _id = $(el).attr('data-id');
-            if(_id == id){
-                $(el).removeClass('btn-primary').attr('data-id','');
-            }
-        });
-        if($(this).hasClass('btn-primary')){
-            $(this).removeClass('btn-primary').attr('data-id','');
-            proFabric.text.assign(name, true);
-        }
-        else{
-            $(this).addClass('btn-primary').attr('data-id', id);
-            proFabric.text.assign(name, false);
-        }
+        var _id = proFabric.get.guid();
+        proFabric.text.add('Your Text Here', {id: _id});
+        $(this).addClass('btn-primary').attr('data-id', _id);
     });
     $(document).delegate('button#editor-cpicker', 'click', function() {
         var obj = proFabric.get.currentObject();
@@ -285,21 +275,22 @@ $(document).ready(function($) {
                 top: 0,
                 left: 0,
                 padding: '25px',
+                backgroundColor : '#fff',
                 overflow: 'auto',
                 width: '100vw',
                 height: '100vh'
             });
             if(document.documentElement.requestFullscreen) {
-                document.getElementById('#editor').requestFullscreen();
+                document.getElementById('editor').requestFullscreen();
             }
             else if(document.documentElement.msRequestFullscreen){
-                document.getElementById('#editor').msRequestFullscreen();
+                document.getElementById('editor').msRequestFullscreen();
             }
             else if(document.documentElement.mozRequestFullScreen){
-                document.getElementById('#editor').mozRequestFullScreen();
+                document.getElementById('editor').mozRequestFullScreen();
             }
             else if(document.documentElement.webkitRequestFullscreen){
-                document.getElementById('editor').webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                document.getElementById('editor').webkitRequestFullscreen();
             }
         }
         else {
