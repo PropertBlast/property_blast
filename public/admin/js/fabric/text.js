@@ -4,7 +4,14 @@ proFabric.text = {
     canvas: proFabric.get.canvas(),
     updateUI:function(object){
         if(!object)return;
-        $("#editor-textarea").val(object.text);
+        if (object.bullet){
+            $("#editor-textarea").val(object.bulletText);
+            $('body').find("button#editor-textList").addClass('btn-primary');
+        }
+        else{
+            $("#editor-textarea").val(object.text);
+            $('body').find("button#editor-textList").removeClass('btn-primary');
+        }
         $('#editor-textColor').css('background-color', object.fill);
         $("#editor-fontSize").val(object.fontSize);
         $('#editor-fontFamily').children('option').filter(function(){return $(this).val()==object.fontFamily}).prop('selected',true).change();
@@ -76,6 +83,34 @@ proFabric.text = {
         if(!obj || obj.class !== 'text') return;
         //
         obj.setCoords();
+        this.canvas.renderAll();
+    },
+    bullet: function(converted) {
+        var obj = this.canvas.getActiveObject();
+        if(!obj || obj.class !== 'text') return;
+        if(converted){
+            obj.bullet = true;
+            obj.bulletText = obj.text;
+            _text = '';
+            //&bull;
+
+            $.each(obj.bulletText.split('\n'), function(index, val) {
+                if (index!=0) 
+                    _text += '\n';
+                _text += '\u2022 '+val;
+            });
+
+            obj.set({
+                text : _text
+            });
+        }
+        else{
+            obj.bullet = false;
+            _text = obj.bulletText;
+            obj.set({
+                text : _text
+            });
+        }
         this.canvas.renderAll();
     }
 };
