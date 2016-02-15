@@ -3,8 +3,8 @@ proFabric.text = {
 	parent : proFabric,
     canvas: proFabric.get.canvas(),
     updateUI:function(Object){
-        $("#addText").val("");
-        $("#addText").val(Object.text);
+        $("#text-area").val("");
+        $("#text-area").val(Object.text);
         $("#fontSize").val(Object.fontSize);
         $("#col-picker").colorpicker("val", Object.fill);
         $( "#FontSize" ).val(Object.fontSize);
@@ -341,6 +341,10 @@ proFabric.text = {
             }
         }
     },
+    getNextLinesCount: function (){
+        var obj = this.canvas.getActiveObject();
+        return obj.nextline;
+    },
     setGroupTextColor: function(sets){
         var self = this;
         $.each(sets, function (index, set) {
@@ -359,8 +363,8 @@ proFabric.text = {
         self.canvas.renderAll();
     },
     disableTextOpts:function(){
-        document.getElementById('addText').value = "";
-        $("#addText").attr("disabled", "disabled");
+        document.getElementById('text-area').value = "";
+        $("#text-area").attr("disabled", "disabled");
         $("#fontSize").attr("disabled", "disabled");
         $("#textfont").attr("disabled", "disabled");
 		$("#bold").removeClass("btn-primary");
@@ -380,7 +384,7 @@ proFabric.text = {
         $("#picker").attr("disabled", "disabled");
     },
     enableTextOpts:function(){
-        $("#addText").removeAttr("disabled");
+        $("#text-area").removeAttr("disabled");
         $("#fontSize").removeAttr("disabled");
         $("#textfont").removeAttr("disabled");
         $("#bold").removeAttr("disabled");

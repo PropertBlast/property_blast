@@ -94,8 +94,7 @@ ini_set('include_path', base_url()+'application/views/frontend/layout/upload.php
         var _wpcf7 = {"loaderUrl":"http:\/\/45.33.34.56\/propblast\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
         /* ]]> */
     </script>
-    <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/scripts.js"></script>
-    <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/jquery.themepunch.tools.min.js"></script>
+   <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/jquery.themepunch.tools.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/jquery.themepunch.revolution.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/wpcf7.js"></script>
     <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://45.33.34.56/propblast/xmlrpc.php?rsd">

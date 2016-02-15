@@ -414,26 +414,19 @@ $(document).ready(function($) {
         proFabric.getcolorObjects();
         proFabric.selectfalseColor();
     });
-    $("body").delegate('#addTextbtn', 'click', function() {
-        var obj;
-        var hex_Col = proFabric.rgb2hex($('#picker').css('borderBottomColor'));
-        var txt = "Hello World";
-        obj = {
-            text: txt,
-            color: hex_Col,
-            fontSize: $("#FontSize").val(),
-            fontFamily: $("#FontFamily").val()
-        };
-        proFabric.text.add(obj);
-        event.preventDefault();
-        var txt = $("#addText").val();
-        proFabric.text.add(txt);
-    });
-    $('#addText').bind('input', function() {
-        proFabric.text.SetText($("#addText").val());
-    });
-    $( "#addText" ).keyup(function() {
-        proFabric.text.SetText($("#addText").val());
+    /*$('#text-area').bind('input', function() {
+        //proFabric.text.SetText($("#text-area").val());
+    });*/
+    $( "#text-area" ).keyup(function(){
+        var _txt = $("#text-area").val();
+        var _count = 0;
+        for(var k=0;k<_txt.length;k++)
+        {
+            if(_txt[k]=='\n')_count++;
+        }
+        if(Object.nextline<=_count) {
+            proFabric.text.SetText(_txt);
+        }
     });
     $("body").delegate('#ColorPicker', 'click', function(event) {
         event.preventDefault();

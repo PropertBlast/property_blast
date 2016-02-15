@@ -449,7 +449,7 @@
         <hr style="width: 100%;margin: 0px;padding: 0px; margin-bottom: 10px;">
     </div>
     <div class="input-group "style="width: 100%; margin-top:5%;">
-        <textarea id="addText" type="textbox" placeholder="" class="form-control"style="height: 200px; border-radius: 5px;"></textarea>
+        <textarea id="text-area" type="textbox" placeholder="Text" class="form-control" style="height: 200px; border-radius: 5px;"></textarea>
     </div>
     <div class="row" style="margin-top: 5px;">
         <div class="col-md-5" style="margin: 0px;padding: 0px;">

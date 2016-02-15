@@ -381,6 +381,23 @@ var proFabric = new function(){
                     that.canvas.renderAll.bind(that.canvas);
                 },function(o, object) {
                     var col = object.fill;
+                    var o_Width = object.width;
+                    var o_Height = object.height;
+                    console.log(object.class);
+                    if(object.class=="text")
+                    {
+                        var _txt = object.text;
+                        var _count = 0;
+                        for(var k=0;k<_txt.length;k++)
+                        {
+                            if(_txt[k]=='\n')
+                            {
+                                _count++;
+                            }
+                        }
+                        console.log(_count);
+                        object.set({nextline : _count});
+                    }
                     object.set({
                         lockMovementX: true,
                         lockMovementY: true,
@@ -388,7 +405,9 @@ var proFabric = new function(){
                         lockScalingX: true,
                         lockScalingY: true,
                         hasControls: false,
-                        editable :false
+                        editable :false,
+                        orignalWidth:o_Width,
+                        orignalHeight:o_Height
                     });
                     if(object.type=="path-group")
                     {
