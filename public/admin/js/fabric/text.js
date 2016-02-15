@@ -3,7 +3,10 @@ proFabric.text = {
 	parent : proFabric,
     canvas: proFabric.get.canvas(),
     updateUI:function(object){
-        if(!object)return;
+        if(!object){
+            $("#editor-textarea").val('');
+            return;
+        }
         if (object.bullet){
             $("#editor-textarea").val(object.bulletText);
             $('body').find("button#editor-textList").addClass('btn-primary');
@@ -43,7 +46,8 @@ proFabric.text = {
             lockMovementY	    : (_options && _options.lockMovementY) || false,
             lockRotation 	    : (_options && _options.lockRotation) || false,
             lockScalingX 	    : (_options && _options.lockScalingX) || false,
-            lockScalingY 	    : (_options && _options.lockScalingY) || false
+            lockScalingY 	    : (_options && _options.lockScalingY) || false,
+            editable            : (_options && _options.editable ) || false
         });
         text.setCoords();
         self.canvas.add(text);
@@ -92,8 +96,6 @@ proFabric.text = {
             obj.bullet = true;
             obj.bulletText = obj.text;
             _text = '';
-            //&bull;
-
             $.each(obj.bulletText.split('\n'), function(index, val) {
                 if (index!=0) 
                     _text += '\n';
