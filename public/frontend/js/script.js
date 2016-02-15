@@ -424,7 +424,10 @@ $(document).ready(function($) {
         {
             if(_txt[k]=='\n')_count++;
         }
-        if(Object.nextline<=_count) {
+        console.log(proFabric.text.getNextLinesCount());
+        console.log(_count);
+        if(proFabric.text.getNextLinesCount()>=_count) {
+            //alert(proFabric.text.getNextLinesCount()+"  ::  "+_count);
             proFabric.text.SetText(_txt);
         }
     });

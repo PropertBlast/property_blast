@@ -547,7 +547,7 @@
         <hr style="width: 100%;margin: 0px;padding: 0px; margin-bottom: 10px;">
     </div>
     <div class="row imgOptclass" >
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-12 col-xs-12" style="margin:0px;padding:0px;">
             <div id="img-present-box" style="margin-top: 10px; margin-bottom: 20px; padding: 5px;">
 
             </div>
