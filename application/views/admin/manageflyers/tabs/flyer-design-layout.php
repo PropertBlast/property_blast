@@ -131,7 +131,10 @@
                         <div class="row pt-10">
                             <div class="col-md-8 col-xs-12 nopad">
                                 <label>Color</label>
-                                <div class="color-div colorpicker" id="editor-textColor" data-type="text"></div>
+                                <input type="textbox" style="width:20px;" id="coler-picker" value="show">
+                                <!-- <div class="color-div colorpicker" id="editor-textColor" data-type="text">
+                                    
+                                </div> -->
                             </div>
                             <div class="col-md-3 col-xs-12 nopad text-right">
                                 <button type="button" id="editor-cpicker" data-type="text" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
