@@ -5,7 +5,6 @@
     
     <script src="<?php echo base_url('public/admin/js/jquery-ui.js') ?>"></script>
     <script src="<?php echo base_url('public/admin/js/admin-scripts.js') ?>"></script>
-    <script src="<?php echo base_url('public/admin/js/colpick.js') ?>"></script>
     <script src="<?php echo base_url('public/admin/js/wan-spinner.js') ?>"></script> 
 
     <script src="<?php echo base_url('public/admin/js/fabric.min.js') ?>"></script> 
@@ -17,6 +16,7 @@
     <script src="<?php echo base_url('public/admin/js/fabric/image.js') ?>"></script>
     <script src="<?php echo base_url('public/admin/js/fabric/shapes.js') ?>"></script>
     <script src="<?php echo base_url('public/admin/js/fabric/colors.js') ?>"></script>
+    <script src="<?php echo base_url('public/admin/js/evol.colorpicker.js') ?>"></script>
 
 </body>
 </html>

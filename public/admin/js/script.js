@@ -46,33 +46,7 @@ $(document).ready(function($) {
             _randomID = _randomID + 1;
         }
     }
-    $('#picker').colpick({
-        //flat:true,
-        //flat:true,
-        color: '#000000',
-        layout: 'hex',
-        colorScheme: 'dark',
-        onChange: function(hsb, hex, rgb, el, bySetColor) {
-            $(el).css('border-color', '#' + hex);
-            //$(el).css('background-color','#'+hex);
-            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-            //alert('Here in color 1');
-            if (!bySetColor) $(el).val(hex);
-        },
-        onSubmit: function(hsb, hex, rgb, el, bySetColor) {
-            $(el).css('border-color', '#' + hex);
-            //$(el).css('background-color','#'+hex);
-            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-            //function calling
-            $(el).colpickHide();
-            alert('Here in color 1');
-            //proFabric.text.SetTextColor('#' + hex);
-            // if(!bySetColor) $(el).val(hex);
-        }
-    });
-    /*.keyup(function(){
-        $(this).colpickSetColor(this.value);
-    });*/
+
     $("#img-count1").removeClass('ui-state-active ui-widget-content');
     $("#uploadfile_1").change(function() {
         readURL(this);
@@ -331,13 +305,24 @@ $(document).ready(function($) {
     
 });
 function colorPickerInit(){
-    $('div.colorpicker').colpick({
+   /* $('div.colorpicker').colpick({
         colorScheme : 'light',
         onSubmit: function(hsb, hex, rgb, el) {
             $(el).css('background-color', '#' + hex);
             $(el).colpickHide();
             colorPickerSubmit(hsb, hex, rgb, el);
         }
+    });*/
+    /*$(document).delegate('div.colorpicker', 'click', function(event) {
+        selector
+    });*/
+    //$('div#col-picker').hide();
+    $('div#coler-picker').colorpicker(
+        {color:'#31859b', defaultPalette:'web',showOn:'button'}
+    )
+    .on('change.color', function(event, color){
+        colorPickerSubmit(hsb, color, rgb, this);
+        console.log(event, color);
     });
 }
 function colorPickerSubmit(hsb, hex, rgb, el){
