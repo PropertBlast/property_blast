@@ -143,6 +143,11 @@ proFabric.text = {
     SetText: function(txt){
         var self = this;
         var obj = self.canvas.getActiveObject();
+        var _prevLeft = obj.left;
+        var _prevTop = obj.top;
+        var _prevWidth = obj.width;
+        var _prevHeight = obj.height;
+        var _clone = fabric.util.object.clone(obj);
         if(obj && obj.class=="text") {
             obj.text = txt;
             self.canvas.renderAll();
@@ -159,6 +164,24 @@ proFabric.text = {
                 self.canvas.renderAll();
             }
         }
+        console.log(_clone);
+        if(obj.width>_prevWidth||obj.height>_prevHeight||obj.left>_prevLeft||obj.top>_prevTop)
+        {
+            $("#text-area").val("");
+            $("#text-area").val(_clone.text);
+            _clone.set({
+                width:obj.orignalWidth,
+                height:obj.orignalHeight
+            });
+            self.canvas.fxRemove(obj);
+            //_clone.width = _clone.orignalWidth;
+            //_clone.height =  _clone.orignalHeight;
+            self.canvas.add(_clone);
+            self.canvas.setActiveObject(_clone);
+            self.canvas.renderAll();
+            return;
+        }
+        self.canvas.fxRemove(_clone);
     },
     SetBold: function(){
         var self = this;
@@ -343,7 +366,13 @@ proFabric.text = {
     },
     getNextLinesCount: function (){
         var obj = this.canvas.getActiveObject();
-        return obj.nextline;
+        if(obj.class=="text")
+            return obj.nextline;
+    },
+    setNextLinesCount: function (num){
+        var obj = this.canvas.getActiveObject();
+        if(obj.class=="text")
+            obj.set({nextline:num});
     },
     setGroupTextColor: function(sets){
         var self = this;

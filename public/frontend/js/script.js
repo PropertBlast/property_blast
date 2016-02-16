@@ -414,22 +414,43 @@ $(document).ready(function($) {
         proFabric.getcolorObjects();
         proFabric.selectfalseColor();
     });
-    /*$('#text-area').bind('input', function() {
-        //proFabric.text.SetText($("#text-area").val());
+    /*$('#text-area').bind('keyup', function(e) {
+        console()
+        if(e.keyCode == 8)
+        {
+            prototypefabric.removeObj();
+            return;
+        }
     });*/
-    $( "#text-area" ).keyup(function(){
+    $( "#text-area" ).keyup(function(e){
+        console.log(e.keyCode);
+        var _num=0;
+        if(e.keyCode == 8)
+        {
+            //alert(e.keyCode);
+            _num=proFabric.text.getNextLinesCount();
+        }
         var _txt = $("#text-area").val();
         var _count = 0;
         for(var k=0;k<_txt.length;k++)
         {
             if(_txt[k]=='\n')_count++;
         }
-        console.log(proFabric.text.getNextLinesCount());
-        console.log(_count);
+        //console.log(proFabric.text.getNextLinesCount());
+        //console.log(_count);
         if(proFabric.text.getNextLinesCount()>=_count) {
-            //alert(proFabric.text.getNextLinesCount()+"  ::  "+_count);
             proFabric.text.SetText(_txt);
+            if (_num)
+            {
+                proFabric.setNextLinesCount(_num);
+            }
+            return;
         }
+        if (_num)
+        {
+            proFabric.text.setNextLinesCount(_num);
+        }
+        //$("#text-area").val(proFabric.text.get("text"));
     });
     $("body").delegate('#ColorPicker', 'click', function(event) {
         event.preventDefault();

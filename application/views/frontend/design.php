@@ -393,7 +393,7 @@
 
 <div class="row">
 <div class="col-md-8 col-xs-12">
-    <div class="row" align="center" style="overflow-x: scroll;overflow-y: scroll;border: 1px solid #747474; height: 875px; width: 620px;margin-left: 0%;  background-size:cover;">
+    <div class="row" align="center" style="overflow-x: scroll;overflow-y: scroll;border: 1px solid #747474; height: 875px; width: 100%;margin-left: 0%;  background-size:cover;">
         <canvas id="myCanvas" style="border:1px solid #747474;">
         </canvas>
     </div>
