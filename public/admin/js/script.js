@@ -287,6 +287,10 @@ $(document).ready(function($) {
             }
         }
     });
+    document.addEventListener("fullscreenchange", FShandler);
+    document.addEventListener("webkitfullscreenchange", FShandler);
+    document.addEventListener("mozfullscreenchange", FShandler);
+    document.addEventListener("MSFullscreenChange", FShandler);
     colorPickerInit();
 
     $(".wan-spinner-1").WanSpinner({
@@ -304,6 +308,12 @@ $(document).ready(function($) {
 
     
 });
+FShandler = function(){
+    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
+        $('#fullScreenEditor').val('Full Screen').html('Full Screen');
+        $('#editor').removeAttr('style');
+    }
+}
 function colorPickerInit(){
    /* $('div.colorpicker').colpick({
         colorScheme : 'light',
