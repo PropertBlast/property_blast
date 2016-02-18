@@ -8,6 +8,7 @@ var _randomID = 1;
 var _flag = 0;
 var obj;
 var t_id="";
+var _zoomMenu=0;
 
 var tabs = ['prop-info', 'agent-info', 'agent-2-info', 'company-info', 'company-2-info'];
 $(document).ready(function($) {
@@ -255,9 +256,6 @@ $(document).ready(function($) {
         $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("float", "left");
     },1000);
 
-	$('body').delegate('#zoom','click',function(){
-		$('#zoom-menu').css("display", "block");
-	});
     $('body').delegate('.color-pallet-row','click',function(){
         $.each($('body').find('.txt'),function(index,obj){
             $(obj).removeClass('textalignactive');
@@ -450,7 +448,7 @@ $(document).ready(function($) {
         {
             proFabric.text.setNextLinesCount(_num);
         }
-        //$("#text-area").val(proFabric.text.get("text"));
+        $("#text-area").val(proFabric.text.get("text"));
     });
     $("body").delegate('#ColorPicker', 'click', function(event) {
         event.preventDefault();
@@ -522,6 +520,13 @@ $(document).ready(function($) {
             });
         }
     });
+    $('body').delegate('#zoom','click',function(){
+        var _display = $( this ).css( "display" );
+        _zoomMenu=1;
+        console.log(_display);
+        //if(_display=="none")
+        $('#zoom-menu').css("display", "block");
+    });
     $("body").delegate('.minus', 'click', function() {
         var value = $("#zoom").val();
 
@@ -531,13 +536,26 @@ $(document).ready(function($) {
         $("#zoom").val(value);
         proFabric.zoomcanvas(value);
     });
-	$("body").delegate('body', 'click', function() {
-		$('#zoom-menu').css("display", "none");
-		});
+    $('body').click(function(){
+        var _display = $( this ).css( "display" );
+        var id = $( this).id;
+        console.log(id +"----"+_display);
+        if(_display=="block"&&id!="zoom"&&_zoomMenu==0) {
+            $('#zoom-menu').css("display", "none");
+        }
+        _zoomMenu=0;
+    });
+	//$("body").delegate('body', 'click', function() {
+     //   var _display = $( this ).css( "display" );
+     //   console.log(_display);
+     //   if($( this ).css( "display" )!="none")
+	//	$('#zoom-menu').css("display", "none");
+	//	});
 	$('#zoom-menu li').click(function(){
 		var value = $(this).val();
 		$("#zoom").val(value);
 		$('#zoom-menu').css("display", "none");
+        _zoomMenu=0;
 		 proFabric.zoomcanvas(value);
 	});
     $("body").delegate('.plus', 'click', function() {

@@ -418,7 +418,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-8 col-xs-12" align="right" style = "padding: 0px;margin: 0px;margin-bottom: 5px;">
+        <div class="col-md-8 col-xs-12" align="right" style = "margin: 0px;margin-bottom: 5px;">
             <div class="btn-group" role="group" aria-label="..." >
                 <div class="col-md-8 col-xs-12" align="center" style = "margin-bottom: 5px;">
                     <div class="btn-group">

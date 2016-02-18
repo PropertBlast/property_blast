@@ -12551,3 +12551,31 @@ h1.title-heading-left {
     color: black  !important;
     font-size:18px !important;
 }
+
+.hexagon {
+    position: relative;
+    width: 20px;
+    height: 11.55px;
+    background-color: #f88538;
+    margin: 5.77px 0;
+}
+
+.hexagon:before,
+.hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+.hexagon:before {
+    bottom: 100%;
+    border-bottom: 5.77px solid #f88538;
+}
+
+.hexagon:after {
+    top: 100%;
+    width: 0;
+    border-top: 5.77px solid #f88538;
+}
