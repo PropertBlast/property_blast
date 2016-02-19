@@ -229,9 +229,20 @@ $(document).ready(function($) {
         colorPickerInit();
     });
     $(document).delegate('button#editor-textAssign', 'click', function() {
-        var _id = proFabric.get.guid();
-        proFabric.text.add('Your Text Here', {id: _id});
-        $(this).addClass('btn-primary').attr('data-id', _id);
+        var _id = $(this).attr('data-id'), _this = $(this);
+        var exist = proFabric.text.checkID(_id);
+        setTimeout(function () {
+            console.log(exist);
+            if (!exist){
+                var _newid = proFabric.get.guid();
+                proFabric.text.add('Your Text Here', {id: _newid});
+                _this.addClass('btn-primary').attr('data-id', _newid);
+            }
+            else{
+                proFabric.set.setActiveobj(_id);
+                _this.addClass('btn-primary');
+            } 
+        }, 500);
     });
     $(document).delegate('button#editor-cpicker', 'click', function() {
         var obj = proFabric.get.currentObject();

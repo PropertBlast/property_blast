@@ -124,9 +124,7 @@ proFabric.color = {
 			$("#lock_color").removeClass('ui-state-active');
 			$("#unlock_color").addClass('ui-state-active');
 		}
-        $('body').find('button#editor-textAssign').removeClass('btn-primary').prop('disabled', false);
-        $('body').find("button#editor-textAssign[data-id!='']").prop('disabled', true);
-        $('body').find('button#editor-textAssign[data-id='+obj.id+']').addClass('btn-primary').prop('disabled', false);
+        $('body').find('button#editor-textAssign').removeClass('btn-primary');
     }
 
 };

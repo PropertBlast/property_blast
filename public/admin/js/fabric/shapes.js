@@ -154,8 +154,6 @@ proFabric.shapes = {
     	else{
     		$("#object").find("#editor-lockGroup").find('button[data-type=unlock]').addClass('btn-primary').siblings().removeClass('btn-primary');
     	}
-        $('body').find('button#editor-textAssign').removeClass('btn-primary').prop('disabled', false);
-        $('body').find("button#editor-textAssign[data-id!='']").prop('disabled', true);
-        $('body').find('button#editor-textAssign[data-id='+obj.id+']').addClass('btn-primary').prop('disabled', false);
+        $('body').find('button#editor-textAssign').removeClass('btn-primary');
     }
 };
