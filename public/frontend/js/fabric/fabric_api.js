@@ -88,8 +88,16 @@ var proFabric = new function(){
             that.text.enableTextOpts();
 			that.disableImgOpts();
         }
-		else if(object.class){
-			proFabric.image.imageSelected(object);
+		else if(object.class=="image"){
+			//proFabric.image.imageSelected(object);
+            console.log(object);
+            object.forEachObject(function(temp){
+                if(temp.class=="img-num"||temp.class=="img-num-text")
+                {
+                    that.canvas.remove(temp);
+                    that.canvas.renderAll();
+                }
+            });
 		}
         else if(object.class=='shape'){
 			that.disableImgOpts();
@@ -420,7 +428,7 @@ var proFabric = new function(){
                     if(object.src) {
                         $('.imgOptclass').show();
                         _img_flag = false;
-                        //document.getElementById('img-present-box').innerHTML = '<div class="rect1 btnImgs" style="width: 48px;margin-left: 20px;height:inherit;border-radius:110px;background-color: #4353A0;text-align: center;font-weight: bolder; color: aliceblue;height: 46px;" id="'+object.id+'" value="'+_img_num+'">';
+                        //document.getEleme ntById('img-present-box').innerHTML = '<div class="rect1 btnImgs" style="width: 48px;margin-left: 20px;height:inherit;border-radius:110px;background-color: #4353A0;text-align: center;font-weight: bolder; color: aliceblue;height: 46px;" id="'+object.id+'" value="'+_img_num+'">';
                         $('#img-present-box').append('<div class="row" style="margin: 0px;padding: 0px;"><div class="col-md-6 col-xs-6" style="margin: 0px;padding: 0px;"><div class="row" style="margin-top: 12px;"><div class="divbtnImgs col-md-3 col-xs-3" align="left" style="font-weight: bolder;font-family: sans-serif;font-size: 14px;" id="'+object.id+'">'+_img_num+'</div><div align="left" class="col-md-9 col-xs-9" style="font-size: 14px;font-weight: bolder;font-family: sans-serif;" align="right">Add Image</div></div></div>'+
                         '<div class="col-md-6 col-xs-6" align="right" style="margin: 0px;padding: 0px;"><button type="button" class="btnImgs btn btn-success" ' +
                         'style="margin-top: 5px;font-weight: bolder;"' +

@@ -9,6 +9,7 @@
  *	jquery.ui.core.js
  *	jquery.ui.widget.js
  */
+ var col_flag=1;
 
 (function( $, undefined ) {
 
@@ -174,6 +175,7 @@ $.widget( "evol.colorpicker", {
 		// indicator
 		if(opts.displayIndicator){
 			h+=this._colorIndHTML(this.options.color)+this._colorIndHTML('');
+			//col_flag=0;
 		}
 		h+='</div>';
 		return h;
@@ -192,7 +194,7 @@ $.widget( "evol.colorpicker", {
 		}else{
 			style='display:none';
 		}
-		return '<div class="evo-color" style="float:left">'+
+		return '<div class="evo-color" style="float:center">'+
 			'<div style="'+style+'" class="'+css+'"></div><span>'+ // class="evo-colortxt-ie"
 			(c?c:'')+'</span></div>';
 	},

@@ -398,27 +398,52 @@
         </canvas>
     </div>
     <div class="row" style="margin-top: 2%;">
-        <div class="col-md-4 col-xs-12" style = "margin-bottom: 5px;">
-            <div class="wan-spinner wan-spinner-1 dropup ">
-                <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 14px;">
-                    -
-                </a>
-                <input type="text" class="dropdown-toggle" id="zoom"value="100" style="width: 100px; padding: 14px;" readonly  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                <ul id="zoom-menu"class="dropdown-menu" aria-labelledby="zoom">
-                    <li value="50"><a>50</a></li>
-                    <li value="60"><a>60</a></li>
-                    <li value="75"><a>75</a></li>
-                    <li value="100"><a>100</a></li>
-                    <li value="120"><a>120</a></li>
-                    <li value="150"><a>150</a></li>
-                    <li value="200"><a>200</a></li>
-                </ul>
-                <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 15px; width:0%;">
-                    +
-                </a>
+        <div class="col-md-8 col-xs-12" style = "margin-bottom: 5px;">
+            <div class="col-md-4 col-xs-12" style = "margin : 0px;padding : 0px;">
+               <div class="wan-spinner wan-spinner-1 dropup ">
+                   <a href="javascript:void(0)" class="minus" style="line-height: 0em;padding: 12px;">
+                       -
+                   </a>
+                   <input type="text" class="dropdown-toggle" id="zoom"value="100" style="width: 80px; padding: 12px;" readonly  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                   <a href="javascript:void(0)" class="plus" style="line-height: 0em;padding: 12px; width:0%;">
+                       +
+                   </a>
+               </div>
+            </div>
+            <div class="col-md-8 col-xs-12" style = "margin : 0px;padding : 0px;">
+               <div class="col-md-2 col-xs-2" style = "margin : 0px;padding : 0px;">
+                  <button type="button" id="zoom-50" style="width: 50px" class="btn btn-default btn-sm zoom-class">
+                           50
+                  </button>
+               </div>
+               <div class="col-md-2  col-xs-2" style = "margin : 0px;padding : 0px;">
+                  <button type="button" id="zoom-75" style="width: 50px" class="btn btn-default btn-sm zoom-class">
+                           75
+                  </button>
+               </div>
+               <div class="col-md-2  col-xs-2" style = "margin : 0px;padding : 0px;">
+                  <button type="button" id="zoom-100" style="width: 50px" class="btn btn-default btn-sm zoom-class">
+                           100
+                  </button>
+               </div>
+               <div class="col-md-2  col-xs-2" style = "margin : 0px;padding : 0px;">
+                  <button type="button" id="zoom-120" style="width: 50px" class="btn btn-default btn-sm zoom-class">
+                           120
+                  </button>
+               </div>
+               <div class="col-md-2  col-xs-2" style = "margin : 0px;padding : 0px;">
+                  <button type="button" id="zoom-150" style="width: 50px" class="btn btn-default btn-sm zoom-class">
+                           150
+                  </button>
+               </div>
+               <div class="col-md-2  col-xs-2" style = "margin : 0px;padding : 0px;">
+                  <button type="button" id="zoom-200" style="width: 50px" class="btn btn-default btn-sm zoom-class">
+                           200
+                  </button>
+               </div>
             </div>
         </div>
-        <div class="col-md-8 col-xs-12" align="right" style = "margin: 0px;margin-bottom: 5px;">
+        <div class="col-md-4 col-xs-12" style = "margin: 0px;margin-bottom: 5px;">
             <div class="btn-group" role="group" aria-label="..." >
                 <div class="col-md-8 col-xs-12" align="center" style = "margin-bottom: 5px;">
                     <div class="btn-group">

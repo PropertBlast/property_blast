@@ -242,18 +242,22 @@ $(document).ready(function($) {
         {color:'#31859b', defaultPalette:'web',showOn:'button'}
     )
     .on('change.color', function(event, color){
-        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("width", "126px");
-        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("height", "20px");
+        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("width", "64px");
+        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("height", "24px");
+        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("border-radius", "3px");
+        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("border", "");
         $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("float", "left");
             if(color)
                 proFabric.text.set({
                     fill: color
-                });
+                });col_flag
     });
     setTimeout(function(){
-        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("width", "126px");
-        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("height", "20px");
-        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("float", "left");
+       $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("width", "64px");
+        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("height", "24px");
+        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("border-radius", "3px");
+        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("border", "");
+        $('body').find('.evo-colorind, .evo-colorind-ie, .evo-colorind-ff').css("float", "left")
     },1000);
 
     $('body').delegate('.color-pallet-row','click',function(){
@@ -412,7 +416,7 @@ $(document).ready(function($) {
         proFabric.getcolorObjects();
         proFabric.selectfalseColor();
     });
-    /*$('#text-area').bind('keyup', function(e) {
+    /*$('#text-area').bind('keyup', function(e) {col_flag
         console()
         if(e.keyCode == 8)
         {
@@ -518,6 +522,44 @@ $(document).ready(function($) {
             proFabric.text.set({
                 textDecoration: 'normal'
             });
+        }
+    });
+    $('body').delegate('.zoom-class','click',function(){
+        var _id = $(this).attr('id');
+        if(_id=="zoom-50")
+        {
+            $("#zoom").val("50");
+            proFabric.zoomcanvas("50");
+        }
+        else if(_id=="zoom-75")
+        {
+            $("#zoom").val("75");
+            proFabric.zoomcanvas("75");
+        }
+        else if(_id=="zoom-100")
+        {
+            $("#zoom").val("100");
+            proFabric.zoomcanvas("100");
+        }
+        else if(_id=="zoom-120")
+        {
+            $("#zoom").val("120");
+            proFabric.zoomcanvas("120");
+        }
+        else if(_id=="zoom-125")
+        {
+            $("#zoom").val("125");
+            proFabric.zoomcanvas("125");
+        }
+        else if(_id=="zoom-150")
+        {
+            $("#zoom").val("150");
+            proFabric.zoomcanvas("150");
+        }
+        else if(_id=="zoom-200")
+        {
+            $("#zoom").val("200");
+            proFabric.zoomcanvas("200");
         }
     });
     $('body').delegate('#zoom','click',function(){
