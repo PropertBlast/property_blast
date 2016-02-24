@@ -17,19 +17,24 @@ proFabric.shapes = {
 	},
 	add: function(src, _options) {
 		var self = this;
+        var _left   = (_options && _options.left) || (self.parent.get.width()/2)/(self.parent.get.zoom() / 100),
+            _top    = (_options && _options.top) || (self.parent.get.height()/4)/(self.parent.get.zoom() / 100),
+            _scaleX = (_options && _options.scaleX) || (1/(self.parent.get.zoom() / 100)),
+            _scaleY = (_options && _options.scaleY) || (1/(self.parent.get.zoom() / 100));
+
 		fabric.loadSVGFromURL(src, function (objects, options) {
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
 			}
 			var obj = fabric.util.groupSVGElements(objects, options);
 			obj.set({
-				left: (_options && _options.left) || self.parent.get.width() / 2,
-				top: (_options && _options.top) || self.parent.get.height() / 4,
+				left: _left,
+				top: _top,
+				scaleX: _scaleX,
+				scaleY: _scaleY,
 				class: 'shape',
 				id: (_options && _options.id) || self.parent.get.guid(),
 				opacity: (_options && _options.opacity) || 1,
-				scaleX: (_options && _options.scaleX) || 1,
-				scaleY: (_options && _options.scaleY) || 1,
 				target: (_options && _options.target) || false,
 				selectable: (_options && _options.selectable) || true,
 				hasControls		  : (_options && _options.opacity) || true,
@@ -40,19 +45,18 @@ proFabric.shapes = {
 				lockScalingX 	  : (_options && _options.lockScalingX) || false,
 				lockScalingY 	  : (_options && _options.lockScalingY) || false
 			});
-            
-			obj.set({
-				original_scaleX: obj.scaleX / (self.parent.get.zoom() / 100),
-				original_scaleY: obj.scaleY / (self.parent.get.zoom() / 100),
-				original_left: obj.left / (self.parent.get.zoom() / 100),
-				original_top: obj.top / (self.parent.get.zoom() / 100)
-			});
 			obj.setCoords();
 			self.parent.canvas.add(obj);
 			self.parent.canvas.setActiveObject(obj);
 			self.scaleToWidth(120);
 			self.scaleToHeight(120);
-			self.parent.canvas.setActiveObject(obj);
+            
+			obj.set({
+				original_scaleX : obj.scaleX,
+				original_scaleY : obj.scaleY,
+				original_left 	: obj.left,
+				original_top 	: obj.top
+			});
 			self.canvas.renderAll();
 
 		}, function (item, object) {
@@ -147,7 +151,7 @@ proFabric.shapes = {
     shapeSelected: function(obj){
     	$("#editor-svgWidth").val(Math.ceil(obj.width));
     	$("#editor-svgHeight").val(Math.ceil(obj.height));
-    	$("#editor-svgFill").css("background-color",obj.fill);
+        $('#coler-picker[data-type=svgFill]').next('.evo-colorind').css('backgroundColor', obj.fill);
     	if(obj.lockMovementX){
     		$("#object").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');
     	}

@@ -131,10 +131,7 @@
                         <div class="row pt-10">
                             <div class="col-md-8 col-xs-12 nopad">
                                 <label>Color</label>
-                                <input type="textbox" style="width:20px;" id="coler-picker" value="show">
-                                <!-- <div class="color-div colorpicker" id="editor-textColor" data-type="text">
-                                    
-                                </div> -->
+                                <div class="inline vt"><input style="width:0px;" id="coler-picker" data-type="text"></div>
                             </div>
                             <div class="col-md-3 col-xs-12 nopad text-right">
                                 <button type="button" id="editor-cpicker" data-type="text" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
@@ -346,7 +343,7 @@
                         <label>Fill</label>
                     </div>
                     <div class="col-md-5 col-xs-12 nopad pl-20">
-                        <div class="color-div large colorpicker" id="editor-svgFill" data-type="svgFill"></div>
+                        <div class="inline vt"><input style="width:0px;" id="coler-picker" data-type="svgFill"></div>
                     </div>
                     <div class="col-md-4 col-xs-12 nopad text-right pr-20">
                         <button type="button" id="editor-cpicker" data-type="svgFill" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
@@ -369,13 +366,6 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="row mt-10">
-                            <div class="col-md-12 col-xs-12">
-                                <button type="button" class="btn btn-default" id="editor-addSets">
-                                    Add Color Set
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-md-6 col-xs-12">
                         <div class="col-md-6">
@@ -392,7 +382,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-20 editor-objectsBox">
+                <div class="row mt-10">
+                    <div class="col-md-6 col-xs-6">
+                        <button type="button" class="btn btn-default" id="editor-addSets">
+                            Add Color Set
+                        </button>
+                    </div>
+                    <div class="col-md-6 col-xs-6 text-right">
+                        <button type="button" class="btn btn-default" id="editor-addShapes">
+                            Insert Shapes
+                        </button>
+                    </div>
+                </div>
+                <div class="row mt-20 editor-objectsBox dno" id="editor-objectsBox">
                     <div class="col-md-12">
                         <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/check56.svg')?>">
                         <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/circle111.svg')?>">

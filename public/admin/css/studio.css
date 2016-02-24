@@ -4,7 +4,9 @@
 .wan-spinner .minus, .wan-spinner .plus {color:#666;padding:8px;cursor:pointer;text-decoration:none;width:36px;font-size:14px;height:30px;line-height:20px;}
 .wan-spinner .minus:hover, .wan-spinner .plus:hover{color:#333333;}
 
-.inline{display: inline-block;}
+.vt{vertical-align: top;}
+.inline{display:inline-block;}
+.dno{display:none;}
 .editor-fa{font-size:18px;}
 .imageIcon{width:18px;height: 18px;}
 .imagetextbold{font-weight:bold;font-size:20px;margin:15px 10px;}

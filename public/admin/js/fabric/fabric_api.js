@@ -85,7 +85,17 @@ var proFabric = new function(){
     });
 	this.canvas.on('object:rotating', function(o){});
 	this.canvas.on('object:scaling', function(o){});
-	this.canvas.on('object:moving', function(o){});
+	this.canvas.on('object:moving', function(o){
+        var object = o.target;
+        if(object){
+            object.set({
+                original_scaleX : object.scaleX / (that.zoom/100),
+                original_scaleY : object.scaleY / (that.zoom/100),
+                original_left   : object.left / (that.zoom/100),
+                original_top    : object.top / (that.zoom/100)
+            });
+        }
+    });
 	this.canvas.on('object:selected', function(o){
 		var object = o.target;
         if(object.class=="text"){
@@ -340,7 +350,6 @@ var proFabric = new function(){
 	};
 	this.zoomcanvas = function(zoom){
         console.log(zoom);
-		//this.deselectcanvas();
 		this.zoom = zoom;
 		this.canvas.forEachObject(function(obj){
 			if(obj.type === 'group'){
@@ -370,6 +379,8 @@ var proFabric = new function(){
 				obj.original_scaleY = typeof obj.original_scaleY === "undefined" ? obj.scaleY : obj.original_scaleY;
 				obj.original_left   = typeof obj.original_left === "undefined"   ? obj.left   : obj.original_left;
 				obj.original_top    = typeof obj.original_top === "undefined"    ? obj.top    : obj.original_top;
+
+                console.log(scale_X , (zoom/100))
 
 				obj.scaleX = scale_X * (zoom/100);
 				obj.scaleY = scale_Y * (zoom/100);
