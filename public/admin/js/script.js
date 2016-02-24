@@ -206,7 +206,7 @@ $(document).ready(function($) {
     $(document).delegate('#cs-tablist>li', 'click', function() {
         var href = $(this).children('a').attr('href');
         $(href).children().each(function(index, el) {
-            proFabric.color.fill($(el).attr('data-id'), $(el).find('.colorpicker').css('backgroundColor'));
+            proFabric.color.fill($(el).attr('data-id'), $(el).find('.evo-colorind').css('backgroundColor'));
         });
     });
     $(document).delegate('#editor-setsImage', 'click', function() {
@@ -214,25 +214,33 @@ $(document).ready(function($) {
         var id = proFabric.color.add(src);
         console.log(id);
         var size = $('#cs-sample1').children().size();
-        var _html = '<div class="row pt-10 colorRow" data-id="'+id+'"><div class="col-md-4 col-xs-12">Color '+(size+ 1)+'</div><div class="col-md-4 col-xs-12"> <div class="color-div large colorpicker" id="editor-svgBorder" data-type="colorsFill"></div></div><div class="col-md-4 col-xs-12 nopad text-right pr-20"><button type="button" id="editor-cpicker" data-type="colorsFill" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button></div></div>';
-        $(_html).appendTo('#cs-sample1');
+        var _html = '<div class="row pt-10 colorRow" data-id="'+id+'"><div class="col-md-4 col-xs-12">Color '+(size+ 1)+'</div><div class="col-md-4 col-xs-12"> <div class="inline vt"><input style="width:0px;" id="coler-picker" data-type="colorsFill"></div></div><div class="col-md-4 col-xs-12 nopad text-right pr-20"><button type="button" id="editor-cpicker" data-type="colorsFill" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button></div></div>';
+        $('#cs-tabContent').children('.tab-pane').each(function(index, el) {
+            $(el);
+            $(_html).appendTo(el);
+        });
         colorPickerInit();
     });
     $(document).delegate('#editor-addSets', 'click', function() {
-        var content = $('#cs-sample1').html();
+        var content = $('#cs-sample1').clone();
+        content = $(content).find('.evo-colorind').remove();
+        content = $(content).html();
+        console.log(content);
         var size = $('#cs-tablist').children().size();
         var _html = '<div role="tabpanel" class="tab-pane" id="cs-sample'+(size+ 1)+'">'+content+'</div>';
-        $(_html).prependTo('#cs-tabContent');
+        $(_html).appendTo('#cs-tabContent');
 
         var _tabs = '<li><a href="#cs-sample'+(size+1)+'" data-toggle="tab">Sample '+(size+1)+'</a></li>';
-        $(_tabs).prependTo('#cs-tablist');
+        $(_tabs).appendTo('#cs-tablist');
         colorPickerInit();
+    });
+    $(document).delegate('#editor-addShapes', 'click', function() {
+        $('#editor-objectsBox').toggle();
     });
     $(document).delegate('button#editor-textAssign', 'click', function() {
         var _id = $(this).attr('data-id'), _this = $(this);
         var exist = proFabric.text.checkID(_id);
         setTimeout(function () {
-            console.log(exist);
             if (!exist){
                 var _newid = proFabric.get.guid();
                 proFabric.text.add('Your Text Here', {id: _newid});
@@ -242,7 +250,7 @@ $(document).ready(function($) {
                 proFabric.set.setActiveobj(_id);
                 _this.addClass('btn-primary');
             } 
-        }, 500);
+        }, 50);
     });
     $(document).delegate('button#editor-cpicker', 'click', function() {
         var obj = proFabric.get.currentObject();
@@ -314,10 +322,9 @@ $(document).ready(function($) {
             var value = parseInt($(val).parent().find('input').val());
             if(value > 0)
                 proFabric.zoomcanvas(value);
+            console.log(value);
         }
     });
-
-    
 });
 FShandler = function(){
     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
@@ -326,38 +333,28 @@ FShandler = function(){
     }
 }
 function colorPickerInit(){
-   /* $('div.colorpicker').colpick({
-        colorScheme : 'light',
-        onSubmit: function(hsb, hex, rgb, el) {
-            $(el).css('background-color', '#' + hex);
-            $(el).colpickHide();
-            colorPickerSubmit(hsb, hex, rgb, el);
-        }
-    });*/
-    /*$(document).delegate('div.colorpicker', 'click', function(event) {
-        selector
-    });*/
-    //$('div#col-picker').hide();
-    $('div#coler-picker').colorpicker(
+    $('input#coler-picker').hide();
+    $('input#coler-picker').colorpicker(
         {color:'#31859b', defaultPalette:'web',showOn:'button'}
     )
     .on('change.color', function(event, color){
-        colorPickerSubmit(hsb, color, rgb, this);
-        console.log(event, color);
+        var type = $(this).data('type');
+        var _rgb = $('#coler-picker[data-type='+type+']').next('.evo-colorind').css('backgroundColor');
+        colorPickerSubmit(_rgb, this);
     });
 }
-function colorPickerSubmit(hsb, hex, rgb, el){
+function colorPickerSubmit(_rgb, el){
     var type = $(el).data('type');
     if (type == "text") {
         proFabric.text.set({
-            fill : '#' + hex
+            fill : _rgb
         });
     }
     else if (type == "svgFill") {
-        proFabric.shapes.fill('#' + hex);
+        proFabric.shapes.fill(_rgb);
     }
     else if (type == "colorsFill") {
-        proFabric.color.fill($(el).parents('.colorRow').attr('data-id'), '#' + hex);
+        proFabric.color.fill($(el).parents('.colorRow').attr('data-id'), _rgb);
     }
 }
 function add(type, idToAppend, name, _tab) {

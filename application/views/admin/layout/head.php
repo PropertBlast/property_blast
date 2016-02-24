@@ -21,8 +21,10 @@
     <link rel="stylesheet" href="//cdn.datatables.net/tabletools/2.2.3/css/dataTables.tableTools.css">
     <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.css">
     <link rel="stylesheet" href="//editor.datatables.net/examples/resources/bootstrap/editor.bootstrap.css">
-    <script src="<?php echo base_url('public/admin/js/jquery-1.9.1.js') ?>"></script>
+    <script src="<?php echo base_url('public/admin/js/jquery-1.10.2.js') ?>"></script>
+    <script src="<?php echo base_url('public/admin/js/jquery-ui.js') ?>"></script>
     <script src="<?php echo base_url('public/admin/js/colpick.js') ?>"></script>
+    <script src="<?php echo base_url('public/admin/js/evol.colorpicker.js') ?>"></script>
     <script src="<?php echo base_url('public/admin'); ?>/js/datatable/media/js/jquery.dataTables.js"></script>
     <script src="<?php echo base_url('public/admin'); ?>/js/datatable/media/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url('public/admin'); ?>/js/datatable/examples/resources/syntax/shCore.js"></script>
