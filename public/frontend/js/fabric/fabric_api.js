@@ -324,18 +324,34 @@ var proFabric = new function(){
                 var _img_flag = true;
                 var i = 0;
                 $('.imgOptclass').hide();
-                that.canvas.loadFromJSON(_JSON_NEW,function(){
+                that.canvas.loadFromJSON(_JSON_NEW, function(){
                     var lenght = that.canvas._objects.length;
                     var t_id = 1;
                     for(var i = 0 ; i < lenght ; i++) {
                         var temp = that.canvas._objects[i];
                         if(temp.src)
                         {
+                            console.log("---");
+                            console.log("original_scaleX : "+temp.original_scaleX);
+                            console.log("original_scaleY : "+temp.original_scaleY);
+                            console.log("scaleX : "+temp.scaleX);
+                            console.log("scaleY : "+temp.scaleY);
+                            console.log("original_top : "+temp.original_top);
+                            console.log("top : "+temp.top);
+                            console.log("original_left : "+temp.original_left);
+                            console.log("left : "+temp.left);
+                            console.log("---");
                             var circle = new fabric.Circle({
                                 radius: 25,
                                 fill: 'white',
                                 class:"img-num",
                                 id:temp.id,
+                                scaleY:temp.scaleY,
+                                scaleX:temp.scaleX,
+                                original_scaleX:temp.original_scaleX,
+                                original_scaleY:temp.original_scaleY,
+                                original_top:temp.original_top,
+                                original_left:temp.original_left,
                                 lockMovementX: true,
                                 lockMovementY: true,
                                 lockRotation: true,
@@ -348,6 +364,12 @@ var proFabric = new function(){
                             circle.setOpacity(0.8);
                             var text = new fabric.Text(t_id.toString(), {
                                 fontSize: 20,
+                                scaleY:temp.scaleY,
+                                scaleX:temp.scaleX,
+                                original_scaleX:temp.original_scaleX,
+                                original_scaleY:temp.original_scaleY,
+                                original_top:temp.original_top,
+                                original_left:temp.original_left,
                                 originX: 'center',
                                 originY: 'center',
                                 top:27,
@@ -362,16 +384,30 @@ var proFabric = new function(){
                                 selectable :false
                             });
                             var group = new fabric.Group([ circle, text ], {
+                                scaleY:temp.scaleY,
+                                scaleX:temp.scaleX,
+                                original_scaleX:temp.original_scaleX,
+                                original_scaleY:temp.original_scaleY,
+                                original_top:temp.original_top,
+                                original_left:temp.original_left,
+                                //originX: "center",
+                                //originY: "center",
                                 left: (temp.left+((temp.width)/4)),
                                 top: (temp.top+((temp.height)/4))
                             });
                             var _img = fabric.util.object.clone(temp);
                             var imageGroup = new fabric.Group([ _img,group ], {
-                                left: temp.left,
-                                top: temp.top,
+                                left: temp.original_left,
+                                top: temp.original_top,
+                                scaleY:temp.scaleY,
+                                scaleX:temp.scaleX,
+                                original_scaleX:temp.original_scaleX,
+                                original_scaleY:temp.original_scaleY,
+                                original_top:temp.original_top,
+                                original_left:temp.original_left,
                                 id:temp.id,
                                 num:t_id,
-                                class:"image",
+                                class:"group",
                                 lockMovementX: true,
                                 lockMovementY: true,
                                 lockRotation: true,
@@ -381,6 +417,7 @@ var proFabric = new function(){
                                 editable :false,
                                 selectable :false
                             });
+                            //console.log(imageGroup);
                             that.canvas.add(imageGroup);
                             that.canvas.fxRemove(temp);
                             t_id=t_id+1;
@@ -462,20 +499,77 @@ var proFabric = new function(){
 		this.zoom = zoom;
 		this.canvas.forEachObject(function(obj){
 			if(obj.type === 'group'){
+                console.log('group');
 				obj.saveState();
 				var groupobj = obj['_objects'];
-				for(i=0; i<groupobj.length; i++){
-					var objct = groupobj[i],
-					scale_X= typeof objct.original_scaleX === "undefined" ? objct.scaleX : objct.original_scaleX,
+                console.log(obj,groupobj);
+				
+					var objct = groupobj[0],
+                    scale_X= typeof objct.original_scaleX === "undefined" ? objct.scaleX : objct.original_scaleX,
 					scale_Y= typeof objct.original_scaleY === "undefined" ? objct.scaleY : objct.original_scaleY,
 					left   = typeof objct.original_left === "undefined"   ? objct.left   : objct.original_left,
 					top    = typeof objct.original_top === "undefined"    ? objct.top    : objct.original_top;
-					objct.scaleX = scale_X * (zoom/100);
-					objct.scaleY = scale_Y * (zoom/100);
-					objct.left   = left   * (zoom/100);
-					objct.top    = top    * (zoom/100);
+					console.log('?-------------------------------------------------?');
+                    console.log('objct.original_scaleX : ' + objct.original_scaleX + ' || objct.original_scaleY : '+ objct.original_scaleY);
+                    console.log('objct.original_top : ' + objct.original_top + ' || objct.original_left : '+ objct.original_left);
+                    console.log('ScaleX : '+scale_X + ' || objct.scaleX : '+objct.scaleX);
+                    console.log('ScaleX : '+scale_Y + ' || objct.scaleX : '+objct.scaleY);
+                    console.log('left : '+left + ' || objct.left : '+objct.left);
+                    console.log('top : '+top + ' || objct.top : '+objct.top);
+                    console.log('?-------------------------------------------------?');
+                    console.log('zoom : '+zoom);
+                    console.log("objct.scaleX : "+objct.scaleX);
+                    objct.scaleX = Math.abs(objct.scaleX) * (zoom/100);
+					console.log("New objct.scaleX : "+objct.scaleX);
+                    console.log("objct.scaleY : "+objct.scaleY);
+                    objct.scaleY = Math.abs(objct.scaleY) * (zoom/100);
+                    console.log("New objct.scaleY :"+objct.scaleY);
+                    console.log("objct.left : "+objct.left);
+					objct.left   = Math.abs(objct.left)   * (zoom/100);
+                    console.log("New objct.left : "+objct.left);
+                    console.log("objct.top : "+objct.top);
+					objct.top    = Math.abs(objct.top)    * (zoom/100);
+                    console.log("New objct.top : "+objct.top);
 					objct.setCoords();
-				}
+                    console.log('?-------------------------------------------------?');
+                    var tmpobj = groupobj[1];
+                    console.log(tmpobj);
+                    var mainObj = tmpobj['_objects'];
+                    console.log(mainObj);
+                    console.log(mainObj.length);
+                    var _len = mainObj.length;
+                    //for(var i=0; i<_len; i++){
+                    //{
+                        /*var _objct = mainObj[i],
+                        scale_X= typeof _objct.original_scaleX === "undefined" ? _objct.scaleX : _objct.original_scaleX,
+                        scale_Y= typeof _objct.original_scaleY === "undefined" ? _objct.scaleY : _objct.original_scaleY,
+                        left   = typeof _objct.original_left === "undefined"   ? _objct.left   : _objct.original_left,
+                        top    = typeof _objct.original_top === "undefined"    ? _objct.top    : _objct.original_top;
+                        console.log(_objct);
+                        console.log('?-------------------------------------------------?');
+                        console.log('objct.original_scaleX : ' + _objct.original_scaleX + ' || objct.original_scaleY : '+ _objct.original_scaleY);
+                        console.log('objct.original_top : ' + _objct.original_top + ' || objct.original_left : '+ _objct.original_left);
+                        console.log('ScaleX : '+scale_X + ' || objct.scaleX : '+_objct.scaleX);
+                        console.log('ScaleX : '+scale_Y + ' || objct.scaleX : '+_objct.scaleY);
+                        console.log('left : '+left + ' || objct.left : '+_objct.left);
+                        console.log('top : '+top + ' || objct.top : '+_objct.top);
+                        console.log('?-------------------------------------------------?');
+                        console.log('zoom : '+zoom);
+                        console.log("objct.scaleX : "+_objct.scaleX);
+                        objct.scaleX = Math.abs(_objct.scaleX) * (zoom/100);
+                        console.log("New objct.scaleX : "+_objct.scaleX);
+                        console.log("objct.scaleY : "+_objct.scaleY);
+                        objct.scaleY = Math.abs(_objct.scaleY) * (zoom/100);
+                        console.log("New objct.scaleY :"+_objct.scaleY);
+                        console.log("objct.left : "+_objct.left);
+                        objct.left   = Math.abs(_objct.left)   * (zoom/100);
+                        console.log("New objct.left : "+_objct.left);
+                        console.log("objct.top : "+_objct.top);
+                        objct.top    = Math.abs(_objct.top)    * (zoom/100);
+                        console.log("New objct.top : "+_objct.top);
+                        _objct.setCoords();*/
+
+                    //}
 				obj.saveCoords().setObjectsCoords();
 			}
 			else{
@@ -499,7 +593,7 @@ var proFabric = new function(){
 				obj.original_top    = typeof obj.original_top === "undefined"    ? obj.top    : obj.original_top;
 
 				obj.scaleX = scale_X * (zoom/100);
-				obj.scaleY = scale_Y * (zoom/100);
+				obj.scaleY = scale_Y * (zoom/100);                                                                                                      
 				obj.left   = left   * (zoom/100);
 				obj.top    = top    * (zoom/100);
 
@@ -507,6 +601,8 @@ var proFabric = new function(){
 			obj.setCoords();
 		});
 		this.canvas.setWidth(this.canvasWidth * (zoom/100)).setHeight(this.canvasHeight * (zoom/100));
+        console.log(this.canvasWidth);
+        console.log(this.canvasHeight);
 		this.canvas.renderAll();
 	};
 	this.getCanvasPixelData = function(x, y) {
@@ -605,7 +701,9 @@ var proFabric = new function(){
         that.canvas.renderAll();
     };
     this.replaceImg=function(source,_id){
+
         var obj = that.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
                 var top = obj.top;
                 var left = obj.left;
                 var _width = obj.width;
@@ -672,6 +770,7 @@ var proFabric = new function(){
                         top: top,
                         id:_id,
                         class:"image",
+                        type:"",
                         num:_num,
                         lockMovementX: true,
                         lockMovementY: true,
@@ -683,6 +782,7 @@ var proFabric = new function(){
                         selectable :false
                     });
                     that.canvas.add(imageGroup);
+                    that.savestate('modified',before,imageGroup.toJSON(['id','class']));
                     that.canvas.renderAll();
                 });
     };
@@ -741,7 +841,7 @@ var proFabric = new function(){
                 that.canvas.moveTo(image, that.canvas.getObjects().indexOf(obj));
                 that.canvas.setActiveObject(image);
                 that.canvas.fxRemove(obj);
-                this.savestate('modified',before,image.toJSON(['id','class']));
+                that.savestate('modified',before,image.toJSON(['id','class']));
                 that.canvas.renderAll();
             }
             ImageObj.src = dataURL;
