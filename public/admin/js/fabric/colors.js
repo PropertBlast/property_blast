@@ -94,12 +94,15 @@ proFabric.color = {
 			if (obj.id == id) {
 				if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
 					obj.setFill(color);
-					self.stroke_color(color);
+					obj.paths.forEach(function(i) { i.set({stroke: color}); });
 				}
 				else if (obj.paths) {
-					obj.paths.forEach(function(i) { i.setFill(color); });
+					obj.paths.forEach(function(i) {
+						i.setFill(color);
+						i.set({stroke: color});
+					});
 				}
-				obj.setCoords();				
+				obj.setCoords();
 			}
 		});
 		this.canvas.renderAll();

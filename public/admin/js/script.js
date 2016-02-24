@@ -222,17 +222,16 @@ $(document).ready(function($) {
         colorPickerInit();
     });
     $(document).delegate('#editor-addSets', 'click', function() {
-        var content = $('#cs-sample1').clone();
-        content = $(content).find('.evo-colorind').remove();
-        content = $(content).html();
-        console.log(content);
+        var content = $('#cs-sample1').html();
         var size = $('#cs-tablist').children().size();
         var _html = '<div role="tabpanel" class="tab-pane" id="cs-sample'+(size+ 1)+'">'+content+'</div>';
         $(_html).appendTo('#cs-tabContent');
+        $('#cs-sample'+(size+ 1)+'').find('.evo-cp-wrap').replaceWith('<input style="width:0px;" id="coler-picker" data-type="colorsFill">');
 
         var _tabs = '<li><a href="#cs-sample'+(size+1)+'" data-toggle="tab">Sample '+(size+1)+'</a></li>';
         $(_tabs).appendTo('#cs-tablist');
         colorPickerInit();
+        $('#cs-tablist').find('li.active').trigger('click');
     });
     $(document).delegate('#editor-addShapes', 'click', function() {
         $('#editor-objectsBox').toggle();
@@ -339,7 +338,7 @@ function colorPickerInit(){
     )
     .on('change.color', function(event, color){
         var type = $(this).data('type');
-        var _rgb = $('#coler-picker[data-type='+type+']').next('.evo-colorind').css('backgroundColor');
+        var _rgb = $(this).next('.evo-colorind').css('backgroundColor');
         colorPickerSubmit(_rgb, this);
     });
 }
