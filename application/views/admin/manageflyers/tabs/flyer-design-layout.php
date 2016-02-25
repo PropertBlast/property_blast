@@ -10,14 +10,21 @@
             <center><canvas id="myCanvas"></canvas></center>
         </div>
         <div class="row" style="margin-top: -2%;">
-            <div class="col-md-5 col-xs-12">
+            <div class="col-md-6 col-xs-12">
                 <div class="wan-spinner wan-spinner-1">
                     <a href="javascript:void(0)" class="minus"><i class="fa fa-minus"></i></a>
                     <input type="text" value="100">
                     <a href="javascript:void(0)" class="plus"><i class="fa fa-plus"></i></a>
                 </div>
+                <div class="mt-5">
+                    <button type="button" id="editor-zoomButton" data-number="50" style="width: 50px" class="btn btn-default btn-sm zoom-class">50</button>
+                    <button type="button" id="editor-zoomButton" data-number="75" style="width: 50px" class="btn btn-default btn-sm zoom-class">75</button>
+                    <button type="button" id="editor-zoomButton" data-number="100" style="width: 50px" class="btn btn-default btn-sm zoom-class">100</button>
+                    <button type="button" id="editor-zoomButton" data-number="150" style="width: 50px" class="btn btn-default btn-sm zoom-class">150</button>
+                    <button type="button" id="editor-zoomButton" data-number="200" style="width: 50px" class="btn btn-default btn-sm zoom-class">200</button>
+                </div>
             </div>
-            <div class="col-md-7 col-xs-12 text-right">
+            <div class="col-md-6 col-xs-12 text-right">
                 <button type="button" id="fullScreenEditor" class="btn btn-success">Full Screen</button>
                 <div class="btn-group" role="group">
                     <button data-type="redo" type="button" class="btn btn-default">Redo</button>
@@ -45,10 +52,10 @@
                     <div class="col-md-6 col-xs-12">
                         <div class="row pt-10">
                             <div class="col-md-12 col-xs-12">
-                                <button type="button" class="btn btn-default" id="editor-bringFront">
+                                <button type="button" class="btn btn-default" id="editor-sendBack">
                                     <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
                                 </button>
-                                <button type="button" class="btn btn-default" id="editor-sendBack">
+                                <button type="button" class="btn btn-default" id="editor-bringFront">
                                     <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
                                 </button>
                                 <button class="btn btn-default" id="editor-delete" data-type="text" type="button"><span class="glyphicon glyphicon-trash editor-fa"></span></button>
@@ -237,7 +244,7 @@
                         <h4 class="mt-0">Select Image Number To Input</h4>
                     </div>
                     <div class="col-md-4 col-xs-12">
-                        <button type="button" id="editor-addImage" class="btn btn-primary">Add Image</button>
+                        <button type="file" id="editor-addImage" class="btn btn-primary">Add Image</button><input type="file" id="editor-addImageFile" accept="image/png, image/jpeg, image/jpg" style="display:none;">
                     </div>
                 </div>
                 <div class="row mt-20 mb-30">
@@ -255,10 +262,10 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-12 col-xs-12">
-                                <button type="button" class="btn btn-default" id="editor-bringFront">
+                                <button type="button" class="btn btn-default" id="editor-sendBack">
                                     <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
                                 </button>
-                                <button type="button" class="btn btn-default" id="editor-sendBack">
+                                <button type="button" class="btn btn-default" id="editor-bringFront">
                                     <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
                                 </button>
                                 <button type="button" class="btn btn-default" data-type="image" id="editor-delete">
@@ -303,10 +310,10 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-12 col-xs-12">
-                                <button type="button" class="btn btn-default" id="editor-bringFront">
+                                <button type="button" class="btn btn-default" id="editor-sendBack">
                                     <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
                                 </button>
-                                <button type="button" class="btn btn-default" id="editor-sendBack">
+                                <button type="button" class="btn btn-default" id="editor-bringFront">
                                     <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
                                 </button>
                                 <button type="button" class="btn btn-default" data-type="shape" id="editor-delete">
@@ -355,10 +362,10 @@
                     <div class="col-md-6 col-xs-12">
                         <div class="row mt-10">
                             <div class="col-md-12 col-xs-12">
-                                <button type="button" class="btn btn-default" id="editor-bringFront">
+                                <button type="button" class="btn btn-default" id="editor-sendBack">
                                     <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
                                 </button>
-                                <button type="button" class="btn btn-default" id="editor-sendBack">
+                                <button type="button" class="btn btn-default" id="editor-bringFront">
                                     <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
                                 </button>
                                 <button type="button" class="btn btn-default" data-type="color" id="editor-delete">
@@ -384,11 +391,17 @@
                 </div>
                 <div class="row mt-10">
                     <div class="col-md-6 col-xs-6">
-                        <button type="button" class="btn btn-default" id="editor-addSets">
-                            Add Color Set
+                        <button type="button" class="btn btn-default" id="editor-renameSet">
+                            Rename Set
+                        </button>
+                        <button type="button" class="btn btn-default" id="editor-deleteSet">
+                            Delete Set
                         </button>
                     </div>
                     <div class="col-md-6 col-xs-6 text-right">
+                        <button type="button" class="btn btn-default" id="editor-addSets">
+                            Add Color Set
+                        </button>
                         <button type="button" class="btn btn-default" id="editor-addShapes">
                             Insert Shapes
                         </button>

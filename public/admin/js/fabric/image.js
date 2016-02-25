@@ -14,7 +14,9 @@ proFabric.image = {
                 scaleX              : _scaleX,
                 scaleY              : _scaleY,
                 class               : 'image',
-                linkid              :'',
+                linkid              : '',
+                width               : (_options && _options.width) || 150,
+                height              : (_options && _options.height) || 150,
                 id                  : (_options && _options.id) || self.parent.get.guid(),
                 opacity             : (_options && _options.opacity) || 1,
                 target              : (_options && _options.target) || false,
@@ -40,6 +42,20 @@ proFabric.image = {
             self.canvas.renderAll();
         });
 	},
+    addBlob: function(src, _options){
+        that = this;
+        fabric.Image.fromURL(src, function(image) {
+            var gcanvas=document.createElement('canvas');
+            var myCanvas = new fabric.Canvas(gcanvas, { width: image.width, height: image.height});
+            image.set({
+                top:0,
+                left:0
+            });
+            myCanvas.add(image);
+            var base64 = myCanvas.toDataURL('image/jpeg');
+            that.add(base64, _options);
+        });
+    },
     set: function(options) {
         var obj = this.canvas.getActiveObject();
         if(obj && obj.class !== 'image') return;

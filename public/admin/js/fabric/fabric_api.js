@@ -83,7 +83,22 @@ var proFabric = new function(){
             proFabric.color.colorSelected(object);
         }
     });
-	this.canvas.on('object:rotating', function(o){});
+	this.canvas.on('object:rotating', function(o){
+        var obj = o.target;
+        if(obj.angle>=350 || obj.angle<=10){
+            obj.angle=0;
+        }
+        else if(obj.angle>=80 && obj.angle<=100){
+            obj.angle=90;
+        }
+        else if(obj.angle>=260 && obj.angle<=280){
+            obj.angle=270;
+        }
+        else if(obj.angle>=170 && obj.angle<=190){
+            obj.angle=180;
+        }
+        console.log(obj.angle);
+    });
 	this.canvas.on('object:scaling', function(o){});
 	this.canvas.on('object:moving', function(o){
         var object = o.target;
@@ -318,6 +333,40 @@ var proFabric = new function(){
 		json : function(json){
 		}
 	};
+    this.move = {
+        up : function(){
+            var obj = that.canvas.getActiveObject();
+            if(!obj) return;
+            obj.set({
+                top : (obj.top-5)
+            });
+            that.canvas.renderAll();
+        },
+        down : function(){
+            var obj = that.canvas.getActiveObject();
+            if(!obj) return;
+            obj.set({
+                top : (obj.top+5)
+            });
+            that.canvas.renderAll();
+        },
+        left : function(){
+            var obj = that.canvas.getActiveObject();
+            if(!obj) return;
+            obj.set({
+                left : (obj.left-5)
+            });
+            that.canvas.renderAll();
+        },
+        right : function(){
+            var obj = that.canvas.getActiveObject();
+            if(!obj) return;
+            obj.set({
+                left : (obj.left+5)
+            });
+            that.canvas.renderAll();
+        }
+    };
     this.randBtnSelection = function(id) {
         that.canvas.forEachObject(function(obj){
             console.log(obj+"  ::  "+id);
