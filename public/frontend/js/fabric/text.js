@@ -77,16 +77,19 @@ proFabric.text = {
         }
     },
     SetFontSize: function(size){
-        var obj = this.parent().canvas.getActiveObject();
+        var self = this;
+        var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj) {
             obj.set({
                 fontSize: size
             });
-            this.parent().canvas.renderAll();
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
@@ -95,48 +98,59 @@ proFabric.text = {
                         });
                     }
                 }
-                this.parent().canvas.renderAll();
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+                self.canvas.renderAll();
             }
         }
     },
     SetTextColor: function(color){
-        var obj = this.parent().canvas.getActiveObject();
+        var self = this;
+        var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj&& obj.class=="text") {
             obj.set({
                 fill: color
             });
-            this.parent().canvas.renderAll();
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
                 for (var i = 0; i < obj._objects.length; i++) {
-                    obj._objects[i].set({
-                        fill: color
-                    });
+                    if(obj._objects[i].class=="text") {
+                        obj._objects[i].set({
+                            fill: color
+                        });
+                    }
                 }
-                this.parent().canvas.renderAll();
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+                self.canvas.renderAll();
             }
         }
     },
     SetFontFamily: function(font)
     {
-        var obj = this.parent().canvas.getActiveObject();
+        var self = this;
+        var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj && obj.class=="text") {
             obj.fontFamily = font;
-            this.parent().canvas.renderAll();
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
                         obj._objects[i].fontFamily = font;
                     }
                 }
-                this.parent().canvas.renderAll();
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+                self.canvas.renderAll();
             }
         }
     },
@@ -147,9 +161,11 @@ proFabric.text = {
         var _prevTop = obj.top;
         var _prevWidth = obj.width;
         var _prevHeight = obj.height;
+        var before = obj.toJSON(['id','class']);
         var _clone = fabric.util.object.clone(obj);
         if(obj && obj.class=="text") {
             obj.text = txt;
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
             self.canvas.renderAll();
         }
         else
@@ -161,6 +177,7 @@ proFabric.text = {
                         obj._objects[i].text = txt;
                     }
                 }
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
                 self.canvas.renderAll();
             }
         }
@@ -186,6 +203,7 @@ proFabric.text = {
     SetBold: function(){
         var self = this;
         var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj && obj.class=="text") {
             if(obj.fontWeight=="bold"){
                 obj.set({
@@ -197,12 +215,12 @@ proFabric.text = {
                     fontWeight: 'bold'
                 });
             }
-
-            this.parent().canvas.renderAll();
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
@@ -217,31 +235,36 @@ proFabric.text = {
                             });
                         }
                     }
+                    self.parent.savestate('modified',before,obj.toJSON(['id','class']));
                 }
-                this.parent().canvas.renderAll();
+                self.canvas.renderAll();
             }
         }
     },
 
     SetItalic: function(){
-        var obj = this.parent().canvas.getActiveObject();
+        var self = this;
+        var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
+        console.log('HERE TO ITALIC OR NORMAL');
         if(obj && obj.class=="text") {
             if(obj.fontStyle=="italic") {
                 obj.set({
                     fontStyle: 'normal'
-                });
+                });console.log('Here normal');
             }
             else
             {
                 obj.set({
                     fontStyle: 'italic'
-                });
+                });console.log('Italic');
             }
-            this.parent().canvas.renderAll();
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
@@ -257,13 +280,16 @@ proFabric.text = {
                         }
                     }
                 }
-                this.parent().canvas.renderAll();
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+                self.canvas.renderAll();
             }
         }
     },
 
     SetUnderline: function(){
-        var obj = this.parent().canvas.getActiveObject();
+        var self = this;
+        var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj && obj.class=="text") {
             if(obj.textDecoration=="underline") {
                 obj.set({
@@ -275,11 +301,12 @@ proFabric.text = {
                     textDecoration: 'underline'
                 });
             }
-            this.parent().canvas.renderAll();
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
@@ -295,22 +322,28 @@ proFabric.text = {
                         }
                     }
                 }
-                this.parent().canvas.renderAll();
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+                self.canvas.renderAll();
             }
         }
     },
     textAlign: function(type){
-        var obj = this.parent().canvas.getActiveObject();
+        var self = this;
+        var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj && obj.class=="text") {
+            console.log("here inside 1L");
             obj.set({
                 textAlign: type
             });
-            this.parent().canvas.renderAll();
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
+                console.log("here inside 1L");
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
                         obj._objects[i].set({
@@ -318,49 +351,62 @@ proFabric.text = {
                         });
                     }
                 }
-                this.parent().canvas.renderAll();
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+                self.canvas.renderAll();
             }
         }
     },
     bringTextToFront: function(){
-        var obj = this.parent().canvas.getActiveObject();
+        var self = this;
+        var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj && obj.class=="text") {
-            this.parent().canvas.sendBackwards(obj);
-            this.parent().canvas.sendToBack(obj);
-            this.parent().canvas.renderAll();
+            console.log("here inside 1BTF");
+            self.canvas.sendBackwards(obj);
+            self.canvas.sendToBack(obj);
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
+                console.log("here inside 1BTF");
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
-                        this.parent().canvas.sendBackwards(obj._objects[i]);
-                        this.parent().canvas.sendToBack(obj._objects[i]);
+                        self.canvas.sendBackwards(obj._objects[i]);
+                        self.canvas.sendToBack(obj._objects[i]);
                     }
                 }
-                this.parent().canvas.renderAll();
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+                self.canvas.renderAll();
             }
         }
     },
     bringTextToBack: function(){
-        var obj = this.parent().canvas.getActiveObject();
+        var self = this;
+        var obj = self.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj && obj.class=="text") {
-            this.parent().canvas.bringForward(obj);
-            this.parent().canvas.bringToFront(obj);
-            this.parent().canvas.renderAll();
+            console.log("here inside 1BTF");
+            self.canvas.bringForward(obj);
+            self.canvas.bringToFront(obj);
+            self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+            self.canvas.renderAll();
         }
         else
         {
-            obj = this.parent().canvas.getActiveGroup();
+            obj = self.canvas.getActiveGroup();
             if(obj) {
+                console.log("here inside 1BTF");
                 for (var i = 0; i < obj._objects.length; i++) {
                     if(obj._objects[i].class=="text") {
-                        this.parent().canvas.bringForward(obj._objects[i]);
-                        this.parent().canvas.bringToFront(obj._objects[i]);
+                        self.canvas.bringForward(obj._objects[i]);
+                        self.canvas.bringToFront(obj._objects[i]);
                     }
                 }
-                this.parent().canvas.renderAll();
+                self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+                self.canvas.renderAll();
             }
         }
     },

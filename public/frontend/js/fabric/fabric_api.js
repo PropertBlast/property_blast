@@ -713,6 +713,7 @@ var proFabric = new function(){
                 that.canvas.renderAll();
                 fabric.Image.fromURL(source, function(img) {
                     img.class = 'image';
+                    img.type = 'group';
                     img.src = source;
                     img.orignalSource = source;
                     img.id = _id;
@@ -721,6 +722,7 @@ var proFabric = new function(){
                     img.width = _width;
                     img.height = _height
                     img.color = "#0000ff";
+                    img.num=_num;
                     img.set({
                         lockMovementX: true,
                         lockMovementY: true,
@@ -867,6 +869,7 @@ var proFabric = new function(){
         that.canvas.renderAll();
     }
     this.undo = function(){
+        console.log("-------------------> Undo");
         if(current_state<0)
             return;
         that.canvas.discardActiveObject();
@@ -936,6 +939,10 @@ var proFabric = new function(){
     this.redo = function(){
         if(current_state<0)
             return;
+        console.log("Redo start --------------------->");
+        console.log(canvas_state[current_state]);
+        console.log(current_state);
+        console.log(canvas_state);
         that.canvas.discardActiveObject();
         that.canvas.discardActiveGroup();
         if((current_state < canvas_state.length)){
@@ -943,6 +950,7 @@ var proFabric = new function(){
             var obj = state[current_state];
             var action = obj.action;
             if(action == 'background'){
+                //$('li#showgrid').removeClass('active');
                 var color = obj.after;
                 that.canvas.backgroundColor = color;
                 that.canvas.renderAll();
@@ -952,6 +960,7 @@ var proFabric = new function(){
                 if(object.type != "group"){
                     that.canvas.forEachObject(function(temp){
                         if(temp.id == object.id){
+                            console.log("Called->",object);
                             that.canvas.remove(temp);
                             setTimeout(function(){
                                 that.addObject(object,0,0,1,1);
@@ -1177,7 +1186,8 @@ var proFabric = new function(){
             });
         }
         else if(obj.type == "image"){
-            var ImageObj = new Image();
+            alert();
+            /*var ImageObj = new Image();
             ImageObj.onload = function() {
                 image = new fabric.Image(ImageObj);
                 image.top  = obj.top+offsetTop;
@@ -1206,7 +1216,140 @@ var proFabric = new function(){
                 that.canvas.bringForward(image);
                 that.canvas.renderAll();
             }
-            ImageObj.src = obj.src;
+            ImageObj.src = obj.src;*/
+
+
+
+                var source = obj.src;
+                var top = obj.top;
+                var left = obj.left;
+                var _width = obj.width;
+                var _height = obj.height;
+                var _original_scaleX = obj.original_scaleX;
+                var _original_scaleY = obj.original_scaleY;
+                var _original_left =  obj.original_left;
+                var _original_top =  obj.original_top;
+                that.canvas.fxRemove(obj);
+                that.canvas.renderAll();
+                console.log(source);
+                console.log(top);
+                console.log(left);
+                console.log(_width);
+                console.log(_height);
+                console.log(_original_scaleX);
+                console.log(_original_scaleY);
+                console.log(_original_left);
+                console.log(_original_top);
+
+                /*fabric.Image.fromURL(source, function(img) {
+                    img.class = 'image';
+                    img.type = 'group';
+                    img.src = source;
+                    img.orignalSource = source;
+                    img.id = _id;
+                    img.top = top;
+                    img.left = left;
+                    img.width = _width;
+                    img.height = _height
+                    img.color = "#0000ff";
+                    img.num=_num;
+                    img.set({
+                        original_left: _original_left,
+                        obj.original_top:_original_top,
+                        original_scaleX:_original_scaleX,
+                        original_scaleY:_original_scaleY,
+                        lockMovementX: true,
+                        lockMovementY: true,
+                        lockRotation: true,
+                        lockScalingX: true,
+                        lockScalingY: true,
+                        hasControls: false
+                    });
+                    //that.canvas.add(img);
+                    //that.canvas.renderAll();
+                    var circle = new fabric.Circle({
+                        radius: 25,
+                        fill: 'white',
+                        class:"img-num",
+                        id:_id,
+                        lockMovementX: true,
+                        lockMovementY: true,
+                        lockRotation: true,
+                        lockScalingX: true,
+                        lockScalingY: true,
+                        hasControls: false,
+                        editable :false,
+                        selectable :false
+                    });
+                    circle.setOpacity(0.75);
+                    var text = new fabric.Text(_num.toString(), {
+                        fontSize: 20,
+                        originX: 'center',
+                        originY: 'center',
+                        top:27,
+                        left:25,
+                        lockMovementX: true,
+                        lockMovementY: true,
+                        lockRotation: true,
+                        lockScalingX: true,
+                        lockScalingY: true,
+                        hasControls: false,
+                        editable :false,
+                        selectable :false
+                    });
+                    var group = new fabric.Group([ circle, text ], {
+                        left: (left+((_width)/4)),
+                        top: (top+((_height)/4))
+                    });
+                    var imageGroup = new fabric.Group([img,group ], {
+                        original_left: _original_left,
+                        obj.original_top:_original_top,
+                        original_scaleX:_original_scaleX,
+                        original_scaleY:_original_scaleY,
+                        left: _original_left,
+                        top: _original_top,
+                        id:_id,
+                        class:"image",
+                        num:_num,
+                        lockMovementX: true,
+                        lockMovementY: true,
+                        lockRotation: true,
+                        lockScalingX: true,
+                        lockScalingY: true,
+                        hasControls: false,
+                        editable :false,
+                        selectable :false
+                    });
+                    that.canvas.add(imageGroup);
+                    console.log(imageGroup);
+                    that.canvas.renderAll();
+
+                });*/
+
+
+        }
+        else if(obj.type == "group"){
+            var source = obj.src;
+                var top = obj.top;
+                var left = obj.left;
+                var _width = obj.width;
+                var _height = obj.height;
+                var _original_scaleX = obj.original_scaleX;
+                var _original_scaleY = obj.original_scaleY;
+                var _original_left =  obj.original_left;
+                var _original_top =  obj.original_top;
+                that.canvas.fxRemove(obj);
+                that.canvas.renderAll();
+                console.log(source);
+                console.log(top);
+                console.log(left);
+                console.log(_width);
+                console.log(_height);
+                console.log(_original_scaleX);
+                console.log(_original_scaleY);
+                console.log(_original_left);
+                console.log(_original_top);
+            alert();
         }
     }
 };
