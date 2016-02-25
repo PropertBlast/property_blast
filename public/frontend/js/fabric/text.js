@@ -204,7 +204,7 @@ proFabric.text = {
         var self = this;
         var obj = self.canvas.getActiveObject();
         var before = obj.toJSON(['id','class']);
-        if(obj && obj.class=="text") {
+        if(obj && obj.class=="text") {     
             if(obj.fontWeight=="bold"){
                 obj.set({
                     fontWeight: 'normal'

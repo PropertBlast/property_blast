@@ -1,6 +1,10 @@
 proFabric;
 var _pickerFlag = 0;
 var _selectionflag=0;
+var _pickerFlag = 0;
+var _selectionflag=0;
+var _img_num=1;
+var undo_redo_tmp_obj=[],canvas_state = new Array(), current_state=0;
 var proFabric = new function(){
 	var that = this; // refrence for proFabric
 	this.canvasWidth = 510;
@@ -652,13 +656,7 @@ var proFabric = new function(){
                 scaleY:obj.scaleY*scaleY,
                 scaleX:obj.scaleX*scaleX,
                 width:obj.width,
-                height:obj.height,
-                lockMovementX     : true,
-                lockMovementY	  : true,
-                lockRotation 	  : true,
-                lockScalingX 	  : true,
-                lockScalingY 	  : true,
-                hasControls       : false
+                height:obj.height
             });
             if(obj.shadow)
             {
@@ -685,7 +683,7 @@ var proFabric = new function(){
             that.canvas.add(text);
             that.canvas.renderAll();
         }
-        else if (obj.class == "svg"){
+        else if (obj.class == "svg"||obj.class == "shape"){
             var group = [];
             fabric.loadSVGFromURL(obj.src, function(objects, options) {
                 var loadedObjects = new fabric.util.groupSVGElements(objects, options);
@@ -797,12 +795,6 @@ var proFabric = new function(){
                 image.id = obj.id;
                 image.alignment = obj.alignment;
                 image.index = obj.index;
-                image.lockMovementX  = true;
-                image.lockMovementY  = true;
-                image.lockRotation  = true;
-                image.lockScalingX  = true;
-                image.lockScalingY  = true;
-                image.hasControls = false;
                 that.canvas.add(image);
                 that.canvas.moveTo(image,obj.index);
                 that.canvas.bringForward(image);

@@ -38,6 +38,7 @@ proFabric.image = {
 
             image.setCoords();
             self.canvas.add(image);
+            self.parent.savestate('add', image.toJSON(['id','class']), image.toJSON(['id','class']));
             self.canvas.setActiveObject(image);
             self.canvas.renderAll();
         });
@@ -58,9 +59,11 @@ proFabric.image = {
     },
     set: function(options) {
         var obj = this.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(obj && obj.class !== 'image') return;
         obj.set(options);
         obj.setCoords();
+        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
         this.canvas.renderAll();
     },
     updateUI: function(obj){

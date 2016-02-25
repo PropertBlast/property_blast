@@ -701,9 +701,9 @@ var proFabric = new function(){
         that.canvas.renderAll();
     };
     this.replaceImg=function(source,_id){
-
         var obj = that.canvas.getActiveObject();
         var before = obj.toJSON(['id','class']);
+        console.log(obj);
                 var top = obj.top;
                 var left = obj.left;
                 var _width = obj.width;
@@ -731,9 +731,10 @@ var proFabric = new function(){
                         lockScalingY: true,
                         hasControls: false
                     });
+                    that.canvas.remove();
                     //that.canvas.add(img);
                     //that.canvas.renderAll();
-                    var circle = new fabric.Circle({
+                    /*var circle = new fabric.Circle({
                         radius: 25,
                         fill: 'white',
                         class:"img-num",
@@ -782,7 +783,7 @@ var proFabric = new function(){
                         hasControls: false,
                         editable :false,
                         selectable :false
-                    });
+                    });*/
                     that.canvas.add(imageGroup);
                     that.savestate('modified',before,imageGroup.toJSON(['id','class']));
                     that.canvas.renderAll();

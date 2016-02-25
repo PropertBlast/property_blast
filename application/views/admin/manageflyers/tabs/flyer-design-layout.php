@@ -27,8 +27,8 @@
             <div class="col-md-6 col-xs-12 text-right">
                 <button type="button" id="fullScreenEditor" class="btn btn-success">Full Screen</button>
                 <div class="btn-group" role="group">
-                    <button data-type="redo" type="button" class="btn btn-default">Redo</button>
-                    <button data-type="undo" type="button" class="btn btn-default">Undo</button>
+                    <button data-type="redo" type="button" class="btn btn-default" id="undobtn">Undo</button>
+                    <button data-type="undo" type="button" class="btn btn-default" id="redobtn">Redo</button>
                 </div>
                 <button type="button" id="save" class="btn btn-primary">Save</button>
             </div>
