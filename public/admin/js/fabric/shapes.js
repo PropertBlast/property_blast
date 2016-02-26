@@ -91,12 +91,8 @@ proFabric.shapes = {
 	},
 	fill: function(color) {
 		var obj = this.canvas.getActiveObject();
-<<<<<<< HEAD
-		if(!obj || obj.class !== 'shape') return;
-=======
 		var before = obj.toJSON(['id','class']);
-		if(obj && obj.class !== 'shape') return;
->>>>>>> origin/master
+		if(!obj || obj.class !== 'shape') return;
 		if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
 			obj.setFill(color);
 			this.stroke_color(color);
