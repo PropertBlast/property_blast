@@ -57,7 +57,16 @@ $(document).ready(function($) {
         //console.log(file);
         console.log(name + " : " + size + " : " + type);
     });
-
+    $(document).delegate('#undobtn','click',function(event){
+        event.preventDefault();
+        console.log('Here I am');
+        proFabric.undo();
+    });
+    $(document).delegate('#redobtn','click',function(event){
+        event.preventDefault();
+        console.log('Here I am');
+        proFabric.redo();
+    });
     $(document).delegate('#editor-mainTabs>li', 'mousedown', function(){
         if(!$(this).hasClass('active')){
             proFabric.deselectCanvas();

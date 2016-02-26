@@ -49,6 +49,7 @@ proFabric.text = {
         });
         text.setCoords();
         self.canvas.add(text);
+        self.parent.savestate('add', text.toJSON(['id','class']), text.toJSON(['id','class']));
         self.canvas.setActiveObject(text);
         self.canvas.renderAll();
     },
@@ -59,9 +60,11 @@ proFabric.text = {
     },
     set: function(options) {
         var obj = this.canvas.getActiveObject();
+        var before = obj.toJSON(['id','class']);
         if(!obj || obj.class !== 'text') return;
         obj.set(options);
         obj.setCoords();
+        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
         this.canvas.renderAll();
     },
     assign: function(name, alreadyAssigned) {
