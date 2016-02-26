@@ -114,7 +114,7 @@ proFabric.color = {
 						i.set({stroke: color});
 					});
 				}
-				this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+				self.parent.savestate('modified',before,obj.toJSON(['id','class']));
 				obj.setCoords();
 			}
 		});
