@@ -166,7 +166,16 @@ $.widget( "evol.colorpicker", {
 			// palette
 			'<span>'+this['_paletteHTML'+pIdx]()+'</span>';
 		h+='</div>';
+		// indicator
+		if(opts.displayIndicator){
+			h+=this._colorIndHTML(this.options.color)+this._colorIndHTML('');
+			//col_flag=0;
+		}
 		return h;
+	},
+	_rgbToHex: function(hex) {
+	    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	    return result ? "rgb("+parseInt(result[1], 16)+","+parseInt(result[2], 16)+","+parseInt(result[3], 16)+")" : null;
 	},
 
 	_colorIndHTML: function(c) {
@@ -182,9 +191,11 @@ $.widget( "evol.colorpicker", {
 		}else{
 			style='display:none';
 		}
+	    console.log(c, this._rgbToHex(c))
 		return '<div class="evo-color" style="float:left">'+
 			'<div style="'+style+'" class="'+css+'"></div><span>'+ // class="evo-colortxt-ie"
-			(c?c:'')+'</span></div>';
+			(c?this._rgbToHex(c):'')+'</span></div>';
+
 	},
 
 	_paletteHTML1: function() {
@@ -446,7 +457,7 @@ $.widget( "evol.colorpicker", {
 	_setColorInd: function(c, idx) {
 		var $box=this['_cTxt'+idx];
 		this._setBoxColor($box, c);
-		$box.next().html(c);
+		$box.next().html(this._rgbToHex(c));
 	},
 
 	_setBoxColor: function($box, c) {

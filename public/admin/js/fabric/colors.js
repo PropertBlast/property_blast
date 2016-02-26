@@ -4,7 +4,7 @@ proFabric.color = {
 	add: function(src, _options) {
 		var self = this;
 		var _id = (_options && _options.id) || self.parent.get.guid();
-
+		console.log(_id);
 		fabric.loadSVGFromURL(src, function (objects, options) {
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
@@ -40,6 +40,9 @@ proFabric.color = {
 			self.canvas.renderAll();
 			self.scaleToWidth(120);
 			self.scaleToHeight(120);
+			if(_options.callback){
+				_options.callback();
+			}
 		}, function (item, object) {
 			object.set('id', item.getAttribute('id'));
 			object.set('class', item.getAttribute('class'));
@@ -47,7 +50,6 @@ proFabric.color = {
 			object.set('original_scaleY', item.getAttribute('original_scaleY'));
 			object.set('original_left', item.getAttribute('original_left'));
 			object.set('original_top', item.getAttribute('original_top'));
-			return object.id;
 		});
 		return _id;
 	},

@@ -74,6 +74,7 @@ $(document).ready(function($) {
         }
         else if(type=="color"){
             $('#cs-tabContent').find('.colorRow[data-id='+_id+']').remove();
+            arrangeColorSets();
         }
         $('#editor-textarea').val('');
         proFabric.delete();
@@ -270,21 +271,33 @@ $(document).ready(function($) {
         });
     });
     $(document).delegate('#editor-setsImage', 'click', function() {
-        var src = $(this).attr('src');
-        var id = proFabric.color.add(src);
-        console.log(id);
-        var size = $('#cs-sample1').children().size();
-        var _html = '<div class="row pt-10 colorRow" data-id="'+id+'"><div class="col-md-4 col-xs-12">Color '+(size+ 1)+'</div><div class="col-md-4 col-xs-12"> <div class="inline vt"><input style="width:0px;" id="coler-picker" data-type="colorsFill"></div></div><div class="col-md-4 col-xs-12 nopad text-right pr-20"><button type="button" id="editor-cpicker" data-type="colorsFill" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button></div></div>';
-        $('#cs-tabContent').children('.tab-pane').each(function(index, el) {
-            $(el);
-            $(_html).appendTo(el);
+        var src = $(this).attr('src'),
+            _id = proFabric.get.guid();
+        proFabric.color.add(src, {
+            id : _id,
+            callback : function () {
+                var size = $('#cs-sample1').children().size();
+                var _html = '<div class="row pt-10 colorRow" data-id="'+_id+'"><div class="col-md-4 col-xs-12">Color '+(size+ 1)+'</div><div class="col-md-4 col-xs-12"> <div class="inline vt"><input style="width:0px;" id="coler-picker" data-type="colorsFill"></div></div><div class="col-md-4 col-xs-12 nopad text-right pr-20"><button type="button" id="editor-cpicker" data-type="colorsFill" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button></div></div>';
+                $('#cs-tabContent').children('.tab-pane').each(function(index, el) {
+                    $(el);
+                    $(_html).appendTo(el);
+                });
+                colorPickerInit();
+            }
         });
-        colorPickerInit();
     });
     $(document).delegate('#editor-addSets', 'click', function() {
-        var content = $('#cs-sample1').html();
-        var size = $('#cs-tablist').children().size();
+        var content = $('#cs-sample1').html(),
+            size = $('#cs-tablist').children().size(),
+            previousColor = [];
         if(size > 5) return;
+        $('#cs-tabContent').children('.tab-pane').each(function(index, el) {
+            var rowcolors = [];
+            $(el).children('.colorRow').each(function(i, element) {
+                rowcolors.push($(element).find('div.evo-colorind').css("backgroundColor"));
+            });
+            previousColor.push({id:$(el).attr('id'), colors:rowcolors});
+        });
         var _html = '<div role="tabpanel" class="tab-pane" id="cs-sample'+(size+ 1)+'">'+content+'</div>';
         $(_html).appendTo('#cs-tabContent');
         $('#cs-sample'+(size+ 1)+'').find('.evo-cp-wrap').replaceWith('<input style="width:0px;" id="coler-picker" data-type="colorsFill">');
@@ -292,6 +305,12 @@ $(document).ready(function($) {
         var _tabs = '<li><a href="#cs-sample'+(size+1)+'" data-toggle="tab">Sample '+(size+1)+'</a></li>';
         $(_tabs).appendTo('#cs-tablist');
         colorPickerInit();
+        $.each(previousColor.reverse(), function(index, val) {
+            $('#'+val.id).find('.colorRow').each(function(i, el) {
+                console.log(val.colors[i]);
+                $(el).find('#coler-picker').colorpicker("val", val.colors[i]);
+            });
+        });
         $('#cs-tablist').find('li.active').trigger('click');
     });
     $(document).delegate('#editor-addShapes', 'click', function() {
@@ -406,7 +425,7 @@ FShandler = function(){
 function colorPickerInit(){
     $('input#coler-picker').hide();
     $('input#coler-picker').colorpicker(
-        {color:'#000', defaultPalette:'web',showOn:'button'}
+        {color:'#000000', defaultPalette:'web',showOn:'button'}
     )
     .on('change.color', function(event, color){
         var type = $(this).data('type');
@@ -453,6 +472,13 @@ function add(type, idToAppend, name, _tab) {
 function arrangeImageNumbers() {
     $('#editor-imageList').children('button').each(function(index, el) {
         $(el).html(index+1);
+    });
+}
+function arrangeColorSets() {
+    $('#cs-tabContent').children('.tab-pane').each(function(index, el) {
+        $(el).children('.colorRow').each(function(i, element) {
+            $(element).children('div:first-child').html("Color "+ (i+1));
+        });
     });
 }
 
