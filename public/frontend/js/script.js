@@ -350,8 +350,8 @@ $(document).ready(function($) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                console.log(e.target.result);
-                console.log(t_id);
+                //console.log(e.target.result);
+                //console.log(t_id);
                 proFabric.replaceImg(e.target.result,t_id);
             }
             reader.readAsDataURL(input.files[0]);

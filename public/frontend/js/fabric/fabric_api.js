@@ -346,12 +346,12 @@ var proFabric = new function(){
                                 fill: 'white',
                                 class:"img-num",
                                 id:temp.id,
-                                scaleY:temp.scaleY,
-                                scaleX:temp.scaleX,
-                                original_scaleX:temp.original_scaleX,
-                                original_scaleY:temp.original_scaleY,
-                                original_top:temp.original_top,
-                                original_left:temp.original_left,
+                                //scaleY:temp.original_scaleY,
+                                //scaleX:temp.original_scaleX,
+                                //original_scaleX:temp.original_scaleX,
+                                //original_scaleY:temp.original_scaleY,
+                                //original_top:temp.original_top,
+                                //original_left:temp.original_left,
                                 lockMovementX: true,
                                 lockMovementY: true,
                                 lockRotation: true,
@@ -364,12 +364,12 @@ var proFabric = new function(){
                             circle.setOpacity(0.8);
                             var text = new fabric.Text(t_id.toString(), {
                                 fontSize: 20,
-                                scaleY:temp.scaleY,
-                                scaleX:temp.scaleX,
-                                original_scaleX:temp.original_scaleX,
-                                original_scaleY:temp.original_scaleY,
-                                original_top:temp.original_top,
-                                original_left:temp.original_left,
+                                //scaleY:temp.scaleY,
+                                //scaleX:temp.scaleX,
+                                //original_scaleX:temp.original_scaleX,
+                                //original_scaleY:temp.original_scaleY,
+                                //original_top:temp.original_top,
+                                //original_left:temp.original_left,
                                 originX: 'center',
                                 originY: 'center',
                                 top:27,
@@ -384,27 +384,27 @@ var proFabric = new function(){
                                 selectable :false
                             });
                             var group = new fabric.Group([ circle, text ], {
-                                scaleY:temp.scaleY,
-                                scaleX:temp.scaleX,
-                                original_scaleX:temp.original_scaleX,
-                                original_scaleY:temp.original_scaleY,
-                                original_top:temp.original_top,
-                                original_left:temp.original_left,
+                                //scaleY:temp.scaleY,
+                                //scaleX:temp.scaleX,
+                                //original_scaleX:temp.original_scaleX,
+                                //original_scaleY:temp.original_scaleY,
+                                //original_top:temp.original_top,
+                                //original_left:temp.original_left,
                                 //originX: "center",
                                 //originY: "center",
-                                left: (temp.left+((temp.width)/4)),
-                                top: (temp.top+((temp.height)/4))
+                                left: (temp.left+((temp.width)/2)),
+                                top: (temp.top+((temp.height)/2))
                             });
                             var _img = fabric.util.object.clone(temp);
                             var imageGroup = new fabric.Group([ _img,group ], {
-                                left: temp.original_left,
-                                top: temp.original_top,
-                                scaleY:temp.scaleY,
-                                scaleX:temp.scaleX,
-                                original_scaleX:temp.original_scaleX,
-                                original_scaleY:temp.original_scaleY,
-                                original_top:temp.original_top,
-                                original_left:temp.original_left,
+                                //left: temp.original_left,
+                                //top: temp.original_top,
+                                //scaleY:temp.scaleY,
+                                //scaleX:temp.scaleX,
+                                //original_scaleX:temp.original_scaleX,
+                                //original_scaleY:temp.original_scaleY,
+                                //original_top:temp.original_top,
+                                //original_left:temp.original_left,
                                 id:temp.id,
                                 num:t_id,
                                 class:"group",
@@ -709,8 +709,20 @@ var proFabric = new function(){
                 var _width = obj.width;
                 var _height = obj.height;
                 var _num = obj.num;
+                //var _object = fabric.util.object.clone(obj);
+                console.log("O-top : "+obj.original_top);
+                console.log("O-left : "+obj.original_left);
+                console.log("top : "+top);
+                console.log("left : "+left);
+                console.log("width : "+_width);
+                console.log("height : "+_height);
+                console.log("num : "+_num);
+                //console.log(obj['_objects']);
+                //console.log(obj['_objects'][0].src);
+                //_object['_objects'][0].src = source;
                 that.canvas.fxRemove(obj);
-                that.canvas.renderAll();
+                //that.canvas.add(_object);
+                //that.canvas.renderAll();
                 fabric.Image.fromURL(source, function(img) {
                     img.class = 'image';
                     img.type = 'group';
@@ -729,12 +741,14 @@ var proFabric = new function(){
                         lockRotation: true,
                         lockScalingX: true,
                         lockScalingY: true,
-                        hasControls: false
+                        hasControls: false,
+                        scaleX:1,
+                        scaleY:1
                     });
                     that.canvas.remove();
                     //that.canvas.add(img);
                     //that.canvas.renderAll();
-                    /*var circle = new fabric.Circle({
+                    var circle = new fabric.Circle({
                         radius: 25,
                         fill: 'white',
                         class:"img-num",
@@ -782,8 +796,10 @@ var proFabric = new function(){
                         lockScalingY: true,
                         hasControls: false,
                         editable :false,
-                        selectable :false
-                    });*/
+                        selectable :false,
+                        scaleX:1,
+                        scaleY:1
+                    });
                     that.canvas.add(imageGroup);
                     that.savestate('modified',before,imageGroup.toJSON(['id','class']));
                     that.canvas.renderAll();
