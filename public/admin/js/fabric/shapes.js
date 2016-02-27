@@ -4,12 +4,12 @@ proFabric.shapes = {
 	get: {
 		width: function() {
 			var obj = this.canvas.getActiveObject();
-			if(|obj || obj.class !== 'shape') return
+			if(!obj || obj.class !== 'shape') return
 			return obj.getWidth();
 		},
 		height: function() {
 			var obj = this.canvas.getActiveObject();
-			if(|obj || obj.class !== 'shape') return;
+			if(!obj || obj.class !== 'shape') return;
 			return obj.getHeight();
 		}
 	},
@@ -109,7 +109,7 @@ proFabric.shapes = {
 	},
 	set: function(option) {
 		var obj = this.canvas.getActiveObject();
-		if(obj && obj.class !== 'shape') return;
+		if(!obj || obj.class !== 'shape') return;
 		var before = obj.toJSON(['id','class']);
 		obj.paths.forEach(function(i) { i.set(option) });
 		obj.setCoords();
@@ -151,7 +151,7 @@ proFabric.shapes = {
     },
     setScaleY: function(height) {
     	var obj = this.canvas.getActiveObject();
-        if(|obj || obj.class !== 'shape') return;
+        if(!obj || obj.class !== 'shape') return;
     	var before = obj.toJSON(['id','class']);
 
         obj.set({scaleY : height / obj.height});
