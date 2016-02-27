@@ -59,8 +59,8 @@ proFabric.image = {
     },
     set: function(options) {
         var obj = this.canvas.getActiveObject();
+        if(!obj || obj.class !== 'image') return;
         var before = obj.toJSON(['id','class']);
-        if(obj && obj.class !== 'image') return;
         obj.set(options);
         obj.setCoords();
         this.parent.savestate('modified',before,obj.toJSON(['id','class']));

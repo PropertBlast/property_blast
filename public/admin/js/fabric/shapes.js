@@ -4,14 +4,12 @@ proFabric.shapes = {
 	get: {
 		width: function() {
 			var obj = this.canvas.getActiveObject();
-			if(obj && obj.class !== 'shape') return;
-
+			if(|obj || obj.class !== 'shape') return
 			return obj.getWidth();
 		},
 		height: function() {
 			var obj = this.canvas.getActiveObject();
-			if(obj && obj.class !== 'shape') return;
-
+			if(|obj || obj.class !== 'shape') return;
 			return obj.getHeight();
 		}
 	},
@@ -73,8 +71,8 @@ proFabric.shapes = {
 	},
 	stroke_color: function(color) {
 		var obj = this.canvas.getActiveObject();
+		if(!obj || obj.class !== 'shape') return;
 		var before = obj.toJSON(['id','class']);
-		if(obj && obj.class !== 'shape') return;
 		obj.paths.forEach(function(i) { i.set({stroke: color}); });
 		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
 		obj.setCoords();
@@ -82,8 +80,8 @@ proFabric.shapes = {
 	},
 	stroke_width: function(width) {
 		var obj = this.canvas.getActiveObject();
+		if(!obj || obj.class !== 'shape') return;
 		var before = obj.toJSON(['id','class']);
-		if(obj && obj.class !== 'shape') return;
 		obj.paths.forEach(function(i) { i.set({strokeWidth: width}); });
 		obj.setCoords();
 		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
@@ -91,8 +89,8 @@ proFabric.shapes = {
 	},
 	fill: function(color) {
 		var obj = this.canvas.getActiveObject();
-		var before = obj.toJSON(['id','class']);
 		if(!obj || obj.class !== 'shape') return;
+		var before = obj.toJSON(['id','class']);
 		if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
 			obj.setFill(color);
 			this.stroke_color(color);
@@ -104,7 +102,6 @@ proFabric.shapes = {
 					fill 	: color
 				});
 			});
-			console.log('a_d_s_f');
 		}
 		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
 		obj.setCoords();
@@ -112,8 +109,8 @@ proFabric.shapes = {
 	},
 	set: function(option) {
 		var obj = this.canvas.getActiveObject();
-		var before = obj.toJSON(['id','class']);
 		if(obj && obj.class !== 'shape') return;
+		var before = obj.toJSON(['id','class']);
 		obj.paths.forEach(function(i) { i.set(option) });
 		obj.setCoords();
 		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
@@ -121,24 +118,22 @@ proFabric.shapes = {
 	},
     scaleToWidth: function(width) {
         var obj = this.canvas.getActiveObject();
+        if(!obj || obj.class !== 'shape') return;
         var before = obj.toJSON(['id','class']);
-        if(obj && obj.class !== 'shape') return;
 
 		var boundingRectFactor = obj.getBoundingRect().width / obj.getWidth();
-		obj.set({scaleX : width / obj.width / boundingRectFactor});	
-        //obj.scaleToWidth(width / sx);
+		obj.set({scaleX : width / obj.width / boundingRectFactor});
         obj.setCoords();
         this.parent.savestate('modified',before,obj.toJSON(['id','class']));
         this.canvas.renderAll();
     },
     scaleToHeight: function(height) {
         var obj = this.canvas.getActiveObject();
+        if(!obj || obj.class !== 'shape') return;
         var before = obj.toJSON(['id','class']);
-        if(obj && obj.class !== 'shape') return;
 
 		var boundingRectFactor = obj.getBoundingRect().height / obj.getHeight();
 		obj.set({scaleY : height / obj.height / boundingRectFactor});
-        //obj.scaleToHeight(height / sy);
         obj.setCoords();
         console.log(obj.getHeight());
         this.parent.savestate('modified',before,obj.toJSON(['id','class']));
@@ -146,8 +141,8 @@ proFabric.shapes = {
     },
     setScaleX: function(width) {
     	var obj = this.canvas.getActiveObject();
+        if(!obj || obj.class !== 'shape') return;
     	var before = obj.toJSON(['id','class']);
-        if(obj && obj.class !== 'shape') return;
 
         obj.set({scaleX : width / obj.width});
         this.parent.savestate('modified',before,obj.toJSON(['id','class']));
@@ -156,8 +151,8 @@ proFabric.shapes = {
     },
     setScaleY: function(height) {
     	var obj = this.canvas.getActiveObject();
-    	 var before = obj.toJSON(['id','class']);
-        if(obj && obj.class !== 'shape') return;
+        if(|obj || obj.class !== 'shape') return;
+    	var before = obj.toJSON(['id','class']);
 
         obj.set({scaleY : height / obj.height});
         this.parent.savestate('modified',before,obj.toJSON(['id','class']));

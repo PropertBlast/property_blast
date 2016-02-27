@@ -56,8 +56,8 @@ proFabric.color = {
 	},
 	stroke_color: function(color) {
 		var obj = this.canvas.getActiveObject();
-		var before = obj.toJSON(['id','class']);
 		if(!obj || obj.class !== 'color') return;
+		var before = obj.toJSON(['id','class']);
 
 		obj.paths.forEach(function(i) { i.set({stroke: color}); });
 		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
@@ -66,8 +66,8 @@ proFabric.color = {
 	},
 	stroke_width: function(width) {
 		var obj = this.canvas.getActiveObject();
-		var before = obj.toJSON(['id','class']);
 		if(!obj || obj.class !== 'color') return;
+		var before = obj.toJSON(['id','class']);
 
 		obj.paths.forEach(function(i) { i.set({strokeWidth: width}); });
 		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
@@ -76,8 +76,8 @@ proFabric.color = {
 	},
 	scaleToWidth: function(width) {
 		var obj = this.canvas.getActiveObject();
-		var before = obj.toJSON(['id','class']);
 		if(!obj || obj.class !== 'color') return;
+		var before = obj.toJSON(['id','class']);
 
 		var boundingRectFactor = obj.getBoundingRect().width / obj.getWidth();
 		obj.set({scaleX : width / obj.width / boundingRectFactor});	
@@ -88,8 +88,8 @@ proFabric.color = {
     },
     scaleToHeight: function(height) {
     	var obj = this.canvas.getActiveObject();
-    	var before = obj.toJSON(['id','class']);
     	if(!obj || obj.class !== 'color') return;
+    	var before = obj.toJSON(['id','class']);
 
     	var boundingRectFactor = obj.getBoundingRect().height / obj.getHeight();
     	obj.set({scaleY : height / obj.height / boundingRectFactor});
@@ -122,8 +122,8 @@ proFabric.color = {
 	},
 	set: function(option) {
 		var obj = this.canvas.getActiveObject();
-		var before = obj.toJSON(['id','class']);
 		if(!obj || obj.class !== 'color') return;
+		var before = obj.toJSON(['id','class']);
 
 		obj.paths.forEach(function(i) { i.set(option) });
 		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
