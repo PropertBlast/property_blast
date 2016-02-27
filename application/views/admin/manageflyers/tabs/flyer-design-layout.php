@@ -339,15 +339,15 @@
                 </div>
                 <div class="row mt-20 editor-objectsBox">
                     <div class="col-md-12">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/check56.svg')?>">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/circle111.svg')?>">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/heart13.svg')?>">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/plain.svg')?>">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/right11.svg')?>">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/square_2.svg')?>">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/square61.svg')?>">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/star129.svg')?>">
-                        <img class="svgImage" id="editor-setsImage" src="<?php echo base_url('public/admin/img/svg/triangle36.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/check56.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/circle111.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/heart13.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/plain.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/right11.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/square_2.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/square61.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/star129.svg')?>">
+                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/triangle36.svg')?>">
                     </div>
                 </div>
                 <div class="row pt-10">

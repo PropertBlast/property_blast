@@ -60,8 +60,8 @@ proFabric.text = {
     },
     set: function(options) {
         var obj = this.canvas.getActiveObject();
-        var before = obj.toJSON(['id','class']);
         if(!obj || obj.class !== 'text') return;
+        var before = obj.toJSON(['id','class']);
         obj.set(options);
         obj.setCoords();
         this.parent.savestate('modified',before,obj.toJSON(['id','class']));
