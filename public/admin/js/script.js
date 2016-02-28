@@ -276,7 +276,7 @@ $(document).ready(function($) {
     $(document).delegate('#cs-tablist>li', 'click', function() {
         var href = $(this).children('a').attr('href');
         $(href).children().each(function(index, el) {
-            proFabric.color.fill($(el).attr('data-id'), $(el).find('.evo-colorind').css('backgroundColor'));
+            proFabric.color.fill($(el).attr('data-id'), $(el).find('.evo-pointer').css('backgroundColor'));
         });
     });
     $(document).delegate('#editor-setsImage', 'click', function() {
@@ -303,7 +303,7 @@ $(document).ready(function($) {
         $('#cs-tabContent').children('.tab-pane').each(function(index, el) {
             var rowcolors = [];
             $(el).children('.colorRow').each(function(i, element) {
-                rowcolors.push($(element).find('div.evo-colorind').css("backgroundColor"));
+                rowcolors.push($(element).find('div.evo-pointer').css("backgroundColor"));
             });
             previousColor.push({id:$(el).attr('id'), colors:rowcolors});
         });
@@ -438,7 +438,7 @@ function colorPickerInit(){
     )
     .on('change.color', function(event, color){
         var type = $(this).data('type');
-        var _rgb = $(this).next('.evo-colorind').css('backgroundColor');
+        var _rgb = $(this).next('.evo-pointer').css('backgroundColor');
         colorPickerSubmit(_rgb, this);
     });
 }

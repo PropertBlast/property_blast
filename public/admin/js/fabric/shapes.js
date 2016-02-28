@@ -162,7 +162,7 @@ proFabric.shapes = {
     shapeSelected: function(obj){
     	$("#editor-svgWidth").val(Math.ceil(obj.width));
     	$("#editor-svgHeight").val(Math.ceil(obj.height));
-        $('#coler-picker[data-type=svgFill]').next('.evo-colorind').css('backgroundColor', obj.fill || '#000');
+        $('#coler-picker[data-type=svgFill]').next('.evo-pointer').css('backgroundColor', obj.fill || '#000');
     	if(obj.lockMovementX){
     		$("#object").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');
     	}
