@@ -37,11 +37,9 @@ var proFabric = new function(){
 
             // get the color array for the pixel under the mouse
             var px = ctx.getImageData(x, y, 1, 1).data;
-            var rgb_val = px[0] + ':' + px[1] + ':' + px[2] + ':' + px[3];
             // report that pixel data
             _pickerFlag = 0;
-            var rgba = 'rgba(' + px[0] + ',' + px[1] + ',' + px[2] + ',' + px[3] + ')';
-            var hex = proFabric.rgb2hex( rgba );
+            var rgb = 'rgb(' + px[0] + ',' + px[1] + ',' + px[2] + ')';
             //$('#picker').colpickSetColor(hex);
             var button = $('#editor-cpicker.btn-primary');
             if(button){
@@ -51,10 +49,9 @@ var proFabric = new function(){
                 that.set.setActiveobj($(button).attr('data-id'));
                 $(button).removeClass('btn-primary');
                 var type = $(button).attr('data-type');
-                var el = $('.colorpicker[data-type='+type+']');
-                $(el).css('backgroundColor',hex);
-                var hexHash = hex.split('#')[1];
-                colorPickerSubmit('', hexHash, '', el);
+                var el = $('#coler-picker[data-type='+type+']');
+                $(el).next('.evo-pointer').css('backgroundColor',rgb);
+                colorPickerSubmit(rgb, el);
             }
         }
     });
@@ -74,6 +71,14 @@ var proFabric = new function(){
 	this.canvas.on('object:remove', function(o){});
 	this.canvas.on('object:modified', function(o){
         var object = o.target;
+        if(object){
+            object.set({
+                original_scaleX : object.scaleX / (that.zoom/100),
+                original_scaleY : object.scaleY / (that.zoom/100),
+                original_left   : object.left / (that.zoom/100),
+                original_top    : object.top / (that.zoom/100)
+            });
+        }
         if(object.class=="text"){
             that.text.updateUI(object);
         }
@@ -133,7 +138,6 @@ var proFabric = new function(){
             $('#editor-mainTabs a[href="#color"]').tab('show');
             proFabric.color.colorSelected(object);
         }
-		console.log(object);
 		var dataId=object.class;
 		$("#tabs li" ).each(function() {
 			if($(this).data('id')==object.class){

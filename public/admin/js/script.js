@@ -343,6 +343,7 @@ $(document).ready(function($) {
     $(document).delegate('button#editor-cpicker', 'click', function() {
         var obj = proFabric.get.currentObject();
         if(!obj) return;
+        $(this).addClass('btn-primary');
         var _id = obj.id;
         $('div.canvas-container, canvas').css('cursor', 'crosshair');
         $(this).addClass('btn-primary').attr('data-id', _id);
