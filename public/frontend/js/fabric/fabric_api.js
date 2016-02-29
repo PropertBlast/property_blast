@@ -374,21 +374,12 @@ var proFabric = new function(){
                             });
                             var _img = fabric.util.object.clone(temp);
                             var imageGroup = new fabric.Group([ _img,group ], {
-<<<<<<< HEAD
                                 left: temp.original_left,
                                 top: temp.original_top,
                                 scaleY:temp.scaleY,
                                 scaleX:temp.scaleX,
                                 original_scaleX:temp.original_scaleX,
                                 original_scaleY:temp.original_scaleY,
-=======
-                                //left: temp.original_left,
-                                //top: temp.original_top,
-                                //scaleY:temp.scaleY,
-                                //scaleX:temp.scaleX,
-                                //original_scaleX:temp.original_scaleX,
-                                //original_scaleY:temp.original_scaleY,
->>>>>>> origin/master
                                 original_top:temp.original_top,
                                 original_left:temp.original_left,
                                 id:temp.id,

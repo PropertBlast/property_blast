@@ -30,6 +30,8 @@ proFabric.shapes = {
 				top: _top,
 				scaleX: _scaleX,
 				scaleY: _scaleY,
+				width: 120,
+				height: 120,
 				class: 'shape',
 				id: (_options && _options.id) || self.parent.get.guid(),
 				opacity: (_options && _options.opacity) || 1,
