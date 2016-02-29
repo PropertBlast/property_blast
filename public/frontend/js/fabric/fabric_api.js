@@ -374,16 +374,27 @@ var proFabric = new function(){
                             });
                             var _img = fabric.util.object.clone(temp);
                             var imageGroup = new fabric.Group([ _img,group ], {
+<<<<<<< HEAD
                                 left: temp.original_left,
                                 top: temp.original_top,
                                 scaleY:temp.scaleY,
                                 scaleX:temp.scaleX,
                                 original_scaleX:temp.original_scaleX,
                                 original_scaleY:temp.original_scaleY,
+=======
+                                //left: temp.original_left,
+                                //top: temp.original_top,
+                                //scaleY:temp.scaleY,
+                                //scaleX:temp.scaleX,
+                                //original_scaleX:temp.original_scaleX,
+                                //original_scaleY:temp.original_scaleY,
+>>>>>>> origin/master
                                 original_top:temp.original_top,
                                 original_left:temp.original_left,
                                 id:temp.id,
                                 num:t_id,
+                                originX: 'center',
+                                originY: 'center',
                                 class:"group",
                                 lockMovementX: true,
                                 lockMovementY: true,
@@ -680,8 +691,8 @@ var proFabric = new function(){
         var obj = that.canvas.getActiveObject();
         var before = obj.toJSON(['id','class']);
         console.log(obj);
-                var top = obj.top;
-                var left = obj.left;
+                var top = obj.original_top;
+                var left = obj.original_left;
                 var _width = obj.width;
                 var _height = obj.height;
                 var _num = obj.num;
@@ -693,10 +704,10 @@ var proFabric = new function(){
                 console.log("width : "+_width);
                 console.log("height : "+_height);
                 console.log("num : "+_num);
+                console.log(" ------------- ");
                 //console.log(obj['_objects']);
                 //console.log(obj['_objects'][0].src);
                 //_object['_objects'][0].src = source;
-                that.canvas.fxRemove(obj);
                 //that.canvas.add(_object);
                 //that.canvas.renderAll();
                 fabric.Image.fromURL(source, function(img) {
@@ -721,9 +732,6 @@ var proFabric = new function(){
                         scaleX:1,
                         scaleY:1
                     });
-                    that.canvas.remove();
-                    //that.canvas.add(img);
-                    //that.canvas.renderAll();
                     var circle = new fabric.Circle({
                         radius: 25,
                         fill: 'white',
@@ -765,6 +773,8 @@ var proFabric = new function(){
                         class:"image",
                         type:"",
                         num:_num,
+                        original_top:obj.original_top,
+                        original_left:obj.original_left,
                         lockMovementX: true,
                         lockMovementY: true,
                         lockRotation: true,
@@ -773,9 +783,15 @@ var proFabric = new function(){
                         hasControls: false,
                         editable :false,
                         selectable :false,
-                        scaleX:1,
-                        scaleY:1
+                        //scaleX:1,
+                        //scaleY:1
                     });
+                    that.canvas.fxRemove(obj);
+                    console.log(" ------------- ");
+                    console.log(" imageGroup.left : "+imageGroup.left);
+                    console.log(" imageGroup.top : "+imageGroup.top);
+                    console.log(" imageGroup.width : "+imageGroup.width);
+                    console.log(" imageGroup.height : "+imageGroup.height);
                     that.canvas.add(imageGroup);
                     that.savestate('modified',before,imageGroup.toJSON(['id','class']));
                     that.canvas.renderAll();
