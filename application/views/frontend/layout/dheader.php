@@ -84,7 +84,7 @@ ini_set('include_path', base_url()+'application/views/frontend/layout/upload.php
     <link rel="stylesheet" id="avada-animations-css" href="<?php echo base_url() ?>public/frontend/css/animations.css" type="text/css" media="all">
     <link rel="stylesheet" id="avada-woocommerce-css" href="<?php echo base_url() ?>public/frontend/css/woocommerce.css" type="text/css" media="all">
     <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/greensock.js"></script>
-    <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/layerslider.kreaturamedia.jquery.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>public/frontend/js/layerslider.transitions.js"></script>

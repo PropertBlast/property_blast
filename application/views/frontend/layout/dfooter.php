@@ -8,6 +8,7 @@
     <script src="<?php echo base_url() ?>public/frontend/js/fabric/text.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/fabric/image.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/fabric/shapes.js"></script>
+    <script src="<?php echo base_url() ?>public/frontend/js/json.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/script.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/dropzone.min.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/wan-spinner.js"></script>

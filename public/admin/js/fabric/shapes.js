@@ -19,7 +19,7 @@ proFabric.shapes = {
             _top    = (_options && _options.top) || (self.parent.get.height()/4)/(self.parent.get.zoom() / 100),
             _scaleX = (_options && _options.scaleX) || (1/(self.parent.get.zoom() / 100)),
             _scaleY = (_options && _options.scaleY) || (1/(self.parent.get.zoom() / 100));
-
+        console.log(src);
 		fabric.loadSVGFromURL(src, function (objects, options) {
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
@@ -58,16 +58,15 @@ proFabric.shapes = {
 			});
 			self.canvas.renderAll();
 			self.parent.savestate('add', obj.toJSON(['id','class']), obj.toJSON(['id','class']));
-
 		}, function (item, object) {
 			object.set('id', item.getAttribute('id'));
 			object.set('class', item.getAttribute('class'));
-			object.set('original_scaleX', item.getAttribute('original_scaleX'));
-			object.set('original_scaleY', item.getAttribute('original_scaleY'));
-			object.set('original_left', item.getAttribute('original_left'));
-			object.set('original_top', item.getAttribute('original_top'));
+			object.set('original_scaleX', item.getAttribute('scaleX'));
+			object.set('original_scaleY', item.getAttribute('scaleY'));
+			object.set('original_left', item.getAttribute('left'));
+			object.set('original_top', item.getAttribute('top'));
 			return object.id;
-		}).bind(this);
+		});
 	},
 	stroke_color: function(color) {
 		var obj = this.canvas.getActiveObject();
