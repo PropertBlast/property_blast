@@ -5,8 +5,8 @@ var _img_num=1;
 var undo_redo_tmp_obj=[],canvas_state = new Array(), current_state=0;
 var proFabric = new function(){
 	var that = this; // refrence for proFabric
-	this.canvasWidth = 576;
-	this.canvasHeight = 864;
+	this.canvasWidth = 510;
+	this.canvasHeight = 650;
     var Top = this.canvasHeight;
     var Left = this.canvasWidth;
 	this.zoom = 0, this.defaultZoom = 0;
@@ -91,13 +91,13 @@ var proFabric = new function(){
 		else if(object.class=="image"){
 			//proFabric.image.imageSelected(object);
             console.log(object);
-            object.forEachObject(function(temp){
+            /*object.forEachObject(function(temp){
                 if(temp.class=="img-num"||temp.class=="img-num-text")
                 {
                     that.canvas.remove(temp);
                     that.canvas.renderAll();
                 }
-            });
+            });*/
 		}
         else if(object.class=='shape'){
 			that.disableImgOpts();
@@ -392,23 +392,24 @@ var proFabric = new function(){
                                 //original_left:temp.original_left,
                                 //originX: "center",
                                 //originY: "center",
-                                left: (temp.left+((temp.width)/2)),
-                                top: (temp.top+((temp.height)/2))
+                                left: (temp.left+((temp.width)/2)-25),
+                                top: (temp.top+((temp.height)/2)-25)
                             });
                             var _img = fabric.util.object.clone(temp);
+                            //alert(t_id+" ||| img.height : "+_img.height+" ||| img.width : "+_img.width+" ||| img.top : "+_img.top+" ||| img.left : "+_img.left);
                             var imageGroup = new fabric.Group([ _img,group ], {
                                 //left: temp.original_left,
                                 //top: temp.original_top,
-                                //scaleY:temp.scaleY,
-                                //scaleX:temp.scaleX,
-                                //original_scaleX:temp.original_scaleX,
-                                //original_scaleY:temp.original_scaleY,
+                                //scaleY:1,
+                                //scaleX:1,
+                                original_scaleX:temp.original_scaleX,
+                                original_scaleY:temp.original_scaleY,
+                                originX: "center",
+                                originY: "center",
                                 original_top:temp.original_top,
                                 original_left:temp.original_left,
                                 id:temp.id,
                                 num:t_id,
-                                originX: 'center',
-                                originY: 'center',
                                 class:"group",
                                 lockMovementX: true,
                                 lockMovementY: true,
@@ -419,7 +420,6 @@ var proFabric = new function(){
                                 editable :false,
                                 selectable :false
                             });
-                            //console.log(imageGroup);
                             that.canvas.add(imageGroup);
                             that.canvas.fxRemove(temp);
                             t_id=t_id+1;
@@ -431,6 +431,7 @@ var proFabric = new function(){
                     var o_Width = object.width;
                     var o_Height = object.height;
                     console.log(object.class);
+                    //alert(t_id+" ||| object.width : "+object.width+" ||| object.height : "+object.height+" ||| object.top : "+object.top+" ||| object.left : "+object.left);
                     if(object.class=="text")
                     {
                         var _txt = object.text;
@@ -778,15 +779,17 @@ var proFabric = new function(){
                         selectable :false
                     });
                     var group = new fabric.Group([ circle, text ], {
-                        left: (left+((_width)/4)),
-                        top: (top+((_height)/4))
+                        left: (left+((_width)/2)),
+                        top: (top+((_height)/2)),
+                        originX: 'center',
+                        originY: 'center'
                     });
                     var imageGroup = new fabric.Group([img,group ], {
                         left: left,
                         top: top,
                         id:_id,
                         class:"image",
-                        type:"",
+                        //type:"",
                         num:_num,
                         original_top:obj.original_top,
                         original_left:obj.original_left,
@@ -798,8 +801,8 @@ var proFabric = new function(){
                         hasControls: false,
                         editable :false,
                         selectable :false,
-                        //scaleX:1,
-                        //scaleY:1
+                        scaleX:1,
+                        scaleY:1
                     });
                     that.canvas.fxRemove(obj);
                     console.log(" ------------- ");
