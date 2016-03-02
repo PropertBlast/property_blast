@@ -14,6 +14,8 @@ proFabric.image = {
                 scaleX              : _scaleX,
                 scaleY              : _scaleY,
                 class               : 'image',
+                originX             : 'center',
+                originY             : 'center',
                 linkid              : '',
                 width               : (_options && _options.width) || 150,
                 height              : (_options && _options.height) || 150,

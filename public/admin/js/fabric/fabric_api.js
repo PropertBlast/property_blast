@@ -437,8 +437,6 @@ var proFabric = new function(){
 				obj.original_left   = typeof obj.original_left === "undefined"   ? obj.left   : obj.original_left;
 				obj.original_top    = typeof obj.original_top === "undefined"    ? obj.top    : obj.original_top;
 
-                console.log(scale_X , (zoom/100))
-
 				obj.scaleX = scale_X * (zoom/100);
 				obj.scaleY = scale_Y * (zoom/100);
 				obj.left   = left   * (zoom/100);
