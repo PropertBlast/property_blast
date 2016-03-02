@@ -19,7 +19,6 @@ proFabric.shapes = {
             _top    = (_options && _options.top) || (self.parent.get.height()/4)/(self.parent.get.zoom() / 100),
             _scaleX = (_options && _options.scaleX) || (1/(self.parent.get.zoom() / 100)),
             _scaleY = (_options && _options.scaleY) || (1/(self.parent.get.zoom() / 100));
-        console.log(src);
 		fabric.loadSVGFromURL(src, function (objects, options) {
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
@@ -58,6 +57,9 @@ proFabric.shapes = {
 			});
 			self.canvas.renderAll();
 			self.parent.savestate('add', obj.toJSON(['id','class']), obj.toJSON(['id','class']));
+			if(_options.callback){
+				_options.callback();
+			}
 		}, function (item, object) {
 			object.set('id', item.getAttribute('id'));
 			object.set('class', item.getAttribute('class'));

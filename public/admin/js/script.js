@@ -281,7 +281,15 @@ $(document).ready(function($) {
     });
     $(document).delegate('#editor-setsImage', 'click', function() {
         var src = $(this).attr('src'),
-            _id = proFabric.get.guid();
+            _id = proFabric.get.guid(),
+            previousColor = [];
+        $('#cs-tabContent').children('.tab-pane').each(function(index, el) {
+            var rowcolors = [];
+            $(el).children('.colorRow').each(function(i, element) {
+                rowcolors.push($(element).find('div.evo-pointer').css("backgroundColor"));
+            });
+            previousColor.push({id:$(el).attr('id'), colors:rowcolors});
+        });
         proFabric.color.add(src, {
             id : _id,
             callback : function () {
@@ -292,6 +300,12 @@ $(document).ready(function($) {
                     $(_html).appendTo(el);
                 });
                 colorPickerInit();
+                $.each(previousColor.reverse(), function(index, val) {
+                    $('#'+val.id).find('.colorRow').each(function(i, el) {
+                        console.log(val.colors[i]);
+                        $(el).find('#coler-picker').colorpicker("val", val.colors[i]);
+                    });
+                });
             }
         });
     });
