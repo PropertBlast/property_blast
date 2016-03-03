@@ -48,6 +48,7 @@ proFabric.shapes = {
 			self.parent.canvas.setActiveObject(obj);
 			self.scaleToWidth(120);
 			self.scaleToHeight(120);
+			self.shapeSelected(obj);
             
 			obj.set({
 				original_scaleX : obj.scaleX,
@@ -161,8 +162,8 @@ proFabric.shapes = {
         this.canvas.renderAll();
     },
     shapeSelected: function(obj){
-    	$("#editor-svgWidth").val(Math.ceil(obj.width));
-    	$("#editor-svgHeight").val(Math.ceil(obj.height));
+    	$("#editor-svgWidth").val(Math.ceil(obj.width * obj.scaleX));
+    	$("#editor-svgHeight").val(Math.ceil(obj.height * obj.scaleY));
         $('#coler-picker[data-type=svgFill]').next('.evo-pointer').css('backgroundColor', obj.fill || '#000');
     	if(obj.lockMovementX){
     		$("#object").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');

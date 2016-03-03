@@ -122,6 +122,7 @@ var proFabric = new function(){
     });
 	this.canvas.on('object:selected', function(o){
 		var object = o.target;
+        console.log(object);
         if(object.class=="text"){
             $('#editor-mainTabs a[href="#text"]').tab('show');
             that.text.updateUI(object);
@@ -331,8 +332,14 @@ var proFabric = new function(){
 	this.export = {
 		svg : function(){
 		},
+        base64 : function(){
+            that.deselectCanvas();
+            return that.canvas.toDataURL({
+                format: 'png'
+            });
+        },
 		json : function(){
-            return that.canvas.toJSON(['id','original_scaleX','original_scaleY','original_left','original_top','class']);
+            return that.canvas.toJSON(['id','original_scaleX','original_scaleY','original_left','original_top','class','index']);
 		}
 	};
 	this.import = {
@@ -344,7 +351,7 @@ var proFabric = new function(){
     this.move = {
         up : function(){
             var obj = that.canvas.getActiveObject();
-            if(!obj) return;
+            if(!obj || obj.lockMovementY) return;
             obj.set({
                 top : (obj.top-5)
             });
@@ -352,7 +359,7 @@ var proFabric = new function(){
         },
         down : function(){
             var obj = that.canvas.getActiveObject();
-            if(!obj) return;
+            if(!obj || obj.lockMovementY) return;
             obj.set({
                 top : (obj.top+5)
             });
@@ -360,7 +367,7 @@ var proFabric = new function(){
         },
         left : function(){
             var obj = that.canvas.getActiveObject();
-            if(!obj) return;
+            if(!obj || obj.lockMovementX) return;
             obj.set({
                 left : (obj.left-5)
             });
@@ -368,7 +375,7 @@ var proFabric = new function(){
         },
         right : function(){
             var obj = that.canvas.getActiveObject();
-            if(!obj) return;
+            if(!obj || obj.lockMovementX) return;
             obj.set({
                 left : (obj.left+5)
             });
