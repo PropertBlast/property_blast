@@ -69,8 +69,8 @@ proFabric.image = {
     updateUI: function(obj){
         $('#editor-imageList').children().removeClass('btn-primary')
         $('#editor-imageList').find('button[data-id='+obj.id+']').addClass('btn-primary');
-        $("#editor-imageWidth").val(Math.ceil(obj.width));
-        $("#editor-imageHeight").val(Math.ceil(obj.height));
+        $("#editor-imageWidth").val(Math.ceil(obj.width * obj.scaleX));
+        $("#editor-imageHeight").val(Math.ceil(obj.height * obj.scaleY));
         if(obj.lockMovementX){
             $("#image").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');
         }

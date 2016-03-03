@@ -96,19 +96,22 @@ $(document).ready(function($) {
         proFabric.set.sendBack();
     });
     $(document).delegate('#editor-renameSet', 'click', function() {
-        var sign = prompt("Write name for active color sample.");
-        if (sign) {
-            $('#cs-tablist').find('.active').children('a').html(sign);
-        }
+        bootbox.prompt("Write name for active color sample", function(result) {                
+            if (result != null) {
+                $('#cs-tablist').find('.active').children('a').html(result);
+            }
+        });
     });
     $(document).delegate('#editor-deleteSet', 'click', function() {
-        var del = confirm("Are you sure?");
-        if (del) {
-            $('#cs-tablist').find('.active').remove();
-            $('#cs-tabContent').find('.active').remove();
-            console.log($('#cs-tablist').children('li:first-child'))
-            $('#cs-tablist').children('li:first-child').find('a').trigger('click');
-        }
+        if($('#cs-tablist').children('li').length <= 1)return;
+        bootbox.confirm("Are you sure?", function(result) {
+            if (result) {
+                $('#cs-tablist').find('.active').remove();
+                $('#cs-tabContent').find('.active').remove();
+                console.log($('#cs-tablist').children('li:first-child'))
+                $('#cs-tablist').children('li:first-child').find('a').trigger('click');
+            }
+        });
     });
     $(document).delegate('body', 'keydown', function(e) {
         if(e.target.tagName == 'INPUT' || e.target.tagName == 'TEXTAREA'){
@@ -281,7 +284,15 @@ $(document).ready(function($) {
     });
     $(document).delegate('#editor-setsImage', 'click', function() {
         var src = $(this).attr('src'),
-            _id = proFabric.get.guid();
+            _id = proFabric.get.guid(),
+            previousColor = [];
+        $('#cs-tabContent').children('.tab-pane').each(function(index, el) {
+            var rowcolors = [];
+            $(el).children('.colorRow').each(function(i, element) {
+                rowcolors.push($(element).find('div.evo-pointer').css("backgroundColor"));
+            });
+            previousColor.push({id:$(el).attr('id'), colors:rowcolors});
+        });
         proFabric.color.add(src, {
             id : _id,
             callback : function () {
@@ -292,6 +303,12 @@ $(document).ready(function($) {
                     $(_html).appendTo(el);
                 });
                 colorPickerInit();
+                $.each(previousColor.reverse(), function(index, val) {
+                    $('#'+val.id).find('.colorRow').each(function(i, el) {
+                        console.log(val.colors[i]);
+                        $(el).find('#coler-picker').colorpicker("val", val.colors[i]);
+                    });
+                });
             }
         });
     });
@@ -353,7 +370,25 @@ $(document).ready(function($) {
 
     $(document).delegate("#save", "click", function(event) {
         var json = JSON.stringify(proFabric.export.json());
-        console.log(json);
+        $('#export-image-proof').attr('src', proFabric.export.base64());
+        _colorJson = [];
+        $('button#editor-textAssign').each(function(index, el) {
+            var _type = $(el).attr('data-type'),
+                _id = $(el).attr('data-id'),
+                _text = '';
+            if(_id){
+                _text = proFabric.text.getTextByID(_id);
+                console.log(_text);
+            }
+            _colorJson.push({
+                'type'  : _type,
+                'id'    : _id,
+                'text'  : _text
+            });
+        });
+        console.log(_colorJson);
+        $('#deliver-json-names').html(JSON.stringify(_colorJson, null, 4));
+        //console.log(json);
     });
 
     $(document).delegate('#fullScreenEditor', 'click', function() {
@@ -421,6 +456,7 @@ $(document).ready(function($) {
     $(document).delegate("#editor-zoomButton", "click", function(event) {
         var value = parseInt($(this).data('number'));
         if(value > 0){
+            $('.wan-spinner').find('input').val(value);
             proFabric.zoomcanvas(value);
         }
     });

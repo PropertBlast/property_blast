@@ -117,6 +117,7 @@ var proFabric = new function(){
     });
 	this.canvas.on('object:selected', function(o){
 		var object = o.target;
+        console.log(object);
         if(object.class=="text"){
             $('#editor-mainTabs a[href="#text"]').tab('show');
             that.text.updateUI(object);
@@ -327,8 +328,14 @@ var proFabric = new function(){
 	this.export = {
 		svg : function(){
 		},
+        base64 : function(){
+            that.deselectCanvas();
+            return that.canvas.toDataURL({
+                format: 'png'
+            });
+        },
 		json : function(){
-            return that.canvas.toJSON(['id','original_scaleX','original_scaleY','original_left','original_top','class']);
+            return that.canvas.toJSON(['id','original_scaleX','original_scaleY','original_left','original_top','class','index']);
 		}
 	};
 	this.import = {
@@ -340,7 +347,7 @@ var proFabric = new function(){
     this.move = {
         up : function(){
             var obj = that.canvas.getActiveObject();
-            if(!obj) return;
+            if(!obj || obj.lockMovementY) return;
             obj.set({
                 top : (obj.top-5)
             });
@@ -348,7 +355,7 @@ var proFabric = new function(){
         },
         down : function(){
             var obj = that.canvas.getActiveObject();
-            if(!obj) return;
+            if(!obj || obj.lockMovementY) return;
             obj.set({
                 top : (obj.top+5)
             });
@@ -356,7 +363,7 @@ var proFabric = new function(){
         },
         left : function(){
             var obj = that.canvas.getActiveObject();
-            if(!obj) return;
+            if(!obj || obj.lockMovementX) return;
             obj.set({
                 left : (obj.left-5)
             });
@@ -364,7 +371,7 @@ var proFabric = new function(){
         },
         right : function(){
             var obj = that.canvas.getActiveObject();
-            if(!obj) return;
+            if(!obj || obj.lockMovementX) return;
             obj.set({
                 left : (obj.left+5)
             });
@@ -432,8 +439,6 @@ var proFabric = new function(){
 				obj.original_scaleY = typeof obj.original_scaleY === "undefined" ? obj.scaleY : obj.original_scaleY;
 				obj.original_left   = typeof obj.original_left === "undefined"   ? obj.left   : obj.original_left;
 				obj.original_top    = typeof obj.original_top === "undefined"    ? obj.top    : obj.original_top;
-
-                console.log(scale_X , (zoom/100))
 
 				obj.scaleX = scale_X * (zoom/100);
 				obj.scaleY = scale_Y * (zoom/100);

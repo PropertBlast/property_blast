@@ -41,6 +41,7 @@ proFabric.color = {
 			self.canvas.renderAll();
 			self.scaleToWidth(120);
 			self.scaleToHeight(120);
+			self.colorSelected(obj);
 			if(_options.callback){
 				_options.callback();
 			}
@@ -131,8 +132,8 @@ proFabric.color = {
 		this.canvas.renderAll();
 	},
 	colorSelected: function(obj){
-		$("#editor-colorWidth").val(Math.ceil(obj.width));
-		$("#editor-colorHeight").val(Math.ceil(obj.height));
+		$("#editor-colorWidth").val(Math.ceil(obj.width * obj.scaleX));
+		$("#editor-colorHeight").val(Math.ceil(obj.height * obj.scaleY));
 		if(obj.lockMovementX){
 			$("#lock_color").addClass('ui-state-active');
 			$("#unlock_color").removeClass('ui-state-active');

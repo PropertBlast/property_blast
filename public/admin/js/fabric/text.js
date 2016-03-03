@@ -53,6 +53,20 @@ proFabric.text = {
         self.canvas.setActiveObject(text);
         self.canvas.renderAll();
     },
+    getTextByID: function(_id) {
+        var _text = '';
+        this.canvas.forEachObject(function(object){
+            if(object.id == _id){
+                if(typeof object.bullet !== 'undefined' && object.bullet){
+                    _text = object.bulletText;
+                    return;
+                }
+                _text = object.text;
+                return;
+            }
+        });
+        return _text;
+    },
     get: function(property) {
         var obj = this.canvas.getActiveObject();
         if(obj && obj.class !== 'text') return;

@@ -71,24 +71,38 @@ var proFabric = new function(){
             that.disableImgOpts();
         }
     });
-	this.canvas.on('selection:cleared', function(o){});
+    this.canvas.on('before:selection:cleared', function(o){
+        var object = o.target;
+        console.log('before:selection:cleared', object);
+        if(object && object.class=='image'){
+            that.replaceimage(object.group_src, object);
+        }
+    });
+	this.canvas.on('selection:cleared', function(o){
+    });
 	this.canvas.on('selection:created', function(o){});
 	this.canvas.on('object:added', function(o){});
 	this.canvas.on('object:remove', function(o){});
-	this.canvas.on('object:modified', function(o){
-
-    });
+	this.canvas.on('object:modified', function(o){});
 	this.canvas.on('object:rotating', function(o){});
 	this.canvas.on('object:scaling', function(o){});
 	this.canvas.on('object:moving', function(o){});
 	this.canvas.on('object:selected', function(o){
 		var object = o.target;
         console.log(object);
-        if(object.class=="text") {
+		var dataId=object.class;
+        if(object.class=="text"){
             that.text.updateUI(object);
             that.text.enableTextOpts();
-			that.disableImgOpts();
+            that.disableImgOpts();
         }
+        else if(object.class=='image'){
+            that.text.disableTextOpts();
+            that.enableImgOpts();
+            $("#settingOpt").show();
+            $("#imageOpt").show();
+        }
+<<<<<<< HEAD
 		else if(object.class=="image"){
 			//proFabric.image.imageSelected(object);
             console.log(object);
@@ -108,29 +122,18 @@ var proFabric = new function(){
                 });
             }
 		}
+=======
+>>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
         else if(object.class=='shape'){
-			that.disableImgOpts();
+            that.disableImgOpts();
             that.text.disableTextOpts();
             proFabric.shapes.shapeSelected(object);
         }
-		var dataId=object.class;
 		$("#tabs li" ).each(function() {
 			if($(this).data('id')==object.class){
 				$(this).trigger('click');
 			}
 		});
-		if(object.class=="text"){
-
-		}
-		else if(object.class=='image'){
-            that.text.disableTextOpts();
-			that.enableImgOpts();
-            $("#settingOpt").show();
-            $("#imageOpt").show();
-		}
-		else if(object.class=='shape'){
-			proFabric.shapes.shapeSelected(object);
-		}
 	});
     this.canvas.on('mouse:move', function(e) {
 
@@ -331,9 +334,10 @@ var proFabric = new function(){
 		json :function(_json){
                 var _JSON_NEW = JSON.stringify(_json);
                 var _img_flag = true;
-                var i = 0;
+                var i = 0, image_number=0;
                 $('.imgOptclass').hide();
                 that.canvas.loadFromJSON(_JSON_NEW, function(){
+<<<<<<< HEAD
                     var lenght = that.canvas._objects.length;
                     var t_id = 1;
                     for(var i = 0 ; i < lenght ; i++) {
@@ -350,10 +354,17 @@ var proFabric = new function(){
                             console.log("original_left : "+temp.original_left);
                             console.log("left : "+temp.left);
                             console.log("---");
+=======
+                    console.log(that.canvas);
+                    that.canvas.forEachObject(function (obj) {
+                        image_number++;
+                        if(obj.class == "image"){
+>>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
                             var circle = new fabric.Circle({
-                                radius: 25,
+                                radius: 20,
                                 fill: 'white',
                                 class:"img-num",
+<<<<<<< HEAD
                                 id:temp.id,
                                 //scaleY:temp.original_scaleY,
                                 //scaleX:temp.original_scaleX,
@@ -433,11 +444,54 @@ var proFabric = new function(){
                         }
                     }
                     that.canvas.renderAll.bind(that.canvas);
+=======
+                                opacity : 0.8,
+                                originX: "center",
+                                originY: "center"
+                            });
+                            var text = new fabric.Text(image_number.toString(), {
+                                fontSize: 18,
+                                originX: "center",
+                                originY: "center"
+                            });
+                            var circleGroup = new fabric.Group([circle, text], {
+                                left: (obj.left+((obj.width * obj.scaleX)/2)),
+                                top: (obj.top+((obj.height * obj.scaleY)/2)),
+                                originX: "center",
+                                originY: "center"
+                            });
+                            var _img = fabric.util.object.clone(obj);
+                            _img.set({
+                                original_top    : 0,
+                                original_left   : 0,
+                                originX         : 'left',
+                                originY         : 'top'
+                            });
+                            var imageGroup = new fabric.Group([_img, circleGroup], {
+                                original_scaleX : 1,
+                                original_scaleY : 1,
+                                original_top    : obj.original_top,
+                                original_left   : obj.original_left,
+                                originX         : 'left',
+                                originY         : 'top',
+                            });
+                            var _im = imageGroup.toDataURL();
+                            obj.set({
+                                original_src : obj.src,
+                                group_src : _im
+                            });
+                            that.replaceimage(_im, obj);
+                        }
+                    });
+>>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
                 },function(o, object) {
                     var col = object.fill;
                     var o_Width = object.width;
                     var o_Height = object.height;
+<<<<<<< HEAD
                     console.log(object.class);
+=======
+>>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
                     if(object.class=="text")
                     {
                         var _txt = object.text;
@@ -449,7 +503,6 @@ var proFabric = new function(){
                                 _count++;
                             }
                         }
-                        console.log(_count);
                         object.set({nextline : _count});
                     }
                     object.set({
@@ -468,30 +521,58 @@ var proFabric = new function(){
                         object.set({selectable :false, stroke:col});
                         object.selectable = false;
                     }
-                    if(object.class=="image"&&object.src)
+                    if(object.class == "image"&& object.src){
                         _img_flag = false;
-                    //console.log((i++)+" <> "+object);
-                    if(object.src) {
                         $('.imgOptclass').show();
-                        _img_flag = false;
-                        //document.getEleme ntById('img-present-box').innerHTML = '<div class="rect1 btnImgs" style="width: 48px;margin-left: 20px;height:inherit;border-radius:110px;background-color: #4353A0;text-align: center;font-weight: bolder; color: aliceblue;height: 46px;" id="'+object.id+'" value="'+_img_num+'">';
                         $('#img-present-box').append('<div class="row" style="margin: 0px;padding: 0px;"><div class="col-md-6 col-xs-6" style="margin: 0px;padding: 0px;"><div class="row" style="margin-top: 12px;"><div class="divbtnImgs col-md-3 col-xs-3" align="left" style="font-weight: bolder;font-family: sans-serif;font-size: 14px;" id="'+object.id+'">'+_img_num+'</div><div align="left" class="col-md-9 col-xs-9" style="font-size: 14px;font-weight: bolder;font-family: sans-serif;" align="right">Add Image</div></div></div>'+
                         '<div class="col-md-6 col-xs-6" align="right" style="margin: 0px;padding: 0px;"><button type="button" class="btnImgs btn btn-success" ' +
                         'style="margin-top: 5px;font-weight: bolder;"' +
                         'id="'+object.id+'" value="'+_img_num+'" >Upload</button></div></div>');
-                        //console.log(JSON.stringify(object));
                         _img_num++
-                        //console.log(JSON.stringify(object));
-                        console.log("-------------------------------------------------------------------");
-                        console.log(object.id);
-                        console.log("-------------------------------------------------------------------");
                     }
                 });
-                //if(_img_flag)
-                    //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Flag Up : '+_img_flag);
                 that.canvas.renderAll();
         }
 	};
+    this.replaceimage = function(newsrc, obj){
+        var ImageObj = new Image();
+        ImageObj.onload = function() {
+            image = new fabric.Image(ImageObj);
+            image.top  = obj.top;
+            image.left = obj.left;
+            image.scaleX = obj.scaleX;
+            image.scaleY = obj.scaleY;
+            image.width = obj.width;
+            image.height = obj.height;
+            image.index= obj.index;
+            image.src=newsrc;
+            image.id = obj.id;
+            image.class=obj.class;
+            image.angle=obj.angle;
+            image.original_scaleX   = obj.original_scaleX;
+            image.original_scaleY = obj.original_scaleY;
+            image.original_left     = obj.original_left;
+            image.original_top      = obj.original_top;
+
+            image.set({
+                original_src    : obj.src,
+                group_src       : obj._im,
+                lockMovementX   : true,
+                lockMovementY   : true,
+                lockRotation    : true,
+                lockScalingX    : true,
+                lockScalingY    : true,
+                hasControls     : false,
+                editable        : false,
+            });
+            that.canvas.add(image);
+            that.canvas.moveTo(image, that.canvas.getObjects().indexOf(obj));
+            that.canvas.setActiveObject(image);
+            that.canvas.remove(obj);
+            that.canvas.renderAll();
+        };
+        ImageObj.src = newsrc;
+    }
     this.rgb2hex=function (rgb){
         rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
         return (rgb && rgb.length === 4) ? "#" +
@@ -505,115 +586,27 @@ var proFabric = new function(){
 		that.canvas.discardActiveGroup()
 	};
 	this.zoomcanvas = function(zoom){
-		this.zoom = zoom;
-		this.canvas.forEachObject(function(obj){
-			if(obj.type === 'group'){
-                console.log('group');
-				obj.saveState();
-				var groupobj = obj['_objects'];
-                console.log(obj,groupobj);
-				
-					var objct = groupobj[0],
-                    scale_X= typeof objct.original_scaleX === "undefined" ? objct.scaleX : objct.original_scaleX,
-					scale_Y= typeof objct.original_scaleY === "undefined" ? objct.scaleY : objct.original_scaleY,
-					left   = typeof objct.original_left === "undefined"   ? objct.left   : objct.original_left,
-					top    = typeof objct.original_top === "undefined"    ? objct.top    : objct.original_top;
-					console.log('?-------------------------------------------------?');
-                    console.log('objct.original_scaleX : ' + objct.original_scaleX + ' || objct.original_scaleY : '+ objct.original_scaleY);
-                    console.log('objct.original_top : ' + objct.original_top + ' || objct.original_left : '+ objct.original_left);
-                    console.log('ScaleX : '+scale_X + ' || objct.scaleX : '+objct.scaleX);
-                    console.log('ScaleX : '+scale_Y + ' || objct.scaleX : '+objct.scaleY);
-                    console.log('left : '+left + ' || objct.left : '+objct.left);
-                    console.log('top : '+top + ' || objct.top : '+objct.top);
-                    console.log('?-------------------------------------------------?');
-                    console.log('zoom : '+zoom);
-                    console.log("objct.scaleX : "+objct.scaleX);
-                    objct.scaleX = Math.abs(objct.scaleX) * (zoom/100);
-					console.log("New objct.scaleX : "+objct.scaleX);
-                    console.log("objct.scaleY : "+objct.scaleY);
-                    objct.scaleY = Math.abs(objct.scaleY) * (zoom/100);
-                    console.log("New objct.scaleY :"+objct.scaleY);
-                    console.log("objct.left : "+objct.left);
-					objct.left   = Math.abs(objct.left)   * (zoom/100);
-                    console.log("New objct.left : "+objct.left);
-                    console.log("objct.top : "+objct.top);
-					objct.top    = Math.abs(objct.top)    * (zoom/100);
-                    console.log("New objct.top : "+objct.top);
-					objct.setCoords();
-                    console.log('?-------------------------------------------------?');
-                    var tmpobj = groupobj[1];
-                    console.log(tmpobj);
-                    var mainObj = tmpobj['_objects'];
-                    console.log(mainObj);
-                    console.log(mainObj.length);
-                    var _len = mainObj.length;
-                    //for(var i=0; i<_len; i++){
-                    //{
-                        /*var _objct = mainObj[i],
-                        scale_X= typeof _objct.original_scaleX === "undefined" ? _objct.scaleX : _objct.original_scaleX,
-                        scale_Y= typeof _objct.original_scaleY === "undefined" ? _objct.scaleY : _objct.original_scaleY,
-                        left   = typeof _objct.original_left === "undefined"   ? _objct.left   : _objct.original_left,
-                        top    = typeof _objct.original_top === "undefined"    ? _objct.top    : _objct.original_top;
-                        console.log(_objct);
-                        console.log('?-------------------------------------------------?');
-                        console.log('objct.original_scaleX : ' + _objct.original_scaleX + ' || objct.original_scaleY : '+ _objct.original_scaleY);
-                        console.log('objct.original_top : ' + _objct.original_top + ' || objct.original_left : '+ _objct.original_left);
-                        console.log('ScaleX : '+scale_X + ' || objct.scaleX : '+_objct.scaleX);
-                        console.log('ScaleX : '+scale_Y + ' || objct.scaleX : '+_objct.scaleY);
-                        console.log('left : '+left + ' || objct.left : '+_objct.left);
-                        console.log('top : '+top + ' || objct.top : '+_objct.top);
-                        console.log('?-------------------------------------------------?');
-                        console.log('zoom : '+zoom);
-                        console.log("objct.scaleX : "+_objct.scaleX);
-                        objct.scaleX = Math.abs(_objct.scaleX) * (zoom/100);
-                        console.log("New objct.scaleX : "+_objct.scaleX);
-                        console.log("objct.scaleY : "+_objct.scaleY);
-                        objct.scaleY = Math.abs(_objct.scaleY) * (zoom/100);
-                        console.log("New objct.scaleY :"+_objct.scaleY);
-                        console.log("objct.left : "+_objct.left);
-                        objct.left   = Math.abs(_objct.left)   * (zoom/100);
-                        console.log("New objct.left : "+_objct.left);
-                        console.log("objct.top : "+_objct.top);
-                        objct.top    = Math.abs(_objct.top)    * (zoom/100);
-                        console.log("New objct.top : "+_objct.top);
-                        _objct.setCoords();*/
+        this.zoom = zoom;
+        this.canvas.forEachObject(function(obj){
+                var scale_X= typeof obj.original_scaleX === "undefined" ? obj.scaleX : obj.original_scaleX,
+                scale_Y    = typeof obj.original_scaleY === "undefined" ? obj.scaleY : obj.original_scaleY,
+                left       = typeof obj.original_left === "undefined"   ? obj.left   : obj.original_left,
+                top        = typeof obj.original_top === "undefined"    ? obj.top    : obj.original_top;
 
-                    //}
-				obj.saveCoords().setObjectsCoords();
-			}
-			else{
-
-                if(obj.class=="image")
-                {
-                    console.log(obj.class);
-                    console.log(obj.scaleX);
-                    console.log(obj.left);
-                    console.log(obj.top);
-                }
-                
-				var scale_X= typeof obj.original_scaleX === "undefined" ? obj.scaleX : obj.original_scaleX,
-				scale_Y    = typeof obj.original_scaleY === "undefined" ? obj.scaleY : obj.original_scaleY,
-				left       = typeof obj.original_left === "undefined"   ? obj.left   : obj.original_left,
-				top        = typeof obj.original_top === "undefined"    ? obj.top    : obj.original_top;
-
-				obj.original_scaleX = typeof obj.original_scaleX === "undefined" ? obj.scaleX : obj.original_scaleX;
-				obj.original_scaleY = typeof obj.original_scaleY === "undefined" ? obj.scaleY : obj.original_scaleY;
-				obj.original_left   = typeof obj.original_left === "undefined"   ? obj.left   : obj.original_left;
-				obj.original_top    = typeof obj.original_top === "undefined"    ? obj.top    : obj.original_top;
-
-				obj.scaleX = scale_X * (zoom/100);
-				obj.scaleY = scale_Y * (zoom/100);                                                                                                      
-				obj.left   = left   * (zoom/100);
-				obj.top    = top    * (zoom/100);
-
-			}
-			obj.setCoords();
-		});
-		this.canvas.setWidth(this.canvasWidth * (zoom/100)).setHeight(this.canvasHeight * (zoom/100));
-        console.log(this.canvasWidth);
-        console.log(this.canvasHeight);
-		this.canvas.renderAll();
-	};
+                obj.original_scaleX = typeof obj.original_scaleX === "undefined" ? obj.scaleX : obj.original_scaleX;
+                obj.original_scaleY = typeof obj.original_scaleY === "undefined" ? obj.scaleY : obj.original_scaleY;
+                obj.original_left   = typeof obj.original_left === "undefined"   ? obj.left   : obj.original_left;
+                obj.original_top    = typeof obj.original_top === "undefined"    ? obj.top    : obj.original_top;
+                obj.scaleX = scale_X * (zoom/100);
+                obj.scaleY = scale_Y * (zoom/100);
+                obj.left   = left   * (zoom/100);
+                obj.top    = top    * (zoom/100);
+            obj.setCoords();
+        });
+        console.log(this.canvasWidth, this.canvasHeight)
+        this.canvas.setWidth(this.canvasWidth * (zoom/100)).setHeight(this.canvasHeight * (zoom/100));
+        this.canvas.renderAll();
+    };
 	this.getCanvasPixelData = function(x, y) {
 		var ctx = that.canvas.getContext('2d');
 		var pixel = ctx.getImageData(x, y, that.canvasWidth, that.canvasHeight);

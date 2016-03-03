@@ -157,82 +157,82 @@
                     <div role="tabpanel" class="tab-pane pt-20 active" id="propertyinfo">
                         <div class="row">
                             <div class="col-md-6">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Address</button>
+                                <button id="editor-textAssign" data-type="address" data-id="" class="btn btn-default fullwidth">Address</button>
                             </div>
                             <div class="col-md-6">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Body 1</button>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-md-6">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Price</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Body 2</button>
+                                <button id="editor-textAssign" data-type="body1" data-id="" class="btn btn-default fullwidth">Body 1</button>
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col-md-6">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Main Header</button>
+                                <button id="editor-textAssign" data-type="price" data-id="" class="btn btn-default fullwidth">Price</button>
                             </div>
                             <div class="col-md-6">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Body 3</button>
+                                <button id="editor-textAssign" data-type="body2" data-id="" class="btn btn-default fullwidth">Body 2</button>
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col-md-6">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Headline</button>
+                                <button id="editor-textAssign" data-type="mainheader" data-id="" class="btn btn-default fullwidth">Main Header</button>
                             </div>
                             <div class="col-md-6">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Call to Action</button>
+                                <button id="editor-textAssign" data-type="body3" data-id="" class="btn btn-default fullwidth">Body 3</button>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-md-6">
+                                <button id="editor-textAssign" data-type="headline" data-id="" class="btn btn-default fullwidth">Headline</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button id="editor-textAssign" data-type="calltoaction" data-id="" class="btn btn-default fullwidth">Call to Action</button>
                             </div>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane pt-20" id="agent1">
                         <div class="row">
                             <div class="col-md-8">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Agent Contact Info</button>
+                                <button id="editor-textAssign" data-type="agent1-contactinfo" data-id="" class="btn btn-default fullwidth">Agent Contact Info</button>
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col-md-8">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">License #</button>
+                                <button id="editor-textAssign" data-type="agent1-license" data-id="" class="btn btn-default fullwidth">License #</button>
                             </div>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane pt-20" id="agent2">
                         <div class="row">
                             <div class="col-md-8">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Agent Contact Info</button>
+                                <button id="editor-textAssign" data-type="agent2-contactinfo" data-id="" class="btn btn-default fullwidth">Agent Contact Info</button>
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col-md-8">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">License #</button>
+                                <button id="editor-textAssign" data-type="agent2-license" data-id="" class="btn btn-default fullwidth">License #</button>
                             </div>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane pt-20" id="company1">
                         <div class="row">
                             <div class="col-md-8">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Company Contact Info</button>
+                                <button id="editor-textAssign" data-type="company1-contactinfo" data-id="" class="btn btn-default fullwidth">Company Contact Info</button>
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col-md-8">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">License #</button>
+                                <button id="editor-textAssign" data-type="company1-license" data-id="" class="btn btn-default fullwidth">License #</button>
                             </div>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane pt-20" id="company2">
                         <div class="row">
                             <div class="col-md-8">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">Company Contact Info</button>
+                                <button id="editor-textAssign" data-type="company2-contactinfo" data-id="" class="btn btn-default fullwidth">Company Contact Info</button>
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col-md-8">
-                                <button id="editor-textAssign" data-id="" class="btn btn-default fullwidth">License #</button>
+                                <button id="editor-textAssign" data-type="company2-license" data-id="" class="btn btn-default fullwidth">License #</button>
                             </div>
                         </div>
                     </div>
@@ -275,13 +275,13 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-xs-12">
-                        <div class="col-md-6">
+                        <div class="col-md-6 p-5">
                             <div class="form-group">
                                 <label for="Editor-imageWidth">Width</label>
                                 <input type="number" class="form-control pr-0" id="editor-imageWidth" placeholder="Width">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 p-5">
                             <div class="form-group">
                                 <label for="Editor-imageHeight">Height</label>
                                 <input type="number" class="form-control pr-0" id="editor-imageHeight" placeholder="Height">
@@ -323,13 +323,13 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-xs-12">
-                        <div class="col-md-6">
+                        <div class="col-md-6 p-5">
                             <div class="form-group">
                                 <label for="editor-svgWidth">Width</label>
                                 <input type="email" class="form-control" id="editor-svgWidth" placeholder="Width">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 p-5">
                             <div class="form-group">
                                 <label for="editor-svgHeight">Height</label>
                                 <input type="email" class="form-control" id="editor-svgHeight" placeholder="Height">

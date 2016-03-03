@@ -19,7 +19,10 @@ proFabric.shapes = {
             _top    = (_options && _options.top) || (self.parent.get.height()/4)/(self.parent.get.zoom() / 100),
             _scaleX = (_options && _options.scaleX) || (1/(self.parent.get.zoom() / 100)),
             _scaleY = (_options && _options.scaleY) || (1/(self.parent.get.zoom() / 100));
+<<<<<<< HEAD
 
+=======
+>>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
 		fabric.loadSVGFromURL(src, function (objects, options) {
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
@@ -49,6 +52,7 @@ proFabric.shapes = {
 			self.parent.canvas.setActiveObject(obj);
 			self.scaleToWidth(120);
 			self.scaleToHeight(120);
+			self.shapeSelected(obj);
             
 			obj.set({
 				original_scaleX : obj.scaleX,
@@ -58,7 +62,13 @@ proFabric.shapes = {
 			});
 			self.canvas.renderAll();
 			self.parent.savestate('add', obj.toJSON(['id','class']), obj.toJSON(['id','class']));
+<<<<<<< HEAD
 
+=======
+			if(_options.callback){
+				_options.callback();
+			}
+>>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
 		}, function (item, object) {
 			object.set('id', item.getAttribute('id'));
 			object.set('class', item.getAttribute('class'));
@@ -160,9 +170,15 @@ proFabric.shapes = {
         this.canvas.renderAll();
     },
     shapeSelected: function(obj){
+<<<<<<< HEAD
     	$("#editor-svgWidth").val(Math.ceil(obj.width));
     	$("#editor-svgHeight").val(Math.ceil(obj.height));
         $('#coler-picker[data-type=svgFill]').next('.evo-colorind').css('backgroundColor', obj.fill || '#000');
+=======
+    	$("#editor-svgWidth").val(Math.ceil(obj.width * obj.scaleX));
+    	$("#editor-svgHeight").val(Math.ceil(obj.height * obj.scaleY));
+        $('#coler-picker[data-type=svgFill]').next('.evo-pointer').css('backgroundColor', obj.fill || '#000');
+>>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
     	if(obj.lockMovementX){
     		$("#object").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');
     	}
