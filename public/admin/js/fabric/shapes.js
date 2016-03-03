@@ -19,10 +19,7 @@ proFabric.shapes = {
             _top    = (_options && _options.top) || (self.parent.get.height()/4)/(self.parent.get.zoom() / 100),
             _scaleX = (_options && _options.scaleX) || (1/(self.parent.get.zoom() / 100)),
             _scaleY = (_options && _options.scaleY) || (1/(self.parent.get.zoom() / 100));
-<<<<<<< HEAD
 
-=======
->>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
 		fabric.loadSVGFromURL(src, function (objects, options) {
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
@@ -34,6 +31,7 @@ proFabric.shapes = {
 				scaleX: _scaleX,
 				scaleY: _scaleY,
 				class: 'shape',
+				src:src,
 				id: (_options && _options.id) || self.parent.get.guid(),
 				opacity: (_options && _options.opacity) || 1,
 				target: (_options && _options.target) || false,
@@ -61,14 +59,11 @@ proFabric.shapes = {
 				original_top 	: obj.top
 			});
 			self.canvas.renderAll();
-			self.parent.savestate('add', obj.toJSON(['id','class']), obj.toJSON(['id','class']));
-<<<<<<< HEAD
+			self.parent.savestate('add', obj.toJSON(['id','class','src']), obj.toJSON(['id','class','src']));
 
-=======
 			if(_options.callback){
 				_options.callback();
 			}
->>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
 		}, function (item, object) {
 			object.set('id', item.getAttribute('id'));
 			object.set('class', item.getAttribute('class'));
@@ -82,25 +77,25 @@ proFabric.shapes = {
 	stroke_color: function(color) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'shape') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 		obj.paths.forEach(function(i) { i.set({stroke: color}); });
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		obj.setCoords();
 		this.canvas.renderAll();
 	},
 	stroke_width: function(width) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'shape') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 		obj.paths.forEach(function(i) { i.set({strokeWidth: width}); });
 		obj.setCoords();
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		this.canvas.renderAll();
 	},
 	fill: function(color) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'shape') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 		if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
 			obj.setFill(color);
 			this.stroke_color(color);
@@ -113,72 +108,67 @@ proFabric.shapes = {
 				});
 			});
 		}
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		obj.setCoords();
 		this.canvas.renderAll();
 	},
 	set: function(option) {
 		var obj = this.canvas.getActiveObject();
 		if(obj && obj.class !== 'shape') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 		obj.paths.forEach(function(i) { i.set(option) });
 		obj.setCoords();
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		this.canvas.renderAll();
 	},
     scaleToWidth: function(width) {
         var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'shape') return;
-        var before = obj.toJSON(['id','class']);
+        var before = obj.toJSON(['id','class','src']);
 
 		var boundingRectFactor = obj.getBoundingRect().width / obj.getWidth();
 		obj.set({scaleX : width / obj.width / boundingRectFactor});
         obj.setCoords();
-        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+        this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         this.canvas.renderAll();
     },
     scaleToHeight: function(height) {
         var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'shape') return;
-        var before = obj.toJSON(['id','class']);
+        var before = obj.toJSON(['id','class','src']);
 
 		var boundingRectFactor = obj.getBoundingRect().height / obj.getHeight();
 		obj.set({scaleY : height / obj.height / boundingRectFactor});
         obj.setCoords();
         console.log(obj.getHeight());
-        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+        this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         this.canvas.renderAll();
     },
     setScaleX: function(width) {
     	var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'shape') return;
-    	var before = obj.toJSON(['id','class']);
+    	var before = obj.toJSON(['id','class','src']);
 
         obj.set({scaleX : width / obj.width});
-        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+        this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         obj.setCoords();
         this.canvas.renderAll();
     },
     setScaleY: function(height) {
     	var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'shape') return;
-    	var before = obj.toJSON(['id','class']);
+    	var before = obj.toJSON(['id','class','src']);
 
         obj.set({scaleY : height / obj.height});
-        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+        this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         obj.setCoords();
         this.canvas.renderAll();
     },
     shapeSelected: function(obj){
-<<<<<<< HEAD
     	$("#editor-svgWidth").val(Math.ceil(obj.width));
     	$("#editor-svgHeight").val(Math.ceil(obj.height));
         $('#coler-picker[data-type=svgFill]').next('.evo-colorind').css('backgroundColor', obj.fill || '#000');
-=======
-    	$("#editor-svgWidth").val(Math.ceil(obj.width * obj.scaleX));
-    	$("#editor-svgHeight").val(Math.ceil(obj.height * obj.scaleY));
-        $('#coler-picker[data-type=svgFill]').next('.evo-pointer').css('backgroundColor', obj.fill || '#000');
->>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
+
     	if(obj.lockMovementX){
     		$("#object").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');
     	}

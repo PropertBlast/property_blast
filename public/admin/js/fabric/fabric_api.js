@@ -10,6 +10,8 @@ var proFabric = new function(){
 	this.canvasWidth = 510;
 	this.canvasHeight = 650;
 	this.zoom = 100, this.defaultZoom = 100;
+	var modifiedCheck = true;
+	var modifiedType = "";
 
     fabric.Object.prototype.toObject = (function (toObject) {
         return function () {
@@ -58,8 +60,20 @@ var proFabric = new function(){
             }
         }
     });
-	this.canvas.on('mouse:move', function(o){});
-	this.canvas.on('mouse:up', function(o){});
+	//this.canvas.on('mouse:move', function(o){});
+	this.canvas.on('object:remove', function(o){
+        var object = o.target;
+    });
+	//this.canvas.on('mouse:up', function(o){});
+	this.canvas.on('mouse:up', function(o) {
+        object = o.target;
+        console.log(object);
+        if(object && modifiedType != ""){
+            modifiedCheck = true;
+            modifiedType = "";
+            proFabric.savestate('modified',prevObject,object.toJSON(['src','id','class','index','alignment']));
+        }
+    });
 	this.canvas.on('selection:cleared', function(o){
         var object = o.target;
         if(!object){
@@ -89,6 +103,12 @@ var proFabric = new function(){
     });
 	this.canvas.on('object:rotating', function(o){
         var obj = o.target;
+        if(modifiedCheck){
+            //object.angle = 0;
+            prevObject = obj.toJSON(['src','id','class','index','alignment']);
+            modifiedCheck = false;
+            modifiedType = "rotate";
+        }
         if(obj.angle>=350 || obj.angle<=10){
             obj.angle=0;
         }
@@ -103,9 +123,29 @@ var proFabric = new function(){
         }
         console.log(obj.angle);
     });
-	this.canvas.on('object:scaling', function(o){});
+	this.canvas.on('object:scaling', function(o){
+        var object = o.target;
+        if(modifiedCheck){
+            prevObject = object.toJSON(['src','id','class','index','alignment']);
+            modifiedCheck = false;
+            modifiedType = "scale";
+        }
+        if(object){
+            object.set({
+                original_scaleX : object.scaleX / (last_zoom/100),
+                original_scaleY : object.scaleY / (last_zoom/100),
+                original_left  : object.left / (last_zoom/100),
+                original_top   : object.top / (last_zoom/100)
+            });
+        }
+    });
 	this.canvas.on('object:moving', function(o){
         var object = o.target;
+        if(modifiedCheck){
+            prevObject = object.toJSON(['src','id','class','index','alignment']);
+            modifiedCheck = false;
+            modifiedType = "move";
+        }
         if(object){
             object.set({
                 original_scaleX : object.scaleX / (that.zoom/100),
@@ -283,17 +323,17 @@ var proFabric = new function(){
                         obj.btnID = id;
                         $(id).addClass('ui-state-active');
                         $(id).addClass('ui-widget-content');
-                        alert("Assigning ID");
+                        //alert("Assigning ID");
                     }
                     else if(id == obj.btnID)
                     {
-                        alert('FLAG : '+_txtSelectionFlag);
+                        //alert('FLAG : '+_txtSelectionFlag);
                         if(_selectionflag==1&&_txtSelectionFlag==1) {
                             obj.btnID = "";
                             that.canvas.setActiveObject(obj);
                             $(id).removeClass('ui-state-active');
                             $(id).removeClass('ui-widget-content');
-                            alert("id already assigned to button . . . . Un-selecting and removing ID");
+                            //alert("id already assigned to button . . . . Un-selecting and removing ID");
                             _txtSelectionFlag=0;
                         }
                         _txtSelectionFlag = 1;
@@ -688,16 +728,16 @@ var proFabric = new function(){
             that.canvas.add(text);
             that.canvas.renderAll();
         }
-        else if (obj.class == "svg"||obj.class == "shape"){
+        else if (obj.class == "svg"||obj.class == "shape" || obj.class == "color"){
             var group = [];
-            alert(obj.src);
+            //alert(obj.src);
             fabric.loadSVGFromURL(obj.src, function(objects, options) {
                 var loadedObjects = new fabric.util.groupSVGElements(objects, options);
                 loadedObjects.src = obj.src;
                 loadedObjects.class = obj.class;
                 loadedObjects.set({
-                    originX: 'center',
-                    originY: 'center',
+                    originX: obj.originX,
+                	originY: obj.originY,
                     id:obj.id,
                     fill:obj.fill,
                     class: 'svg',

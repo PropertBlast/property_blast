@@ -102,28 +102,6 @@ var proFabric = new function(){
             $("#settingOpt").show();
             $("#imageOpt").show();
         }
-<<<<<<< HEAD
-		else if(object.class=="image"){
-			//proFabric.image.imageSelected(object);
-            console.log(object);
-            /*object.forEachObject(function(temp){
-                if(temp.class=="img-num"||temp.class=="img-num-text")
-                {
-                    that.canvas.remove(temp);
-                    that.canvas.renderAll();
-                }
-            });*/
-            if (object._objects) {
-                object.forEachObject(function(temp){
-                    if(temp.class=="img-num" || temp.class=="img-num-text"){
-                        that.canvas.remove(temp);
-                        that.canvas.renderAll();
-                    }
-                });
-            }
-		}
-=======
->>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
         else if(object.class=='shape'){
             that.disableImgOpts();
             that.text.disableTextOpts();
@@ -337,114 +315,14 @@ var proFabric = new function(){
                 var i = 0, image_number=0;
                 $('.imgOptclass').hide();
                 that.canvas.loadFromJSON(_JSON_NEW, function(){
-<<<<<<< HEAD
-                    var lenght = that.canvas._objects.length;
-                    var t_id = 1;
-                    for(var i = 0 ; i < lenght ; i++) {
-                        var temp = that.canvas._objects[i];
-                        if(temp.src)
-                        {
-                            console.log("---");
-                            console.log("original_scaleX : "+temp.original_scaleX);
-                            console.log("original_scaleY : "+temp.original_scaleY);
-                            console.log("scaleX : "+temp.scaleX);
-                            console.log("scaleY : "+temp.scaleY);
-                            console.log("original_top : "+temp.original_top);
-                            console.log("top : "+temp.top);
-                            console.log("original_left : "+temp.original_left);
-                            console.log("left : "+temp.left);
-                            console.log("---");
-=======
                     console.log(that.canvas);
                     that.canvas.forEachObject(function (obj) {
                         image_number++;
                         if(obj.class == "image"){
->>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
                             var circle = new fabric.Circle({
                                 radius: 20,
                                 fill: 'white',
                                 class:"img-num",
-<<<<<<< HEAD
-                                id:temp.id,
-                                //scaleY:temp.original_scaleY,
-                                //scaleX:temp.original_scaleX,
-                                //original_scaleX:temp.original_scaleX,
-                                //original_scaleY:temp.original_scaleY,
-                                //original_top:temp.original_top,
-                                //original_left:temp.original_left,
-                                lockMovementX: true,
-                                lockMovementY: true,
-                                lockRotation: true,
-                                lockScalingX: true,
-                                lockScalingY: true,
-                                hasControls: false,
-                                editable :false,
-                                selectable :false
-                            });
-                            circle.setOpacity(0.8);
-                            var text = new fabric.Text(t_id.toString(), {
-                                fontSize: 20,
-                                //scaleY:temp.scaleY,
-                                //scaleX:temp.scaleX,
-                                //original_scaleX:temp.original_scaleX,
-                                //original_scaleY:temp.original_scaleY,
-                                //original_top:temp.original_top,
-                                //original_left:temp.original_left,
-                                originX: 'center',
-                                originY: 'center',
-                                top:27,
-                                left:25,
-                                lockMovementX: true,
-                                lockMovementY: true,
-                                lockRotation: true,
-                                lockScalingX: true,
-                                lockScalingY: true,
-                                hasControls: false,
-                                editable :false,
-                                selectable :false
-                            });
-                            var group = new fabric.Group([ circle, text ], {
-                                //original_scaleX:temp.original_scaleX,
-                                //original_scaleY:temp.original_scaleY,
-                                //original_top:temp.original_top,
-                                //original_left:temp.original_left,
-                                originX: "center",
-                                originY: "center",
-                                left: (temp.left+((temp.width)/2)),
-                                top: (temp.top+((temp.height)/2))
-                            });
-                            var _img = fabric.util.object.clone(temp);
-                            var imageGroup = new fabric.Group([ _img,group ], {
-                                //left: temp.original_left,
-                                //top: temp.original_top,
-                                //scaleY:temp.scaleY,
-                                //scaleX:temp.scaleX,
-                                //original_scaleX:temp.original_scaleX,
-                                //original_scaleY:temp.original_scaleY,
-                                //original_top:temp.original_top,
-                                //original_left:temp.original_left,
-                                scaleY:1,
-                                scaleX:1,
-                                id:temp.id,
-                                num:t_id,
-                                class:"group",
-                                lockMovementX: true,
-                                lockMovementY: true,
-                                lockRotation: true,
-                                lockScalingX: true,
-                                lockScalingY: true,
-                                hasControls: false,
-                                editable :false,
-                                selectable :false
-                            });
-                            //console.log(imageGroup);
-                            that.canvas.add(imageGroup);
-                            that.canvas.fxRemove(temp);
-                            t_id=t_id+1;
-                        }
-                    }
-                    that.canvas.renderAll.bind(that.canvas);
-=======
                                 opacity : 0.8,
                                 originX: "center",
                                 originY: "center"
@@ -483,15 +361,10 @@ var proFabric = new function(){
                             that.replaceimage(_im, obj);
                         }
                     });
->>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
                 },function(o, object) {
                     var col = object.fill;
                     var o_Width = object.width;
                     var o_Height = object.height;
-<<<<<<< HEAD
-                    console.log(object.class);
-=======
->>>>>>> 25233b22569450f51ab23da18e06eb8dc7e5e377
                     if(object.class=="text")
                     {
                         var _txt = object.text;
