@@ -6,6 +6,7 @@ var i = 1;
 var _lockFlag = 1;
 var _randomID = 1;
 var _flag = 0;
+var col_flag = 1;
 var button = [
     ['Address', 'Price', 'Main-header', 'Headline', 'Body-1', 'Body-2', 'Body-3', 'Call-action'],
     ['Agent-contect', 'Agent-license'],
@@ -467,7 +468,7 @@ FShandler = function(){
         $('#editor').removeAttr('style');
     }
 }
-function colorPickerInit(){
+function colorPickerInit(val){
     $('input#coler-picker').hide();
     $('input#coler-picker').colorpicker(
         {color:'#000000', defaultPalette:'web',showOn:'button'}
@@ -476,6 +477,7 @@ function colorPickerInit(){
         var type = $(this).data('type');
         var _rgb = $(this).next('.evo-colorind').css('backgroundColor');
         colorPickerSubmit(_rgb, this);
+        //alert('called');
     });
 }
 function colorPickerSubmit(_rgb, el){

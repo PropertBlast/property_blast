@@ -71,7 +71,7 @@ var proFabric = new function(){
         if(object && modifiedType != ""){
             modifiedCheck = true;
             modifiedType = "";
-            proFabric.savestate('modified',prevObject,object.toJSON(['src','id','class','index','alignment']));
+            //proFabric.savestate('modified',prevObject,object.toJSON(['src','id','class','index','alignment']));
         }
     });
 	this.canvas.on('selection:cleared', function(o){

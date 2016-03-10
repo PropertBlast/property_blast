@@ -18,6 +18,7 @@ proFabric.color = {
 				class: 'color',
 				id: _id,
 				src:src,
+				//index: self.canvas.getObjects().length,
 				opacity: (_options && _options.opacity) || 1,
 				scaleX: (_options && _options.scaleX) || 1,
 				scaleY: (_options && _options.scaleY) || 1,
