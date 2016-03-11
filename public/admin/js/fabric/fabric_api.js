@@ -199,6 +199,7 @@ var proFabric = new function(){
 			return that.canvasHeight;
 		},
 		currentObject : function(){
+			//alert(that.canvas.getActiveObject());
 			return that.canvas.getActiveObject();
 		},
 		currentGroup : function(){

@@ -38,7 +38,6 @@
         <ul class="nav nav-tabs editor-tabs" role="tablist" id="editor-mainTabs">
             <li class="active"><a href="#text" role="tab" data-toggle="tab">Text</a></li>
             <li><a href="#image" role="tab" data-toggle="tab">Image</a></li>
-            <li><a href="#object" role="tab" data-toggle="tab">Shapes</a></li>
             <li><a href="#color" role="tab" data-toggle="tab">Set Colors</a></li>
         </ul>
         <div class="tab-content">
@@ -294,74 +293,6 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="object">
-                <div class="row mt-20 mb-30">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="row">
-                            <div class="col-md-12 col-xs-12">
-                                <label class="control-label">lock/unlock</label>
-                            </div>
-                            <div class="col-md-12 col-xs-12">
-                                <div class="btn-group" role="group" id="editor-lockGroup">
-                                    <button data-type="lock" type="button" class="btn btn-default"><i class="fa fa-lock"></i></button>
-                                    <button data-type="unlock" type="button" class="btn btn-default btn-primary"><i class="fa fa-unlock"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-10">
-                            <div class="col-md-12 col-xs-12">
-                                <button type="button" class="btn btn-default" id="editor-sendBack">
-                                    <img src="<?php echo base_url('public/admin/img/layered-bottom.png') ?>" class="imageIcon">
-                                </button>
-                                <button type="button" class="btn btn-default" id="editor-bringFront">
-                                    <img src="<?php echo base_url('public/admin/img/layered-top.png') ?>" class="imageIcon">
-                                </button>
-                                <button type="button" class="btn btn-default" data-type="shape" id="editor-delete">
-                                    <span class="glyphicon glyphicon-trash editor-fa"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-12">
-                        <div class="col-md-6 p-5">
-                            <div class="form-group">
-                                <label for="editor-svgWidth">Width</label>
-                                <input type="email" class="form-control" id="editor-svgWidth" placeholder="Width">
-                            </div>
-                        </div>
-                        <div class="col-md-6 p-5">
-                            <div class="form-group">
-                                <label for="editor-svgHeight">Height</label>
-                                <input type="email" class="form-control" id="editor-svgHeight" placeholder="Height">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-20 editor-objectsBox">
-                    <div class="col-md-12">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/check56.svg')?>">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/circle111.svg')?>">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/heart13.svg')?>">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/plain.svg')?>">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/right11.svg')?>">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/square_2.svg')?>">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/square61.svg')?>">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/star129.svg')?>">
-                        <img class="svgImage" id="editor-svgImage" src="<?php echo base_url('public/admin/img/svg/triangle36.svg')?>">
-                    </div>
-                </div>
-                <div class="row pt-10">
-                    <div class="col-md-3 col-xs-12 nopad pl-20">
-                        <label>Fill</label>
-                    </div>
-                    <div class="col-md-5 col-xs-12 nopad pl-20">
-                        <div class="inline vt"><input style="width:0px;" id="coler-picker" data-type="svgFill"></div>
-                    </div>
-                    <div class="col-md-4 col-xs-12 nopad text-right pr-20">
-                        <button type="button" id="editor-cpicker" data-type="svgFill" data-id="" class="btn btn-default"><i class="fa fa-eyedropper"></i></button>
-                    </div>
-                </div>
-            </div>
             <div role="tabpanel" class="tab-pane" id="color">
                 <div class="row mt-20 mb-30">
                     <div class="col-md-6 col-xs-12">
@@ -406,9 +337,6 @@
                     <div class="col-md-6 col-xs-6 text-right">
                         <button type="button" class="btn btn-default" id="editor-addSets">
                             Add Color Set
-                        </button>
-                        <button type="button" class="btn btn-default" id="editor-addShapes">
-                            Insert Shapes
                         </button>
                     </div>
                 </div>
