@@ -1,3 +1,36 @@
+<!-- site footer -->
+    <footer id="site-footer" class="site-footer">
+        <div class="wrap container">
+            <div class="inner row">
+                <div class="footer-left col-md-6">
+                    <ul class="footer-menu list-inline list-unstyled">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Legal Statement</a></li>
+                    </ul>
+                    <!-- footer-menu -->
+                    <p class="credits">Copyright &copy; 2015 - <a href="#">Major Properties</a></p>
+                </div>
+                <!-- footer-left -->
+                <div class="footer-right col-md-6">
+                    <p class="pull-right text-right">213.747.4151 <br />
+                    1200 West Olympic Boulevard <br />
+                    Los Angeles, CA 90015</p>
+                </div>
+                <!-- footer-right -->
+            </div>
+            <!-- inner -->
+        </div>
+        <!-- wrap -->
+    </footer>
+    <!-- end site footer -->
+
+    <!-- footer js resourses -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>public/frontend/js/bootstrap.js"></script>
+    <script src="<?php echo base_url() ?>public/frontend/js/bootstrap-lightbox.js"></script>
+    <script src="<?php echo base_url() ?>public/frontend/js/parallax.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/jquery-1.11.3.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/bootstrap.js"></script>
     <script src="<?php echo base_url() ?>public/frontend/js/bootstrap.min.js"></script>
@@ -45,40 +78,40 @@
             }
         });
     </script>
-	<script type="text/javascript">
+    <script type="text/javascript">
          var recaptcha_widgets={};
          function recaptchaLoadCallback(){ 
-         	try {
-         		grecaptcha;
-         	} catch(err){
-         		return;
-         	}
-         	var e=document.querySelectorAll ? document.querySelectorAll('.g-recaptcha') : document.getElementsByClassName('g-recaptcha'),form_submits;
+            try {
+                grecaptcha;
+            } catch(err){
+                return;
+            }
+            var e=document.querySelectorAll ? document.querySelectorAll('.g-recaptcha') : document.getElementsByClassName('g-recaptcha'),form_submits;
          
-         	for (var i=0;i<e.length;i++) {
-         		(function(el){
-         			var wid;
-         			// check if captcha element is unrendered
-         			if ( ! el.childNodes.length) {
-         				wid = grecaptcha.render(el,{
-         					'sitekey':'6LfyXw4TAAAAAIpIbjBSI7vRGYcMVqig-pN8EJDS',
-         					'theme':el.getAttribute('data-theme') || 'light'
-         				});
-         				el.setAttribute('data-widget-id',wid);
-         			} else {
-         				wid = el.getAttribute('data-widget-id');
-         				grecaptcha.reset(wid);
-         			}
-         		})(e[i]);
-         	}
+            for (var i=0;i<e.length;i++) {
+                (function(el){
+                    var wid;
+                    // check if captcha element is unrendered
+                    if ( ! el.childNodes.length) {
+                        wid = grecaptcha.render(el,{
+                            'sitekey':'6LfyXw4TAAAAAIpIbjBSI7vRGYcMVqig-pN8EJDS',
+                            'theme':el.getAttribute('data-theme') || 'light'
+                        });
+                        el.setAttribute('data-widget-id',wid);
+                    } else {
+                        wid = el.getAttribute('data-widget-id');
+                        grecaptcha.reset(wid);
+                    }
+                })(e[i]);
+            }
          }
          
          // if jquery present re-render jquery/ajax loaded captcha elements 
          if ( typeof jQuery !== 'undefined' )
-         	jQuery(document).ajaxComplete( function(evt,xhr,set){
-         		if( xhr.responseText && xhr.responseText.indexOf('6LfyXw4TAAAAAIpIbjBSI7vRGYcMVqig-pN8EJDS') !== -1)
-         			recaptchaLoadCallback();
-         	} );
+            jQuery(document).ajaxComplete( function(evt,xhr,set){
+                if( xhr.responseText && xhr.responseText.indexOf('6LfyXw4TAAAAAIpIbjBSI7vRGYcMVqig-pN8EJDS') !== -1)
+                    recaptchaLoadCallback();
+            } );
          
       </script><script src='<?php echo base_url() ?>public/frontend/js/api.js' async="" defer=""></script>
       <!-- END recaptcha -->
@@ -140,62 +173,8 @@
                               font-size: 20px;
                               }
         </style>
-	  <!--[if lte IE 8]>
+      <!--[if lte IE 8]>
       <script type="text/javascript" src="http://45.33.34.56/propblast/wp-content/themes/Avada/assets/js/respond.js"></script>
       <![endif]-->
     </body>
 </html>
-
-
-
-    <link rel='stylesheet' id='layerslider-css'  href='<?php echo base_url() ?>public/frontend/css/layerslider.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='ls-google-fonts-css'  href='http://fonts.googleapis.com/css?family=Lato:100,300,regular,700,900%7COpen+Sans:300%7CIndie+Flower:regular%7COswald:300,regular,700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
-    <link rel='stylesheet' id='owl-carousel-css'  href='<?php echo base_url() ?>public/frontend/css/owl.carousel.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='owl-theme-css'  href='<?php echo base_url() ?>public/frontend/css/owl.theme.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='owl-transitions-css'  href='<?php echo base_url() ?>public/frontend/css/owl.transitions.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='contact-form-7-css'  href='<?php echo base_url() ?>public/frontend/css/styles.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='rs-plugin-settings-css'  href='<?php echo base_url() ?>public/frontend/css/settings.css' type='text/css' media='all' />
-    <style id='rs-plugin-settings-inline-css' type='text/css'>
-        .tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}
-    </style>
-    <link rel='stylesheet' id='flyer-css-css'  href='<?php echo base_url() ?>public/frontend/css/create-flyer.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='bootstrap-grid-css'  href='<?php echo base_url() ?>public/frontend/css/bootstrap-grids.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='mini-colorpicker-css'  href='<?php echo base_url() ?>public/frontend/css/jquery.minicolors.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='avada-google-fonts-css'  href='http://fonts.googleapis.com/css?family=Open+Sans%3A400%2C400italic%2C600%2C+700%2C700italic%7CNixie+One%3A400%2C400italic%2C600%2C+700%2C700italic%7CPT+Sans%3A400%2C400italic%2C600%2C+700%2C700italic&#038;ver=4.3.2' type='text/css' media='all' />
-    <link rel='stylesheet' id='avada-stylesheet-css'  href='<?php echo base_url() ?>public/frontend/css/style.css' type='text/css' media='all' />
-    <!--[if lte IE 9]>
-    <link rel='stylesheet' id='avada-shortcodes-css'  href='<?php echo base_url() ?>public/frontend/css/shortcodes.css' type='text/css' media='all' />
-    <![endif]-->
-    <link rel='stylesheet' id='fontawesome-css'  href='<?php echo base_url() ?>public/frontend/css/font-awesome.css' type='text/css' media='all' />
-    <!--[if lte IE 9]>
-    <link rel='stylesheet' id='avada-IE-fontawesome-css'  href='<?php echo base_url() ?>public/frontend/css/font-awesome.css' type='text/css' media='all' />
-    <![endif]-->
-    <!--[if lte IE 8]>
-    <link rel='stylesheet' id='avada-IE8-css'  href='<?php echo base_url() ?>public/frontend/css/ie8.css' type='text/css' media='all' />
-    <![endif]-->
-    <!--[if IE]>
-    <link rel='stylesheet' id='avada-IE-css'  href='<?php echo base_url() ?>public/frontend/css/ie.css' type='text/css' media='all' />
-    <![endif]-->
-    <link rel='stylesheet' id='avada-iLightbox-css'  href='<?php echo base_url() ?>public/frontend/css/ilightbox.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='avada-animations-css'  href='<?php echo base_url() ?>public/frontend/css/animations.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='avada-woocommerce-css'  href='<?php echo base_url() ?>public/frontend/css/woocommerce.css' type='text/css' media='all' />
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/greensock.js'></script>
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/jquery.js'></script>
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/jquery-migrate.min.js'></script>
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/layerslider.kreaturamedia.jquery.js'></script>
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/layerslider.transitions.js'></script>
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/jquery.form.min.js'></script>
-    <script type='text/javascript'>
-        /* <![CDATA[ */
-        var _wpcf7 = {"loaderUrl":"http:\/\/45.33.34.56\/propblast\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
-        /* ]]> */
-    </script>
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/jquery.themepunch.tools.min.js'></script>
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/jquery.themepunch.revolution.min.js'></script>
-    <script type='text/javascript' src='<?php echo base_url() ?>public/frontend/js/wpcf7.js'></script>
-    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://45.33.34.56/propblast/xmlrpc.php?rsd" />
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://45.33.34.56/propblast/wp-includes/wlwmanifest.xml" />
-    <meta name="generator" content="WordPress 4.3.2" />
-    <meta name="generator" content="WooCommerce 2.4.7" />
-    <link rel='canonical' href='http://45.33.34.56/propblast/create-new-flyer/' />
-    <link rel='shortlink' href='http://45.33.34.56/propblast/?p=13800' />

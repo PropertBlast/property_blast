@@ -15,7 +15,7 @@ proFabric.text = {
             $("#editor-textarea").val(object.text);
             $('body').find("button#editor-textList").removeClass('btn-primary');
         }
-        $('#coler-picker[data-type=text]').next('.evo-pointer').css('backgroundColor', object.fill);
+        $('#coler-picker[data-type=text]').next('.evo-colorind').css('backgroundColor', object.fill);
         $("#editor-fontSize").val(object.fontSize);
         $('#editor-fontFamily').children('option').filter(function(){return $(this).val()==object.fontFamily}).prop('selected',true).change();
         $('div#editor-textAlign').find('button[data-type='+object.textAlign+']').addClass('btn-primary').siblings().removeClass('btn-primary');

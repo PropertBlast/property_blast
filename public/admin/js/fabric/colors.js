@@ -13,8 +13,11 @@ proFabric.color = {
 			obj.set({
 				left: (_options && _options.left) || self.parent.get.width() / 2,
 				top: (_options && _options.top) || self.parent.get.height() / 4,
+				scaleX:100/objects.width,
+				scaleY:100/objects.height,
 				class: 'color',
 				id: _id,
+				src:src,
 				opacity: (_options && _options.opacity) || 1,
 				scaleX: (_options && _options.scaleX) || 1,
 				scaleY: (_options && _options.scaleY) || 1,
@@ -36,12 +39,13 @@ proFabric.color = {
 			});
 			obj.setCoords();
 			self.parent.canvas.add(obj);
-			self.parent.savestate('add', obj.toJSON(['id','class']), obj.toJSON(['id','class']));
+			// self.scaleToWidth(120);
+			// self.scaleToHeight(120);
+			self.colorSelected(obj);
+			
+			self.parent.savestate('add', obj.toJSON(['id','class','src']), obj.toJSON(['id','class','src']));
 			self.parent.canvas.setActiveObject(obj);
 			self.canvas.renderAll();
-			self.scaleToWidth(120);
-			self.scaleToHeight(120);
-			self.colorSelected(obj);
 			if(_options.callback){
 				_options.callback();
 			}
@@ -58,31 +62,31 @@ proFabric.color = {
 	stroke_color: function(color) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'color') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 
 		obj.paths.forEach(function(i) { i.set({stroke: color}); });
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		obj.setCoords();
 		this.canvas.renderAll();
 	},
 	stroke_width: function(width) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'color') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 
 		obj.paths.forEach(function(i) { i.set({strokeWidth: width}); });
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		obj.setCoords();
 		this.canvas.renderAll();
 	},
 	scaleToWidth: function(width) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'color') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 
 		var boundingRectFactor = obj.getBoundingRect().width / obj.getWidth();
 		obj.set({scaleX : width / obj.width / boundingRectFactor});	
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         //obj.scaleToWidth(width / sx);
         obj.setCoords();
         this.canvas.renderAll();
@@ -90,11 +94,11 @@ proFabric.color = {
     scaleToHeight: function(height) {
     	var obj = this.canvas.getActiveObject();
     	if(!obj || obj.class !== 'color') return;
-    	var before = obj.toJSON(['id','class']);
+    	var before = obj.toJSON(['id','class','src']);
 
     	var boundingRectFactor = obj.getBoundingRect().height / obj.getHeight();
     	obj.set({scaleY : height / obj.height / boundingRectFactor});
-    	this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+    	this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         //obj.scaleToHeight(height / sy);
         obj.setCoords();
         console.log(obj.getHeight());
@@ -104,7 +108,7 @@ proFabric.color = {
 		var self = this;
 		this.canvas.forEachObject(function(obj) {
 			if (obj.id == id) {
-				var before = obj.toJSON(['id','class']);
+				var before = obj.toJSON(['id','class','src']);
 				if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
 					obj.setFill(color);
 					obj.paths.forEach(function(i) { i.set({stroke: color}); });
@@ -115,7 +119,7 @@ proFabric.color = {
 						i.set({stroke: color});
 					});
 				}
-				self.parent.savestate('modified',before,obj.toJSON(['id','class']));
+				self.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 				obj.setCoords();
 			}
 		});
@@ -124,10 +128,10 @@ proFabric.color = {
 	set: function(option) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'color') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 
 		obj.paths.forEach(function(i) { i.set(option) });
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		obj.setCoords();
 		this.canvas.renderAll();
 	},

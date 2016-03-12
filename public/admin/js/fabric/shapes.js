@@ -19,6 +19,7 @@ proFabric.shapes = {
             _top    = (_options && _options.top) || (self.parent.get.height()/4)/(self.parent.get.zoom() / 100),
             _scaleX = (_options && _options.scaleX) || (1/(self.parent.get.zoom() / 100)),
             _scaleY = (_options && _options.scaleY) || (1/(self.parent.get.zoom() / 100));
+
 		fabric.loadSVGFromURL(src, function (objects, options) {
 			for (var i = 0; i < objects.length; i++) {
 				objects[i].set({stroke: 'black', strokeWidth: 1});
@@ -30,6 +31,7 @@ proFabric.shapes = {
 				scaleX: _scaleX,
 				scaleY: _scaleY,
 				class: 'shape',
+				src:src,
 				id: (_options && _options.id) || self.parent.get.guid(),
 				opacity: (_options && _options.opacity) || 1,
 				target: (_options && _options.target) || false,
@@ -57,42 +59,43 @@ proFabric.shapes = {
 				original_top 	: obj.top
 			});
 			self.canvas.renderAll();
-			self.parent.savestate('add', obj.toJSON(['id','class']), obj.toJSON(['id','class']));
+			self.parent.savestate('add', obj.toJSON(['id','class','src']), obj.toJSON(['id','class','src']));
+
 			if(_options.callback){
 				_options.callback();
 			}
 		}, function (item, object) {
 			object.set('id', item.getAttribute('id'));
 			object.set('class', item.getAttribute('class'));
-			object.set('original_scaleX', item.getAttribute('scaleX'));
-			object.set('original_scaleY', item.getAttribute('scaleY'));
-			object.set('original_left', item.getAttribute('left'));
-			object.set('original_top', item.getAttribute('top'));
+			object.set('original_scaleX', item.getAttribute('original_scaleX'));
+			object.set('original_scaleY', item.getAttribute('original_scaleY'));
+			object.set('original_left', item.getAttribute('original_left'));
+			object.set('original_top', item.getAttribute('original_top'));
 			return object.id;
-		});
+		}).bind(this);
 	},
 	stroke_color: function(color) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'shape') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 		obj.paths.forEach(function(i) { i.set({stroke: color}); });
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		obj.setCoords();
 		this.canvas.renderAll();
 	},
 	stroke_width: function(width) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'shape') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 		obj.paths.forEach(function(i) { i.set({strokeWidth: width}); });
 		obj.setCoords();
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		this.canvas.renderAll();
 	},
 	fill: function(color) {
 		var obj = this.canvas.getActiveObject();
 		if(!obj || obj.class !== 'shape') return;
-		var before = obj.toJSON(['id','class']);
+		var before = obj.toJSON(['id','class','src']);
 		if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
 			obj.setFill(color);
 			this.stroke_color(color);
@@ -105,66 +108,67 @@ proFabric.shapes = {
 				});
 			});
 		}
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		obj.setCoords();
 		this.canvas.renderAll();
 	},
 	set: function(option) {
 		var obj = this.canvas.getActiveObject();
-		if(!obj || obj.class !== 'shape') return;
-		var before = obj.toJSON(['id','class']);
+		if(obj && obj.class !== 'shape') return;
+		var before = obj.toJSON(['id','class','src']);
 		obj.paths.forEach(function(i) { i.set(option) });
 		obj.setCoords();
-		this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		this.canvas.renderAll();
 	},
     scaleToWidth: function(width) {
         var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'shape') return;
-        var before = obj.toJSON(['id','class']);
+        var before = obj.toJSON(['id','class','src']);
 
 		var boundingRectFactor = obj.getBoundingRect().width / obj.getWidth();
 		obj.set({scaleX : width / obj.width / boundingRectFactor});
         obj.setCoords();
-        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+        this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         this.canvas.renderAll();
     },
     scaleToHeight: function(height) {
         var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'shape') return;
-        var before = obj.toJSON(['id','class']);
+        var before = obj.toJSON(['id','class','src']);
 
 		var boundingRectFactor = obj.getBoundingRect().height / obj.getHeight();
 		obj.set({scaleY : height / obj.height / boundingRectFactor});
         obj.setCoords();
         console.log(obj.getHeight());
-        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+        this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         this.canvas.renderAll();
     },
     setScaleX: function(width) {
     	var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'shape') return;
-    	var before = obj.toJSON(['id','class']);
+    	var before = obj.toJSON(['id','class','src']);
 
         obj.set({scaleX : width / obj.width});
-        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+        this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         obj.setCoords();
         this.canvas.renderAll();
     },
     setScaleY: function(height) {
     	var obj = this.canvas.getActiveObject();
         if(!obj || obj.class !== 'shape') return;
-    	var before = obj.toJSON(['id','class']);
+    	var before = obj.toJSON(['id','class','src']);
 
         obj.set({scaleY : height / obj.height});
-        this.parent.savestate('modified',before,obj.toJSON(['id','class']));
+        this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
         obj.setCoords();
         this.canvas.renderAll();
     },
     shapeSelected: function(obj){
-    	$("#editor-svgWidth").val(Math.ceil(obj.width * obj.scaleX));
-    	$("#editor-svgHeight").val(Math.ceil(obj.height * obj.scaleY));
-        $('#coler-picker[data-type=svgFill]').next('.evo-pointer').css('backgroundColor', obj.fill || '#000');
+    	$("#editor-svgWidth").val(Math.ceil(obj.width));
+    	$("#editor-svgHeight").val(Math.ceil(obj.height));
+        $('#coler-picker[data-type=svgFill]').next('.evo-colorind').css('backgroundColor', obj.fill || '#000');
+
     	if(obj.lockMovementX){
     		$("#object").find("#editor-lockGroup").find('button[data-type=lock]').addClass('btn-primary').siblings().removeClass('btn-primary');
     	}
