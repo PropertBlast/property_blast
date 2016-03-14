@@ -71,13 +71,35 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row pt-20">
+                                <div class="col-md-12 col-xs-12"><label class="control-label">Max Font size</label></div>
+                                <div class="col-md-12 col-xs-12">
+                                    <select class="form-control" id="editor-maxfontSize" style="width:100%;">
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="12">12</option>
+                                        <option value="14">14</option>
+                                        <option value="16">16</option>
+                                        <option value="18">18</option>
+                                        <option value="20">20</option>
+                                        <option value="22">22</option>
+                                        <option value="24">24</option>
+                                        <option value="26">26</option>
+                                        <option value="28">28</option>
+                                        <option value="36">36</option>
+                                        <option value="48">48</option>
+                                        <option value="72">72</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </div>
                     <div class="col-md-6 col-xs-12">
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
                                 <div class="row"><label class="control-label">Font size</label></div>
                                 <div class="row">
-                                    <select class="form-control" id="editor-fontSize" style="width:90%;">
+                                    <select class="form-control" id="editor-fontSize" style="width:95%;">
                                         <option value="8">8</option>
                                         <option value="9">9</option>
                                         <option value="10">10</option>
@@ -108,6 +130,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row pt-10">
                             <div class="col-md-12 col-xs-12 nopad">
                                 <label class="control-label">Alignment</label>

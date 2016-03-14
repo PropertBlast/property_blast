@@ -141,6 +141,8 @@ var proFabric = new function(){
     });
 	this.canvas.on('object:moving', function(o){
         var object = o.target;
+        //alert();
+        console.log("Object top : "+object.top+" Object left : "+object.left+"Object top : "+object.top+" Object left : "+object.left);
         if(modifiedCheck){
             prevObject = object.toJSON(['src','id','class','index','alignment']);
             modifiedCheck = false;

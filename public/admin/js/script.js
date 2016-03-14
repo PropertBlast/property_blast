@@ -38,6 +38,7 @@ $(document).ready(function($) {
     var tempid = d.getDate().toString()+d.getDay().toString()+d.getHours().toString()+d.getMinutes().toString()+d.getSeconds().toString()+d.getMilliseconds().toString();
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'+tempid);
     add("button",tempid,'address');*/
+    $("#editor-maxfontSize").val('36');
     for (var i = 0; i < button.length; i++) {
         var btn = button[i];
         for (var j = 0; j < btn.length; j++) {
@@ -161,9 +162,21 @@ $(document).ready(function($) {
                 proFabric.text.set({text: _text});
         }
     });
-    $(document).delegate('#editor-fontSize', 'change', function() {
-        var value = $("#editor-fontSize").val();
+    $(document).delegate('#editor-maxfontSize', 'change', function() {
+        var value = $("#editor-maxfontSize").val();
         proFabric.text.set({
+            maxfontSize: parseInt(value)
+        });
+    });
+    $(document).delegate('#editor-fontSize', 'change', function() {
+        var valueMax = $("#editor-maxfontSize").val();
+        var value = $("#editor-fontSize").val();
+        if(valueMax<value)
+        {
+            $("#editor-maxfontSize").val(value);
+        }
+        proFabric.text.set({
+            maxfontSize: parseInt(value),
             fontSize: parseInt(value)
         });
     });
