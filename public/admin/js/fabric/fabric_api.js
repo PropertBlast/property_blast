@@ -219,6 +219,10 @@ var proFabric = new function(){
 		},
 		inchesToPixel : function(inc){
 			return inc * 96;
+        },
+        lockMovementXText : function(){
+        	var _obj = that.canvas.getActiveObject();
+        	return _obj.lockMovementX;
         }
 
 	};

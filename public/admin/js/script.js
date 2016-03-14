@@ -151,12 +151,15 @@ $(document).ready(function($) {
     $(document).delegate('#editor-textarea', 'keyup', function() {
         var _text = $(this).val();
         var obj = proFabric.get.currentObject();
-        if(obj && obj.class=='text' && obj.bullet){
-            proFabric.text.set({text: _text});
-            proFabric.text.bullet(true);
+        if(!proFabric.get.lockMovementXText())
+        {
+            if(obj && obj.class=='text' && obj.bullet){
+                proFabric.text.set({text: _text});
+                proFabric.text.bullet(true);
+            }
+            else
+                proFabric.text.set({text: _text});
         }
-        else
-            proFabric.text.set({text: _text});
     });
     $(document).delegate('#editor-fontSize', 'change', function() {
         var value = $("#editor-fontSize").val();

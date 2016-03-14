@@ -24,14 +24,14 @@ proFabric.text = {
     },
     add: function(_text,_options){
         var self = this;
-        var text = new fabric.Textbox(_text || 'Enter Your Text Here', {
+        var text = new fabric.Text(_text || 'Enter Your Text Here', {
             textAlign           : 'left',
             class               : 'text',
             fontSize            : 16,
             left                : (_options && _options.left) || self.parent.get.width() / 2,
             top                 : (_options && _options.top) || self.parent.get.height() / 4,
             width               : (_options && _options.width) || 200,
-            height              : (_options && _options.height) || 200,
+            //height              : (_options && _options.height) || 200,
             id                  : (_options && _options.id) || self.parent.get.guid(),
             opacity             : (_options && _options.opacity) || 1,
             scaleX              : (_options && _options.scaleX) || 1,
