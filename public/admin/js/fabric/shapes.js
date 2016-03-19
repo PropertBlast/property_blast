@@ -32,6 +32,9 @@ proFabric.shapes = {
 				scaleY: _scaleY,
 				class: 'shape',
 				src:src,
+				strokeWidth:0,
+				stroke:null,
+				index: self.canvas.getObjects().length,
 				id: (_options && _options.id) || self.parent.get.guid(),
 				opacity: (_options && _options.opacity) || 1,
 				target: (_options && _options.target) || false,
@@ -42,14 +45,14 @@ proFabric.shapes = {
 				lockMovementY	  : (_options && _options.lockMovementY) || false,
 				lockRotation 	  : (_options && _options.lockRotation) || false,
 				lockScalingX 	  : (_options && _options.lockScalingX) || false,
-				lockScalingY 	  : (_options && _options.lockScalingY) || false
+				lockScalingY 	  : (_options && _options.lockScalingY) || false,
 			});
+			obj.scaleToWidth(120);
+			obj.scaleToHeight(120);
 			obj.setCoords();
 
 			self.parent.canvas.add(obj);
 			self.parent.canvas.setActiveObject(obj);
-			self.scaleToWidth(120);
-			self.scaleToHeight(120);
 			self.shapeSelected(obj);
             
 			obj.set({
@@ -93,12 +96,18 @@ proFabric.shapes = {
 		this.canvas.renderAll();
 	},
 	fill: function(color) {
+		//alert(color);
 		var obj = this.canvas.getActiveObject();
-		if(!obj || obj.class !== 'shape') return;
 		var before = obj.toJSON(['id','class','src']);
+		if(!obj || obj.class !== 'shape') return;
 		if (obj.isSameColor && obj.isSameColor() || !obj.paths) {
-			obj.setFill(color);
-			this.stroke_color(color);
+			//obj.setFill(color);
+			//this.stroke_color(color);
+			obj.set({
+				stroke:null,
+				strokeWidth:0,
+				fill:color
+			});
 		}
 		else if (obj.paths) {
 			obj.paths.forEach(function(i) {
@@ -108,9 +117,9 @@ proFabric.shapes = {
 				});
 			});
 		}
-		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 		obj.setCoords();
 		this.canvas.renderAll();
+		this.parent.savestate('modified',before,obj.toJSON(['id','class','src']));
 	},
 	set: function(option) {
 		var obj = this.canvas.getActiveObject();

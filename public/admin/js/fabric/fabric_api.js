@@ -71,7 +71,7 @@ var proFabric = new function(){
         if(object && modifiedType != ""){
             modifiedCheck = true;
             modifiedType = "";
-            proFabric.savestate('modified',prevObject,object.toJSON(['src','id','class','index','alignment']));
+            //proFabric.savestate('modified',prevObject,object.toJSON(['src','id','class','index','alignment']));
         }
     });
 	this.canvas.on('selection:cleared', function(o){
@@ -124,7 +124,7 @@ var proFabric = new function(){
         console.log(obj.angle);
     });
 	this.canvas.on('object:scaling', function(o){
-        var object = o.target;
+        var object = o.target, $this = this;
         if(modifiedCheck){
             prevObject = object.toJSON(['src','id','class','index','alignment']);
             modifiedCheck = false;
@@ -132,15 +132,17 @@ var proFabric = new function(){
         }
         if(object){
             object.set({
-                original_scaleX : object.scaleX / (last_zoom/100),
-                original_scaleY : object.scaleY / (last_zoom/100),
-                original_left  : object.left / (last_zoom/100),
-                original_top   : object.top / (last_zoom/100)
+                original_scaleX : object.scaleX / (that.zoom/100),
+                original_scaleY : object.scaleY / (that.zoom/100),
+                original_left  : object.left / (that.zoom/100),
+                original_top   : object.top / (that.zoom/100)
             });
         }
     });
 	this.canvas.on('object:moving', function(o){
         var object = o.target;
+        //alert();
+        console.log("Object top : "+object.top+" Object left : "+object.left+"Object top : "+object.top+" Object left : "+object.left);
         if(modifiedCheck){
             prevObject = object.toJSON(['src','id','class','index','alignment']);
             modifiedCheck = false;
@@ -199,6 +201,7 @@ var proFabric = new function(){
 			return that.canvasHeight;
 		},
 		currentObject : function(){
+			//alert(that.canvas.getActiveObject());
 			return that.canvas.getActiveObject();
 		},
 		currentGroup : function(){
@@ -218,6 +221,10 @@ var proFabric = new function(){
 		},
 		inchesToPixel : function(inc){
 			return inc * 96;
+        },
+        lockMovementXText : function(){
+        	var _obj = that.canvas.getActiveObject();
+        	return _obj.lockMovementX;
         }
 
 	};

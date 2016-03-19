@@ -1,4 +1,5 @@
 _txtSelectionFlag=0;
+var _fontSize = ['8','9','10','11','12','14','16','18','20','22','24','26','28','36','48','72'];
 proFabric.text = {
 	parent : proFabric,
     canvas: proFabric.get.canvas(),
@@ -10,6 +11,15 @@ proFabric.text = {
         $( "#FontSize" ).val(Object.fontSize);
         $( "#textfont" ).val(Object.fontFamily);
         _txtSelectionFlag = 1;
+        $('#fontSize').html('');
+        for(var i=0;i<_fontSize.length;i++)
+        {
+            if(Object.maxfontSize>=_fontSize[i])
+            $('#fontSize').append($('<option>', {
+                value: _fontSize[i],
+                text: _fontSize[i]
+            }));
+        }
         if(Object.fontWeight == 'bold')
         {
             $('#bold').addClass("btn-primary");
